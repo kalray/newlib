@@ -2,7 +2,7 @@
 # Configuration validation subroutine script.
 #   Copyright 1992-2016 Free Software Foundation, Inc.
 
-timestamp='2016-05-10'
+timestamp='2019-03-27'
 
 # This file is free software; you can redistribute it and/or modify it
 # under the terms of the GNU General Public License as published by
@@ -266,6 +266,7 @@ case $basic_machine in
 	| i370 | i860 | i960 | ia64 \
 	| ip2k | iq2000 \
 	| k1om \
+	| k1 \
 	| le32 | le64 \
 	| lm32 \
 	| m32c | m32r | m32rle | m68000 | m68k | m88k \
@@ -390,6 +391,7 @@ case $basic_machine in
 	| i*86-* | i860-* | i960-* | ia64-* \
 	| ip2k-* | iq2000-* \
 	| k1om-* \
+	| k1-* \
 	| le32-* | le64-* \
 	| lm32-* \
 	| m32c-* | m32r-* | m32rle-* \
@@ -1398,7 +1400,7 @@ case $os in
 	      | -os2* | -vos* | -palmos* | -uclinux* | -nucleus* \
 	      | -morphos* | -superux* | -rtmk* | -rtmk-nova* | -windiss* \
 	      | -powermax* | -dnix* | -nx6 | -nx7 | -sei* | -dragonfly* \
-	      | -skyos* | -haiku* | -rdos* | -toppers* | -drops* | -es* \
+	      | -skyos* | -haiku* | -rdos* | -toppers* | -drops* | -es* | -mbr* \
 	      | -onefs* | -tirtos* | -phoenix*)
 	# Remember, each alternative MUST END IN *, to match a version number.
 		;;

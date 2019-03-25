@@ -788,6 +788,7 @@ CPP'
 ac_subdirs_all='aarch64
 arm
 i386
+k1
 nds32
 spu
 riscv'
@@ -11435,7 +11436,7 @@ else
   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
   lt_status=$lt_dlunknown
   cat > conftest.$ac_ext <<_LT_EOF
-#line 11438 "configure"
+#line 11439 "configure"
 #include "confdefs.h"
 
 #if HAVE_DLFCN_H
@@ -11541,7 +11542,7 @@ else
   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
   lt_status=$lt_dlunknown
   cat > conftest.$ac_ext <<_LT_EOF
-#line 11544 "configure"
+#line 11545 "configure"
 #include "confdefs.h"
 
 #if HAVE_DLFCN_H
@@ -11791,6 +11792,8 @@ subdirs="$subdirs aarch64"
 	arm) subdirs="$subdirs arm"
  ;;
 	i386) subdirs="$subdirs i386"
+ ;;
+	k1) subdirs="$subdirs k1"
  ;;
 	nds32) subdirs="$subdirs nds32"
  ;;

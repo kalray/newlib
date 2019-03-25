@@ -804,6 +804,7 @@ hppa
 i386
 i960
 iq2000
+k1
 lm32
 m32c
 m32r
@@ -11483,7 +11484,7 @@ else
   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
   lt_status=$lt_dlunknown
   cat > conftest.$ac_ext <<_LT_EOF
-#line 11486 "configure"
+#line 11487 "configure"
 #include "confdefs.h"
 
 #if HAVE_DLFCN_H
@@ -11589,7 +11590,7 @@ else
   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
   lt_status=$lt_dlunknown
   cat > conftest.$ac_ext <<_LT_EOF
-#line 11592 "configure"
+#line 11593 "configure"
 #include "confdefs.h"
 
 #if HAVE_DLFCN_H
@@ -11871,6 +11872,8 @@ subdirs="$subdirs a29k"
 	i960) subdirs="$subdirs i960"
  ;;
 	iq2000) subdirs="$subdirs iq2000"
+ ;;
+	k1) subdirs="$subdirs k1"
  ;;
 	lm32) subdirs="$subdirs lm32"
  ;;

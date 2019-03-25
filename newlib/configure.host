@@ -176,6 +176,12 @@ case "${host_cpu}" in
   iq2000)
 	machine_dir=iq2000
 	;;
+  k1)
+	machine_dir=k1
+	libm_machine_dir=k1
+	default_newlib_io_long_long="yes"
+	default_newlib_io_c99_formats="yes"
+	;;
   lm32)
 	machine_dir=lm32
 	;;
@@ -492,6 +498,12 @@ case "${host}" in
 	##newlib_cflags="${newlib_cflags} -idirafter ${gcc_dir}include"
 	;;
 
+  k1-*-elf)
+	sys_dir=k1
+	# crt0 is provided by libgloss.
+	have_crt0="no"
+	;;
+
   m68hc11-*-*|m6811-*-*|m6812-*-*|m68hc12-*-*)
 	;;
 
@@ -722,6 +734,9 @@ newlib_cflags="${newlib_cflags} -DCLOCK_PROVIDED -DMALLOC_PROVIDED -DEXIT_PROVID
   iq2000*)
 	syscall_dir=syscalls
 	default_newlib_io_long_long="yes"
+	;;
+  k1-*-*)
+	syscall_dir=syscalls
 	;;
   lm32-*-*)
 	syscall_dir=syscalls

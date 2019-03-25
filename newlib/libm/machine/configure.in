@@ -28,6 +28,7 @@ if test -n "${libm_machine_dir}"; then
 	aarch64) AC_CONFIG_SUBDIRS(aarch64) ;;
 	arm) AC_CONFIG_SUBDIRS(arm) ;;
 	i386) AC_CONFIG_SUBDIRS(i386) ;;
+	k1) AC_CONFIG_SUBDIRS(k1) ;;
 	nds32) AC_CONFIG_SUBDIRS(nds32) ;;
 	spu) AC_CONFIG_SUBDIRS(spu) ;;
 	riscv) AC_CONFIG_SUBDIRS(riscv) ;;

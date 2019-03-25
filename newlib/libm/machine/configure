@@ -789,6 +789,7 @@ CPP'
 ac_subdirs_all='aarch64
 arm
 i386
+k1
 nds32
 pru
 spu
@@ -11814,6 +11815,8 @@ subdirs="$subdirs aarch64"
 	arm) subdirs="$subdirs arm"
  ;;
 	i386) subdirs="$subdirs i386"
+ ;;
+	k1) subdirs="$subdirs k1"
  ;;
 	nds32) subdirs="$subdirs nds32"
  ;;

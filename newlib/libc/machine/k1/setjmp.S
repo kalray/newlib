@@ -41,32 +41,40 @@ _ENTRY(setjmp)
 	.loc 1 12 0
 	.loc 1 12 0
 	## All preserved registers
-	sq	0x0[$r0] = $r16r17
+	sq	0x0[$r0] = $r18r19
 ;;
-	sq	0x10[$r0] = $r18r19
+	sq	0x10[$r0] = $r20r21
 ;;
-	sq	0x20[$r0] = $r20r21
+	sq	0x20[$r0] = $r22r23
 ;;
-	sq	0x30[$r0] = $r22r23
+	sq	0x30[$r0] = $r24r25
 ;;
-	sd	0x40[$r0] = $r10
+	sq	0x40[$r0] = $r26r27
+;;
+	sq	0x50[$r0] = $r28r29
+;;
+	sq	0x60[$r0] = $r30r31
+;;
+	sd	0x70[$r0] = $r13
+;;
+	sd	0x78[$r0] = $r14
 	get     $r1 = $ls
 ;;
-	sd	0x48[$r0] = $r1
+	sd	0x80[$r0] = $r1
 	get     $r1 = $le
 ;;
-	sd	0x50[$r0] = $r1
+	sd	0x88[$r0] = $r1
 	get     $r1 = $lc
 ;;
-	sd	0x58[$r0] = $r1
+	sd	0x90[$r0] = $r1
 	get     $r1 = $cs
 ;;
-	sd	0x60[$r0] = $r1
+	sd	0x98[$r0] = $r1
 	get     $r1 = $ra
 ;;
-	sd	0x68[$r0] = $r1
+	sd	0xa0[$r0] = $r1
 ;;
-	sd	0x70[$r0] = $r12
+	sd	0xa8[$r0] = $r12
 	make    $r0 = 0
 ;;
 	## Must return zero if called to set up jm_buf
@@ -83,32 +91,41 @@ _ENTRY(setjmp)
 _ENTRY(longjmp)
         .loc 1 55 0
         .loc 1 55 0
-	lq	$r16r17 = 0x0[$r0]
+	lq	$r18r19 = 0x0[$r0]
 ;;
-	lq	$r18r19 = 0x10[$r0]
+	lq	$r20r21 = 0x10[$r0]
 ;;
-	lq	$r20r21 = 0x20[$r0]
+	lq	$r22r23 = 0x20[$r0]
 ;;
-	lq	$r22r23 = 0x30[$r0]
+	lq	$r24r25 = 0x30[$r0]
 ;;
-	ld	$r10 = 0x40[$r0]
+	lq	$r26r27 = 0x40[$r0]
 ;;
-	ld	$r2  = 0x48[$r0]
+	lq	$r28r29 = 0x50[$r0]
 ;;
-	ld	$r2  = 0x50[$r0]
+	lq	$r30r31 = 0x60[$r0]
+;;
+	ld	$r13 = 0x70[$r0]
+;;
+	ld	$r14 = 0x78[$r0]
+;;
+	ld	$r2  = 0x80[$r0]
+;;
+	ld	$r2  = 0x88[$r0]
 	set     $ls  = $r2
 ;;
-	ld	$r2  = 0x58[$r0]
+	ld	$r2  = 0x90[$r0]
 	set     $le  = $r2
 ;;
-	ld	$r2  = 0x60[$r0]
+	ld	$r2  = 0x98[$r0]
 	set     $lc  = $r2
 ;;
-	ld	$r2  = 0x68[$r0]
+	ld	$r2  = 0xa0[$r0]
 	set     $cs  = $r2
 ;;
-	ld	$r12 = 0x70[$r0]
 	set     $ra  = $r2
+;;
+	ld	$r12 = 0xa8[$r0]
 	copyd   $r0 = $r1
 	make    $r2 = 1
 ;;

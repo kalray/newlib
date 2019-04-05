@@ -1,6 +1,14 @@
 
 _BEGIN_STD_C
 
+#ifdef __k1__
+
+ /* callee saved + sp + ra + cs + r13, r14, loop regs */
+#define _JBLEN (14 + 1 + 1 + 1 + 1 + 1 + 3)
+#define _JBTYPE long long
+
+#endif /* __k1__ */
+
 #if defined(__or1k__) || defined(__or1knd__)
 #define _JBLEN 31 /* 32 GPRs - r0 */
 #define _JBTYPE unsigned long

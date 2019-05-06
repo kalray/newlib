@@ -2892,6 +2892,11 @@ case "${target}" in
 
        config_libnosys=false
        ;;
+  k1*-*-mbr)
+       subdirs="$subdirs k1-mbr"
+
+       config_libnosys=false
+       ;;
   lm32*-*-*)
 	config_lm32=true
 	;;

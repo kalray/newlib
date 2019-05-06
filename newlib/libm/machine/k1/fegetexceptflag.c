@@ -38,7 +38,8 @@ int fegetexceptflag(fexcept_t *flagp, int excepts)
   excepts &= FE_ALL_EXCEPT;
 
   /* The get insn below allows to get the current exception flags of
-     the $cs register. */
+   * the $cs register.
+   */
   fexcept_t flags;
   asm volatile("get %0 = $cs" : "=r"(flags));
 
@@ -46,7 +47,8 @@ int fegetexceptflag(fexcept_t *flagp, int excepts)
   *flagp = flags & excepts;
 
   /* The above insn cannot fail (while the OS allows access to the
-     floating-point exception flags of the $cs register). Return
-     success. */
+   * floating-point exception flags of the $cs register). Return
+   * success.
+   */
   return 0;
 }

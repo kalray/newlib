@@ -42,14 +42,16 @@ int feholdexcept(fenv_t *envp)
   *envp = (fe & (FE_ALL_EXCEPT | FE_RND_MASK));
 
   /* The wfxl insn allows to set the least significant word of the
-     operated system register (here $cs), with 'FE_ALL_EXCEPT' as a
-     clear mask. */
+   * operated system register (here $cs), with 'FE_ALL_EXCEPT' as a
+   * clear mask.
+   */
   asm volatile ("wfxl $cs, %0" : : "r"(FE_ALL_EXCEPT) : "$cs");
 
   /* K1 does not raise FP traps so it is always in a "non-stop" mode */
 
   /* The above insn cannot fail (while the OS allows access to the
-     floating-point exception flags of the $cs register). Return
-     success. */
+   * floating-point exception flags of the $cs register). Return
+   * success.
+   */
   return 0;
 }

@@ -38,16 +38,19 @@ int feraiseexcept(int excepts)
   excepts &= FE_ALL_EXCEPT;
 
   /* The wfxl insn allows to set the least significant word of the
-     operated system register (here $cs), with 'excepts << 32' as a
-     set mask. */
+   * operated system register (here $cs), with 'excepts << 32' as a
+   * set mask.
+   */
   asm volatile ("wfxl $cs, %0" : : "r"((long long)excepts << 32) : "$cs");
 
   /* C99 requirements are met. The flags are raised at the same time
-     so order is preserved. FE_INEXACT is not raised if one of the
-     exceptions is FE_OVERFLOW or FE_UNDERFLOW. */
+   * so order is preserved. FE_INEXACT is not raised if one of the
+   * exceptions is FE_OVERFLOW or FE_UNDERFLOW.
+   */
 
   /* The above insn cannot fail (while the OS allows access to the
-     floating-point exception flags of the $cs register). Return
-     success. */
+   * floating-point exception flags of the $cs register). Return
+   * success.
+   */
   return 0;
 }

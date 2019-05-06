@@ -38,12 +38,14 @@ int feclearexcept(int excepts)
   excepts &= FE_ALL_EXCEPT;
 
   /* The wfxl insn allows to set the least significant word of the
-     operated system register (here $cs), with 'excepts' as a clear
-     mask. */
+   * operated system register (here $cs), with 'excepts' as a clear
+   * mask.
+   */
   asm volatile ("wfxl $cs, %0" : : "r"(excepts) : "$cs");
 
   /* The above insn cannot fail (while the OS allows access to the
-     floating-point exception flags of the $cs register). Return
-     success. */
+   * floating-point exception flags of the $cs register). Return
+   * success.
+   */
   return 0;
 }

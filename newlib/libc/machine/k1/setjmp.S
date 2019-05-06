@@ -72,7 +72,7 @@ _ENTRY(setjmp)
 	sd	0x98[$r0] = $r1
 	get     $r1 = $ra
 ;;
-	sd	0xa0[$r0] = $r1
+	sd	0xa0[$r0] = $r1    ## Warning!!!! $ra offset must be set in gdb port in gdb/gdb/k1-common-tdep.c
 ;;
 	sd	0xa8[$r0] = $r12
 	make    $r0 = 0

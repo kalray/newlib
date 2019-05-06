@@ -30,13 +30,15 @@
  *    OR OTHERWISE), EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-  All rights reserved.
+/*
+ *  This file provides fenv.h for the Coolidge processor.
+ *
+ *  Each core of the Coolidge processor have a coprocessor. They share
+ *  the CS register but have distinct bit-fields for their
+ *  floating-point environment.  This implementation synchronizes them
+ *  in such a way that they cannot be managed separately.
+ */
 
-  Each core of the Coolidge processor have a coprocessor. They share
-  the CS register but have distinct bit-fields for their
-  floating-point environment.  This implementation synchronizes them
-  in such a way that they cannot be managed separately.
-*/
 #ifndef _FENV_H
 #define _FENV_H
 

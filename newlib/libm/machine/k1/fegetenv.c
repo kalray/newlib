@@ -42,7 +42,8 @@ int fegetenv(fenv_t *envp)
   *envp = (fe & (FE_ALL_EXCEPT | FE_RND_MASK));
 
   /* The above insn cannot fail (while the OS allows access to the
-     floating-point exception flags of the $cs register). Return
-     success. */
+   * floating-point exception flags of the $cs register). Return
+   * success.
+   */
   return 0;
 }

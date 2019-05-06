@@ -38,12 +38,14 @@ int fetestexcept(int excepts)
   excepts &= FE_ALL_EXCEPT;
 
   /* The get insn below allows to get the current exception flags of
-     the $cs register. */
+   * the $cs register.
+   */
   fexcept_t flags;
   asm volatile("get %0 = $cs" : "=r"(flags));
 
   /* Return the floating-point exception macros that are both included
-     in excepts and correspond to the floating-point exceptions
-     currently set. */
+   * in excepts and correspond to the floating-point exceptions
+   * currently set.
+   */
   return (flags & excepts);
 }

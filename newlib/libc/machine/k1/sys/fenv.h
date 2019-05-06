@@ -30,31 +30,34 @@
  *    OR OTHERWISE), EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-  All rights reserved.
+/*
+ *  This file provides sys/fenv.h for the Coolidge processor.
+ *
+ *  Each core of the Coolidge processor have a coprocessor. They share
+ *  the CS register but have distinct bit-fields for their
+ *  floating-point environment.  This implementation synchronizes them
+ *  in such a way that they cannot be managed separately.
+ */
 
-  Each core of the Coolidge processor have a coprocessor. They share
-  the CS register but have distinct bit-fields for their
-  floating-point environment.  This implementation synchronizes them
-  in such a way that they cannot be managed separately.
-*/
 #ifndef _SYS_FENV_H
 #define _SYS_FENV_H
 
 /* Compute Status ($cs) register contains the following bit-fields for
-   floating-point execption flags.
-
-   Bit-field Condition of the IEEE 754 binary floating-point standard
-   --------- --------------------------------------------------------
-   IO        Invalid Operation
-   DZ        Divide by Zero
-   OV        Overflow
-   UN        Underflow
-   IN        Inexact
-   XIO       Invalid Operation (coprocessor)
-   XDZ       Divide by Zero (coprocessor)
-   XOV       Overflow (coprocessor)
-   XUN       Underflow (coprocessor)
-   XIN       Inexact (coprocessor) */
+ *   floating-point execption flags.
+ *
+ *   Bit-field Condition of the IEEE 754 binary floating-point standard
+ *   --------- --------------------------------------------------------
+ *   IO        Invalid Operation
+ *   DZ        Divide by Zero
+ *   OV        Overflow
+ *   UN        Underflow
+ *   IN        Inexact
+ *   XIO       Invalid Operation (coprocessor)
+ *   XDZ       Divide by Zero (coprocessor)
+ *   XOV       Overflow (coprocessor)
+ *   XUN       Underflow (coprocessor)
+ *   XIN       Inexact (coprocessor)
+ */
 
 #define _FE_INVALID   0x02
 #define _FE_DIVBYZERO 0x04
@@ -77,16 +80,17 @@
 #define FE_ALL_EXCEPT (FE_INVALID|FE_DIVBYZERO|FE_OVERFLOW|FE_UNDERFLOW|FE_INEXACT)
 
 /* Compute Status ($cs) register contains the following bit-fields for
-   floating-point rounding modes.
-
-   Following table describes both the RM and XRM (coproc) bit-fields.
-
-   Value Rounding Mode of the IEEE 754 binary floating-point standard
-   ----- ------------------------------------------------------------
-   0b00  to nearest even
-   0b01  toward +inf
-   0b10  toward -inf
-   0b11  toward zero */
+ * floating-point rounding modes.
+ *
+ * Following table describes both the RM and XRM (coproc) bit-fields.
+ *
+ * Value Rounding Mode of the IEEE 754 binary floating-point standard
+ * ----- ------------------------------------------------------------
+ * 0b00  to nearest even
+ * 0b01  toward +inf
+ * 0b10  toward -inf
+ * 0b11  toward zero
+ */
 
 #define _FE_TONEAREST  0
 #define _FE_UPWARD     1
@@ -107,12 +111,14 @@
 #define FE_RND_MASK FE_TOWARDZERO
 
 /* The type representing all floating-point status flags collectively.
-   The environment is simply a copy from the FPU related bits in the
-   CS register, but can be improved in the future. */
+ * The environment is simply a copy from the FPU related bits in the
+ * CS register, but can be improved in the future.
+ */
 typedef unsigned int fexcept_t;
 /* The type representing the entire floating-point environment.  The
-   environment is simply a copy from the FPU related bits in the CS
-   register. */
+ * environment is simply a copy from the FPU related bits in the CS
+ * register.
+ */
 typedef unsigned int fenv_t;
 
 extern const fenv_t __fe_dfl_env;

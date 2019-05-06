@@ -736,7 +736,8 @@ newlib_cflags="${newlib_cflags} -DCLOCK_PROVIDED -DMALLOC_PROVIDED -DEXIT_PROVID
 	default_newlib_io_long_long="yes"
 	;;
   k1-*-*)
-	syscall_dir=syscalls
+	newlib_cflags="${newlib_cflags} -D_COMPILING_NEWLIB"
+ 	syscall_dir=syscalls
 	;;
   lm32-*-*)
 	syscall_dir=syscalls

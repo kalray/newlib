@@ -2887,6 +2887,11 @@ case "${target}" in
 
 	subdirs="$subdirs ft32"
 	;;
+  k1*-*-elf)
+       subdirs="$subdirs k1-elf"
+
+       config_libnosys=false
+       ;;
   lm32*-*-*)
 	config_lm32=true
 	;;

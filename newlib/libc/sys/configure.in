@@ -34,7 +34,8 @@ if test -n "${sys_dir}"; then
 	mmixware) AC_CONFIG_SUBDIRS(mmixware) ;;
 	netware) AC_CONFIG_SUBDIRS(netware) ;;
 	or1k) AC_CONFIG_SUBDIRS(or1k) ;;
-	k1) AC_CONFIG_SUBDIRS(k1) ;;
+	k1-elf) AC_CONFIG_SUBDIRS(k1-elf) ;;
+	k1-mbr) AC_CONFIG_SUBDIRS(k1-mbr) ;;
 	phoenix) AC_CONFIG_SUBDIRS(phoenix) ;;
 	rdos) AC_CONFIG_SUBDIRS(rdos) ;;
 	rtems) AC_CONFIG_SUBDIRS(rtems) ;;

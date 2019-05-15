@@ -797,7 +797,8 @@ m88kbug
 mmixware
 netware
 or1k
-k1
+k1-elf
+k1-mbr
 phoenix
 rdos
 rtems
@@ -11457,7 +11458,7 @@ else
   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
   lt_status=$lt_dlunknown
   cat > conftest.$ac_ext <<_LT_EOF
-#line 11460 "configure"
+#line 11461 "configure"
 #include "confdefs.h"
 
 #if HAVE_DLFCN_H
@@ -11563,7 +11564,7 @@ else
   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
   lt_status=$lt_dlunknown
   cat > conftest.$ac_ext <<_LT_EOF
-#line 11566 "configure"
+#line 11567 "configure"
 #include "confdefs.h"
 
 #if HAVE_DLFCN_H
@@ -11830,7 +11831,9 @@ subdirs="$subdirs a29khif"
  ;;
 	or1k) subdirs="$subdirs or1k"
  ;;
-	k1) subdirs="$subdirs k1"
+	k1-elf) subdirs="$subdirs k1-elf"
+ ;;
+	k1-mbr) subdirs="$subdirs k1-mbr"
  ;;
 	phoenix) subdirs="$subdirs phoenix"
  ;;

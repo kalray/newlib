@@ -499,7 +499,13 @@ case "${host}" in
 	;;
 
   k1-*-elf)
-	sys_dir=k1
+	sys_dir=k1-elf
+	# crt0 is provided by libgloss.
+	have_crt0="no"
+	;;
+
+  k1-*-mbr)
+	sys_dir=k1-mbr
 	# crt0 is provided by libgloss.
 	have_crt0="no"
 	;;

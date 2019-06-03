@@ -151,7 +151,12 @@ typedef struct {
 } pthread_mutexattr_t;
 
 #else /* !defined(__XMK__) */
+#if defined(__CLUSTER_OS__)
+/* size is dependent on 32/64 bits pointers */
+typedef uintptr_t pthread_mutex_t;
+#else
 typedef __uint32_t pthread_mutex_t;      /* identify a mutex */
+#endif
 
 typedef struct {
   int   is_initialized;
@@ -173,7 +178,11 @@ typedef struct {
 
 /* Condition Variables */
 
+#if defined(__CLUSTER_OS__)
+typedef uintptr_t pthread_cond_t;
+#else
 typedef __uint32_t pthread_cond_t;       /* identify a condition variable */
+#endif
 
 #define _PTHREAD_COND_INITIALIZER ((pthread_cond_t) 0xFFFFFFFF)
 
@@ -200,7 +209,11 @@ typedef struct {
 /* POSIX Barrier Types */
 
 #if defined(_POSIX_BARRIERS)
+#if defined(__CLUSTER_OS__)
+typedef uintptr_t pthread_barrier_t;
+#else /* __CLUSTER_OS__ */
 typedef __uint32_t pthread_barrier_t;        /* POSIX Barrier Object */
+#endif /* __CLUSTER_OS__ */
 typedef struct {
   int   is_initialized;  /* is this structure initialized? */
 #if defined(_POSIX_THREAD_PROCESS_SHARED)
@@ -212,7 +225,12 @@ typedef struct {
 /* POSIX Spin Lock Types */
 
 #if defined(_POSIX_SPIN_LOCKS)
+#if defined(__CLUSTER_OS__)
+/* size is dependent on 32/64 bits pointers */
+typedef uintptr_t pthread_spinlock_t;        /* POSIX Spin Lock Object */
+#else
 typedef __uint32_t pthread_spinlock_t;        /* POSIX Spin Lock Object */
+#endif /* __CLUSTER_OS__ */
 #endif /* defined(_POSIX_SPIN_LOCKS) */
 
 /* POSIX Reader/Writer Lock Types */

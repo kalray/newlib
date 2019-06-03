@@ -510,6 +510,12 @@ case "${host}" in
 	have_crt0="no"
 	;;
 
+  k1-*-cos)
+	sys_dir=k1-cos
+	# crt0 is provided by libgloss.
+	have_crt0="no"
+	;;
+
   m68hc11-*-*|m6811-*-*|m6812-*-*|m68hc12-*-*)
 	;;
 

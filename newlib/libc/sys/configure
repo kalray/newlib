@@ -801,6 +801,7 @@ netware
 or1k
 k1-elf
 k1-mbr
+k1-cos
 phoenix
 rdos
 rtems
@@ -11855,6 +11856,8 @@ subdirs="$subdirs a29khif"
 	k1-elf) subdirs="$subdirs k1-elf"
  ;;
 	k1-mbr) subdirs="$subdirs k1-mbr"
+ ;;
+	k1-cos) subdirs="$subdirs k1-cos"
  ;;
 	phoenix) subdirs="$subdirs phoenix"
  ;;

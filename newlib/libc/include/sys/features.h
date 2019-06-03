@@ -330,6 +330,18 @@ extern "C" {
 #  define __SSP_FORTIFY_LEVEL 0
 #endif
 
+/* Cluster OS from Kalray SA. */
+#ifdef __CLUSTER_OS__
+#define _POSIX_THREADS                         1
+#define _POSIX_SPIN_LOCKS                      200112L
+#define _POSIX_BARRIERS                        200112L
+#define _POSIX_THREAD_CPUTIME                  1
+#define _UNIX98_THREAD_MUTEX_ATTRIBUTES        1
+#define _POSIX_THREAD_PROCESS_SHARED           1
+#define _POSIX_TIMERS                          1
+#define _POSIX_MONOTONIC_CLOCK                 200112L
+#endif /* __CLUSTER_OS__ */
+
 /* RTEMS adheres to POSIX -- 1003.1b with some features from annexes.  */
 
 #ifdef __rtems__

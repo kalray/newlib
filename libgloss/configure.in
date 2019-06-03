@@ -125,6 +125,10 @@ case "${target}" in
        AC_CONFIG_SUBDIRS([k1-mbr])
        config_libnosys=false
        ;;
+  k1*-*-cos)
+       AC_CONFIG_SUBDIRS([k1-cos])
+       config_libnosys=false
+       ;;
   lm32*-*-*)
 	AC_CONFIG_SUBDIRS([lm32])
 	;;

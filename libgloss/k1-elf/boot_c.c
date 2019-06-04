@@ -119,24 +119,25 @@ void __k1_pe_libc_start(void *_args)
   __start1(args->argc, args->argv, args->envp); /* jump to libc */
 }
 
-k1_boot_args_t args;
+static k1_boot_args_t __k1_libc_args;
 
 /** Start the main program on RM or on PE0 **/
 static void __k1_do_rm_startup(void)
 {
   int execute_main_on_rm = 0;
 
-  get_k1_boot_args(&args);
+  get_k1_boot_args(&__k1_libc_args);
   if(execute_main_on_rm) {
     __k1_do_rm_before_startup();
-    __start1(args.argc, args.argv, args.envp); /* jump to libc */
+    /* jump to libc */
+    __start1(__k1_libc_args.argc, __k1_libc_args.argv, __k1_libc_args.envp);
   }
   else {
     /* Execute main on pe0 */
     int pe_id = 0;
     __k1_start_pe(pe_id,
 		  (void*)&__k1_pe_libc_start,
-		  (void*)&args,               /* main routine arguments passed to PE0 */
+		  (void*)&__k1_libc_args,     /* main routine arguments passed to PE0 */
 		  (void*)&K1_PE_STACK_START); /* Only stack for PE0 is reserved in linker script bare.ld */
 
   }

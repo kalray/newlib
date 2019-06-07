@@ -561,19 +561,19 @@ case "${host}" in
 	;;
 
   k1-*-elf)
-	sys_dir=k1-elf
+	sys_dir=k1
 	# crt0 is provided by libgloss.
 	have_crt0="no"
 	;;
 
   k1-*-mbr)
-	sys_dir=k1-mbr
+	sys_dir=mbr
 	# crt0 is provided by libgloss.
 	have_crt0="no"
 	;;
 
   k1-*-cos)
-	sys_dir=k1-cos
+	sys_dir=cos
 	# crt0 is provided by libgloss.
 	have_crt0="no"
 	;;

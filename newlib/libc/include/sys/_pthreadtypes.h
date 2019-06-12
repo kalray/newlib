@@ -28,6 +28,9 @@
 
 #if defined(__XMK__)
 typedef unsigned int pthread_t;          /* identify a thread */
+#elif defined(__CLUSTER_OS__)
+/* size is dependent on 32/64 bits pointers */
+typedef uintptr_t pthread_t;          /* identify a thread */
 #else
 typedef __uint32_t pthread_t;            /* identify a thread */
 #endif
@@ -179,6 +182,7 @@ typedef struct {
 /* Condition Variables */
 
 #if defined(__CLUSTER_OS__)
+/* size is dependent on 32/64 bits pointers */
 typedef uintptr_t pthread_cond_t;
 #else
 typedef __uint32_t pthread_cond_t;       /* identify a condition variable */
@@ -196,7 +200,12 @@ typedef struct {
 
 /* Keys */
 
+#if defined(__CLUSTER_OS__)
+/* size is dependent on 32/64 bits pointers */
+typedef uintptr_t pthread_key_t;        /* thread-specific data keys */
+#else
 typedef __uint32_t pthread_key_t;        /* thread-specific data keys */
+#endif /* __CLUSTER_OS__ */
 
 typedef struct {
   int   is_initialized;  /* is this structure initialized? */

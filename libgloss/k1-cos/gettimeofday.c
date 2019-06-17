@@ -5,13 +5,13 @@
 #include <time.h>
 
 #include <hal/cos_power.h>
+#include <hal/cos_cpu.h>
 
 /***************************************************************
  *	gettimeofday
  ***************************************************************/
 
 #define NANOSEC_PER_SECOND (1000000000uLL)
-#define _COS_TIMESTAMP_FREQ 100000000ULL
 
 int __gloss_getnanotime(struct timespec *tval)
 {

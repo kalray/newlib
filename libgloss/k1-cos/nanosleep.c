@@ -1,11 +1,11 @@
 #include <errno.h>
 #include <time.h>
 #include <hal/cos_power.h>
+#include <hal/cos_cpu.h>
 #include <sys/types.h>
 #include <stdint.h>
 
 #define NANOSEC_PER_SECOND (1000000000uLL)
-#define _COS_TIMESTAMP_FREQ 100000000ULL
 
 int nanosleep(const struct timespec *req, struct timespec *rem){
 	const unsigned long long start = mppa_pwr_ctrl_local->dsu_timestamp.reg;

@@ -69,7 +69,7 @@ LIBRARIES = $(noinst_LIBRARIES)
 ARFLAGS = cru
 lib_a_AR = $(AR) $(ARFLAGS)
 lib_a_LIBADD =
-am_lib_a_OBJECTS = lib_a-setjmp.$(OBJEXT) lib_a-memset.$(OBJEXT)
+am_lib_a_OBJECTS = lib_a-setjmp.$(OBJEXT) lib_a-memset.$(OBJEXT) lib_a-memcpy.$(OBJEXT)
 lib_a_OBJECTS = $(am_lib_a_OBJECTS)
 DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp =
@@ -196,20 +196,7 @@ INCLUDES = $(NEWLIB_CFLAGS) $(CROSS_CFLAGS) $(TARGET_CFLAGS)
 AM_CCASFLAGS = $(INCLUDES)
 noinst_LIBRARIES = lib.a
 
-# /*  _____________________ */
-# /* < removed optimized memcpy > */
-# /*  --------------------- */
-# /*         \   ^__^ */
-# /*          \  (oo)\_______ */
-# /*             (__)\       )\/\ */
-# /*                 ||----w | */
-# /*                 ||     || */
-# /*  ____  _     _____    _    ____  _____  //\    _____ _____  __ */
-# /* |  _ \| |   | ____|  / \  / ___|| ____||/_\|  |  ___|_ _\ \/ / */
-# /* | |_) | |   |  _|   / _ \ \___ \|  _|   /_\   | |_   | | \  /  */
-# /* |  __/| |___| |___ / ___ \ ___) | |___ / _ \  |  _|  | | /  \  */
-# /* |_|   |_____|_____/_/   \_\____/|_____/_/ \_\ |_|   |___/_/\_\ */
-lib_a_SOURCES = setjmp.S memset.c
+lib_a_SOURCES = setjmp.S memset.S memcpy.c
 lib_a_CCASFLAGS = $(AM_CCASFLAGS)
 lib_a_CFLAGS = $(AM_CFLAGS) -fstack-check=no
 ACLOCAL_AMFLAGS = -I ../../.. -I ../../../..
@@ -284,11 +271,17 @@ lib_a-setjmp.obj: setjmp.S
 .c.obj:
 	$(COMPILE) -c `$(CYGPATH_W) '$<'`
 
-lib_a-memset.o: memset.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-memset.o `test -f 'memset.c' || echo '$(srcdir)/'`memset.c
+lib_a-memset.o: memset.S
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-memset.o `test -f 'memset.S' || echo '$(srcdir)/'`memset.S
 
-lib_a-memset.obj: memset.c
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-memset.obj `if test -f 'memset.c'; then $(CYGPATH_W) 'memset.c'; else $(CYGPATH_W) '$(srcdir)/memset.c'; fi`
+lib_a-memset.obj: memset.S
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-memset.obj `if test -f 'memset.S'; then $(CYGPATH_W) 'memset.S'; else $(CYGPATH_W) '$(srcdir)/memset.S'; fi`
+
+lib_a-memcpy.o: memcpy.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-memcpy.o `test -f 'memcpy.c' || echo '$(srcdir)/'`memcpy.c
+
+lib_a-memcpy.obj: memcpy.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-memcpy.obj `if test -f 'memcpy.c'; then $(CYGPATH_W) 'memcpy.c'; else $(CYGPATH_W) '$(srcdir)/memcpy.c'; fi`
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \

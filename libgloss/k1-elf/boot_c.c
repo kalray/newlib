@@ -156,12 +156,9 @@ static void __k1_setup_tls(uint8_t *_tls_base)
 
 }
 
-/* Quick and dirty hack until we can get a better memset directly from gcc ... */
-extern void *__k1_memset(void *m, int c, int n);
-
 static void __k1_bss_section(uint8_t *dst, uint32_t size)
 {
-  __k1_memset(dst, 0, size);
+  memset(dst, 0, size);
   __builtin_k1_fence();
 }
 

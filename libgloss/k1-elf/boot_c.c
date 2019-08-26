@@ -98,9 +98,9 @@ static void __k1_low_level_startup()
 
   if (__k1_is_rm()) {
     /* initialization of RAMs*/
-    l2_init_metadata();
-    apic_gic_init();
-    apic_mailbox_init();
+    __l2_init_metadata();
+    __apic_gic_init();
+    __apic_mailbox_init();
   }
 
   __builtin_k1_wfxm(K1_SFR_PCR, K1_SFR_WFXM_VALUE(PCR_L1CE, 1)); /* L1 coherency enable */

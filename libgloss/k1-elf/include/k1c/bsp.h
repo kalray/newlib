@@ -327,8 +327,8 @@ typedef enum {
 
 } apic_mailbox_ifunct_e;
 
-extern void apic_gic_init(void);
-extern void apic_mailbox_init(void);
+extern void __apic_gic_init(void);
+extern void __apic_mailbox_init(void);
 
 #endif /* __ASSEMBLER__ */
 
@@ -356,9 +356,7 @@ extern void apic_mailbox_init(void);
 
 #  ifndef __ASSEMBLER__
 
-extern void l2_enable(void);
-extern void l2_disable(void);
-extern void l2_init_metadata(void);
+extern void __l2_init_metadata(void);
 
 #endif /* __ASSEMBLER__ */
 

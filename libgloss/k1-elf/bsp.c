@@ -196,7 +196,7 @@ void __k1_interrupt_configure_dame(void)
 
 #include <machine/k1c/mppa3-80/cluster/gic.h>
 
-void apic_gic_init(void)
+void __apic_gic_init(void)
 {
   int i;
   int j;
@@ -220,7 +220,7 @@ void apic_gic_init(void)
 
 #include <machine/k1c/mppa3-80/cluster/mailbox.h>
 
-void apic_mailbox_init(void)
+void __apic_mailbox_init(void)
 {
   int i;
   int j;
@@ -244,25 +244,25 @@ void apic_mailbox_init(void)
 #include <machine/k1c/mppa3-80/cluster/pwr_ctrl.h>
 #include <machine/k1c/mppa3-80/cluster/l2_cache.h>
 
-void l2_enable(void)
+static void __l2_enable(void)
 {
   /* Enable L1 cache */
   __k1_io_write64((void *)&(mppa_pwr_ctrl_local->global_config.set), 1 << PWR_GLOB_CACHE_EN_IDX);
 }
 
-void l2_disable(void)
+static void __l2_disable(void)
 {
   /* Enable L1 cache */
   __k1_io_write64((void *)&(mppa_pwr_ctrl_local->global_config.clear), 1 << PWR_GLOB_CACHE_EN_IDX);
 }
 
-void l2_init_metadata(void)
+void __l2_init_metadata(void)
 {
   int i;
   uint64_t ecc_status;
 
   /* Need to enable the l2 cache to be able to write the metadata */
-  l2_enable();
+  __l2_enable();
 
   /* initialize L2 TAGS, readers and dirty */
   for (i = 0; i < NB_SMEM_READERS; i++) {
@@ -281,7 +281,7 @@ void l2_init_metadata(void)
     ecc_status = mppa_pwr_ctrl_local->ecc_status_clear.reg;
   }
 
-  l2_disable();
+  __l2_disable();
 }
 
 /**

@@ -49,7 +49,7 @@ extern volatile void *_K1_PE_START_ADDRESS[];
 #      define _K1_RM_ID 16
 #    endif
 #    ifndef _K1_CPU_FREQ
-#      define _K1_CPU_FREQ (__bsp_frequency)
+#      define _K1_CPU_FREQ (800 * 1000 * 1000) /* 800 MHz */
 #    endif
 #    ifndef __K1_CLOCKS_PER_SEC__
 #      define __K1_CLOCKS_PER_SEC__ 1000000
@@ -70,16 +70,6 @@ extern volatile void *_K1_PE_START_ADDRESS[];
 #    endif /* _K1_TIMESTAMP_FREQ */
 
 #  ifndef __ASSEMBLER__
-
-#    ifdef __cplusplus
-extern "C" {
-#    endif /* __cplusplus */
-
-  extern unsigned int __bsp_frequency;
-
-#    ifdef __cplusplus
-}
-#    endif /* __cplusplus */
 
 /**
  * \fn int __k1_is_rm(void)

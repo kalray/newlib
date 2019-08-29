@@ -133,7 +133,7 @@ void __libc_lock_init_recursive(_LOCK_T *lock)
 {
   if(lock == NULL) {
     /* Unable to allocate memory: trig a trap opcode. */
-    asm("errop;;");
+    asm("errop\n;;");
   }
   __libc_recursive_initlock_base(lock);
 }

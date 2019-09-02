@@ -247,13 +247,13 @@ void __apic_mailbox_init(void)
 static void __l2_enable(void)
 {
   /* Enable L1 cache */
-  __k1_io_write64((void *)&(mppa_pwr_ctrl_local->global_config.set), 1 << PWR_GLOB_CACHE_EN_IDX);
+  __k1_volatile_write64((void *)&(mppa_pwr_ctrl_local->global_config.set), 1 << PWR_GLOB_CACHE_EN_IDX);
 }
 
 static void __l2_disable(void)
 {
   /* Enable L1 cache */
-  __k1_io_write64((void *)&(mppa_pwr_ctrl_local->global_config.clear), 1 << PWR_GLOB_CACHE_EN_IDX);
+  __k1_volatile_write64((void *)&(mppa_pwr_ctrl_local->global_config.clear), 1 << PWR_GLOB_CACHE_EN_IDX);
 }
 
 void __l2_init_metadata(void)
@@ -290,22 +290,22 @@ void __l2_init_metadata(void)
 
 void __k1_set_pwr_pen_uen(void)
 {
-  __k1_io_write64((void *)&(mppa_pwr_ctrl_local->global_config.set), MPPA_PWR_CTRL_GLOBAL_CONFIG_USER_EN__MASK | MPPA_PWR_CTRL_GLOBAL_CONFIG_PE_EN__MASK);
+  __k1_volatile_write64((void *)&(mppa_pwr_ctrl_local->global_config.set), MPPA_PWR_CTRL_GLOBAL_CONFIG_USER_EN__MASK | MPPA_PWR_CTRL_GLOBAL_CONFIG_PE_EN__MASK);
 }
 
 void __k1_clear_pwc_reset_on_wup(int cpuid)
 {
-  __k1_io_write64((void *)&(mppa_pwr_ctrl_local->vector_proc_control.reset_on_wakeup.clear), (1ULL << cpuid));
+  __k1_volatile_write64((void *)&(mppa_pwr_ctrl_local->vector_proc_control.reset_on_wakeup.clear), (1ULL << cpuid));
 }
 
 void __k1_set_pwc_wup(int cpuid)
 {
-  __k1_io_write64((void *)&(mppa_pwr_ctrl_local->vector_proc_control.wup.set), (1ULL << cpuid));
+  __k1_volatile_write64((void *)&(mppa_pwr_ctrl_local->vector_proc_control.wup.set), (1ULL << cpuid));
 }
 
 void __k1_clear_pwc_wup(int cpuid)
 {
-  __k1_io_write64((void *)&(mppa_pwr_ctrl_local->vector_proc_control.wup.clear), (1ULL << cpuid));
+  __k1_volatile_write64((void *)&(mppa_pwr_ctrl_local->vector_proc_control.wup.clear), (1ULL << cpuid));
 }
 
 void __k1_pwc_init(void)
@@ -337,7 +337,7 @@ void __k1_cluster_poweroff(void)
  * IO write routine
  */
 
-void __k1_io_write64(void *addr, uint64_t val)
+void __k1_volatile_write64(void *addr, uint64_t val)
 {
   *(volatile uint64_t *)addr = val;
 }

@@ -418,12 +418,12 @@ extern void __k1_cluster_poweroff(void);
  */
 
 /**
- * \fn uint64_t __k1_io_write64(void *addr, uint64_t val)
- * \brief Write 64 bits
+ * \fn uint64_t __k1_volatile_write64(void *addr, uint64_t val)
+ * \brief Peripheral write of 64 bits
  * \param addr Pointer to the adress where data will be written
  * \param val Data to write
  */
-extern void __k1_io_write64(void *addr, uint64_t val);
+extern void __k1_volatile_write64(void *addr, uint64_t val);
 
 #endif /* __ASSEMBLER__ */
 

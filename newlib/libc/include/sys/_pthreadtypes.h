@@ -225,6 +225,10 @@ typedef __uint32_t pthread_barrier_t;        /* POSIX Barrier Object */
 #endif /* __CLUSTER_OS__ */
 typedef struct {
   int   is_initialized;  /* is this structure initialized? */
+#ifdef __CLUSTER_OS__
+  int   type;   /* type of attribute used in ClusterOS */
+  void* mspace; /* ClusterOS specific argument used for memory space allocation */
+#endif
 #if defined(_POSIX_THREAD_PROCESS_SHARED)
   int   process_shared;       /* allow this to be shared amongst processes */
 #endif

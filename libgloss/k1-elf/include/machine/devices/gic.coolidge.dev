@@ -1,0 +1,129 @@
+/*
+ * gic.coolidge.dev
+ * Automatically generated from registers definition files. Do not edit
+ * Copyright (c) Kalray 2019.
+ */
+
+#ifndef _INCLUDED_DEVICES_GIC_COOLIDGE_DEV_
+#define _INCLUDED_DEVICES_GIC_COOLIDGE_DEV_
+
+#include "device_inttype.h"
+
+struct mppa_gic_v_enable {
+mppa_uint8 enable :1; /*[ 0: 0]behavior: [:RD, :WR],Enable bit*/
+mppa_uint8 reserved_1:7;
+} __attribute__((__packed__));
+
+#define MPPA_GIC_V_ENABLE_ENABLE__SHIFT 0
+#define MPPA_GIC_V_ENABLE_ENABLE__MASK 0x1UL
+
+
+/***
+ * gic enable register definition
+ * Enable the interrupt generation
+ *
+ * Permissions:
+ * ANY: ker => [:RD, :WR],
+ * ANY: usr => [:RD, :WR],
+ * Size: 1 byte (min access size = 1 byte)
+ * Reset value: Not initialized
+ */
+typedef union {
+mppa_uint8 reg;
+mppa_uint8 bword;
+struct mppa_gic_v_enable _;
+} mppa_gic_enable_t;
+
+/***
+ * gic status register definition
+ * Interrupt status
+ *
+ * Permissions:
+ * ANY: ker => [:RD, :WR],
+ * ANY: usr => [:RD, :WR],
+ * Size: 8 bytes (min access size = 8 bytes)
+ * Reset value: Not initialized
+ */
+typedef union {
+mppa_uint64 reg;
+mppa_uint64 dword;
+} mppa_gic_status_t;
+
+/***
+ * gic status_lac register definition
+ * Interrupt status load and clear
+ *
+ * Permissions:
+ * ANY: ker => [:RD],
+ * ANY: usr => [:RD],
+ * Size: 8 bytes (min access size = 8 bytes)
+ * Reset value: Not initialized
+ */
+typedef union {
+mppa_uint64 reg;
+mppa_uint64 dword;
+} mppa_gic_status_lac_t;
+
+struct mppa_gic_v_access_policy {
+mppa_uint64 rm :2; /*[ 1: 0]behavior: [:RD, :WR],*/
+mppa_uint64 reserved_0:6;
+mppa_uint64 pe :2; /*[ 9: 8]behavior: [:RD, :WR],*/
+mppa_uint64 reserved_2:54;
+} __attribute__((__packed__));
+
+#define MPPA_GIC_V_ACCESS_POLICY_RM__SHIFT 0
+#define MPPA_GIC_V_ACCESS_POLICY_RM__MASK 0x3ULL
+#define MPPA_GIC_V_ACCESS_POLICY_PE__SHIFT 8
+#define MPPA_GIC_V_ACCESS_POLICY_PE__MASK 0x300ULL
+
+
+/***
+ * gic access_pol register definition
+ * Register access policy
+ *
+ * Permissions:
+ * ANY: ker => [:RD, :WR],
+ * ANY: usr => [:RD, :WR],
+ * Size: 8 bytes (min access size = 8 bytes)
+ * Reset value: Not initialized
+ */
+typedef union {
+mppa_uint64 reg;
+mppa_uint64 dword;
+struct mppa_gic_v_access_policy _;
+} mppa_gic_access_pol_t;
+
+/***
+ * gic group_gic group definition
+ *
+ * Size: 1024/0x400 bytes
+ */
+#define MPPA_GIC_GROUP_GIC_ENABLE_NUMBER 157
+#define MPPA_GIC_GROUP_GIC_STATUS_NUMBER 3
+#define MPPA_GIC_GROUP_GIC_STATUS_LAC_NUMBER 3
+typedef struct  {
+mppa_gic_enable_t enable[157]; /* offset: 0x0, size: 0x9D ( /!\ this is a 8bits register*/
+mppa_uint8 unused0[99];
+mppa_gic_status_t status[3]; /* offset: 0x100, size: 0x18 ( /!\ this is a 64bits register*/
+mppa_uint8 unused1[8];
+mppa_gic_status_lac_t status_lac[3]; /* offset: 0x120, size: 0x18 ( /!\ this is a 64bits register*/
+mppa_uint8 unused2[8];
+mppa_gic_access_pol_t access_policy; /* offset: 0x140, size: 0x8 */
+mppa_uint8 unused3[696];
+} __attribute__((__packed__)) mppa_gic_group_gic_t;
+
+/***
+ * gic device definition
+ * MPPA APIC gic
+ *
+ * Size: 73728/0x12000 bytes
+ */
+#define MPPA_GIC_GIC_NUMBER 72
+typedef struct  {
+mppa_gic_group_gic_t gic[18][4]; /* offset: 0x0, size: 0x12000 */
+} __attribute__((__packed__)) mppa_gic_t;
+
+#endif // _INCLUDED_DEVICES_GIC_COOLIDGE_DEV_
+
+/* -*- Mode: C; c-basic-offset: 2 -*- */
+/* vim:set ft=c sw=2 cindent: */

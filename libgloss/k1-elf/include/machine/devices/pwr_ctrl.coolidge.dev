@@ -1,0 +1,890 @@
+/*
+ * pwr_ctrl.coolidge.dev
+ * Automatically generated from registers definition files. Do not edit
+ * Copyright (c) Kalray 2019.
+ */
+
+#ifndef _INCLUDED_DEVICES_PWR_CTRL_COOLIDGE_DEV_
+#define _INCLUDED_DEVICES_PWR_CTRL_COOLIDGE_DEV_
+
+#include "device_inttype.h"
+
+struct mppa_pwr_ctrl_proc_config {
+mppa_uint64 wakeup :1; /*[ 0: 0]reset: 0x0,behavior: [:RD, :WR],wake-up processor*/
+mppa_uint64 reset_on_wakeup :1; /*[ 1: 1]reset: 0x0,behavior: [:RD, :WR],Processor FSM goes back to RESETING when going out from deep sleep*/
+mppa_uint64 reserved_0:8;
+mppa_uint64 wd_ack :1; /*[10:10]reset: 0x0,behavior: [:RD, :WR],Watchdog acknowledge*/
+mppa_uint64 reserved_2:53;
+} __attribute__((__packed__));
+
+#define MPPA_PWR_CTRL_PROC_CONFIG_WAKEUP__SHIFT 0
+#define MPPA_PWR_CTRL_PROC_CONFIG_WAKEUP__MASK 0x1ULL
+#define MPPA_PWR_CTRL_PROC_CONFIG_RESET_ON_WAKEUP__SHIFT 1
+#define MPPA_PWR_CTRL_PROC_CONFIG_RESET_ON_WAKEUP__MASK 0x2ULL
+#define MPPA_PWR_CTRL_PROC_CONFIG_WD_ACK__SHIFT 10
+#define MPPA_PWR_CTRL_PROC_CONFIG_WD_ACK__MASK 0x400ULL
+
+
+/***
+ * pwr_ctrl write register definition
+ * This register can only be accessed by the RM
+ *
+ * Permissions:
+ * RM: ker => [:RD, :WR],
+ * RM: usr => [:CUSTOM],
+ * PE: ker => [:CUSTOM],
+ * PE: usr => [:CUSTOM],
+ * Size: 8 bytes (min access size = 1 byte)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint64 reg;
+mppa_uint64 dword;
+mppa_uint32 word[2];
+mppa_uint16 hword[4];
+mppa_uint8 bword[8];
+struct mppa_pwr_ctrl_proc_config _;
+} mppa_pwr_ctrl_write_t;
+
+/***
+ * pwr_ctrl set register definition
+ * Written data is considered as a mask where bits at 1 set register corresponding
+ * bits. This register can only be accessed by the RM
+ *
+ * Permissions:
+ * RM: ker => [:RD, :WR],
+ * RM: usr => [:CUSTOM],
+ * PE: ker => [:CUSTOM],
+ * PE: usr => [:CUSTOM],
+ * Size: 8 bytes (min access size = 1 byte)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint64 reg;
+mppa_uint64 dword;
+mppa_uint32 word[2];
+mppa_uint16 hword[4];
+mppa_uint8 bword[8];
+struct mppa_pwr_ctrl_proc_config _;
+} mppa_pwr_ctrl_set_t;
+
+/***
+ * pwr_ctrl clear register definition
+ * Written data is considered as a mask where bits at 1 clear register corresponding
+ * bits. This register can only be accessed by the RM
+ *
+ * Permissions:
+ * RM: ker => [:RD, :WR],
+ * RM: usr => [:CUSTOM],
+ * PE: ker => [:CUSTOM],
+ * PE: usr => [:CUSTOM],
+ * Size: 8 bytes (min access size = 1 byte)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint64 reg;
+mppa_uint64 dword;
+mppa_uint32 word[2];
+mppa_uint16 hword[4];
+mppa_uint8 bword[8];
+struct mppa_pwr_ctrl_proc_config _;
+} mppa_pwr_ctrl_clear_t;
+
+/***
+ * pwr_ctrl proc_control group definition
+ * Processor Power Control
+ *
+ * Size: 64/0x40 bytes
+ */
+typedef struct  {
+mppa_pwr_ctrl_write_t write; /* offset: 0x0, size: 0x8 */
+mppa_uint8 unused0[8];
+mppa_pwr_ctrl_set_t set; /* offset: 0x10, size: 0x8 */
+mppa_uint8 unused1[8];
+mppa_pwr_ctrl_clear_t clear; /* offset: 0x20, size: 0x8 */
+mppa_uint8 unused2[24];
+} __attribute__((__packed__)) mppa_pwr_ctrl_proc_control_t;
+
+struct mppa_pwr_ctrl_proc_status {
+mppa_uint64 wd :1; /*[ 0: 0]reset: 0x0,behavior: [:RD],*/
+mppa_uint64 idle :2; /*[ 2: 1]reset: 0x2,behavior: [:RD],*/
+mppa_uint64 fsm :2; /*[ 4: 3]reset: 0x0,behavior: [:RD],*/
+mppa_uint64 reserved_1:59;
+} __attribute__((__packed__));
+
+#define MPPA_PWR_CTRL_PROC_STATUS_WD__SHIFT 0
+#define MPPA_PWR_CTRL_PROC_STATUS_WD__MASK 0x1ULL
+#define MPPA_PWR_CTRL_PROC_STATUS_IDLE__SHIFT 1
+#define MPPA_PWR_CTRL_PROC_STATUS_IDLE__MASK 0x6ULL
+#define MPPA_PWR_CTRL_PROC_STATUS_FSM__SHIFT 3
+#define MPPA_PWR_CTRL_PROC_STATUS_FSM__MASK 0x18ULL
+
+
+/***
+ * pwr_ctrl proc_sts register definition
+ * Permissions:
+ * RM: ker => [:RD],
+ * RM: usr => [:CUSTOM],
+ * PE: ker => [:CUSTOM],
+ * PE: usr => [:CUSTOM],
+ * Size: 8 bytes (min access size = 1 byte)
+ * Reset value: 0x4
+ */
+typedef union {
+mppa_uint64 reg;
+mppa_uint64 dword;
+mppa_uint32 word[2];
+mppa_uint16 hword[4];
+mppa_uint8 bword[8];
+struct mppa_pwr_ctrl_proc_status _;
+} mppa_pwr_ctrl_proc_sts_t;
+
+/***
+ * pwr_ctrl proc_status group definition
+ * Processor Power Control
+ *
+ * Size: 16/0x10 bytes
+ */
+typedef struct  {
+mppa_pwr_ctrl_proc_sts_t proc_sts; /* offset: 0x0, size: 0x8 */
+mppa_uint8 unused0[8];
+} __attribute__((__packed__)) mppa_pwr_ctrl_proc_status_t;
+
+struct mppa_pwr_ctrl_core {
+union {
+struct {
+mppa_uint64 pe :16; /*[15: 0]reset: 0x0,behavior: [:RD, :WR],*/
+mppa_uint64 rm :1; /*[16:16]reset: 0x0,behavior: [:RD, :WR],*/
+mppa_uint64 reserved_1:47;
+};
+struct {
+mppa_uint64 pe_0 :1;
+mppa_uint64 pe_1 :1;
+mppa_uint64 pe_2 :1;
+mppa_uint64 pe_3 :1;
+mppa_uint64 pe_4 :1;
+mppa_uint64 pe_5 :1;
+mppa_uint64 pe_6 :1;
+mppa_uint64 pe_7 :1;
+mppa_uint64 pe_8 :1;
+mppa_uint64 pe_9 :1;
+mppa_uint64 pe_10 :1;
+mppa_uint64 pe_11 :1;
+mppa_uint64 pe_12 :1;
+mppa_uint64 pe_13 :1;
+mppa_uint64 pe_14 :1;
+mppa_uint64 pe_15 :1;
+mppa_uint64 :1; /* rm */ /*[16:16]reset: 0x0,behavior: [:RD, :WR],*/
+mppa_uint64 :47;
+};
+};
+} __attribute__((__packed__));
+
+#define MPPA_PWR_CTRL_CORE_PE__SHIFT 0
+#define MPPA_PWR_CTRL_CORE_PE__MASK 0xffffULL
+#define MPPA_PWR_CTRL_CORE_RM__SHIFT 16
+#define MPPA_PWR_CTRL_CORE_RM__MASK 0x10000ULL
+
+
+#define MPPA_PWR_CTRL_CORE_PE_0__SHIFT 0
+#define MPPA_PWR_CTRL_CORE_PE_0__MASK 0x1ULL
+#define MPPA_PWR_CTRL_CORE_PE_1__SHIFT 1
+#define MPPA_PWR_CTRL_CORE_PE_1__MASK 0x2ULL
+#define MPPA_PWR_CTRL_CORE_PE_2__SHIFT 2
+#define MPPA_PWR_CTRL_CORE_PE_2__MASK 0x4ULL
+#define MPPA_PWR_CTRL_CORE_PE_3__SHIFT 3
+#define MPPA_PWR_CTRL_CORE_PE_3__MASK 0x8ULL
+#define MPPA_PWR_CTRL_CORE_PE_4__SHIFT 4
+#define MPPA_PWR_CTRL_CORE_PE_4__MASK 0x10ULL
+#define MPPA_PWR_CTRL_CORE_PE_5__SHIFT 5
+#define MPPA_PWR_CTRL_CORE_PE_5__MASK 0x20ULL
+#define MPPA_PWR_CTRL_CORE_PE_6__SHIFT 6
+#define MPPA_PWR_CTRL_CORE_PE_6__MASK 0x40ULL
+#define MPPA_PWR_CTRL_CORE_PE_7__SHIFT 7
+#define MPPA_PWR_CTRL_CORE_PE_7__MASK 0x80ULL
+#define MPPA_PWR_CTRL_CORE_PE_8__SHIFT 8
+#define MPPA_PWR_CTRL_CORE_PE_8__MASK 0x100ULL
+#define MPPA_PWR_CTRL_CORE_PE_9__SHIFT 9
+#define MPPA_PWR_CTRL_CORE_PE_9__MASK 0x200ULL
+#define MPPA_PWR_CTRL_CORE_PE_10__SHIFT 10
+#define MPPA_PWR_CTRL_CORE_PE_10__MASK 0x400ULL
+#define MPPA_PWR_CTRL_CORE_PE_11__SHIFT 11
+#define MPPA_PWR_CTRL_CORE_PE_11__MASK 0x800ULL
+#define MPPA_PWR_CTRL_CORE_PE_12__SHIFT 12
+#define MPPA_PWR_CTRL_CORE_PE_12__MASK 0x1000ULL
+#define MPPA_PWR_CTRL_CORE_PE_13__SHIFT 13
+#define MPPA_PWR_CTRL_CORE_PE_13__MASK 0x2000ULL
+#define MPPA_PWR_CTRL_CORE_PE_14__SHIFT 14
+#define MPPA_PWR_CTRL_CORE_PE_14__MASK 0x4000ULL
+#define MPPA_PWR_CTRL_CORE_PE_15__SHIFT 15
+#define MPPA_PWR_CTRL_CORE_PE_15__MASK 0x8000ULL
+
+
+/***
+ * pwr_ctrl vector_proc_write register definition
+ * Permissions:
+ * RM: ker => [:RD, :WR],
+ * RM: usr => [:CUSTOM],
+ * PE: ker => [:CUSTOM],
+ * PE: usr => [:CUSTOM],
+ * Size: 8 bytes (min access size = 8 bytes)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint64 reg;
+mppa_uint64 dword;
+struct mppa_pwr_ctrl_core _;
+} mppa_pwr_ctrl_vector_proc_write_t;
+
+/***
+ * pwr_ctrl vector_proc_set register definition
+ * Permissions:
+ * RM: ker => [:RD, :WR],
+ * RM: usr => [:CUSTOM],
+ * PE: ker => [:CUSTOM],
+ * PE: usr => [:CUSTOM],
+ * Size: 8 bytes (min access size = 8 bytes)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint64 reg;
+mppa_uint64 dword;
+struct mppa_pwr_ctrl_core _;
+} mppa_pwr_ctrl_vector_proc_set_t;
+
+/***
+ * pwr_ctrl vector_proc_clear register definition
+ * Permissions:
+ * RM: ker => [:RD, :WR],
+ * RM: usr => [:CUSTOM],
+ * PE: ker => [:CUSTOM],
+ * PE: usr => [:CUSTOM],
+ * Size: 8 bytes (min access size = 8 bytes)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint64 reg;
+mppa_uint64 dword;
+struct mppa_pwr_ctrl_core _;
+} mppa_pwr_ctrl_vector_proc_clear_t;
+
+/***
+ * pwr_ctrl write_set_clear group definition
+ * Write, Set and Clear registers group
+ *
+ * Size: 64/0x40 bytes
+ */
+typedef struct  {
+mppa_pwr_ctrl_vector_proc_write_t write; /* offset: 0x0, size: 0x8 */
+mppa_uint8 unused0[8];
+mppa_pwr_ctrl_vector_proc_set_t set; /* offset: 0x10, size: 0x8 */
+mppa_uint8 unused1[8];
+mppa_pwr_ctrl_vector_proc_clear_t clear; /* offset: 0x20, size: 0x8 */
+mppa_uint8 unused2[24];
+} __attribute__((__packed__)) mppa_pwr_ctrl_write_set_clear_t;
+
+/***
+ * pwr_ctrl vector_proc_control group definition
+ * Global PEs Power Control
+ *
+ * Size: 192/0xC0 bytes
+ */
+typedef struct  {
+mppa_pwr_ctrl_write_set_clear_t wup; /* offset: 0x0, size: 0x40 */
+mppa_pwr_ctrl_write_set_clear_t reset_on_wakeup; /* offset: 0x40, size: 0x40 */
+mppa_pwr_ctrl_write_set_clear_t wd_ack; /* offset: 0x80, size: 0x40 */
+} __attribute__((__packed__)) mppa_pwr_ctrl_vector_proc_control_t;
+
+/***
+ * pwr_ctrl vec_proc_status register definition
+ * Permissions:
+ * RM: ker => [:RD],
+ * RM: usr => [:CUSTOM],
+ * PE: ker => [:CUSTOM],
+ * PE: usr => [:CUSTOM],
+ * Size: 8 bytes (min access size = 8 bytes)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint64 reg;
+mppa_uint64 dword;
+struct mppa_pwr_ctrl_core _;
+} mppa_pwr_ctrl_vec_proc_status_t;
+
+struct mppa_pwr_ctrl_core_2b_idle {
+union {
+struct {
+mppa_uint64 pe :32; /*[31: 0]reset: 0x2,behavior: [:RD],*/
+mppa_uint64 rm :2; /*[33:32]reset: 0x2,behavior: [:RD],*/
+mppa_uint64 reserved_1:30;
+};
+struct {
+mppa_uint64 pe_0 :2;
+mppa_uint64 pe_1 :2;
+mppa_uint64 pe_2 :2;
+mppa_uint64 pe_3 :2;
+mppa_uint64 pe_4 :2;
+mppa_uint64 pe_5 :2;
+mppa_uint64 pe_6 :2;
+mppa_uint64 pe_7 :2;
+mppa_uint64 pe_8 :2;
+mppa_uint64 pe_9 :2;
+mppa_uint64 pe_10 :2;
+mppa_uint64 pe_11 :2;
+mppa_uint64 pe_12 :2;
+mppa_uint64 pe_13 :2;
+mppa_uint64 pe_14 :2;
+mppa_uint64 pe_15 :2;
+mppa_uint64 :2; /* rm */ /*[33:32]reset: 0x2,behavior: [:RD],*/
+mppa_uint64 :30;
+};
+};
+} __attribute__((__packed__));
+
+#define MPPA_PWR_CTRL_CORE_2B_IDLE_PE__SHIFT 0
+#define MPPA_PWR_CTRL_CORE_2B_IDLE_PE__MASK 0xffffffffULL
+#define MPPA_PWR_CTRL_CORE_2B_IDLE_RM__SHIFT 32
+#define MPPA_PWR_CTRL_CORE_2B_IDLE_RM__MASK 0x300000000ULL
+
+
+#define MPPA_PWR_CTRL_CORE_2B_IDLE_PE_0__SHIFT 0
+#define MPPA_PWR_CTRL_CORE_2B_IDLE_PE_0__MASK 0x3ULL
+#define MPPA_PWR_CTRL_CORE_2B_IDLE_PE_1__SHIFT 2
+#define MPPA_PWR_CTRL_CORE_2B_IDLE_PE_1__MASK 0xcULL
+#define MPPA_PWR_CTRL_CORE_2B_IDLE_PE_2__SHIFT 4
+#define MPPA_PWR_CTRL_CORE_2B_IDLE_PE_2__MASK 0x30ULL
+#define MPPA_PWR_CTRL_CORE_2B_IDLE_PE_3__SHIFT 6
+#define MPPA_PWR_CTRL_CORE_2B_IDLE_PE_3__MASK 0xc0ULL
+#define MPPA_PWR_CTRL_CORE_2B_IDLE_PE_4__SHIFT 8
+#define MPPA_PWR_CTRL_CORE_2B_IDLE_PE_4__MASK 0x300ULL
+#define MPPA_PWR_CTRL_CORE_2B_IDLE_PE_5__SHIFT 10
+#define MPPA_PWR_CTRL_CORE_2B_IDLE_PE_5__MASK 0xc00ULL
+#define MPPA_PWR_CTRL_CORE_2B_IDLE_PE_6__SHIFT 12
+#define MPPA_PWR_CTRL_CORE_2B_IDLE_PE_6__MASK 0x3000ULL
+#define MPPA_PWR_CTRL_CORE_2B_IDLE_PE_7__SHIFT 14
+#define MPPA_PWR_CTRL_CORE_2B_IDLE_PE_7__MASK 0xc000ULL
+#define MPPA_PWR_CTRL_CORE_2B_IDLE_PE_8__SHIFT 16
+#define MPPA_PWR_CTRL_CORE_2B_IDLE_PE_8__MASK 0x30000ULL
+#define MPPA_PWR_CTRL_CORE_2B_IDLE_PE_9__SHIFT 18
+#define MPPA_PWR_CTRL_CORE_2B_IDLE_PE_9__MASK 0xc0000ULL
+#define MPPA_PWR_CTRL_CORE_2B_IDLE_PE_10__SHIFT 20
+#define MPPA_PWR_CTRL_CORE_2B_IDLE_PE_10__MASK 0x300000ULL
+#define MPPA_PWR_CTRL_CORE_2B_IDLE_PE_11__SHIFT 22
+#define MPPA_PWR_CTRL_CORE_2B_IDLE_PE_11__MASK 0xc00000ULL
+#define MPPA_PWR_CTRL_CORE_2B_IDLE_PE_12__SHIFT 24
+#define MPPA_PWR_CTRL_CORE_2B_IDLE_PE_12__MASK 0x3000000ULL
+#define MPPA_PWR_CTRL_CORE_2B_IDLE_PE_13__SHIFT 26
+#define MPPA_PWR_CTRL_CORE_2B_IDLE_PE_13__MASK 0xc000000ULL
+#define MPPA_PWR_CTRL_CORE_2B_IDLE_PE_14__SHIFT 28
+#define MPPA_PWR_CTRL_CORE_2B_IDLE_PE_14__MASK 0x30000000ULL
+#define MPPA_PWR_CTRL_CORE_2B_IDLE_PE_15__SHIFT 30
+#define MPPA_PWR_CTRL_CORE_2B_IDLE_PE_15__MASK 0xc0000000ULL
+
+
+/***
+ * pwr_ctrl vec_2bits_proc_status register definition
+ * Permissions:
+ * RM: ker => [:RD],
+ * RM: usr => [:CUSTOM],
+ * PE: ker => [:CUSTOM],
+ * PE: usr => [:CUSTOM],
+ * Size: 8 bytes (min access size = 8 bytes)
+ * Reset value: 0x2AAAAAAAA
+ */
+typedef union {
+mppa_uint64 reg;
+mppa_uint64 dword;
+struct mppa_pwr_ctrl_core_2b_idle _;
+} mppa_pwr_ctrl_vec_2bits_proc_status_t;
+
+struct mppa_pwr_ctrl_core_2b {
+union {
+struct {
+mppa_uint64 pe :32; /*[31: 0]reset: 0x0,behavior: [:RD],*/
+mppa_uint64 rm :2; /*[33:32]reset: 0x0,behavior: [:RD],*/
+mppa_uint64 reserved_1:30;
+};
+struct {
+mppa_uint64 pe_0 :2;
+mppa_uint64 pe_1 :2;
+mppa_uint64 pe_2 :2;
+mppa_uint64 pe_3 :2;
+mppa_uint64 pe_4 :2;
+mppa_uint64 pe_5 :2;
+mppa_uint64 pe_6 :2;
+mppa_uint64 pe_7 :2;
+mppa_uint64 pe_8 :2;
+mppa_uint64 pe_9 :2;
+mppa_uint64 pe_10 :2;
+mppa_uint64 pe_11 :2;
+mppa_uint64 pe_12 :2;
+mppa_uint64 pe_13 :2;
+mppa_uint64 pe_14 :2;
+mppa_uint64 pe_15 :2;
+mppa_uint64 :2; /* rm */ /*[33:32]reset: 0x0,behavior: [:RD],*/
+mppa_uint64 :30;
+};
+};
+} __attribute__((__packed__));
+
+#define MPPA_PWR_CTRL_CORE_2B_PE__SHIFT 0
+#define MPPA_PWR_CTRL_CORE_2B_PE__MASK 0xffffffffULL
+#define MPPA_PWR_CTRL_CORE_2B_RM__SHIFT 32
+#define MPPA_PWR_CTRL_CORE_2B_RM__MASK 0x300000000ULL
+
+
+#define MPPA_PWR_CTRL_CORE_2B_PE_0__SHIFT 0
+#define MPPA_PWR_CTRL_CORE_2B_PE_0__MASK 0x3ULL
+#define MPPA_PWR_CTRL_CORE_2B_PE_1__SHIFT 2
+#define MPPA_PWR_CTRL_CORE_2B_PE_1__MASK 0xcULL
+#define MPPA_PWR_CTRL_CORE_2B_PE_2__SHIFT 4
+#define MPPA_PWR_CTRL_CORE_2B_PE_2__MASK 0x30ULL
+#define MPPA_PWR_CTRL_CORE_2B_PE_3__SHIFT 6
+#define MPPA_PWR_CTRL_CORE_2B_PE_3__MASK 0xc0ULL
+#define MPPA_PWR_CTRL_CORE_2B_PE_4__SHIFT 8
+#define MPPA_PWR_CTRL_CORE_2B_PE_4__MASK 0x300ULL
+#define MPPA_PWR_CTRL_CORE_2B_PE_5__SHIFT 10
+#define MPPA_PWR_CTRL_CORE_2B_PE_5__MASK 0xc00ULL
+#define MPPA_PWR_CTRL_CORE_2B_PE_6__SHIFT 12
+#define MPPA_PWR_CTRL_CORE_2B_PE_6__MASK 0x3000ULL
+#define MPPA_PWR_CTRL_CORE_2B_PE_7__SHIFT 14
+#define MPPA_PWR_CTRL_CORE_2B_PE_7__MASK 0xc000ULL
+#define MPPA_PWR_CTRL_CORE_2B_PE_8__SHIFT 16
+#define MPPA_PWR_CTRL_CORE_2B_PE_8__MASK 0x30000ULL
+#define MPPA_PWR_CTRL_CORE_2B_PE_9__SHIFT 18
+#define MPPA_PWR_CTRL_CORE_2B_PE_9__MASK 0xc0000ULL
+#define MPPA_PWR_CTRL_CORE_2B_PE_10__SHIFT 20
+#define MPPA_PWR_CTRL_CORE_2B_PE_10__MASK 0x300000ULL
+#define MPPA_PWR_CTRL_CORE_2B_PE_11__SHIFT 22
+#define MPPA_PWR_CTRL_CORE_2B_PE_11__MASK 0xc00000ULL
+#define MPPA_PWR_CTRL_CORE_2B_PE_12__SHIFT 24
+#define MPPA_PWR_CTRL_CORE_2B_PE_12__MASK 0x3000000ULL
+#define MPPA_PWR_CTRL_CORE_2B_PE_13__SHIFT 26
+#define MPPA_PWR_CTRL_CORE_2B_PE_13__MASK 0xc000000ULL
+#define MPPA_PWR_CTRL_CORE_2B_PE_14__SHIFT 28
+#define MPPA_PWR_CTRL_CORE_2B_PE_14__MASK 0x30000000ULL
+#define MPPA_PWR_CTRL_CORE_2B_PE_15__SHIFT 30
+#define MPPA_PWR_CTRL_CORE_2B_PE_15__MASK 0xc0000000ULL
+
+
+/***
+ * pwr_ctrl vector_proc_status group definition
+ * Global PEs Power Control
+ *
+ * Size: 40/0x28 bytes
+ */
+typedef struct  {
+mppa_pwr_ctrl_vec_proc_status_t wd; /* offset: 0x0, size: 0x8 */
+mppa_uint8 unused0[8];
+mppa_pwr_ctrl_vec_2bits_proc_status_t idle; /* offset: 0x10, size: 0x8 */
+mppa_uint8 unused1[8];
+mppa_pwr_ctrl_vec_2bits_proc_status_t fsm; /* offset: 0x20, size: 0x8 */
+} __attribute__((__packed__)) mppa_pwr_ctrl_vector_proc_status_t;
+
+struct mppa_pwr_ctrl_pc {
+mppa_uint64 pc :32; /*[31: 0]reset: 0x0,behavior: [:RD, :WR],PE Reset PC*/
+mppa_uint64 reserved_1:32;
+} __attribute__((__packed__));
+
+#define MPPA_PWR_CTRL_PC_PC__SHIFT 0
+#define MPPA_PWR_CTRL_PC_PC__MASK 0xffffffffULL
+
+
+/***
+ * pwr_ctrl pe_reset_pc register definition
+ * Permissions:
+ * RM: ker => [:RD, :WR],
+ * RM: usr => [:RD, :WR],
+ * PE: ker => [:RD, :WR],
+ * PE: usr => [:RD, :WR],
+ * Size: 8 bytes (min access size = 8 bytes)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint64 reg;
+mppa_uint64 dword;
+struct mppa_pwr_ctrl_pc _;
+} mppa_pwr_ctrl_pe_reset_pc_t;
+
+struct mppa_pwr_ctrl_global_config {
+mppa_uint64 user_en :1; /*[ 0: 0]reset: 0x0,behavior: [:RD, :WR],Allow access in user mode to control and status regsiters*/
+mppa_uint64 pe_en :1; /*[ 1: 1]reset: 0x0,behavior: [:RD, :WR],Allow pe access to pe control and status regsiters*/
+mppa_uint64 l2_cache_en :1; /*[ 2: 2]reset: 0x0,behavior: [:RD, :WR],Level2 cache enable*/
+mppa_uint64 l2_cache_config :1; /*[ 3: 3]reset: 0x0,behavior: [:RD, :WR],Level2 cache config; 0=2MB cache, 1=1MB cache*/
+mppa_uint64 reserved_0:4;
+mppa_uint64 secure_mst_weak :24; /*[31: 8]reset: 0xFFFFFF,behavior: [:RD, :WR],Weak secure status of masters*/
+mppa_uint64 reserved_1:1;
+mppa_uint64 dsu_ecc_bypass :1; /*[33:33]reset: 0x0,behavior: [:RD, :WR],Bypass ECC in dsu memory*/
+mppa_uint64 smem_ecc_bypass :1; /*[34:34]reset: 0x0,behavior: [:RD, :WR],Bypass ECC in smem memory*/
+mppa_uint64 smem_burst_len :3; /*[37:35]reset: 0x1,behavior: [:RD, :WR],Configure maximum burst length for Smart Arbitration Protocol (SAP) in smem*/
+mppa_uint64 axi_burst_dis :1; /*[38:38]reset: 0x0,behavior: [:RD, :WR],AXI2SMEM only generates 1-flit transaction*/
+mppa_uint64 reserved_2:24;
+mppa_uint64 lock :1; /*[63:63]reset: 0x0,behavior: [:RD, :WR],When set, whole register cannot no more be modified */
+} __attribute__((__packed__));
+
+#define MPPA_PWR_CTRL_GLOBAL_CONFIG_USER_EN__SHIFT 0
+#define MPPA_PWR_CTRL_GLOBAL_CONFIG_USER_EN__MASK 0x1ULL
+#define MPPA_PWR_CTRL_GLOBAL_CONFIG_PE_EN__SHIFT 1
+#define MPPA_PWR_CTRL_GLOBAL_CONFIG_PE_EN__MASK 0x2ULL
+#define MPPA_PWR_CTRL_GLOBAL_CONFIG_L2_CACHE_EN__SHIFT 2
+#define MPPA_PWR_CTRL_GLOBAL_CONFIG_L2_CACHE_EN__MASK 0x4ULL
+#define MPPA_PWR_CTRL_GLOBAL_CONFIG_L2_CACHE_CONFIG__SHIFT 3
+#define MPPA_PWR_CTRL_GLOBAL_CONFIG_L2_CACHE_CONFIG__MASK 0x8ULL
+#define MPPA_PWR_CTRL_GLOBAL_CONFIG_SECURE_MST_WEAK__SHIFT 8
+#define MPPA_PWR_CTRL_GLOBAL_CONFIG_SECURE_MST_WEAK__MASK 0xffffff00ULL
+#define MPPA_PWR_CTRL_GLOBAL_CONFIG_DSU_ECC_BYPASS__SHIFT 33
+#define MPPA_PWR_CTRL_GLOBAL_CONFIG_DSU_ECC_BYPASS__MASK 0x200000000ULL
+#define MPPA_PWR_CTRL_GLOBAL_CONFIG_SMEM_ECC_BYPASS__SHIFT 34
+#define MPPA_PWR_CTRL_GLOBAL_CONFIG_SMEM_ECC_BYPASS__MASK 0x400000000ULL
+#define MPPA_PWR_CTRL_GLOBAL_CONFIG_SMEM_BURST_LEN__SHIFT 35
+#define MPPA_PWR_CTRL_GLOBAL_CONFIG_SMEM_BURST_LEN__MASK 0x3800000000ULL
+#define MPPA_PWR_CTRL_GLOBAL_CONFIG_AXI_BURST_DIS__SHIFT 38
+#define MPPA_PWR_CTRL_GLOBAL_CONFIG_AXI_BURST_DIS__MASK 0x4000000000ULL
+#define MPPA_PWR_CTRL_GLOBAL_CONFIG_LOCK__SHIFT 63
+#define MPPA_PWR_CTRL_GLOBAL_CONFIG_LOCK__MASK 0x8000000000000000ULL
+
+
+/***
+ * pwr_ctrl global_config_write register definition
+ * This register can only be accessed by the RM
+ *
+ * Permissions:
+ * RM: ker => [:RD, :WR],
+ * RM: usr => [:RD, :WR],
+ * Size: 8 bytes (min access size = 8 bytes)
+ * Reset value: 0x8FFFFFF00
+ */
+typedef union {
+mppa_uint64 reg;
+mppa_uint64 dword;
+struct mppa_pwr_ctrl_global_config _;
+} mppa_pwr_ctrl_global_config_write_t;
+
+/***
+ * pwr_ctrl global_config_set register definition
+ * This register can only be accessed by the RM
+ *
+ * Permissions:
+ * RM: ker => [:RD, :WR],
+ * RM: usr => [:RD, :WR],
+ * Size: 8 bytes (min access size = 8 bytes)
+ * Reset value: 0x8FFFFFF00
+ */
+typedef union {
+mppa_uint64 reg;
+mppa_uint64 dword;
+struct mppa_pwr_ctrl_global_config _;
+} mppa_pwr_ctrl_global_config_set_t;
+
+/***
+ * pwr_ctrl global_config_clear register definition
+ * This register can only be accessed by the RM
+ *
+ * Permissions:
+ * RM: ker => [:RD, :WR],
+ * RM: usr => [:RD, :WR],
+ * Size: 8 bytes (min access size = 8 bytes)
+ * Reset value: 0x8FFFFFF00
+ */
+typedef union {
+mppa_uint64 reg;
+mppa_uint64 dword;
+struct mppa_pwr_ctrl_global_config _;
+} mppa_pwr_ctrl_global_config_clear_t;
+
+/***
+ * pwr_ctrl config group definition
+ * Global Power Control
+ *
+ * Size: 64/0x40 bytes
+ */
+typedef struct  {
+mppa_pwr_ctrl_global_config_write_t write; /* offset: 0x0, size: 0x8 */
+mppa_uint8 unused0[8];
+mppa_pwr_ctrl_global_config_set_t set; /* offset: 0x10, size: 0x8 */
+mppa_uint8 unused1[8];
+mppa_pwr_ctrl_global_config_clear_t clear; /* offset: 0x20, size: 0x8 */
+mppa_uint8 unused2[24];
+} __attribute__((__packed__)) mppa_pwr_ctrl_config_t;
+
+struct mppa_pwr_ctrl_global_status {
+mppa_uint64 rm_wup :1; /*[ 0: 0]reset: 0x0,wake-up bit from bootmode to RM*/
+mppa_uint64 reset :1; /*[ 1: 1]reset: 0x0,Top reset*/
+mppa_uint64 clk_en :1; /*[ 2: 2]reset: 0x1,Kernel clock enable*/
+mppa_uint64 shuf_dis :1; /*[ 3: 3]reset: 0x0,Shuffling disable*/
+mppa_uint64 noc_idle :1; /*[ 4: 4]reset: 0x0,All DMA RX and TX channel are clear*/
+mppa_uint64 dbg_fifo_idle :1; /*[ 5: 5]reset: 0x0,Debug message fifo empty*/
+mppa_uint64 watchdog :1; /*[ 6: 6]reset: 0x0,Watchdog fire*/
+mppa_uint64 axi_idle :1; /*[ 7: 7]reset: 0x0,No pending transaction on AXi ports master and slave*/
+mppa_uint64 reserved_1:56;
+} __attribute__((__packed__));
+
+#define MPPA_PWR_CTRL_GLOBAL_STATUS_RM_WUP__SHIFT 0
+#define MPPA_PWR_CTRL_GLOBAL_STATUS_RM_WUP__MASK 0x1ULL
+#define MPPA_PWR_CTRL_GLOBAL_STATUS_RESET__SHIFT 1
+#define MPPA_PWR_CTRL_GLOBAL_STATUS_RESET__MASK 0x2ULL
+#define MPPA_PWR_CTRL_GLOBAL_STATUS_CLK_EN__SHIFT 2
+#define MPPA_PWR_CTRL_GLOBAL_STATUS_CLK_EN__MASK 0x4ULL
+#define MPPA_PWR_CTRL_GLOBAL_STATUS_SHUF_DIS__SHIFT 3
+#define MPPA_PWR_CTRL_GLOBAL_STATUS_SHUF_DIS__MASK 0x8ULL
+#define MPPA_PWR_CTRL_GLOBAL_STATUS_NOC_IDLE__SHIFT 4
+#define MPPA_PWR_CTRL_GLOBAL_STATUS_NOC_IDLE__MASK 0x10ULL
+#define MPPA_PWR_CTRL_GLOBAL_STATUS_DBG_FIFO_IDLE__SHIFT 5
+#define MPPA_PWR_CTRL_GLOBAL_STATUS_DBG_FIFO_IDLE__MASK 0x20ULL
+#define MPPA_PWR_CTRL_GLOBAL_STATUS_WATCHDOG__SHIFT 6
+#define MPPA_PWR_CTRL_GLOBAL_STATUS_WATCHDOG__MASK 0x40ULL
+#define MPPA_PWR_CTRL_GLOBAL_STATUS_AXI_IDLE__SHIFT 7
+#define MPPA_PWR_CTRL_GLOBAL_STATUS_AXI_IDLE__MASK 0x80ULL
+
+
+/***
+ * pwr_ctrl global_status register definition
+ * This register can only be accessed by the RM
+ *
+ * Permissions:
+ * RM: ker => [:RD],
+ * RM: usr => [:RD],
+ * Size: 8 bytes (min access size = 8 bytes)
+ * Reset value: 0x4
+ */
+typedef union {
+mppa_uint64 reg;
+mppa_uint64 dword;
+struct mppa_pwr_ctrl_global_status _;
+} mppa_pwr_ctrl_global_status_t;
+
+struct mppa_pwr_ctrl_ecc_status {
+mppa_uint64 secc :16; /*[15: 0]reset: 0x0,behavior: [:RD],single ecc error status per bank*/
+mppa_uint64 decc :16; /*[31:16]reset: 0x0,behavior: [:RD],double ecc error status per bank*/
+mppa_uint64 reserved_1:32;
+} __attribute__((__packed__));
+
+#define MPPA_PWR_CTRL_ECC_STATUS_SECC__SHIFT 0
+#define MPPA_PWR_CTRL_ECC_STATUS_SECC__MASK 0xffffULL
+#define MPPA_PWR_CTRL_ECC_STATUS_DECC__SHIFT 16
+#define MPPA_PWR_CTRL_ECC_STATUS_DECC__MASK 0xffff0000ULL
+
+
+/***
+ * pwr_ctrl ecc_status register definition
+ * Permissions:
+ * RM: ker => [:RD],
+ * RM: usr => [:CUSTOM],
+ * PE: ker => [:CUSTOM],
+ * PE: usr => [:CUSTOM],
+ * Size: 8 bytes (min access size = 1 byte)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint64 reg;
+mppa_uint64 dword;
+mppa_uint32 word[2];
+mppa_uint16 hword[4];
+mppa_uint8 bword[8];
+struct mppa_pwr_ctrl_ecc_status _;
+} mppa_pwr_ctrl_ecc_status_t;
+
+/***
+ * pwr_ctrl ecc_status_clear register definition
+ * Permissions:
+ * RM: ker => [:RD],
+ * RM: usr => [:CUSTOM],
+ * PE: ker => [:CUSTOM],
+ * PE: usr => [:CUSTOM],
+ * Size: 8 bytes (min access size = 1 byte)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint64 reg;
+mppa_uint64 dword;
+mppa_uint32 word[2];
+mppa_uint16 hword[4];
+mppa_uint8 bword[8];
+struct mppa_pwr_ctrl_ecc_status _;
+} mppa_pwr_ctrl_ecc_status_clear_t;
+
+struct mppa_pwr_ctrl_secure_status_crypto0_nonsecure {
+mppa_uint64 present :1; /*[ 0: 0]reset: 0x1,behavior: [:RD],Crypto Acc 0 present in non-secure world*/
+mppa_uint64 reserved_1:63;
+} __attribute__((__packed__));
+
+#define MPPA_PWR_CTRL_SECURE_STATUS_CRYPTO0_NONSECURE_PRESENT__SHIFT 0
+#define MPPA_PWR_CTRL_SECURE_STATUS_CRYPTO0_NONSECURE_PRESENT__MASK 0x1ULL
+
+
+/***
+ * pwr_ctrl crypto0_nonsecure register definition
+ * Permissions:
+ * RM: ker => [:RD],
+ * RM: usr => [:RD],
+ * PE: ker => [:RD],
+ * PE: usr => [:RD],
+ * Size: 8 bytes (min access size = 1 byte)
+ * Reset value: 0x1
+ */
+typedef union {
+mppa_uint64 reg;
+mppa_uint64 dword;
+mppa_uint32 word[2];
+mppa_uint16 hword[4];
+mppa_uint8 bword[8];
+struct mppa_pwr_ctrl_secure_status_crypto0_nonsecure _;
+} mppa_pwr_ctrl_crypto0_nonsecure_t;
+
+struct mppa_pwr_ctrl_secure_status_crypto0_secure {
+mppa_uint64 present :1; /*[ 0: 0]reset: 0x0,behavior: [:RD],Crypto Acc 0 present in secure world*/
+mppa_uint64 reserved_1:63;
+} __attribute__((__packed__));
+
+#define MPPA_PWR_CTRL_SECURE_STATUS_CRYPTO0_SECURE_PRESENT__SHIFT 0
+#define MPPA_PWR_CTRL_SECURE_STATUS_CRYPTO0_SECURE_PRESENT__MASK 0x1ULL
+
+
+/***
+ * pwr_ctrl crypto0_secure register definition
+ * Permissions:
+ * RM: ker => [:RD],
+ * RM: usr => [:RD],
+ * PE: ker => [:RD],
+ * PE: usr => [:RD],
+ * Size: 8 bytes (min access size = 1 byte)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint64 reg;
+mppa_uint64 dword;
+mppa_uint32 word[2];
+mppa_uint16 hword[4];
+mppa_uint8 bword[8];
+struct mppa_pwr_ctrl_secure_status_crypto0_secure _;
+} mppa_pwr_ctrl_crypto0_secure_t;
+
+struct mppa_pwr_ctrl_secure_status_crypto1_nonsecure {
+mppa_uint64 present :1; /*[ 0: 0]reset: 0x1,behavior: [:RD],Crypto Acc 0 present in non-secure world*/
+mppa_uint64 reserved_1:63;
+} __attribute__((__packed__));
+
+#define MPPA_PWR_CTRL_SECURE_STATUS_CRYPTO1_NONSECURE_PRESENT__SHIFT 0
+#define MPPA_PWR_CTRL_SECURE_STATUS_CRYPTO1_NONSECURE_PRESENT__MASK 0x1ULL
+
+
+/***
+ * pwr_ctrl crypto1_nonsecure register definition
+ * Permissions:
+ * RM: ker => [:RD],
+ * RM: usr => [:RD],
+ * PE: ker => [:RD],
+ * PE: usr => [:RD],
+ * Size: 8 bytes (min access size = 1 byte)
+ * Reset value: 0x1
+ */
+typedef union {
+mppa_uint64 reg;
+mppa_uint64 dword;
+mppa_uint32 word[2];
+mppa_uint16 hword[4];
+mppa_uint8 bword[8];
+struct mppa_pwr_ctrl_secure_status_crypto1_nonsecure _;
+} mppa_pwr_ctrl_crypto1_nonsecure_t;
+
+struct mppa_pwr_ctrl_secure_status_crypto1_secure {
+mppa_uint64 present :1; /*[ 0: 0]reset: 0x0,behavior: [:RD],Crypto Acc 0 present in secure world*/
+mppa_uint64 reserved_1:63;
+} __attribute__((__packed__));
+
+#define MPPA_PWR_CTRL_SECURE_STATUS_CRYPTO1_SECURE_PRESENT__SHIFT 0
+#define MPPA_PWR_CTRL_SECURE_STATUS_CRYPTO1_SECURE_PRESENT__MASK 0x1ULL
+
+
+/***
+ * pwr_ctrl crypto1_secure register definition
+ * Permissions:
+ * RM: ker => [:RD],
+ * RM: usr => [:RD],
+ * PE: ker => [:RD],
+ * PE: usr => [:RD],
+ * Size: 8 bytes (min access size = 1 byte)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint64 reg;
+mppa_uint64 dword;
+mppa_uint32 word[2];
+mppa_uint16 hword[4];
+mppa_uint8 bword[8];
+struct mppa_pwr_ctrl_secure_status_crypto1_secure _;
+} mppa_pwr_ctrl_crypto1_secure_t;
+
+/***
+ * pwr_ctrl secure_status group definition
+ * Secure status
+ *
+ * Size: 32/0x20 bytes
+ */
+typedef struct  {
+mppa_pwr_ctrl_crypto0_nonsecure_t crypto0_nonsecure; /* offset: 0x0, size: 0x8 */
+mppa_pwr_ctrl_crypto0_secure_t crypto0_secure; /* offset: 0x8, size: 0x8 */
+mppa_pwr_ctrl_crypto1_nonsecure_t crypto1_nonsecure; /* offset: 0x10, size: 0x8 */
+mppa_pwr_ctrl_crypto1_secure_t crypto1_secure; /* offset: 0x18, size: 0x8 */
+} __attribute__((__packed__)) mppa_pwr_ctrl_secure_status_t;
+
+struct mppa_pwr_ctrl_v_dsu_time_stamp {
+mppa_uint64 timestamp :64; /*[63: 0]reset: 0x0,behavior: [:RD],DSU Timestamp*/
+} __attribute__((__packed__));
+
+#define MPPA_PWR_CTRL_V_DSU_TIME_STAMP_TIMESTAMP__SHIFT 0
+#define MPPA_PWR_CTRL_V_DSU_TIME_STAMP_TIMESTAMP__MASK 0xffffffffffffffffULL
+
+
+/***
+ * pwr_ctrl dsu_timestamp register definition
+ * Permissions:
+ * RM: ker => [:RD],
+ * RM: usr => [:RD],
+ * PE: ker => [:RD],
+ * PE: usr => [:RD],
+ * Size: 8 bytes (min access size = 8 bytes)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint64 reg;
+mppa_uint64 dword;
+struct mppa_pwr_ctrl_v_dsu_time_stamp _;
+} mppa_pwr_ctrl_dsu_timestamp_t;
+
+/***
+ * pwr_ctrl device definition
+ * Cluster Power Controller
+ *
+ * Size: 16776/0x4188 bytes
+ */
+#define MPPA_PWR_CTRL_PE_CONTROL_NUMBER 16
+#define MPPA_PWR_CTRL_PE_STATUS_NUMBER 16
+typedef struct  {
+mppa_pwr_ctrl_proc_control_t pe_control[16]; /* offset: 0x0, size: 0x400 */
+mppa_pwr_ctrl_proc_status_t pe_status[16]; /* offset: 0x400, size: 0x100 */
+mppa_uint8 unused0[2816];
+mppa_pwr_ctrl_vector_proc_control_t vector_proc_control; /* offset: 0x1000, size: 0xC0 */
+mppa_uint8 unused1[64];
+mppa_pwr_ctrl_vector_proc_status_t vector_proc_status; /* offset: 0x1100, size: 0x28 */
+mppa_uint8 unused2[3800];
+mppa_pwr_ctrl_pe_reset_pc_t pe_reset_pc; /* offset: 0x2000, size: 0x8 */
+mppa_uint8 unused3[8248];
+mppa_pwr_ctrl_config_t global_config; /* offset: 0x4040, size: 0x40 */
+mppa_pwr_ctrl_global_status_t global_status; /* offset: 0x4080, size: 0x8 */
+mppa_uint8 unused4[56];
+mppa_pwr_ctrl_proc_control_t rm_control; /* offset: 0x40C0, size: 0x40 */
+mppa_pwr_ctrl_proc_status_t rm_status; /* offset: 0x4100, size: 0x10 */
+mppa_uint8 unused5[48];
+mppa_pwr_ctrl_ecc_status_t ecc_status; /* offset: 0x4140, size: 0x8 */
+mppa_uint8 unused6[8];
+mppa_pwr_ctrl_ecc_status_clear_t ecc_status_clear; /* offset: 0x4150, size: 0x8 */
+mppa_uint8 unused7[8];
+mppa_pwr_ctrl_secure_status_t secure_status; /* offset: 0x4160, size: 0x20 */
+mppa_pwr_ctrl_dsu_timestamp_t dsu_timestamp; /* offset: 0x4180, size: 0x8 */
+} __attribute__((__packed__)) mppa_pwr_ctrl_t;
+
+#endif // _INCLUDED_DEVICES_PWR_CTRL_COOLIDGE_DEV_
+
+/* -*- Mode: C; c-basic-offset: 2 -*- */
+/* vim:set ft=c sw=2 cindent: */

@@ -40,15 +40,15 @@
  */
 
 /**
- * \fn int __k1_syscall(const __k1_uint32_t syscall)
+ * \fn uint64_t __k1_syscall(const __k1_uint32_t syscall)
  * \brief Do syscall with no arguments
  * \param syscall Syscall number
  * \return Result of the syscall
  */
-extern int __k1_syscall(const uint32_t syscall_nb);
+extern uint64_t __k1_syscall(const uint32_t syscall_nb);
 
 /**
- * \fn int __k1_syscall_with_args(const uint64_t syscall, uint64_t sc_arg0,
+ * \fn uint64_t __k1_syscall_with_args(const uint64_t syscall, uint64_t sc_arg0,
  *                       uint64_t sc_arg1,uint64_t sc_arg2,
  *                       uint64_t sc_arg3, uint64_t sc_arg4,
  *                       uint64_t sc_arg5)
@@ -62,8 +62,8 @@ extern int __k1_syscall(const uint32_t syscall_nb);
  * \param sc_arg5 Sixth syscall argument
  * \return Result of the syscall
  */
-extern int __k1_syscall_with_args(const uint32_t syscall_nb, uint64_t sc_arg0, uint64_t sc_arg1,
-				  uint64_t sc_arg2, uint64_t sc_arg3, uint64_t sc_arg4,
-				  uint64_t sc_arg5);
+extern uint64_t __k1_syscall_with_args(const uint32_t syscall_nb,
+                    uint64_t sc_arg0, uint64_t sc_arg1, uint64_t sc_arg2,
+                    uint64_t sc_arg3, uint64_t sc_arg4, uint64_t sc_arg5);
 
 #endif      /* ndef _K1_SYSCALL_H */

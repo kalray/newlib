@@ -32,18 +32,19 @@
 
 #include <k1c/syscall.h>
 
-int __k1_syscall(const uint32_t syscall_nb)
+uint64_t __k1_syscall(const uint32_t syscall_nb)
 {
   register long ret __asm__("$r0");
   __asm__ __volatile__ ("scall %1\n\t;;"
 			: "=r" (ret)
 			: "ir" (syscall_nb)
 			: "memory"); /* As we now make a fullish context backup, we only have to put memory into clobber */
-  return (int)ret;
+  return (uint64_t)ret;
 }
 
-int __k1_syscall_with_args(const uint32_t syscall_nb, uint64_t sc_arg0, uint64_t sc_arg1,
-			   uint64_t sc_arg2, uint64_t sc_arg3, uint64_t sc_arg4, uint64_t sc_arg5)
+uint64_t __k1_syscall_with_args(const uint32_t syscall_nb,
+								uint64_t sc_arg0, uint64_t sc_arg1, uint64_t sc_arg2,
+								uint64_t sc_arg3, uint64_t sc_arg4, uint64_t sc_arg5)
 {
   register long arg0 __asm__("$r0")    = (long)sc_arg0;
   register long arg1 __asm__("$r1")    = (long)sc_arg1;
@@ -55,5 +56,5 @@ int __k1_syscall_with_args(const uint32_t syscall_nb, uint64_t sc_arg0, uint64_t
 			: "+r" (arg0)
 			: "r" (arg1), "r" (arg2), "r" (arg3), "r" (arg4), "r" (arg5), "ir" (syscall_nb)
 			: "memory"); /* As we now make a fullish context backup, we only have to put memory into clobber */
-  return (int)arg0;
+  return (uint64_t)arg0;
 }

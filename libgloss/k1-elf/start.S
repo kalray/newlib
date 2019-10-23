@@ -119,23 +119,3 @@ k1c_syscall_handler_trampoline:
 	;;
 	.endp k1c_syscall_handler_trampoline
 
-	.section .bare_dsu, "ax", @progbits
-	.globl k1c_exceptions_pl0_handler_trampoline
-	.proc k1c_exceptions_pl0_handler_trampoline
-k1c_exceptions_pl0_handler_trampoline:
-	// DEBUG
-	goto __k1_asm_exceptions_pl0_handler
-	;;
-	// TRAP
-	.align 0x40
-	goto __k1_asm_exceptions_pl0_handler
-	;;
-	// ITs
-	.align 0x40
-	goto __k1_asm_exceptions_pl0_handler
-	;;
-	// SCALL
-	.align 0x40
-	goto __k1_asm_exceptions_pl0_handler
-	;;
-	.endp k1c_exceptions_pl0_handler_trampoline

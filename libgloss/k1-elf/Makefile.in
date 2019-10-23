@@ -55,7 +55,7 @@ OBJCOPY = `if [ -f ${objroot}/../binutils/objcopy ] ; \
 	then echo ${objroot}/../binutils/objcopy ; \
 	else t='$(program_transform_name)'; echo objcopy | sed -e $$t ; fi`
 
-GLOSS_OBJS = start.o boot_c.o bsp.o exceptions.o exceptions_pl0.o \
+GLOSS_OBJS = start.o boot_c.o bsp.o exceptions.o \
 	handlers.o syscall.o context.o diagnostic.o boot_args.o
 
 SYS_OBJS = access.o chdir.o chmod.o close.o dup.o dup2.o  exit.o fcntl.o \

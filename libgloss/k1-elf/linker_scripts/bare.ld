@@ -240,10 +240,6 @@ SECTIONS
   .debug_macinfo    0 : { *(.debug_macinfo) }
   .debug_loc        0 : { *(.debug_loc) }
 
-  .bare_dsu K1_DEBUG_RAM_ADDRESS : {
-    KEEP(*(.bare_dsu))
-  }
-
   . = 0x80000000;
   .alias_ddr ALIGN(16) : {
     *(.alias_ddr)

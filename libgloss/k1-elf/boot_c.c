@@ -106,6 +106,54 @@ static void __k1_low_level_startup()
   __builtin_k1_wfxm(K1_SFR_PCR, K1_SFR_WFXM_VALUE(PCR_L1CE, 1)); /* L1 coherency enable */
   __builtin_k1_dinval(); /* invalidate the data cache after turning on the L1 coherency so that we don't keep hot data in the cache that the directory is not aware of  */
 
+  /* Check PL : if PL0 : switch to PL1, if not
+   *(i.e. with jtag already in PL1) do nothing
+   */
+  if (__k1_get_privilege_level() == 0) {
+
+    /* Currently on PL0 : switch to PL1 to support debug hot attach */
+    /* Delegate IT management to PL1, except ITs 23:21 (SW ITs) */
+    __builtin_k1_wfxl(K1_SFR_ITOW, 0x5555555500000000);
+
+    __builtin_k1_wfxm(K1_SFR_ITOW, 0x5555015500000000);
+
+    /* Delegate syscall to PL1 : except Q3 */
+    __builtin_k1_wfxl(K1_SFR_SYOW, 0x1500000000);
+
+    /* Delegate all PS management to PL1 */
+    /* Except SMR, SME and HTD */
+    __builtin_k1_wfxl(K1_SFR_PSOW, 0x5555551500000000);
+
+    __builtin_k1_wfxm(K1_SFR_PSOW, 0x1550500000000);
+
+    /* Delegate all Misc ownership to PL1 */
+    __builtin_k1_wfxl(K1_SFR_MOW, 0x5555555500000000);
+
+    __builtin_k1_wfxm(K1_SFR_MOW, 0x100000000);
+
+    /* Delegate all traps to PL1 except DE, *ECC, *PAR */
+    __builtin_k1_wfxl(K1_SFR_HTOW, 0x145505500000000);
+
+    /* Delegate Breakpoint1 and Watchpoint1 to PL1 */
+    __builtin_k1_wfxl(K1_SFR_DOW, 0x4400000000);
+
+    __builtin_k1_set(K1_SFR_SPS,
+		     (__builtin_k1_get(K1_SFR_PS) & (~K1_SFR_PS_PL_MASK))|0x1);
+
+    __asm__ __volatile__ (
+			  "make $r1 = spc_pl1_label\n"
+			  ";;\n"
+			  "set $spc = $r1\n"
+			  ";;\n"
+			  "rfe\n"
+			  ";;\n"
+			  "spc_pl1_label:\n"
+			  : /* no outputs */ : : "r1");
+
+    /* set ev_pl1 to default exception vector as for privilege level 0 */
+    __builtin_k1_set(K1_SFR_EV, (uintptr_t)&K1_EXCEPTION_ADDRESS);
+  }
+
   /* If power controler exists, switch it on */
   __k1_pwc_init();
 }

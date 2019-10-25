@@ -31,6 +31,7 @@
  */
 
 #include <stdlib.h>
+#include <string.h>
 #include <k1c/registers.h>
 #include <k1c/trap.h>
 #include <k1c/boot_args.h>

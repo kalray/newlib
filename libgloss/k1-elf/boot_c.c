@@ -170,13 +170,14 @@ void __k1_pe_libc_start(void *_args)
 
 static k1_boot_args_t __k1_libc_args;
 
+extern int execute_main_on_rm __attribute((weak));
+
 /** Start the main program on RM or on PE0 **/
 static void __k1_do_rm_startup(void)
 {
-  int execute_main_on_rm = 0;
 
   get_k1_boot_args(&__k1_libc_args);
-  if(execute_main_on_rm) {
+  if(&execute_main_on_rm) {
     __k1_do_rm_before_startup();
     /* jump to libc */
     __start1(__k1_libc_args.argc, __k1_libc_args.argv, __k1_libc_args.envp);

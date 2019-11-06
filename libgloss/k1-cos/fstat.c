@@ -11,7 +11,7 @@ int sc_fstat(int fd, int *res);
 static inline int __gloss_fstat(int fd, struct stat *st)
 {
   int ret;
-  int res[13];
+  long res[13];
 
   ret = sc_fstat(fd, res);
 

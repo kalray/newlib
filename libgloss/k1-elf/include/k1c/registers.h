@@ -103,10 +103,10 @@
 #define K1_SFR_MO 36 // Miscellaneous Owners $mo $s36
 #define K1_SFR_PSO 37 // PS register fields Owners $pso $s37
 #define K1_SFR_DC 40 // OCE (Debug) Control $dc $s40
-#define K1_SFR_DBA0 41 // Debug breakpoint address 0 $dba0 $s41
-#define K1_SFR_DBA1 42 // Debug breakpoint address 1 $dba1 $s42
-#define K1_SFR_DWA0 43 // Debug Watchpoint address 0 $dwa0 $s43
-#define K1_SFR_DWA1 44 // Debug Watchpoint address 1 $dwa1 $s44
+#define K1_SFR_DBA0 41 // Breakpoint Address 0 $dba0 $s41
+#define K1_SFR_DBA1 42 // Breakpoint Address 1 $dba1 $s42
+#define K1_SFR_DWA0 43 // Watchpoint Address 0 $dwa0 $s43
+#define K1_SFR_DWA1 44 // Watchpoint Address 1 $dwa1 $s44
 #define K1_SFR_MES 45 // Memory Error Status $mes $s45
 #define K1_SFR_WS 46 // Wake-Up Status $ws $s46
 #define K1_SFR_SPC_PL0 64 // Shadow PC PL 0 $spc_pl0 $s64

@@ -6,17 +6,15 @@
 #include <sys/times.h>
 #include <errno.h>
 
+#include <hal/cos_power.h>
 #include <hal/cos_cpu.h>
-#include <hal/cos_diagnostic.h>
-
-int amp_do_syscall_times(struct tms *buf) __attribute__((weak));
-
 
 int __gloss_times(struct tms *buf)
 {
   /*  errno = ENOSYS; */
+  unsigned long long dsu_cycles = mppa_pwr_ctrl_local->dsu_timestamp.reg;
   int cycle_ratio = _COS_CPU_FREQ / __COS_CLOCKS_PER_SEC__;
-  clock_t cycles = __cos_counter_num(0)/ cycle_ratio;
+  clock_t cycles = dsu_cycles / cycle_ratio;
   /* User time */
   if (buf != NULL) {
     buf->tms_utime = cycles;

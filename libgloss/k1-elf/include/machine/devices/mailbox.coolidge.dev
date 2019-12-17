@@ -59,8 +59,12 @@ mppa_uint64 ifunct :2; /*[ 1: 0]behavior: [:RD, :WR],Mailbox input function: 0: 
 mppa_uint64 reserved_0:6;
 mppa_uint64 trigger :3; /*[10: 8]behavior: [:RD, :WR],Mailbox trigger function: 0:no trigger, 1:doorbell, 2: mask, 3:barrier, 4: value*/
 mppa_uint64 reserved_2:53;
-} __attribute__((__packed__));
+}  __attribute__((__packed__));
 
+#ifndef K1_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_mailbox_v_funct[(sizeof(struct mppa_mailbox_v_funct) == 8)*2-1];// If this fails, then the size of struct mppa_mailbox_v_funct as created by the compiler does not match the hardware size.
+
+#endif /* K1_DISABLE_TYPECHECK */
 #define MPPA_MAILBOX_V_FUNCT_IFUNCT__SHIFT 0
 #define MPPA_MAILBOX_V_FUNCT_IFUNCT__MASK 0x3ULL
 #define MPPA_MAILBOX_V_FUNCT_TRIGGER__SHIFT 8
@@ -88,8 +92,12 @@ mppa_uint64 rm :2; /*[ 1: 0]behavior: [:RD, :WR],*/
 mppa_uint64 reserved_0:6;
 mppa_uint64 pe :2; /*[ 9: 8]behavior: [:RD, :WR],*/
 mppa_uint64 reserved_2:54;
-} __attribute__((__packed__));
+}  __attribute__((__packed__));
 
+#ifndef K1_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_mailbox_v_access_policy[(sizeof(struct mppa_mailbox_v_access_policy) == 8)*2-1];// If this fails, then the size of struct mppa_mailbox_v_access_policy as created by the compiler does not match the hardware size.
+
+#endif /* K1_DISABLE_TYPECHECK */
 #define MPPA_MAILBOX_V_ACCESS_POLICY_RM__SHIFT 0
 #define MPPA_MAILBOX_V_ACCESS_POLICY_RM__MASK 0x3ULL
 #define MPPA_MAILBOX_V_ACCESS_POLICY_PE__SHIFT 8
@@ -124,8 +132,12 @@ mppa_mailbox_mask_t mask; /* offset: 0x10, size: 0x8 */
 mppa_mailbox_funct_t funct; /* offset: 0x18, size: 0x8 */
 mppa_mailbox_access_pol_t access_policy; /* offset: 0x20, size: 0x8 */
 mppa_uint8 unused0[472];
-} __attribute__((__packed__)) mppa_mailbox_group_mailbox_t;
+}  __attribute__((__packed__)) mppa_mailbox_group_mailbox_t;
 
+#ifndef K1_DISABLE_TYPECHECK
+typedef char assertion_for_mppa_mailbox_group_mailbox_t[(sizeof(mppa_mailbox_group_mailbox_t) == 512)*2-1];// If this fails, then the size of mppa_mailbox_group_mailbox_t as created by the compiler does not match the hardware size.
+
+#endif /* K1_DISABLE_TYPECHECK */
 /***
  * mailbox device definition
  * MPPA APIC mailboxes
@@ -135,8 +147,12 @@ mppa_uint8 unused0[472];
 #define MPPA_MAILBOX_MAILBOX_NUMBER 128
 typedef struct  {
 mppa_mailbox_group_mailbox_t mailbox[16][8]; /* offset: 0x0, size: 0x10000 */
-} __attribute__((__packed__)) mppa_mailbox_t;
+}  __attribute__((__packed__)) mppa_mailbox_t;
 
+#ifndef K1_DISABLE_TYPECHECK
+typedef char assertion_for_mppa_mailbox_t[(sizeof(mppa_mailbox_t) == 65536)*2-1];// If this fails, then the size of mppa_mailbox_t as created by the compiler does not match the hardware size.
+
+#endif /* K1_DISABLE_TYPECHECK */
 #endif // _INCLUDED_DEVICES_MAILBOX_COOLIDGE_DEV_
 
 /* -*- Mode: C; c-basic-offset: 2 -*- */

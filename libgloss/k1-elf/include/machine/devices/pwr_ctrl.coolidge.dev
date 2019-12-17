@@ -15,8 +15,12 @@ mppa_uint64 reset_on_wakeup :1; /*[ 1: 1]reset: 0x0,behavior: [:RD, :WR],Process
 mppa_uint64 reserved_0:8;
 mppa_uint64 wd_ack :1; /*[10:10]reset: 0x0,behavior: [:RD, :WR],Watchdog acknowledge*/
 mppa_uint64 reserved_2:53;
-} __attribute__((__packed__));
+}  __attribute__((__packed__));
 
+#ifndef K1_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_pwr_ctrl_proc_config[(sizeof(struct mppa_pwr_ctrl_proc_config) == 8)*2-1];// If this fails, then the size of struct mppa_pwr_ctrl_proc_config as created by the compiler does not match the hardware size.
+
+#endif /* K1_DISABLE_TYPECHECK */
 #define MPPA_PWR_CTRL_PROC_CONFIG_WAKEUP__SHIFT 0
 #define MPPA_PWR_CTRL_PROC_CONFIG_WAKEUP__MASK 0x1ULL
 #define MPPA_PWR_CTRL_PROC_CONFIG_RESET_ON_WAKEUP__SHIFT 1
@@ -103,15 +107,23 @@ mppa_pwr_ctrl_set_t set; /* offset: 0x10, size: 0x8 */
 mppa_uint8 unused1[8];
 mppa_pwr_ctrl_clear_t clear; /* offset: 0x20, size: 0x8 */
 mppa_uint8 unused2[24];
-} __attribute__((__packed__)) mppa_pwr_ctrl_proc_control_t;
+}  __attribute__((__packed__)) mppa_pwr_ctrl_proc_control_t;
 
+#ifndef K1_DISABLE_TYPECHECK
+typedef char assertion_for_mppa_pwr_ctrl_proc_control_t[(sizeof(mppa_pwr_ctrl_proc_control_t) == 64)*2-1];// If this fails, then the size of mppa_pwr_ctrl_proc_control_t as created by the compiler does not match the hardware size.
+
+#endif /* K1_DISABLE_TYPECHECK */
 struct mppa_pwr_ctrl_proc_status {
 mppa_uint64 wd :1; /*[ 0: 0]reset: 0x0,behavior: [:RD],*/
 mppa_uint64 idle :2; /*[ 2: 1]reset: 0x2,behavior: [:RD],*/
 mppa_uint64 fsm :2; /*[ 4: 3]reset: 0x0,behavior: [:RD],*/
 mppa_uint64 reserved_1:59;
-} __attribute__((__packed__));
+}  __attribute__((__packed__));
 
+#ifndef K1_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_pwr_ctrl_proc_status[(sizeof(struct mppa_pwr_ctrl_proc_status) == 8)*2-1];// If this fails, then the size of struct mppa_pwr_ctrl_proc_status as created by the compiler does not match the hardware size.
+
+#endif /* K1_DISABLE_TYPECHECK */
 #define MPPA_PWR_CTRL_PROC_STATUS_WD__SHIFT 0
 #define MPPA_PWR_CTRL_PROC_STATUS_WD__MASK 0x1ULL
 #define MPPA_PWR_CTRL_PROC_STATUS_IDLE__SHIFT 1
@@ -148,8 +160,12 @@ struct mppa_pwr_ctrl_proc_status _;
 typedef struct  {
 mppa_pwr_ctrl_proc_sts_t proc_sts; /* offset: 0x0, size: 0x8 */
 mppa_uint8 unused0[8];
-} __attribute__((__packed__)) mppa_pwr_ctrl_proc_status_t;
+}  __attribute__((__packed__)) mppa_pwr_ctrl_proc_status_t;
 
+#ifndef K1_DISABLE_TYPECHECK
+typedef char assertion_for_mppa_pwr_ctrl_proc_status_t[(sizeof(mppa_pwr_ctrl_proc_status_t) == 16)*2-1];// If this fails, then the size of mppa_pwr_ctrl_proc_status_t as created by the compiler does not match the hardware size.
+
+#endif /* K1_DISABLE_TYPECHECK */
 struct mppa_pwr_ctrl_core {
 union {
 struct {
@@ -178,8 +194,12 @@ mppa_uint64 :1; /* rm */ /*[16:16]reset: 0x0,behavior: [:RD, :WR],*/
 mppa_uint64 :47;
 };
 };
-} __attribute__((__packed__));
+}  __attribute__((__packed__));
 
+#ifndef K1_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_pwr_ctrl_core[(sizeof(struct mppa_pwr_ctrl_core) == 8)*2-1];// If this fails, then the size of struct mppa_pwr_ctrl_core as created by the compiler does not match the hardware size.
+
+#endif /* K1_DISABLE_TYPECHECK */
 #define MPPA_PWR_CTRL_CORE_PE__SHIFT 0
 #define MPPA_PWR_CTRL_CORE_PE__MASK 0xffffULL
 #define MPPA_PWR_CTRL_CORE_RM__SHIFT 16
@@ -281,8 +301,12 @@ mppa_pwr_ctrl_vector_proc_set_t set; /* offset: 0x10, size: 0x8 */
 mppa_uint8 unused1[8];
 mppa_pwr_ctrl_vector_proc_clear_t clear; /* offset: 0x20, size: 0x8 */
 mppa_uint8 unused2[24];
-} __attribute__((__packed__)) mppa_pwr_ctrl_write_set_clear_t;
+}  __attribute__((__packed__)) mppa_pwr_ctrl_write_set_clear_t;
 
+#ifndef K1_DISABLE_TYPECHECK
+typedef char assertion_for_mppa_pwr_ctrl_write_set_clear_t[(sizeof(mppa_pwr_ctrl_write_set_clear_t) == 64)*2-1];// If this fails, then the size of mppa_pwr_ctrl_write_set_clear_t as created by the compiler does not match the hardware size.
+
+#endif /* K1_DISABLE_TYPECHECK */
 /***
  * pwr_ctrl vector_proc_control group definition
  * Global PEs Power Control
@@ -293,8 +317,12 @@ typedef struct  {
 mppa_pwr_ctrl_write_set_clear_t wup; /* offset: 0x0, size: 0x40 */
 mppa_pwr_ctrl_write_set_clear_t reset_on_wakeup; /* offset: 0x40, size: 0x40 */
 mppa_pwr_ctrl_write_set_clear_t wd_ack; /* offset: 0x80, size: 0x40 */
-} __attribute__((__packed__)) mppa_pwr_ctrl_vector_proc_control_t;
+}  __attribute__((__packed__)) mppa_pwr_ctrl_vector_proc_control_t;
 
+#ifndef K1_DISABLE_TYPECHECK
+typedef char assertion_for_mppa_pwr_ctrl_vector_proc_control_t[(sizeof(mppa_pwr_ctrl_vector_proc_control_t) == 192)*2-1];// If this fails, then the size of mppa_pwr_ctrl_vector_proc_control_t as created by the compiler does not match the hardware size.
+
+#endif /* K1_DISABLE_TYPECHECK */
 /***
  * pwr_ctrl vec_proc_status register definition
  * Permissions:
@@ -339,8 +367,12 @@ mppa_uint64 :2; /* rm */ /*[33:32]reset: 0x2,behavior: [:RD],*/
 mppa_uint64 :30;
 };
 };
-} __attribute__((__packed__));
+}  __attribute__((__packed__));
 
+#ifndef K1_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_pwr_ctrl_core_2b_idle[(sizeof(struct mppa_pwr_ctrl_core_2b_idle) == 8)*2-1];// If this fails, then the size of struct mppa_pwr_ctrl_core_2b_idle as created by the compiler does not match the hardware size.
+
+#endif /* K1_DISABLE_TYPECHECK */
 #define MPPA_PWR_CTRL_CORE_2B_IDLE_PE__SHIFT 0
 #define MPPA_PWR_CTRL_CORE_2B_IDLE_PE__MASK 0xffffffffULL
 #define MPPA_PWR_CTRL_CORE_2B_IDLE_RM__SHIFT 32
@@ -425,8 +457,12 @@ mppa_uint64 :2; /* rm */ /*[33:32]reset: 0x0,behavior: [:RD],*/
 mppa_uint64 :30;
 };
 };
-} __attribute__((__packed__));
+}  __attribute__((__packed__));
 
+#ifndef K1_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_pwr_ctrl_core_2b[(sizeof(struct mppa_pwr_ctrl_core_2b) == 8)*2-1];// If this fails, then the size of struct mppa_pwr_ctrl_core_2b as created by the compiler does not match the hardware size.
+
+#endif /* K1_DISABLE_TYPECHECK */
 #define MPPA_PWR_CTRL_CORE_2B_PE__SHIFT 0
 #define MPPA_PWR_CTRL_CORE_2B_PE__MASK 0xffffffffULL
 #define MPPA_PWR_CTRL_CORE_2B_RM__SHIFT 32
@@ -479,13 +515,21 @@ mppa_uint8 unused0[8];
 mppa_pwr_ctrl_vec_2bits_proc_status_t idle; /* offset: 0x10, size: 0x8 */
 mppa_uint8 unused1[8];
 mppa_pwr_ctrl_vec_2bits_proc_status_t fsm; /* offset: 0x20, size: 0x8 */
-} __attribute__((__packed__)) mppa_pwr_ctrl_vector_proc_status_t;
+}  __attribute__((__packed__)) mppa_pwr_ctrl_vector_proc_status_t;
 
+#ifndef K1_DISABLE_TYPECHECK
+typedef char assertion_for_mppa_pwr_ctrl_vector_proc_status_t[(sizeof(mppa_pwr_ctrl_vector_proc_status_t) == 40)*2-1];// If this fails, then the size of mppa_pwr_ctrl_vector_proc_status_t as created by the compiler does not match the hardware size.
+
+#endif /* K1_DISABLE_TYPECHECK */
 struct mppa_pwr_ctrl_pc {
 mppa_uint64 pc :32; /*[31: 0]reset: 0x0,behavior: [:RD, :WR],PE Reset PC*/
 mppa_uint64 reserved_1:32;
-} __attribute__((__packed__));
+}  __attribute__((__packed__));
 
+#ifndef K1_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_pwr_ctrl_pc[(sizeof(struct mppa_pwr_ctrl_pc) == 8)*2-1];// If this fails, then the size of struct mppa_pwr_ctrl_pc as created by the compiler does not match the hardware size.
+
+#endif /* K1_DISABLE_TYPECHECK */
 #define MPPA_PWR_CTRL_PC_PC__SHIFT 0
 #define MPPA_PWR_CTRL_PC_PC__MASK 0xffffffffULL
 
@@ -520,8 +564,12 @@ mppa_uint64 smem_burst_len :3; /*[37:35]reset: 0x1,behavior: [:RD, :WR],Configur
 mppa_uint64 axi_burst_dis :1; /*[38:38]reset: 0x0,behavior: [:RD, :WR],AXI2SMEM only generates 1-flit transaction*/
 mppa_uint64 reserved_2:24;
 mppa_uint64 lock :1; /*[63:63]reset: 0x0,behavior: [:RD, :WR],When set, whole register cannot no more be modified */
-} __attribute__((__packed__));
+}  __attribute__((__packed__));
 
+#ifndef K1_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_pwr_ctrl_global_config[(sizeof(struct mppa_pwr_ctrl_global_config) == 8)*2-1];// If this fails, then the size of struct mppa_pwr_ctrl_global_config as created by the compiler does not match the hardware size.
+
+#endif /* K1_DISABLE_TYPECHECK */
 #define MPPA_PWR_CTRL_GLOBAL_CONFIG_USER_EN__SHIFT 0
 #define MPPA_PWR_CTRL_GLOBAL_CONFIG_USER_EN__MASK 0x1ULL
 #define MPPA_PWR_CTRL_GLOBAL_CONFIG_PE_EN__SHIFT 1
@@ -605,8 +653,12 @@ mppa_pwr_ctrl_global_config_set_t set; /* offset: 0x10, size: 0x8 */
 mppa_uint8 unused1[8];
 mppa_pwr_ctrl_global_config_clear_t clear; /* offset: 0x20, size: 0x8 */
 mppa_uint8 unused2[24];
-} __attribute__((__packed__)) mppa_pwr_ctrl_config_t;
+}  __attribute__((__packed__)) mppa_pwr_ctrl_config_t;
 
+#ifndef K1_DISABLE_TYPECHECK
+typedef char assertion_for_mppa_pwr_ctrl_config_t[(sizeof(mppa_pwr_ctrl_config_t) == 64)*2-1];// If this fails, then the size of mppa_pwr_ctrl_config_t as created by the compiler does not match the hardware size.
+
+#endif /* K1_DISABLE_TYPECHECK */
 struct mppa_pwr_ctrl_global_status {
 mppa_uint64 rm_wup :1; /*[ 0: 0]reset: 0x0,wake-up bit from bootmode to RM*/
 mppa_uint64 reset :1; /*[ 1: 1]reset: 0x0,Top reset*/
@@ -617,8 +669,12 @@ mppa_uint64 dbg_fifo_idle :1; /*[ 5: 5]reset: 0x0,Debug message fifo empty*/
 mppa_uint64 watchdog :1; /*[ 6: 6]reset: 0x0,Watchdog fire*/
 mppa_uint64 axi_idle :1; /*[ 7: 7]reset: 0x0,No pending transaction on AXi ports master and slave*/
 mppa_uint64 reserved_1:56;
-} __attribute__((__packed__));
+}  __attribute__((__packed__));
 
+#ifndef K1_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_pwr_ctrl_global_status[(sizeof(struct mppa_pwr_ctrl_global_status) == 8)*2-1];// If this fails, then the size of struct mppa_pwr_ctrl_global_status as created by the compiler does not match the hardware size.
+
+#endif /* K1_DISABLE_TYPECHECK */
 #define MPPA_PWR_CTRL_GLOBAL_STATUS_RM_WUP__SHIFT 0
 #define MPPA_PWR_CTRL_GLOBAL_STATUS_RM_WUP__MASK 0x1ULL
 #define MPPA_PWR_CTRL_GLOBAL_STATUS_RESET__SHIFT 1
@@ -657,8 +713,12 @@ struct mppa_pwr_ctrl_ecc_status {
 mppa_uint64 secc :16; /*[15: 0]reset: 0x0,behavior: [:RD],single ecc error status per bank*/
 mppa_uint64 decc :16; /*[31:16]reset: 0x0,behavior: [:RD],double ecc error status per bank*/
 mppa_uint64 reserved_1:32;
-} __attribute__((__packed__));
+}  __attribute__((__packed__));
 
+#ifndef K1_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_pwr_ctrl_ecc_status[(sizeof(struct mppa_pwr_ctrl_ecc_status) == 8)*2-1];// If this fails, then the size of struct mppa_pwr_ctrl_ecc_status as created by the compiler does not match the hardware size.
+
+#endif /* K1_DISABLE_TYPECHECK */
 #define MPPA_PWR_CTRL_ECC_STATUS_SECC__SHIFT 0
 #define MPPA_PWR_CTRL_ECC_STATUS_SECC__MASK 0xffffULL
 #define MPPA_PWR_CTRL_ECC_STATUS_DECC__SHIFT 16
@@ -706,8 +766,12 @@ struct mppa_pwr_ctrl_ecc_status _;
 struct mppa_pwr_ctrl_secure_status_crypto0_nonsecure {
 mppa_uint64 present :1; /*[ 0: 0]reset: 0x1,behavior: [:RD],Crypto Acc 0 present in non-secure world*/
 mppa_uint64 reserved_1:63;
-} __attribute__((__packed__));
+}  __attribute__((__packed__));
 
+#ifndef K1_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_pwr_ctrl_secure_status_crypto0_nonsecure[(sizeof(struct mppa_pwr_ctrl_secure_status_crypto0_nonsecure) == 8)*2-1];// If this fails, then the size of struct mppa_pwr_ctrl_secure_status_crypto0_nonsecure as created by the compiler does not match the hardware size.
+
+#endif /* K1_DISABLE_TYPECHECK */
 #define MPPA_PWR_CTRL_SECURE_STATUS_CRYPTO0_NONSECURE_PRESENT__SHIFT 0
 #define MPPA_PWR_CTRL_SECURE_STATUS_CRYPTO0_NONSECURE_PRESENT__MASK 0x1ULL
 
@@ -734,8 +798,12 @@ struct mppa_pwr_ctrl_secure_status_crypto0_nonsecure _;
 struct mppa_pwr_ctrl_secure_status_crypto0_secure {
 mppa_uint64 present :1; /*[ 0: 0]reset: 0x0,behavior: [:RD],Crypto Acc 0 present in secure world*/
 mppa_uint64 reserved_1:63;
-} __attribute__((__packed__));
+}  __attribute__((__packed__));
 
+#ifndef K1_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_pwr_ctrl_secure_status_crypto0_secure[(sizeof(struct mppa_pwr_ctrl_secure_status_crypto0_secure) == 8)*2-1];// If this fails, then the size of struct mppa_pwr_ctrl_secure_status_crypto0_secure as created by the compiler does not match the hardware size.
+
+#endif /* K1_DISABLE_TYPECHECK */
 #define MPPA_PWR_CTRL_SECURE_STATUS_CRYPTO0_SECURE_PRESENT__SHIFT 0
 #define MPPA_PWR_CTRL_SECURE_STATUS_CRYPTO0_SECURE_PRESENT__MASK 0x1ULL
 
@@ -762,8 +830,12 @@ struct mppa_pwr_ctrl_secure_status_crypto0_secure _;
 struct mppa_pwr_ctrl_secure_status_crypto1_nonsecure {
 mppa_uint64 present :1; /*[ 0: 0]reset: 0x1,behavior: [:RD],Crypto Acc 0 present in non-secure world*/
 mppa_uint64 reserved_1:63;
-} __attribute__((__packed__));
+}  __attribute__((__packed__));
 
+#ifndef K1_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_pwr_ctrl_secure_status_crypto1_nonsecure[(sizeof(struct mppa_pwr_ctrl_secure_status_crypto1_nonsecure) == 8)*2-1];// If this fails, then the size of struct mppa_pwr_ctrl_secure_status_crypto1_nonsecure as created by the compiler does not match the hardware size.
+
+#endif /* K1_DISABLE_TYPECHECK */
 #define MPPA_PWR_CTRL_SECURE_STATUS_CRYPTO1_NONSECURE_PRESENT__SHIFT 0
 #define MPPA_PWR_CTRL_SECURE_STATUS_CRYPTO1_NONSECURE_PRESENT__MASK 0x1ULL
 
@@ -790,8 +862,12 @@ struct mppa_pwr_ctrl_secure_status_crypto1_nonsecure _;
 struct mppa_pwr_ctrl_secure_status_crypto1_secure {
 mppa_uint64 present :1; /*[ 0: 0]reset: 0x0,behavior: [:RD],Crypto Acc 0 present in secure world*/
 mppa_uint64 reserved_1:63;
-} __attribute__((__packed__));
+}  __attribute__((__packed__));
 
+#ifndef K1_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_pwr_ctrl_secure_status_crypto1_secure[(sizeof(struct mppa_pwr_ctrl_secure_status_crypto1_secure) == 8)*2-1];// If this fails, then the size of struct mppa_pwr_ctrl_secure_status_crypto1_secure as created by the compiler does not match the hardware size.
+
+#endif /* K1_DISABLE_TYPECHECK */
 #define MPPA_PWR_CTRL_SECURE_STATUS_CRYPTO1_SECURE_PRESENT__SHIFT 0
 #define MPPA_PWR_CTRL_SECURE_STATUS_CRYPTO1_SECURE_PRESENT__MASK 0x1ULL
 
@@ -826,12 +902,20 @@ mppa_pwr_ctrl_crypto0_nonsecure_t crypto0_nonsecure; /* offset: 0x0, size: 0x8 *
 mppa_pwr_ctrl_crypto0_secure_t crypto0_secure; /* offset: 0x8, size: 0x8 */
 mppa_pwr_ctrl_crypto1_nonsecure_t crypto1_nonsecure; /* offset: 0x10, size: 0x8 */
 mppa_pwr_ctrl_crypto1_secure_t crypto1_secure; /* offset: 0x18, size: 0x8 */
-} __attribute__((__packed__)) mppa_pwr_ctrl_secure_status_t;
+}  __attribute__((__packed__)) mppa_pwr_ctrl_secure_status_t;
 
+#ifndef K1_DISABLE_TYPECHECK
+typedef char assertion_for_mppa_pwr_ctrl_secure_status_t[(sizeof(mppa_pwr_ctrl_secure_status_t) == 32)*2-1];// If this fails, then the size of mppa_pwr_ctrl_secure_status_t as created by the compiler does not match the hardware size.
+
+#endif /* K1_DISABLE_TYPECHECK */
 struct mppa_pwr_ctrl_v_dsu_time_stamp {
 mppa_uint64 timestamp :64; /*[63: 0]reset: 0x0,behavior: [:RD],DSU Timestamp*/
-} __attribute__((__packed__));
+}  __attribute__((__packed__));
 
+#ifndef K1_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_pwr_ctrl_v_dsu_time_stamp[(sizeof(struct mppa_pwr_ctrl_v_dsu_time_stamp) == 8)*2-1];// If this fails, then the size of struct mppa_pwr_ctrl_v_dsu_time_stamp as created by the compiler does not match the hardware size.
+
+#endif /* K1_DISABLE_TYPECHECK */
 #define MPPA_PWR_CTRL_V_DSU_TIME_STAMP_TIMESTAMP__SHIFT 0
 #define MPPA_PWR_CTRL_V_DSU_TIME_STAMP_TIMESTAMP__MASK 0xffffffffffffffffULL
 
@@ -882,8 +966,12 @@ mppa_pwr_ctrl_ecc_status_clear_t ecc_status_clear; /* offset: 0x4150, size: 0x8 
 mppa_uint8 unused7[8];
 mppa_pwr_ctrl_secure_status_t secure_status; /* offset: 0x4160, size: 0x20 */
 mppa_pwr_ctrl_dsu_timestamp_t dsu_timestamp; /* offset: 0x4180, size: 0x8 */
-} __attribute__((__packed__)) mppa_pwr_ctrl_t;
+}  __attribute__((__packed__)) mppa_pwr_ctrl_t;
 
+#ifndef K1_DISABLE_TYPECHECK
+typedef char assertion_for_mppa_pwr_ctrl_t[(sizeof(mppa_pwr_ctrl_t) == 16776)*2-1];// If this fails, then the size of mppa_pwr_ctrl_t as created by the compiler does not match the hardware size.
+
+#endif /* K1_DISABLE_TYPECHECK */
 #endif // _INCLUDED_DEVICES_PWR_CTRL_COOLIDGE_DEV_
 
 /* -*- Mode: C; c-basic-offset: 2 -*- */

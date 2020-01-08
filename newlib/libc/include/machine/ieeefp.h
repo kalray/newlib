@@ -223,8 +223,13 @@
 
 #ifdef __k1__
 #define __IEEE_LITTLE_ENDIAN
+
+/* ilogb(0) must return (-2147483647 - 1) */
+#define FP_ILOGB0 (INT_MIN)
+/* ilogb(+-nan) must return (-2147483647 - 1) */
+#define FP_ILOGBNAN (INT_MIN)
 #endif
-	 
+
 #if defined(_C4x) || defined(_C3x)
 #define __IEEE_BIG_ENDIAN
 #define _DOUBLE_IS_32BITS

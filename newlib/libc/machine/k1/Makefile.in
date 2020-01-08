@@ -70,7 +70,9 @@ ARFLAGS = cru
 lib_a_AR = $(AR) $(ARFLAGS)
 lib_a_LIBADD =
 am_lib_a_OBJECTS = lib_a-setjmp.$(OBJEXT) lib_a-memset.$(OBJEXT) \
-	lib_a-memcpy.$(OBJEXT)
+	lib_a-memcpy.$(OBJEXT) lib_a-rpmatch.$(OBJEXT) \
+	lib_a-arc4random.$(OBJEXT) lib_a-arc4random_uniform.$(OBJEXT) \
+	lib_a-hash_page.$(OBJEXT)
 lib_a_OBJECTS = $(am_lib_a_OBJECTS)
 DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp =
@@ -195,10 +197,10 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 AUTOMAKE_OPTIONS = foreign
-INCLUDES = $(NEWLIB_CFLAGS) $(CROSS_CFLAGS) $(TARGET_CFLAGS)
+INCLUDES = $(NEWLIB_CFLAGS) $(CROSS_CFLAGS) $(TARGET_CFLAGS) -I$(newlib_basedir)/libc/search
 AM_CCASFLAGS = $(INCLUDES)
 noinst_LIBRARIES = lib.a
-lib_a_SOURCES = setjmp.S memset.S memcpy.S
+lib_a_SOURCES = setjmp.S memset.S memcpy.S rpmatch.c arc4random.c arc4random_uniform.c hash_page.c
 lib_a_CCASFLAGS = $(AM_CCASFLAGS)
 lib_a_CFLAGS = $(AM_CFLAGS)
 ACLOCAL_AMFLAGS = -I ../../.. -I ../../../..
@@ -206,7 +208,7 @@ CONFIG_STATUS_DEPENDENCIES = $(newlib_basedir)/configure.host
 all: all-am
 
 .SUFFIXES:
-.SUFFIXES: .S .o .obj
+.SUFFIXES: .S .c .o .obj
 am--refresh: Makefile
 	@:
 $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am  $(am__configure_deps)
@@ -278,6 +280,36 @@ lib_a-memcpy.o: memcpy.S
 
 lib_a-memcpy.obj: memcpy.S
 	$(CCAS) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CCASFLAGS) $(CCASFLAGS) -c -o lib_a-memcpy.obj `if test -f 'memcpy.S'; then $(CYGPATH_W) 'memcpy.S'; else $(CYGPATH_W) '$(srcdir)/memcpy.S'; fi`
+
+.c.o:
+	$(COMPILE) -c $<
+
+.c.obj:
+	$(COMPILE) -c `$(CYGPATH_W) '$<'`
+
+lib_a-rpmatch.o: rpmatch.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-rpmatch.o `test -f 'rpmatch.c' || echo '$(srcdir)/'`rpmatch.c
+
+lib_a-rpmatch.obj: rpmatch.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-rpmatch.obj `if test -f 'rpmatch.c'; then $(CYGPATH_W) 'rpmatch.c'; else $(CYGPATH_W) '$(srcdir)/rpmatch.c'; fi`
+
+lib_a-arc4random.o: arc4random.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-arc4random.o `test -f 'arc4random.c' || echo '$(srcdir)/'`arc4random.c
+
+lib_a-arc4random.obj: arc4random.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-arc4random.obj `if test -f 'arc4random.c'; then $(CYGPATH_W) 'arc4random.c'; else $(CYGPATH_W) '$(srcdir)/arc4random.c'; fi`
+
+lib_a-arc4random_uniform.o: arc4random_uniform.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-arc4random_uniform.o `test -f 'arc4random_uniform.c' || echo '$(srcdir)/'`arc4random_uniform.c
+
+lib_a-arc4random_uniform.obj: arc4random_uniform.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-arc4random_uniform.obj `if test -f 'arc4random_uniform.c'; then $(CYGPATH_W) 'arc4random_uniform.c'; else $(CYGPATH_W) '$(srcdir)/arc4random_uniform.c'; fi`
+
+lib_a-hash_page.o: hash_page.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-hash_page.o `test -f 'hash_page.c' || echo '$(srcdir)/'`hash_page.c
+
+lib_a-hash_page.obj: hash_page.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-hash_page.obj `if test -f 'hash_page.c'; then $(CYGPATH_W) 'hash_page.c'; else $(CYGPATH_W) '$(srcdir)/hash_page.c'; fi`
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \

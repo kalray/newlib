@@ -720,6 +720,7 @@ fr30
 frv
 ft32
 k1-elf
+k1-llvmelf
 k1-mbr
 k1-cos
 lm32
@@ -2644,7 +2645,7 @@ case "${target}" in
 	subdirs="$subdirs ft32"
 
 	;;
-  k1*-*-elf)
+  k1*-*-elf | k1*-*-llvmelf)
        subdirs="$subdirs k1-elf"
 
        config_libnosys=false

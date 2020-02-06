@@ -221,7 +221,7 @@
 #define __IEEE_LITTLE_ENDIAN
 #endif
 
-#ifdef __k1__
+#ifdef __kvx__
 #define __IEEE_LITTLE_ENDIAN
 
 /* ilogb(0) must return (-2147483647 - 1) */

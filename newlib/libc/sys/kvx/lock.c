@@ -33,10 +33,86 @@
 #include <stdlib.h>
 #include <sys/lock.h>
 
-#include <mppa_bare_runtime/kv3/context.h>
-#include <mppa_bare_runtime/kv3/syscall.h>
-#include <mppa_bare_runtime/kv3/scall_no.h>
-#include <mppa_bare_runtime/kv3/registers.h>
+/**
+ * L1 cache interface
+ */
+
+/* L1 cache defines */
+#define _KVX_DCACHE_LINE_SIZE    ((64*8)/8)
+#define _KVX_DCACHE_SIZE (128*1024)
+
+#define _KVX_ICACHE_LINE_SIZE    ((64*8)/8)
+#define _KVX_ICACHE_SIZE (4*8*1024)
+
+/**
+ * \fn void __libc_recursive_initlock_base(_LOCK_T *lock)
+ * \brief Initialize recursive lock
+ * \param lock Pointer to recursive lock struct
+ * \warning Cache line containing lock struct is flushed
+ */
+static void __libc_recursive_initlock_base(_LOCK_T *lock)
+{
+  *(volatile uint32_t *)&(lock->owner) = _KVX_RECURSIVE_NO_OWNER;
+  *(volatile uint32_t *)&(lock->counter) = 0;
+}
+
+/**
+ * \fn int __libc_recursive_trylock_base(_LOCK_T *lock,
+ *                                     uint64_t myself)
+ * \brief Try to acquire recursive lock
+ * This function tries to acquire recursive lock. It does not perform any
+ * cache operations.
+ * \param lock Pointer to recursive lock struct
+ * \param myself My owner value. WARNING 0x0 means unlocked
+ * \return 1 if lock is acquired, else 0
+ * \warning The cache line containing the lock counter is flushed
+ */
+static int __libc_recursive_trylock_base(_LOCK_T *lock, uint32_t myself)
+{
+  uint32_t swap_success;
+
+  swap_success = __builtin_kvx_acswapw(&(lock->owner), myself, _KVX_RECURSIVE_NO_OWNER);
+  if ((swap_success == 1)
+      || (__builtin_kvx_lwzu(&(lock->owner)) == myself)) {
+    uint64_t counter = __builtin_kvx_lwzu(&(lock->counter));
+
+    counter += 1;
+    *(volatile uint32_t *)&(lock->counter) = counter;
+    return 1;
+  } else {
+    return 0;
+  }
+}
+
+/**
+ * \fn void __libc_recursive_unlock_base(_LOCK_T *lock,
+ *                                     uint64_t myself)
+ * \brief Release recursive lock
+ * This function unlocks an recursive lock. It does not perform any
+ * cache oeprations.
+ * \param lock Pointer to recursive lock struct
+ * \param myself My owner value. WARNING 0x0 means unlocked
+ */
+static int __libc_recursive_unlock_base(_LOCK_T *lock, uint64_t myself)
+{
+  uint32_t counter = __builtin_kvx_lwzu((void *)&(lock->counter));
+  uint32_t owner = __builtin_kvx_lwzu((void *)&(lock->owner));
+
+  if (owner != myself) {
+    return 0;
+  }
+
+  counter -= 1;
+  *(volatile uint32_t *)&(lock->counter) = counter;
+  if (counter == 0) {
+    /* Unlock */
+    *(volatile uint32_t *)&(lock->owner) = _KVX_RECURSIVE_NO_OWNER;
+  }
+  return 1;
+}
+
+/* Defined in bsp.c in libgloss. */
+extern int __kvx_get_cpu_id(void);
 
 static inline unsigned long long libc_get_id(void)
 {
@@ -45,8 +121,12 @@ static inline unsigned long long libc_get_id(void)
 
 static inline void libc_cache_flush(void)
 {
-  __kvx_mb();
+  /* Full memory barrier */
+  __builtin_kvx_dinval();
+  __builtin_kvx_fence();
 }
+
+/* All these entries are declared in newlib/libc/sys/kvx-elf/include/sys/lock.h */
 
 void __libc_lock_init(_LOCK_T *lock) __attribute__((alias ("__libc_lock_init_recursive")));
 void __libc_lock_init_recursive(_LOCK_T *lock)
@@ -55,7 +135,7 @@ void __libc_lock_init_recursive(_LOCK_T *lock)
     /* Unable to allocate memory: trig a trap opcode. */
     asm("errop\n;;");
   }
-  __kvx_recursive_initlock_base(&(lock->lock));
+  __libc_recursive_initlock_base(lock);
 }
 
 void __libc_lock_close(_LOCK_T *lock) __attribute__((alias ("__libc_lock_close_recursive")));
@@ -85,7 +165,7 @@ int __libc_lock_try_acquire_recursive(_LOCK_T *lock)
   int res;
 
   myself = libc_get_id();
-  res = __kvx_recursive_trylock_base(&(lock->lock), myself);
+  res = __libc_recursive_trylock_base(lock, myself);
   if (res == 1)
     libc_cache_flush();
   return !res;
@@ -97,5 +177,5 @@ void __libc_lock_release_recursive(_LOCK_T *lock)
   unsigned long long myself;
   myself = libc_get_id();
   libc_cache_flush();
-  __kvx_recursive_unlock_base(&(lock->lock), myself);
+  __libc_recursive_unlock_base(lock, myself);
 }

@@ -117,16 +117,16 @@ case "${target}" in
   ft32*-*-*)
 	AC_CONFIG_SUBDIRS([ft32])
 	;;
-  k1*-*-elf | k1*-*-llvmosp)
-       AC_CONFIG_SUBDIRS([k1-elf])
+  kvx*-*-elf | kvx*-*-llvmosp)
+       AC_CONFIG_SUBDIRS([kvx-elf])
        config_libnosys=false
        ;;
-  k1*-*-mbr)
-       AC_CONFIG_SUBDIRS([k1-mbr])
+  kvx-*-mbr)
+       AC_CONFIG_SUBDIRS([kvx-mbr])
        config_libnosys=false
        ;;
-  k1*-*-cos)
-       AC_CONFIG_SUBDIRS([k1-cos])
+  kvx-*-cos)
+       AC_CONFIG_SUBDIRS([kvx-cos])
        config_libnosys=false
        ;;
   lm32*-*-*)

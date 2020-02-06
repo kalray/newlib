@@ -211,9 +211,9 @@ case "${host_cpu}" in
   iq2000)
 	machine_dir=iq2000
 	;;
-  k1)
-	machine_dir=k1
-	libm_machine_dir=k1
+  kvx)
+	machine_dir=kvx
+	libm_machine_dir=kvx
 	default_newlib_io_long_long="yes"
 	default_newlib_io_c99_formats="yes"
 	;;
@@ -560,19 +560,19 @@ case "${host}" in
 	##newlib_cflags="${newlib_cflags} -idirafter ${gcc_dir}include"
 	;;
 
-  k1-*-elf | k1-*-llvmosp)
-	sys_dir=k1
+  kvx-*-elf | kvx-*-llvmosp)
+	sys_dir=kvx
 	# crt0 is provided by libgloss.
 	have_crt0="no"
 	;;
 
-  k1-*-mbr)
+  kvx-*-mbr)
 	sys_dir=mbr
 	# crt0 is provided by libgloss.
 	have_crt0="no"
 	;;
 
-  k1-*-cos)
+  kvx-*-cos)
 	sys_dir=cos
 	# crt0 is provided by libgloss.
 	have_crt0="no"
@@ -814,7 +814,7 @@ newlib_cflags="${newlib_cflags} -DCLOCK_PROVIDED -DMALLOC_PROVIDED -DEXIT_PROVID
 	syscall_dir=syscalls
 	default_newlib_io_long_long="yes"
 	;;
-  k1-*-*)
+  kvx-*-*)
 	newlib_cflags="${newlib_cflags} -D_COMPILING_NEWLIB"
  	syscall_dir=syscalls
 	;;

@@ -34,25 +34,36 @@
 #define __SYS_LOCK_H__
 
 #include <stdint.h>
-#include <mppa_bare_runtime/kv3/atomic.h>
-#include <mppa_bare_runtime/kv3/cache.h>
 
 /*
- * Lock routines for mppa bare runtime toolchain.
+ * Lock routines for bare mode used for OS porting.
  */
 
 #ifndef _KVX_RECURSIVE_NO_OWNER
 #define _KVX_RECURSIVE_NO_OWNER 0x0UL
 #endif /* _KVX_RECURSIVE_NO_OWNER  */
 
-struct __lock {
-  __kvx_recursive_lock_t lock;
-} __attribute__ ((aligned (_KVX_DCACHE_LINE_SIZE)));
+/**
+ * \struct __kvx_recursive_lock
+ * \brief Recursive Locks
+ *
+ * Recursive Locks (SMP ready)
+ *
+ * WARNING : an owner value of 0x0 means "unlocked"
+ *
+ * Principle: This lock can be recursively locked by the same owner.
+ *            On lock we CAS for being sure that it is either ours or unlocked.
+ */
+struct __kvx_recursive_lock {
+  uint32_t owner;
+  uint32_t counter;
+};
 
-typedef struct __lock _LOCK_T;
+typedef struct __kvx_recursive_lock _LOCK_T;
 #define _LOCK_RECURSIVE_T _LOCK_T
 
-#define __LOCK_INIT(class,lock) class _LOCK_T lock = {0}
+#define __LOCK_INIT(class,lock) \
+  class _LOCK_T lock = {.owner = _KVX_RECURSIVE_NO_OWNER, .counter = 0}
 #define __LOCK_INIT_RECURSIVE(class,lock) __LOCK_INIT(class,lock)
 
 extern void __libc_lock_init(_LOCK_T *lock);

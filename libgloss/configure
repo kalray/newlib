@@ -2887,18 +2887,18 @@ case "${target}" in
 
 	subdirs="$subdirs ft32"
 	;;
-  k1*-*-elf)
-       subdirs="$subdirs k1-elf"
+  kvx*-*-elf)
+       subdirs="$subdirs kvx-elf"
 
        config_libnosys=false
        ;;
-  k1*-*-mbr)
-       subdirs="$subdirs k1-mbr"
+  kvx*-*-mbr)
+       subdirs="$subdirs kvx-mbr"
 
        config_libnosys=false
        ;;
-  k1*-*-cos)
-       subdirs="$subdirs k1-cos"
+  kvx*-*-cos)
+       subdirs="$subdirs kvx-cos"
 
        config_libnosys=false
        ;;

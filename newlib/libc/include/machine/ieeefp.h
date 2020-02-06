@@ -205,7 +205,7 @@
 #define __IEEE_BIG_ENDIAN
 #endif
 
-#ifdef __k1__
+#ifdef __kvx__
 #define __IEEE_LITTLE_ENDIAN
 #define _GLIBCXX_HAVE_FABSL
 #define _GLIBCXX_HAVE_ACOSL

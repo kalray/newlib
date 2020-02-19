@@ -72,7 +72,8 @@ int __k1_do_scall(int syscall_nb __attribute__((unused)), __k1_context_t *ctxt _
   case 17: /* sc_write */ {
     register int buf asm ("r0") = arg1;
     register int len asm ("r1") = arg2;
-    asm volatile ("scall 4094\n\t;;" :: "r"(buf), "r"(len));
+    register int fd asm ("r2") = arg0;
+    asm volatile ("scall 4094\n\t;;" :: "r"(buf), "r"(len), "r"(fd));
     return len;
   }
   case 1: /* sc_exit */ {

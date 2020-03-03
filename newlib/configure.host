@@ -560,7 +560,7 @@ case "${host}" in
 	##newlib_cflags="${newlib_cflags} -idirafter ${gcc_dir}include"
 	;;
 
-  k1-*-elf | k1-*-llvmelf)
+  k1-*-elf | k1-*-llvmosp)
 	sys_dir=k1
 	# crt0 is provided by libgloss.
 	have_crt0="no"

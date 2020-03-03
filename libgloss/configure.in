@@ -117,7 +117,7 @@ case "${target}" in
   ft32*-*-*)
 	AC_CONFIG_SUBDIRS([ft32])
 	;;
-  k1*-*-elf | k1*-*-llvmelf)
+  k1*-*-elf | k1*-*-llvmosp)
        AC_CONFIG_SUBDIRS([k1-elf])
        config_libnosys=false
        ;;

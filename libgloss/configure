@@ -725,6 +725,7 @@ kvx-elf
 kvx-llvmosp
 kvx-mbr
 kvx-cos
+kvx-llvmcos
 lm32
 mcore
 mep
@@ -2674,7 +2675,7 @@ case "${target}" in
 
        config_libnosys=false
        ;;
-  kvx-*-cos)
+  kvx-*-cos | kvx*-*-llvmcos)
        subdirs="$subdirs kvx-cos"
 
        config_libnosys=false

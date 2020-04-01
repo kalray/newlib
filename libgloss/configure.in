@@ -125,7 +125,7 @@ case "${target}" in
        AC_CONFIG_SUBDIRS([kvx-mbr])
        config_libnosys=false
        ;;
-  kvx-*-cos)
+  kvx-*-cos | kvx*-*-llvmcos)
        AC_CONFIG_SUBDIRS([kvx-cos])
        config_libnosys=false
        ;;

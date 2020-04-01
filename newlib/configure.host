@@ -572,7 +572,7 @@ case "${host}" in
 	have_crt0="no"
 	;;
 
-  kvx-*-cos)
+  kvx-*-cos | kvx-*-llvmcos)
 	sys_dir=cos
 	# crt0 is provided by libgloss.
 	have_crt0="no"

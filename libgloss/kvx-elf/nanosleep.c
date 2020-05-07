@@ -35,20 +35,18 @@
 #include <sys/types.h>
 #include <stdint.h>
 
-#include <machine/kv3/mppa3-80/cluster/pwr_ctrl.h>
+#include <machine/kv3/mppa3-80/cluster/trace.h>
 #include <kv3/bsp.h>
 
 /* _POSIX_TIMERS is not defined for bare. Internal routine __kvx_nanosleep is provided and used in sleep implementation. */
 int __kvx_nanosleep(const struct timespec *req, struct timespec *rem)
 {
-  uint64_t ticks = 0;
-  uint64_t cycles;
-  uint64_t end;
   if (req) {
-    cycles  = mppa_pwr_ctrl_local->dsu_timestamp.dword;
-    ticks   = (req->tv_sec + req->tv_nsec / (float) TOD_NANOSECONDS_PER_SECOND) * _KVX_TIMESTAMP_FREQ;
-    end     = cycles + ticks;
-    while (mppa_pwr_ctrl_local->dsu_timestamp.dword < end)
+    uint64_t start  = mppa_trace[0]->timestamp_value.dword;
+    uint64_t ticks  = (uint64_t)((req->tv_sec + req->tv_nsec /
+      (float) TOD_NANOSECONDS_PER_SECOND) * _KVX_TIMESTAMP_FREQ);
+
+    while (ticks > (mppa_trace[0]->timestamp_value.dword - start))
       ;
 
     if (rem) {

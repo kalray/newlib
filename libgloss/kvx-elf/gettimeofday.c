@@ -34,7 +34,7 @@
 #include <sys/time.h>
 #include <time.h>
 
-#include <machine/kv3/mppa3-80/cluster/pwr_ctrl.h>
+#include <machine/kv3/mppa3-80/cluster/trace.h>
 #include <kv3/bsp.h>
 
 #define NANOSEC_PER_SECOND (1000000000uLL)
@@ -45,7 +45,7 @@ int __gloss_getnanotime(struct timespec *tval)
   uint64_t cycles;
   uint64_t end;
 
-  cycles  = mppa_pwr_ctrl_local->dsu_timestamp.dword;
+  cycles  = mppa_trace[0]->timestamp_value.dword;
   tval->tv_sec = cycles / _KVX_TIMESTAMP_FREQ;
   tval->tv_nsec = (cycles -  _KVX_TIMESTAMP_FREQ*(uint64_t)tval->tv_sec) * (TOD_NANOSECONDS_PER_SECOND/(float)_KVX_TIMESTAMP_FREQ);
 

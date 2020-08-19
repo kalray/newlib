@@ -39,7 +39,7 @@
  * Core routines
  */
 
-int __kvx_is_rm(void)
+int __gloss_kvx_is_rm(void)
 {
   if (KVX_SFR_GET_FIELD(__builtin_kvx_get(KVX_SFR_PCR), PCR_PID) == 0x10)
     return 1;
@@ -47,32 +47,32 @@ int __kvx_is_rm(void)
   return 0;
 }
 
-int __kvx_get_cpu_id(void)
+int __gloss_kvx_get_cpu_id(void)
 {
   return (int) KVX_SFR_GET_FIELD(__builtin_kvx_get(KVX_SFR_PCR), PCR_PID);
 }
 
-int __kvx_get_rm_id(void)
+int __gloss_kvx_get_rm_id(void)
 {
-  return _KVX_RM_ID;
+  return __GLOSS_KVX_RM_ID;
 }
 
-void __kvx_hwloops_enable(void)
+void __gloss_kvx_hwloops_enable(void)
 {
   __builtin_kvx_wfxl(KVX_SFR_PS, KVX_SFR_PS_HLE_WFXL_SET);
 }
 
-void __kvx_hwloops_disable(void)
+void __gloss_kvx_hwloops_disable(void)
 {
   __builtin_kvx_wfxl(KVX_SFR_PS, KVX_SFR_PS_HLE_WFXL_CLEAR);
 }
 
-void __kvx_clear_kvx_wup_mask(unsigned int mask)
+void __gloss_kvx_clear_wup_mask(unsigned int mask)
 {
   __builtin_kvx_wfxl(KVX_SFR_WS, mask);
 }
 
-void __kvx_set_kvx_wup_mask(unsigned int mask)
+void __gloss_kvx_set_wup_mask(unsigned int mask)
 {
   __builtin_kvx_wfxl(KVX_SFR_WS, (uint64_t)mask << 32);
 }
@@ -81,7 +81,7 @@ void __kvx_set_kvx_wup_mask(unsigned int mask)
  * Cluster routines
  */
 
-int __kvx_get_cluster_id(void)
+int __gloss_kvx_get_cluster_id(void)
 {
   return (int)KVX_SFR_GET_FIELD(__builtin_kvx_get(KVX_SFR_PCR), PCR_CID);
 }
@@ -91,73 +91,73 @@ int __kvx_get_cluster_id(void)
  */
 
 /**
- * \fn void __kvx_interrupt_level_set(uint32_t level)
+ * \fn void __gloss_kvx_interrupt_level_set(uint32_t level)
  * \brief Sets the current level of priority.
  * \param level new level of priority
  */
 
-void __kvx_interrupt_level_set(uint32_t level)
+void __gloss_kvx_interrupt_level_set(uint32_t level)
 {
   __builtin_kvx_wfxl(KVX_SFR_PS, KVX_SFR_WFXL_VALUE(PS_IL, level));
 }
 
 /**
- * \fn static inline void __kvx_interrupt_priorities_equal(void)
+ * \fn static inline void __gloss_kvx_interrupt_priorities_equal(void)
  * \brief Set all interrupt lines to the same priority (1)
  */
-void __kvx_interrupt_priorities_equal(void)
+void __gloss_kvx_interrupt_priorities_equal(void)
 {
   __builtin_kvx_set(KVX_SFR_ILL, 0x5555555555555555ULL);
 }
 
 /**
- * \fn void __kvx_interrupt_enable(void)
+ * \fn void __gloss_kvx_interrupt_enable(void)
  * \brief Enable interrupts
  */
-void __kvx_interrupt_enable(void)
+void __gloss_kvx_interrupt_enable(void)
 {
   __builtin_kvx_wfxl(KVX_SFR_PS, (long long)KVX_SFR_PS_IE_MASK << 32);
 }
 
 /**
- * \fn void __kvx_interrupt_disable(void)
+ * \fn void __gloss_kvx_interrupt_disable(void)
  * \brief Disable interrupts
  */
 void
-__kvx_interrupt_disable(void)
+__gloss_kvx_interrupt_disable(void)
 {
   __builtin_kvx_wfxl(KVX_SFR_PS, KVX_SFR_PS_IE_MASK);
 }
 
 /**
- * \fn void __kvx_interrupt_init(void)
+ * \fn void __gloss_kvx_interrupt_init(void)
  * \brief Enable interrupts and set them to equal priority
  */
 void
-__kvx_interrupt_init(void)
+__gloss_kvx_interrupt_init(void)
 {
-  __kvx_interrupt_level_set(0);
-  __kvx_interrupt_priorities_equal();
-  __kvx_interrupt_enable();
+  __gloss_kvx_interrupt_level_set(0);
+  __gloss_kvx_interrupt_priorities_equal();
+  __gloss_kvx_interrupt_enable();
 }
 
 /**
- * \fn void __kvx_interrupt_enable_num(unsigned int x)
+ * \fn void __gloss_kvx_interrupt_enable_num(unsigned int x)
  * \brief Enable an interrupt line
  * \param x Interrupt number
  */
-void __kvx_interrupt_enable_num(unsigned int x)
+void __gloss_kvx_interrupt_enable_num(unsigned int x)
 {
   __builtin_kvx_wfxl(KVX_SFR_ILE, 1ull << (32 + x));
 }
 
 /**
- * \fn void __kvx_interrupt_set_priority(unsigned int num, uint8_t prio)
+ * \fn void __gloss_kvx_interrupt_set_priority(unsigned int num, uint8_t prio)
  * \brief Set interrupt line to given priority
  * \param num Interrupt number
  * \param prio Priority number
  */
-void __kvx_interrupt_set_priority(unsigned int num, uint8_t prio)
+void __gloss_kvx_interrupt_set_priority(unsigned int num, uint8_t prio)
 {
   unsigned int num_sfr = num >> 5;
   unsigned int sfr_half = (num & 0x10) >> 4;
@@ -181,13 +181,13 @@ void __kvx_interrupt_set_priority(unsigned int num, uint8_t prio)
 }
 
 /**
- * \fn void __kvx_interrupt_configure_dame(void)
+ * \fn void __gloss_kvx_interrupt_configure_dame(void)
  * \brief Configure DAME interrupt : enable it + set its (relative) priority to 3
  */
-void __kvx_interrupt_configure_dame(void)
+void __gloss_kvx_interrupt_configure_dame(void)
 {
-  __kvx_interrupt_set_priority(_KVX_PE_INT_LINE_DAME, 3);
-  __kvx_interrupt_enable_num(_KVX_PE_INT_LINE_DAME);
+  __gloss_kvx_interrupt_set_priority(__GLOSS_KVX_PE_INT_LINE_DAME, 3);
+  __gloss_kvx_interrupt_enable_num(__GLOSS_KVX_PE_INT_LINE_DAME);
 }
 
 /**
@@ -247,13 +247,13 @@ void __apic_mailbox_init(void)
 static void __l2_enable(void)
 {
   /* Enable L1 cache */
-  __kvx_volatile_write64((void *)&(mppa_pwr_ctrl_local->global_config.set), 1 << PWR_GLOB_CACHE_EN_IDX);
+  __gloss_kvx_volatile_write64((void *)&(mppa_pwr_ctrl_local->global_config.set), 1 << PWR_GLOB_CACHE_EN_IDX);
 }
 
 static void __l2_disable(void)
 {
   /* Enable L1 cache */
-  __kvx_volatile_write64((void *)&(mppa_pwr_ctrl_local->global_config.clear), 1 << PWR_GLOB_CACHE_EN_IDX);
+  __gloss_kvx_volatile_write64((void *)&(mppa_pwr_ctrl_local->global_config.clear), 1 << PWR_GLOB_CACHE_EN_IDX);
 }
 
 void __l2_init_metadata(void)
@@ -288,46 +288,46 @@ void __l2_init_metadata(void)
  * Power Controller routines
  */
 
-void __kvx_set_pwr_pen_uen(void)
+void __gloss_kvx_set_pwr_pen_uen(void)
 {
-  __kvx_volatile_write64((void *)&(mppa_pwr_ctrl_local->global_config.set), MPPA_PWR_CTRL_GLOBAL_CONFIG_USER_EN__MASK | MPPA_PWR_CTRL_GLOBAL_CONFIG_PE_EN__MASK);
+  __gloss_kvx_volatile_write64((void *)&(mppa_pwr_ctrl_local->global_config.set), MPPA_PWR_CTRL_GLOBAL_CONFIG_USER_EN__MASK | MPPA_PWR_CTRL_GLOBAL_CONFIG_PE_EN__MASK);
 }
 
-void __kvx_clear_pwc_reset_on_wup(int cpuid)
+void __gloss_kvx_clear_pwc_reset_on_wup(int cpuid)
 {
-  __kvx_volatile_write64((void *)&(mppa_pwr_ctrl_local->vector_proc_control.reset_on_wakeup.clear), (1ULL << cpuid));
+  __gloss_kvx_volatile_write64((void *)&(mppa_pwr_ctrl_local->vector_proc_control.reset_on_wakeup.clear), (1ULL << cpuid));
 }
 
-void __kvx_set_pwc_wup(int cpuid)
+void __gloss_kvx_set_pwc_wup(int cpuid)
 {
-  __kvx_volatile_write64((void *)&(mppa_pwr_ctrl_local->vector_proc_control.wup.set), (1ULL << cpuid));
+  __gloss_kvx_volatile_write64((void *)&(mppa_pwr_ctrl_local->vector_proc_control.wup.set), (1ULL << cpuid));
 }
 
-void __kvx_clear_pwc_wup(int cpuid)
+void __gloss_kvx_clear_pwc_wup(int cpuid)
 {
-  __kvx_volatile_write64((void *)&(mppa_pwr_ctrl_local->vector_proc_control.wup.clear), (1ULL << cpuid));
+  __gloss_kvx_volatile_write64((void *)&(mppa_pwr_ctrl_local->vector_proc_control.wup.clear), (1ULL << cpuid));
 }
 
-void __kvx_pwc_init(void)
+void __gloss_kvx_pwc_init(void)
 {
   int cpuid;
 
-  cpuid = __kvx_get_cpu_id();
+  cpuid = __gloss_kvx_get_cpu_id();
 
   /* PEN/KEN settings */
-  if (cpuid == _KVX_RM_ID) {
-    __kvx_set_pwr_pen_uen();
+  if (cpuid == __GLOSS_KVX_RM_ID) {
+    __gloss_kvx_set_pwr_pen_uen();
   }
   /* Default settings : be ready to idle + resume execution linearly after wup
    * (after clearing the relevant WS.WU* bits)
    */
-  __kvx_clear_pwc_reset_on_wup(cpuid);
-  __kvx_clear_pwc_wup(cpuid);
+  __gloss_kvx_clear_pwc_reset_on_wup(cpuid);
+  __gloss_kvx_clear_pwc_wup(cpuid);
   __builtin_kvx_fence();
 }
 
 extern void __kvx_stop(void);
-void __kvx_cluster_poweroff(void)
+void __gloss_kvx_cluster_poweroff(void)
 {
   /* Waiting for power controler implementation */
   __kvx_stop();
@@ -337,7 +337,7 @@ void __kvx_cluster_poweroff(void)
  * IO write routine
  */
 
-void __kvx_volatile_write64(void *addr, uint64_t val)
+void __gloss_kvx_volatile_write64(void *addr, uint64_t val)
 {
   *(volatile uint64_t *)addr = val;
 }

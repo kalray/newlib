@@ -46,8 +46,8 @@ int __gloss_getnanotime(struct timespec *tval)
   uint64_t end;
 
   cycles  = mppa_trace[0]->timestamp_value.dword;
-  tval->tv_sec = cycles / _KVX_TIMESTAMP_FREQ;
-  tval->tv_nsec = (cycles -  _KVX_TIMESTAMP_FREQ*(uint64_t)tval->tv_sec) * (TOD_NANOSECONDS_PER_SECOND/(float)_KVX_TIMESTAMP_FREQ);
+  tval->tv_sec = cycles / __GLOSS_KVX_TIMESTAMP_FREQ;
+  tval->tv_nsec = (cycles -  __GLOSS_KVX_TIMESTAMP_FREQ*(uint64_t)tval->tv_sec) * (TOD_NANOSECONDS_PER_SECOND/(float)__GLOSS_KVX_TIMESTAMP_FREQ);
 
   return 0;
 }

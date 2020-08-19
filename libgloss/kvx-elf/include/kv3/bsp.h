@@ -35,9 +35,9 @@
 
 #  ifndef __ASSEMBLER__
 
-extern volatile void *_KVX_PE_STACK_ADDRESS[];
-extern volatile void *_KVX_PE_ARGS_ADDRESS[];
-extern volatile void *_KVX_PE_START_ADDRESS[];
+extern volatile void *__GLOSS_KVX_PE_STACK_ADDRESS[];
+extern volatile void *__GLOSS_KVX_PE_ARGS_ADDRESS[];
+extern volatile void *__GLOSS_KVX_PE_START_ADDRESS[];
 
 #endif /* __ASSEMBLER__ */
 
@@ -45,68 +45,68 @@ extern volatile void *_KVX_PE_START_ADDRESS[];
  * Core interface
  */
 
-#    ifndef _KVX_RM_ID
-#      define _KVX_RM_ID 16
+#    ifndef __GLOSS_KVX_RM_ID
+#      define __GLOSS_KVX_RM_ID 16
 #    endif
-#    ifndef _KVX_CPU_FREQ
-#      define _KVX_CPU_FREQ (800 * 1000 * 1000) /* 800 MHz */
+#    ifndef __GLOSS_KVX_CPU_FREQ
+#      define __GLOSS_KVX_CPU_FREQ (800 * 1000 * 1000) /* 800 MHz */
 #    endif
-#    ifndef __KVX_CLOCKS_PER_SEC__
-#      define __KVX_CLOCKS_PER_SEC__ 1000000
+#    ifndef __GLOSS_KVX_CLOCKS_PER_SEC__
+#      define __GLOSS_KVX_CLOCKS_PER_SEC__ 1000000
 #    endif
 
-#    ifndef _KVX_NB_PE
-#      define _KVX_NB_PE 16
-#    endif /* _KVX_NB_PE */
+#    ifndef __GLOSS_KVX_NB_PE
+#      define __GLOSS_KVX_NB_PE 16
+#    endif /* __GLOSS_KVX_NB_PE */
 
-#    ifndef _KVX_NB_RM
-#      define _KVX_NB_RM 1
-#    endif /* _KVX_NB_RM */
+#    ifndef __GLOSS_KVX_NB_RM
+#      define __GLOSS_KVX_NB_RM 1
+#    endif /* __GLOSS_KVX_NB_RM */
 
 #define TOD_NANOSECONDS_PER_SECOND 1000000000ull
 
-#    ifndef _KVX_TIMESTAMP_FREQ
-#      define _KVX_TIMESTAMP_FREQ 100000000ULL
-#    endif /* _KVX_TIMESTAMP_FREQ */
+#    ifndef __GLOSS_KVX_TIMESTAMP_FREQ
+#      define __GLOSS_KVX_TIMESTAMP_FREQ 100000000ULL
+#    endif /* __GLOSS_KVX_TIMESTAMP_FREQ */
 
 #  ifndef __ASSEMBLER__
 
 /**
- * \fn int __kvx_is_rm(void)
+ * \fn int __gloss_kvx_is_rm(void)
  * \brief Check whether PE is a Ressource Manager
  * \return 1 if PE is a RM, else 0
  */
-extern int __kvx_is_rm(void) __attribute__((__const__));
+extern int __gloss_kvx_is_rm(void) __attribute__((__const__));
 
 /**
- * \fn int __kvx_get_cpu_id(void)
+ * \fn int __gloss_kvx_get_cpu_id(void)
  * \brief Get the PE ID
  * \return PE ID
  */
-extern int __kvx_get_cpu_id(void) __attribute__((__const__));
+extern int __gloss_kvx_get_cpu_id(void) __attribute__((__const__));
 
 /**
- * \fn int __kvx_get_rm_id(void)
+ * \fn int __gloss_kvx_get_rm_id(void)
  * \brief Get RM ID
- * \return _KVX_RM_ID
+ * \return __GLOSS_KVX_RM_ID
  */
-extern int __kvx_get_rm_id(void);
+extern int __gloss_kvx_get_rm_id(void);
 
 /**
- * \fn void __kvx_hwloops_enable(void)
+ * \fn void __gloss_kvx_hwloops_enable(void)
  * \brief Enable hardware loops
  */
-extern void __kvx_hwloops_enable(void);
+extern void __gloss_kvx_hwloops_enable(void);
 
 /**
- * \fn void __kvx_hwloops_disable(void)
+ * \fn void __gloss_kvx_hwloops_disable(void)
  * \brief Disable hardware loops
  */
-extern void __kvx_hwloops_disable(void);
+extern void __gloss_kvx_hwloops_disable(void);
 
-extern void __kvx_clear_kvx_wup_mask(unsigned int mask);
+extern void __gloss_kvx_clear_wup_mask(unsigned int mask);
 
-extern void __kvx_set_kvx_wup_mask(unsigned int mask);
+extern void __gloss_kvx_set_wup_mask(unsigned int mask);
 
 #endif /* __ASSEMBLER__ */
 
@@ -117,11 +117,11 @@ extern void __kvx_set_kvx_wup_mask(unsigned int mask);
 #  ifndef __ASSEMBLER__
 
 /**
- * \fn int __kvx_get_cluster_id(void)
+ * \fn int __gloss_kvx_get_cluster_id(void)
  * \brief Get cluster ID
  * \return Cluster ID
  */
-extern int __kvx_get_cluster_id(void) __attribute__((__const__));
+extern int __gloss_kvx_get_cluster_id(void) __attribute__((__const__));
 
 #  endif /* __ASSEMBLER__ */
 
@@ -129,164 +129,164 @@ extern int __kvx_get_cluster_id(void) __attribute__((__const__));
  * Interrupts interface
  */
 
-#    ifndef _KVX_PE_INT_LINE_TIMER0
-#      define _KVX_PE_INT_LINE_TIMER0 0
+#    ifndef __GLOSS_KVX_PE_INT_LINE_TIMER0
+#      define __GLOSS_KVX_PE_INT_LINE_TIMER0 0
 #    endif
-#    ifndef _KVX_PE_INT_LINE_TIMER1
-#      define _KVX_PE_INT_LINE_TIMER1 1
+#    ifndef __GLOSS_KVX_PE_INT_LINE_TIMER1
+#      define __GLOSS_KVX_PE_INT_LINE_TIMER1 1
 #    endif
-#    ifndef _KVX_PE_INT_LINE_WATCHDOG
-#      define _KVX_PE_INT_LINE_WATCHDOG 2
+#    ifndef __GLOSS_KVX_PE_INT_LINE_WATCHDOG
+#      define __GLOSS_KVX_PE_INT_LINE_WATCHDOG 2
 #    endif
-#    ifndef _KVX_PE_INT_LINE_BIDIR0
-#      define _KVX_PE_INT_LINE_BIDIR0 8
+#    ifndef __GLOSS_KVX_PE_INT_LINE_BIDIR0
+#      define __GLOSS_KVX_PE_INT_LINE_BIDIR0 8
 #    endif
-#    ifndef _KVX_PE_INT_LINE_BIDIR1
-#      define _KVX_PE_INT_LINE_BIDIR1 9
+#    ifndef __GLOSS_KVX_PE_INT_LINE_BIDIR1
+#      define __GLOSS_KVX_PE_INT_LINE_BIDIR1 9
 #    endif
-#    ifndef _KVX_PE_INT_LINE_BIDIR2
-#      define _KVX_PE_INT_LINE_BIDIR2 10
+#    ifndef __GLOSS_KVX_PE_INT_LINE_BIDIR2
+#      define __GLOSS_KVX_PE_INT_LINE_BIDIR2 10
 #    endif
-#    ifndef _KVX_PE_INT_LINE_BIDIR3
-#      define _KVX_PE_INT_LINE_BIDIR3 11
+#    ifndef __GLOSS_KVX_PE_INT_LINE_BIDIR3
+#      define __GLOSS_KVX_PE_INT_LINE_BIDIR3 11
 #    endif
-#    ifndef _KVX_PE_INT_LINE_SHOOTDOWN
-#      define _KVX_PE_INT_LINE_SHOOTDOWN 15
+#    ifndef __GLOSS_KVX_PE_INT_LINE_SHOOTDOWN
+#      define __GLOSS_KVX_PE_INT_LINE_SHOOTDOWN 15
 #    endif
-#    ifndef _KVX_PE_INT_LINE_DAME
-#      define _KVX_PE_INT_LINE_DAME 16
+#    ifndef __GLOSS_KVX_PE_INT_LINE_DAME
+#      define __GLOSS_KVX_PE_INT_LINE_DAME 16
 #    endif
-#    ifndef _KVX_PE_INT_LINE_CLI
-#      define _KVX_PE_INT_LINE_CLI 17
-#    endif
-
-#    ifndef _KVX_RM_INT_LINE_TIMER0
-#      define _KVX_RM_INT_LINE_TIMER0 0
-#    endif
-#    ifndef _KVX_RM_INT_LINE_TIMER1
-#      define _KVX_RM_INT_LINE_TIMER1 1
-#    endif
-#    ifndef _KVX_RM_INT_LINE_WATCHDOG
-#      define _KVX_RM_INT_LINE_WATCHDOG 2
+#    ifndef __GLOSS_KVX_PE_INT_LINE_CLI
+#      define __GLOSS_KVX_PE_INT_LINE_CLI 17
 #    endif
 
-#    ifndef _KVX_RM_INT_LINE_CNOCRX
-#      define _KVX_RM_INT_LINE_CNOCRX 3
+#    ifndef __GLOSS_KVX_RM_INT_LINE_TIMER0
+#      define __GLOSS_KVX_RM_INT_LINE_TIMER0 0
 #    endif
-#    ifndef _KVX_RM_INT_LINE_DNOCRX
-#      define _KVX_RM_INT_LINE_DNOCRX 4
+#    ifndef __GLOSS_KVX_RM_INT_LINE_TIMER1
+#      define __GLOSS_KVX_RM_INT_LINE_TIMER1 1
 #    endif
-#    ifndef _KVX_RM_INT_LINE_DNOCTX
-#      define _KVX_RM_INT_LINE_DNOCTX 5
-#    endif
-#    ifndef _KVX_RM_INT_LINE_DNOCERR
-#      define _KVX_RM_INT_LINE_DNOCERR 6
+#    ifndef __GLOSS_KVX_RM_INT_LINE_WATCHDOG
+#      define __GLOSS_KVX_RM_INT_LINE_WATCHDOG 2
 #    endif
 
-#    ifndef _KVX_RM_INT_GIC_BASE
-#      define _KVX_RM_INT_GIC_BASE 7
+#    ifndef __GLOSS_KVX_RM_INT_LINE_CNOCRX
+#      define __GLOSS_KVX_RM_INT_LINE_CNOCRX 3
 #    endif
-#    ifndef _KVX_RM_INT_LINE_BIDIR0
-#      define _KVX_RM_INT_LINE_BIDIR0 8
+#    ifndef __GLOSS_KVX_RM_INT_LINE_DNOCRX
+#      define __GLOSS_KVX_RM_INT_LINE_DNOCRX 4
 #    endif
-#    ifndef _KVX_RM_INT_LINE_BIDIR1
-#      define _KVX_RM_INT_LINE_BIDIR1 9
+#    ifndef __GLOSS_KVX_RM_INT_LINE_DNOCTX
+#      define __GLOSS_KVX_RM_INT_LINE_DNOCTX 5
 #    endif
-#    ifndef _KVX_RM_INT_LINE_BIDIR2
-#      define _KVX_RM_INT_LINE_BIDIR2 10
+#    ifndef __GLOSS_KVX_RM_INT_LINE_DNOCERR
+#      define __GLOSS_KVX_RM_INT_LINE_DNOCERR 6
 #    endif
-#    ifndef _KVX_RM_INT_LINE_BIDIR3
-#      define _KVX_RM_INT_LINE_BIDIR3 11
+
+#    ifndef __GLOSS_KVX_RM_INT_GIC_BASE
+#      define __GLOSS_KVX_RM_INT_GIC_BASE 7
 #    endif
-#    ifndef _KVX_RM_INT_LINE_PEWATCHDOGIRQ
-#      define _KVX_RM_INT_LINE_PEWATCHDOGIRQ 14
+#    ifndef __GLOSS_KVX_RM_INT_LINE_BIDIR0
+#      define __GLOSS_KVX_RM_INT_LINE_BIDIR0 8
 #    endif
-#    ifndef _KVX_RM_INT_LINE_SHOOTDOWN
-#      define _KVX_RM_INT_LINE_SHOOTDOWN 15
+#    ifndef __GLOSS_KVX_RM_INT_LINE_BIDIR1
+#      define __GLOSS_KVX_RM_INT_LINE_BIDIR1 9
+#    endif
+#    ifndef __GLOSS_KVX_RM_INT_LINE_BIDIR2
+#      define __GLOSS_KVX_RM_INT_LINE_BIDIR2 10
+#    endif
+#    ifndef __GLOSS_KVX_RM_INT_LINE_BIDIR3
+#      define __GLOSS_KVX_RM_INT_LINE_BIDIR3 11
+#    endif
+#    ifndef __GLOSS_KVX_RM_INT_LINE_PEWATCHDOGIRQ
+#      define __GLOSS_KVX_RM_INT_LINE_PEWATCHDOGIRQ 14
+#    endif
+#    ifndef __GLOSS_KVX_RM_INT_LINE_SHOOTDOWN
+#      define __GLOSS_KVX_RM_INT_LINE_SHOOTDOWN 15
 #    endif
 /* Data Asynchronous Memory Error */
-#    ifndef _KVX_RM_INT_LINE_DAME
-#      define _KVX_RM_INT_LINE_DAME 16
+#    ifndef __GLOSS_KVX_RM_INT_LINE_DAME
+#      define __GLOSS_KVX_RM_INT_LINE_DAME 16
 #    endif
 /* Cache Line Invalidation */
-#    ifndef _KVX_RM_INT_LINE_CLI
-#      define _KVX_RM_INT_LINE_CLI 17
+#    ifndef __GLOSS_KVX_RM_INT_LINE_CLI
+#      define __GLOSS_KVX_RM_INT_LINE_CLI 17
 #    endif
 
-#    ifndef _KVX_INT_GIC_BASE
-#      define _KVX_INT_GIC_BASE (_KVX_RM_INT_GIC_BASE)
+#    ifndef __GLOSS_KVX_INT_GIC_BASE
+#      define __GLOSS_KVX_INT_GIC_BASE (__GLOSS_KVX_RM_INT_GIC_BASE)
 #    endif
-#    ifndef _KVX_INT_GIC0
-#      define _KVX_INT_GIC0 _KVX_INT_GIC_BASE
+#    ifndef __GLOSS_KVX_INT_GIC0
+#      define __GLOSS_KVX_INT_GIC0 __GLOSS_KVX_INT_GIC_BASE
 #    endif
-#    ifndef _KVX_INT_GIC1
-#      define _KVX_INT_GIC1 (_KVX_INT_GIC_BASE + 1)
+#    ifndef __GLOSS_KVX_INT_GIC1
+#      define __GLOSS_KVX_INT_GIC1 (__GLOSS_KVX_INT_GIC_BASE + 1)
 #    endif
-#    ifndef _KVX_INT_GIC2
-#      define _KVX_INT_GIC2 (_KVX_INT_GIC_BASE + 2)
+#    ifndef __GLOSS_KVX_INT_GIC2
+#      define __GLOSS_KVX_INT_GIC2 (__GLOSS_KVX_INT_GIC_BASE + 2)
 #    endif
-#    ifndef _KVX_INT_GIC3
-#      define _KVX_INT_GIC3 (_KVX_INT_GIC_BASE + 3)
+#    ifndef __GLOSS_KVX_INT_GIC3
+#      define __GLOSS_KVX_INT_GIC3 (__GLOSS_KVX_INT_GIC_BASE + 3)
 #    endif
 
-#    ifndef _KVX_MAX_INT_NUMBER
-#      define _KVX_MAX_INT_NUMBER 32
+#    ifndef __GLOSS_KVX_MAX_INT_NUMBER
+#      define __GLOSS_KVX_MAX_INT_NUMBER 32
 #    endif
 
 #  ifndef __ASSEMBLER__
 
-/**
- * \fn void __kvx_interrupt_priorities_equal(void)
+/**x
+ * \fn void __gloss_kvx_interrupt_priorities_equal(void)
  * \brief Set all interrupt lines to the same priority
  */
-  extern void __kvx_interrupt_priorities_equal(void);
+  extern void __gloss_kvx_interrupt_priorities_equal(void);
 
 /**
- * \fn void __kvx_interrupt_level_set(uint32_t level)
+ * \fn void __gloss_kvx_interrupt_level_set(uint32_t level)
  * \brief Sets the current level of priority.
  * \param level new level of priority
  */
 
-extern void __kvx_interrupt_level_set(uint32_t level);
+extern void __gloss_kvx_interrupt_level_set(uint32_t level);
 
 /**
- * \fn void __kvx_interrupt_enable(void)
+ * \fn void __gloss_kvx_interrupt_enable(void)
  * \brief Enable interrupts
  */
-extern void __kvx_interrupt_enable(void);
+extern void __gloss_kvx_interrupt_enable(void);
 
 /**
- * \fn void __kvx_interrupt_disable(void)
+ * \fn void __gloss_kvx_interrupt_disable(void)
  * \brief Disable interrupts
  */
-extern void __kvx_interrupt_disable(void);
+extern void __gloss_kvx_interrupt_disable(void);
 
 /**
- * \fn void __kvx_interrupt_init(void)
+ * \fn void __gloss_kvx_interrupt_init(void)
  * \brief Enable interrupts and set them to equal priority
  */
-extern void __kvx_interrupt_init(void);
+extern void __gloss_kvx_interrupt_init(void);
 
 /**
- * \fn void __kvx_interrupt_enable_num(unsigned int x)
+ * \fn void __gloss_kvx_interrupt_enable_num(unsigned int x)
  * \brief Enable an interrupt line
  * \param x Interrupt number
  */
-extern void __kvx_interrupt_enable_num(unsigned int x);
+extern void __gloss_kvx_interrupt_enable_num(unsigned int x);
 
 /**
- * \fn void __kvx_interrupt_set_priority(unsigned int num, uint8_t prio)
+ * \fn void __gloss_kvx_interrupt_set_priority(unsigned int num, uint8_t prio)
  * \brief Set interrupt line to given priority
  * \param num Interrupt number
  * \param prio Priority number
  */
-extern void __kvx_interrupt_set_priority(unsigned int num, uint8_t prio);
+extern void __gloss_kvx_interrupt_set_priority(unsigned int num, uint8_t prio);
 
 /**
- * \fn void __kvx_interrupt_configure_dame(void)
+ * \fn void __gloss_kvx_interrupt_configure_dame(void)
  * \brief Configure DAME interrupt : enable it + set its priority to 15
  */
-extern void __kvx_interrupt_configure_dame(void);
+extern void __gloss_kvx_interrupt_configure_dame(void);
 
 #endif /* __ASSEMBLER__ */
 
@@ -367,43 +367,43 @@ extern void __l2_init_metadata(void);
 #  ifndef __ASSEMBLER__
 
 /**
- * \fn void __kvx_set_pwr_pen_uen(void)
+ * \fn void __gloss_kvx_set_pwr_pen_uen(void)
  * \brief Set PEN and UEN bit in the local power_controller
  */
-extern void __kvx_set_pwr_pen_uen(void);
+extern void __gloss_kvx_set_pwr_pen_uen(void);
 
 /**
- * \fn void __kvx_set_pwc_reset_on_wup(int cpuid)
+ * \fn void __gloss_kvx_set_pwc_reset_on_wup(int cpuid)
  * \brief Set the reset_on_wakeup bit associated to PE cpuid in the local power_controller
  * \param cpuid PE id
  */
-extern void __kvx_clear_pwc_reset_on_wup(int cpuid);
+extern void __gloss_kvx_clear_pwc_reset_on_wup(int cpuid);
 
 /**
- * \fn void __kvx_set_pwc_wup(int cpuid)
+ * \fn void __gloss_kvx_set_pwc_wup(int cpuid)
  * \brief Set the wup bit corresponding to PE cpuid in the local power_controller => wup the corresponding PE
  * \param cpuid PE id
  */
-extern void __kvx_set_pwc_wup(int cpuid);
+extern void __gloss_kvx_set_pwc_wup(int cpuid);
 
 /**
- * \fn void __kvx_clear_pwc_wup(int cpuid)
+ * \fn void __gloss_kvx_clear_pwc_wup(int cpuid)
  * \brief Clear the wup bit corresponding to PE cpuid in the local power_controller
  * \param cpuid PE id
  */
-extern void __kvx_clear_pwc_wup(int cpuid);
+extern void __gloss_kvx_clear_pwc_wup(int cpuid);
 
 /**
- * \fn void __kvx_pwc_init(void)
+ * \fn void __gloss_kvx_pwc_init(void)
  * \brief Initializes basic power_controller features
  */
-extern void __kvx_pwc_init(void);
+extern void __gloss_kvx_pwc_init(void);
 
 /**
- * \fn void __kvx_cluster_poweroff(void)
+ * \fn void __gloss_kvx_cluster_poweroff(void)
  * \brief Power off cluster
  */
-extern void __kvx_cluster_poweroff(void);
+extern void __gloss_kvx_cluster_poweroff(void);
 
 #endif /* __ASSEMBLER__ */
 
@@ -418,12 +418,12 @@ extern void __kvx_cluster_poweroff(void);
  */
 
 /**
- * \fn uint64_t __kvx_volatile_write64(void *addr, uint64_t val)
+ * \fn uint64_t __gloss_kvx_volatile_write64(void *addr, uint64_t val)
  * \brief Peripheral write of 64 bits
  * \param addr Pointer to the adress where data will be written
  * \param val Data to write
  */
-extern void __kvx_volatile_write64(void *addr, uint64_t val);
+extern void __gloss_kvx_volatile_write64(void *addr, uint64_t val);
 
 #endif /* __ASSEMBLER__ */
 

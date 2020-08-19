@@ -36,13 +36,13 @@
 
 #define TOD_MICROSECONDS_PER_SECOND     1000000
 
-extern int __kvx_nanosleep(const struct timespec *req, struct timespec *rem);
+extern int __gloss_kvx_nanosleep(const struct timespec *req, struct timespec *rem);
 int usleep(useconds_t useconds){
   struct timespec t;
 
   t.tv_sec = useconds / TOD_MICROSECONDS_PER_SECOND;
   t.tv_nsec = (useconds % TOD_MICROSECONDS_PER_SECOND) * 1000;
 
-  return __kvx_nanosleep(&t, NULL);
+  return __gloss_kvx_nanosleep(&t, NULL);
 
 }

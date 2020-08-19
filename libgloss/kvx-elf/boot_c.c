@@ -44,12 +44,12 @@
 
 void __kvx_start_pe(int cpuid, void *start_address, void *args_address, void *stack_address)
 {
-  _KVX_PE_START_ADDRESS[cpuid] = start_address;
-  _KVX_PE_ARGS_ADDRESS[cpuid]  = args_address;
-  _KVX_PE_STACK_ADDRESS[cpuid] = stack_address;
+  __GLOSS_KVX_PE_START_ADDRESS[cpuid] = start_address;
+  __GLOSS_KVX_PE_ARGS_ADDRESS[cpuid]  = args_address;
+  __GLOSS_KVX_PE_STACK_ADDRESS[cpuid] = stack_address;
 
   __builtin_kvx_fence();
-  __kvx_set_pwc_wup(cpuid);
+  __gloss_kvx_set_pwc_wup(cpuid);
 }
 
 void __kvx_stop(void)
@@ -59,15 +59,15 @@ void __kvx_stop(void)
    */
   int cpuid;
 
-  cpuid = __kvx_get_cpu_id();
+  cpuid = __gloss_kvx_get_cpu_id();
 
-  __kvx_clear_pwc_reset_on_wup(cpuid);
+  __gloss_kvx_clear_pwc_reset_on_wup(cpuid);
 
   while (1) {
-    __kvx_clear_pwc_wup(cpuid);
+    __gloss_kvx_clear_pwc_wup(cpuid);
     __builtin_kvx_fence();
 
-    __kvx_clear_kvx_wup_mask(KVX_SFR_WS_WU2_MASK);
+    __gloss_kvx_clear_wup_mask(KVX_SFR_WS_WU2_MASK);
     __builtin_kvx_stop();
   }
 }
@@ -91,13 +91,13 @@ static void __kvx_low_level_startup()
   __builtin_kvx_wfxl(KVX_SFR_PS, flags);
 
   /* enable interrupts */
-  __kvx_interrupt_init();
+  __gloss_kvx_interrupt_init();
 
   /* enable DAME (Data Asynchronous Memory Error) interrupt + configure its priority to the maximum level (15) */
-  __kvx_interrupt_configure_dame();
+  __gloss_kvx_interrupt_configure_dame();
 
 
-  if (__kvx_is_rm()) {
+  if (__gloss_kvx_is_rm()) {
     /* initialization of RAMs*/
     __l2_init_metadata();
     __apic_gic_init();
@@ -156,7 +156,7 @@ static void __kvx_low_level_startup()
   }
 
   /* If power controler exists, switch it on */
-  __kvx_pwc_init();
+  __gloss_kvx_pwc_init();
 }
 
 void __kvx_do_rm_before_startup(void) __attribute__ ((weak));
@@ -176,7 +176,7 @@ extern int execute_main_on_rm __attribute((weak));
 static void __kvx_do_rm_startup(void)
 {
 
-  get_kvx_boot_args(&__kvx_libc_args);
+  __kvx_get_boot_args(&__kvx_libc_args);
   if(&execute_main_on_rm) {
     __kvx_do_rm_before_startup();
     /* jump to libc */
@@ -257,7 +257,7 @@ static uint8_t *__kvx_tls_pe_base_address(int pid)
   case 14: return &_tls_pe14_start;
   case 15: return &_tls_pe15_start;
   default:
-    __kvx_assert(0);
+    __gloss_kvx_assert(0);
   }
   return (uint8_t *) 0;
 }
@@ -327,13 +327,13 @@ void __kvx_finish_newlib_init(void);
 static void __kvx_do_pe_startup(void)
 {
   void (*__kvx_code_ptr)(volatile void *) = 0;
-  int pid = __kvx_get_cpu_id();
+  int pid = __gloss_kvx_get_cpu_id();
 
   volatile void *args_ptr = 0;
 
   __kvx_pe_init(pid);
-  __kvx_code_ptr = _KVX_PE_START_ADDRESS[pid];
-  args_ptr = _KVX_PE_ARGS_ADDRESS[pid];
+  __kvx_code_ptr = __GLOSS_KVX_PE_START_ADDRESS[pid];
+  args_ptr = __GLOSS_KVX_PE_ARGS_ADDRESS[pid];
 
   __kvx_do_pe_before_startup();
 

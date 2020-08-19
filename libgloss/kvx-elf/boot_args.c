@@ -35,7 +35,7 @@
 static char *argv_default[] = { "main", 0, };
 static char *envp_default[] = { 0, };
 
-void get_kvx_boot_args(kvx_boot_args_t *args)
+void __kvx_get_boot_args(kvx_boot_args_t *args)
 {
   args->argc  = 1;
   args->envc  = 0;

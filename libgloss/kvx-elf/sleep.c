@@ -34,7 +34,7 @@
 #include <time.h>
 #include <unistd.h>
 
-extern int __kvx_nanosleep(const struct timespec *req, struct timespec *rem);
+extern int __gloss_kvx_nanosleep(const struct timespec *req, struct timespec *rem);
 unsigned int _sleep(unsigned int seconds)
 {
   struct timespec t;
@@ -42,7 +42,7 @@ unsigned int _sleep(unsigned int seconds)
   t.tv_nsec = 0;
   t.tv_sec = seconds;
 
-  return __kvx_nanosleep(&t, NULL);
+  return __gloss_kvx_nanosleep(&t, NULL);
 }
 
 unsigned int sleep(unsigned int seconds)

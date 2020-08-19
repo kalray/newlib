@@ -41,8 +41,8 @@
 clock_t __gloss_times(struct tms *buf)
 {
   /*  errno = ENOSYS; */
-  int cycle_ratio = _KVX_CPU_FREQ / __KVX_CLOCKS_PER_SEC__;
-  clock_t cycles = __kvx_counter_num(0)/ cycle_ratio;
+  int cycle_ratio = __GLOSS_KVX_CPU_FREQ / __GLOSS_KVX_CLOCKS_PER_SEC__;
+  clock_t cycles = __gloss_kvx_counter_num(0)/ cycle_ratio;
   /* User time */
   buf->tms_utime = cycles;
   /* System time */

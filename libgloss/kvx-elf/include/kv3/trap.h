@@ -30,8 +30,8 @@
  *    OR OTHERWISE), EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef _KVX_TRAP_H_
-#define _KVX_TRAP_H_
+#ifndef __GLOSS_KVX_TRAP_H_
+#define __GLOSS_KVX_TRAP_H_
 
 #define KV3_TRAP_RESET          0x0
 #define KV3_TRAP_OPCODE         0x1
@@ -62,29 +62,29 @@
 
 #  ifndef __ASSEMBLER__
 /**
- * \fn void __kvx_trap_enable(void)
+ * \fn void __gloss_kvx_trap_enable(void)
  * \brief Enables Traps
  */
-extern void __kvx_trap_enable(void);
+extern void __gloss_kvx_trap_enable(void);
 
 /**
- * \fn void __kvx_trap_disable(void)
+ * \fn void __gloss_kvx_trap_disable(void)
  * \brief Disable Traps
  */
-extern void __kvx_trap_disable(void);
+extern void __gloss_kvx_trap_disable(void);
 
 /**
- * \fn void __kvx_clear_exception_taken(void)
+ * \fn void __gloss_kvx_clear_exception_taken(void)
  * \brief Clear Exception Taken bit of $ps ($ps.ET) to enable exception nesting
  */
-extern void __kvx_clear_exception_taken(void);
+extern void __gloss_kvx_clear_exception_taken(void);
 
 /**
- * \fn void __kvx_set_exception_taken(void)
+ * \fn void __gloss_kvx_set_exception_taken(void)
  * \brief Set Exception Taken bit of $ps ($ps.ET) to enable exception nesting
  */
-extern void __kvx_set_exception_taken(void);
+extern void __gloss_kvx_set_exception_taken(void);
 
 #endif /* __ASSEMBLER__ */
 
-#endif /* _KVX_TRAP_H_ */
+#endif /* __GLOSS_KVX_TRAP_H_ */

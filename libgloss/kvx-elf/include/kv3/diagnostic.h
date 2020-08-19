@@ -30,125 +30,125 @@
  *    OR OTHERWISE), EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef _KVX_DIAGNOSTIC_H
-#  define _KVX_DIAGNOSTIC_H
+#ifndef __GLOSS_KVX_DIAGNOSTIC_H
+#  define __GLOSS_KVX_DIAGNOSTIC_H
 
 #include <stdint.h>
 
 /*
  * Metrics, more details can be found in the architecture reference manual
  */
-#define _KVX_PM_PCC 0     //  Processor Clock CycleSAT                            ,  None
-#define _KVX_PM_ICC 1     //  Idle Clock Cycle                                    ,  None
-#define _KVX_PM_EBE 2     //  Executed Bundle Event                               ,  PC
-#define _KVX_PM_ENIE 3    //  Executed N Instructions Event                       ,  PC
-#define _KVX_PM_ENSE 4    //  Executed N Syllables Event                          ,  PC
-#define _KVX_PM_ICHE 5    //  I$ Hit Event                                        ,  A
-#define _KVX_PM_ICME 6    //  I$ Miss Event                                       ,  A
-#define _KVX_PM_ICMABE 7  //  I$ Memory Accesses Burst Event                      ,  A
-#define _KVX_PM_MNGIC 8   //  Memory Not Granting Instruction cache access Cycle  ,  None
-#define _KVX_PM_MIMHE 9   //  MMU Instruction Micro-tlb Hit Event                 ,  A
-#define _KVX_PM_MIMME 10  //  MMU Instruction Micro-tlb Miss Event                ,  A
-#define _KVX_PM_IATSC 11  //  Instruction Address Translation Stall Cycle         ,  None
-#define _KVX_PM_FE 12     //  Fetch Event                                         ,  None
-#define _KVX_PM_PBSC 13   //  Prefetch Buffer Starvation Cycle                    ,  None
-#define _KVX_PM_PNVC 14   //  Pipeline No Valid Cycle                             ,  None
-#define _KVX_PM_PSC 15    //  Pipeline Starvation Cycle                           ,  None
-#define _KVX_PM_TADBE 16  //  Taken Applicative Direct Branch Event               ,  PC
-#define _KVX_PM_TABE 17   //  Taken Applicative Branch Event                      ,  PC
-#define _KVX_PM_TBE 18    //  Taken Branch Event                                  ,  None
-#define _KVX_PM_MDMHE 19  //  MMU Data  Micro-tlb Hit Event                       ,  PC
-#define _KVX_PM_MDMME 20  //  MMU Data Micro-tlb Miss Event                       ,  PC
-#define _KVX_PM_DATSC 21  //  Data Address Translation Stall Cycle                ,  None
-#define _KVX_PM_DCLHE 22  //  D$ Load Hit Event                                   ,  PC
-#define _KVX_PM_DCHE 23   //  D$ Hit Event                                        ,  PC
-#define _KVX_PM_DCLME 24  //  D$ Load Miss Event                                  ,  PC
-#define _KVX_PM_DCME 25   //  D$ Miss Event                                       ,  PC
-#define _KVX_PM_DARSC 26  //  Data Access Related Stall Cycle                     ,  None
-#define _KVX_PM_LDSC 27   //  Load Dependency Stall Cycle                         ,  None
-#define _KVX_PM_DCNGC 28  //  Data Cache Not Granting Cycle                       ,  None
-#define _KVX_PM_DMAE 29   //  Data Misaligned Access Event                        ,  PC
-#define _KVX_PM_LCFSC 30  //  Load Cam Full Stall Cycle                           ,  None
-#define _KVX_PM_MNGDC 31  //  Memory Not Granting Data cache access Cycle         ,  None
-#define _KVX_PM_MACC 32   //  Memory Accesses Conflict Cycle                      ,  None
-#define _KVX_PM_TACC 33   //  TLB Accesses Conflict Cycle                         ,  None
-#define _KVX_PM_IWC 34    //  Idle Wait Cycle                                     ,  None
-#define _KVX_PM_WISC 35   //  Wait Instruction Stall Cycle                        ,  None
-#define _KVX_PM_SISC 36   //  Synchronization Instruction Stall Cycle             ,  None
-#define _KVX_PM_DDSC 37   //  Data Dependency Stall Cycle                         ,  None
-#define _KVX_PM_SC 38     //  Stall Cycle                                         ,  None
-#define _KVX_PM_ELE 39    //  Executed Load Event                                 ,  PC
-#define _KVX_PM_ELNBE 40  //  Executed Load N Bytes Event                         ,  PC
-#define _KVX_PM_ELUE 41   //  Executed Load Uncached Event                        ,  PC
-#define _KVX_PM_ELUNBE 42 //  Executed Load Uncached N Bytes Event                ,  PC
-#define _KVX_PM_ESE 43    //  Executed Store Event                                ,  PC
-#define _KVX_PM_ESNBE 44  //  Executed Store N Bytes Event                        ,  PC
-#define _KVX_PM_EAE 45    //  Executed Atomics Event                              ,  PC
-#define _KVX_PM_CIRE 46   //  Coherency Invalidation Request Event                ,  A
-#define _KVX_PM_CIE 47    //  Coherency Invalidation Event                        ,  A
-#define _KVX_PM_SE 48     //  Stop Event                                          ,  None
-#define _KVX_PM_RE 49     //  Reset Event                                         ,  None
-#define _KVX_PM_FSC 50    //  Fetch Stall Cycle                                   ,  None
+#define __GLOSS_KVX_PM_PCC 0     //  Processor Clock CycleSAT                            ,  None
+#define __GLOSS_KVX_PM_ICC 1     //  Idle Clock Cycle                                    ,  None
+#define __GLOSS_KVX_PM_EBE 2     //  Executed Bundle Event                               ,  PC
+#define __GLOSS_KVX_PM_ENIE 3    //  Executed N Instructions Event                       ,  PC
+#define __GLOSS_KVX_PM_ENSE 4    //  Executed N Syllables Event                          ,  PC
+#define __GLOSS_KVX_PM_ICHE 5    //  I$ Hit Event                                        ,  A
+#define __GLOSS_KVX_PM_ICME 6    //  I$ Miss Event                                       ,  A
+#define __GLOSS_KVX_PM_ICMABE 7  //  I$ Memory Accesses Burst Event                      ,  A
+#define __GLOSS_KVX_PM_MNGIC 8   //  Memory Not Granting Instruction cache access Cycle  ,  None
+#define __GLOSS_KVX_PM_MIMHE 9   //  MMU Instruction Micro-tlb Hit Event                 ,  A
+#define __GLOSS_KVX_PM_MIMME 10  //  MMU Instruction Micro-tlb Miss Event                ,  A
+#define __GLOSS_KVX_PM_IATSC 11  //  Instruction Address Translation Stall Cycle         ,  None
+#define __GLOSS_KVX_PM_FE 12     //  Fetch Event                                         ,  None
+#define __GLOSS_KVX_PM_PBSC 13   //  Prefetch Buffer Starvation Cycle                    ,  None
+#define __GLOSS_KVX_PM_PNVC 14   //  Pipeline No Valid Cycle                             ,  None
+#define __GLOSS_KVX_PM_PSC 15    //  Pipeline Starvation Cycle                           ,  None
+#define __GLOSS_KVX_PM_TADBE 16  //  Taken Applicative Direct Branch Event               ,  PC
+#define __GLOSS_KVX_PM_TABE 17   //  Taken Applicative Branch Event                      ,  PC
+#define __GLOSS_KVX_PM_TBE 18    //  Taken Branch Event                                  ,  None
+#define __GLOSS_KVX_PM_MDMHE 19  //  MMU Data  Micro-tlb Hit Event                       ,  PC
+#define __GLOSS_KVX_PM_MDMME 20  //  MMU Data Micro-tlb Miss Event                       ,  PC
+#define __GLOSS_KVX_PM_DATSC 21  //  Data Address Translation Stall Cycle                ,  None
+#define __GLOSS_KVX_PM_DCLHE 22  //  D$ Load Hit Event                                   ,  PC
+#define __GLOSS_KVX_PM_DCHE 23   //  D$ Hit Event                                        ,  PC
+#define __GLOSS_KVX_PM_DCLME 24  //  D$ Load Miss Event                                  ,  PC
+#define __GLOSS_KVX_PM_DCME 25   //  D$ Miss Event                                       ,  PC
+#define __GLOSS_KVX_PM_DARSC 26  //  Data Access Related Stall Cycle                     ,  None
+#define __GLOSS_KVX_PM_LDSC 27   //  Load Dependency Stall Cycle                         ,  None
+#define __GLOSS_KVX_PM_DCNGC 28  //  Data Cache Not Granting Cycle                       ,  None
+#define __GLOSS_KVX_PM_DMAE 29   //  Data Misaligned Access Event                        ,  PC
+#define __GLOSS_KVX_PM_LCFSC 30  //  Load Cam Full Stall Cycle                           ,  None
+#define __GLOSS_KVX_PM_MNGDC 31  //  Memory Not Granting Data cache access Cycle         ,  None
+#define __GLOSS_KVX_PM_MACC 32   //  Memory Accesses Conflict Cycle                      ,  None
+#define __GLOSS_KVX_PM_TACC 33   //  TLB Accesses Conflict Cycle                         ,  None
+#define __GLOSS_KVX_PM_IWC 34    //  Idle Wait Cycle                                     ,  None
+#define __GLOSS_KVX_PM_WISC 35   //  Wait Instruction Stall Cycle                        ,  None
+#define __GLOSS_KVX_PM_SISC 36   //  Synchronization Instruction Stall Cycle             ,  None
+#define __GLOSS_KVX_PM_DDSC 37   //  Data Dependency Stall Cycle                         ,  None
+#define __GLOSS_KVX_PM_SC 38     //  Stall Cycle                                         ,  None
+#define __GLOSS_KVX_PM_ELE 39    //  Executed Load Event                                 ,  PC
+#define __GLOSS_KVX_PM_ELNBE 40  //  Executed Load N Bytes Event                         ,  PC
+#define __GLOSS_KVX_PM_ELUE 41   //  Executed Load Uncached Event                        ,  PC
+#define __GLOSS_KVX_PM_ELUNBE 42 //  Executed Load Uncached N Bytes Event                ,  PC
+#define __GLOSS_KVX_PM_ESE 43    //  Executed Store Event                                ,  PC
+#define __GLOSS_KVX_PM_ESNBE 44  //  Executed Store N Bytes Event                        ,  PC
+#define __GLOSS_KVX_PM_EAE 45    //  Executed Atomics Event                              ,  PC
+#define __GLOSS_KVX_PM_CIRE 46   //  Coherency Invalidation Request Event                ,  A
+#define __GLOSS_KVX_PM_CIE 47    //  Coherency Invalidation Event                        ,  A
+#define __GLOSS_KVX_PM_SE 48     //  Stop Event                                          ,  None
+#define __GLOSS_KVX_PM_RE 49     //  Reset Event                                         ,  None
+#define __GLOSS_KVX_PM_FSC 50    //  Fetch Stall Cycle                                   ,  None
 
 
-#define _KVX_PM0 0
-#define _KVX_PM1 1
-#define _KVX_PM2 2
-#define _KVX_PM3 3
+#define __GLOSS_KVX_PM0 0
+#define __GLOSS_KVX_PM1 1
+#define __GLOSS_KVX_PM2 2
+#define __GLOSS_KVX_PM3 3
 
-#define _KVX_PM_NB 4
+#define __GLOSS_KVX_PM_NB 4
 
 
 /**
- * \fn static inline int __kvx_counter_control(void)
+ * \fn static inline int __gloss_kvx_counter_control(void)
  * \brief Get value of counter control register
  */
-extern int __kvx_counter_control(void);
+extern int __gloss_kvx_counter_control(void);
 
 /*
  * New scheme routines
  */
 
 /**
- * \fn static inline uint32_t __kvx_counter_num(unsigned int n)
+ * \fn static inline uint32_t __gloss_kvx_counter_num(unsigned int n)
  * \brief Get value of counters
  * \param n Number of counter (0-3)
  * \return Content of counter
  */
-extern uint64_t __kvx_counter_num(unsigned int n);
+extern uint64_t __gloss_kvx_counter_num(unsigned int n);
 
 /**
- * \fn static inline void __kvx_counter_control(void)
+ * \fn static inline void __gloss_kvx_counter_control(void)
  * \brief Enable performance counter for a specific metric
  * \param counter_num Number of counter (0-3)
  * \param metric specified metric
  */
-extern void __kvx_counter_start(unsigned int counter_num, int metric);
+extern void __gloss_kvx_counter_start(unsigned int counter_num, int metric);
 
 /**
- * \fn static inline void __kvx_counter_stop(unsigned int counter_num)
+ * \fn static inline void __gloss_kvx_counter_stop(unsigned int counter_num)
  * \brief Stop counter n
  * \param counter_num Number of counter (0-3)
  */
-extern void __kvx_counter_stop(unsigned int counter_num);
+extern void __gloss_kvx_counter_stop(unsigned int counter_num);
 
 /**
- * \fn static inline void __kvx_counter_reset(unsigned int counter_num)
+ * \fn static inline void __gloss_kvx_counter_reset(unsigned int counter_num)
  * \brief Reset value of counter n
  * \param n Number of counter (0-3)
  */
-extern void __kvx_counter_reset(unsigned int counter_num);
+extern void __gloss_kvx_counter_reset(unsigned int counter_num);
 
 /**
- * \fn static inline void __kvx_counter_stop_all(void)
+ * \fn static inline void __gloss_kvx_counter_stop_all(void)
  * \brief Stop all counters
  */
-extern void __kvx_counter_stop_all(void);
+extern void __gloss_kvx_counter_stop_all(void);
 
 /**
- * \fn static inline void __kvx_counter_reset_all(unsigned int counter_num)
+ * \fn static inline void __gloss_kvx_counter_reset_all(unsigned int counter_num)
  * \brief Reset all counters
  */
-extern void __kvx_counter_reset_all(void);
+extern void __gloss_kvx_counter_reset_all(void);
 
-#endif      /* _KVX_DIAGNOSTIC_H */
+#endif      /* __GLOSS_KVX_DIAGNOSTIC_H */

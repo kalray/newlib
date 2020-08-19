@@ -34,24 +34,24 @@
 #include <kv3/registers.h>
 #include <kv3/diagnostic.h>
 
-int __kvx_counter_control(void)
+int __gloss_kvx_counter_control(void)
 {
   return __builtin_kvx_get(KVX_SFR_PMC);
 }
 
-uint64_t __kvx_counter_num(unsigned int n)
+uint64_t __gloss_kvx_counter_num(unsigned int n)
 {
 
-  __kvx_assert(n < _KVX_PM_NB);
+  __gloss_kvx_assert(n < __GLOSS_KVX_PM_NB);
 
   switch (n) {
-  case _KVX_PM0:
+  case __GLOSS_KVX_PM0:
     return __builtin_kvx_get(KVX_SFR_PM0);
-  case _KVX_PM1:
+  case __GLOSS_KVX_PM1:
     return __builtin_kvx_get(KVX_SFR_PM1);
-  case _KVX_PM2:
+  case __GLOSS_KVX_PM2:
     return __builtin_kvx_get(KVX_SFR_PM2);
-  case _KVX_PM3:
+  case __GLOSS_KVX_PM3:
     return __builtin_kvx_get(KVX_SFR_PM3);
   default:
     break;
@@ -59,23 +59,23 @@ uint64_t __kvx_counter_num(unsigned int n)
   return 0;
 }
 
-void __kvx_counter_start(unsigned int counter_num, int metric)
+void __gloss_kvx_counter_start(unsigned int counter_num, int metric)
 {
 
   uint64_t pmc_metric_wfx = 0;
 
-  __kvx_assert(counter_num < _KVX_PM_NB);
+  __gloss_kvx_assert(counter_num < __GLOSS_KVX_PM_NB);
   switch (counter_num) {
-  case _KVX_PM0:
+  case __GLOSS_KVX_PM0:
     pmc_metric_wfx = KVX_SFR_WFXL_VALUE(PMC_PM0C, metric);
     break;
-  case _KVX_PM1:
+  case __GLOSS_KVX_PM1:
     pmc_metric_wfx = KVX_SFR_WFXL_VALUE(PMC_PM1C, metric);
     break;
-  case _KVX_PM2:
+  case __GLOSS_KVX_PM2:
     pmc_metric_wfx = KVX_SFR_WFXL_VALUE(PMC_PM2C, metric);
     break;
-  case _KVX_PM3:
+  case __GLOSS_KVX_PM3:
     pmc_metric_wfx = KVX_SFR_WFXL_VALUE(PMC_PM3C, metric);
     break;
   default:
@@ -84,24 +84,24 @@ void __kvx_counter_start(unsigned int counter_num, int metric)
   __builtin_kvx_wfxl(KVX_SFR_PMC, pmc_metric_wfx);
 }
 
-void __kvx_counter_stop(unsigned int counter_num)
+void __gloss_kvx_counter_stop(unsigned int counter_num)
 {
 
   uint64_t pmc_metric_wfx = 0;
 
-  __kvx_assert(counter_num < _KVX_PM_NB);
+  __gloss_kvx_assert(counter_num < __GLOSS_KVX_PM_NB);
   switch (counter_num) {
-  case _KVX_PM0:
-    pmc_metric_wfx = KVX_SFR_WFXL_VALUE(PMC_PM0C, _KVX_PM_SE);
+  case __GLOSS_KVX_PM0:
+    pmc_metric_wfx = KVX_SFR_WFXL_VALUE(PMC_PM0C, __GLOSS_KVX_PM_SE);
     break;
-  case _KVX_PM1:
-    pmc_metric_wfx = KVX_SFR_WFXL_VALUE(PMC_PM1C, _KVX_PM_SE);
+  case __GLOSS_KVX_PM1:
+    pmc_metric_wfx = KVX_SFR_WFXL_VALUE(PMC_PM1C, __GLOSS_KVX_PM_SE);
     break;
-  case _KVX_PM2:
-    pmc_metric_wfx = KVX_SFR_WFXL_VALUE(PMC_PM2C, _KVX_PM_SE);
+  case __GLOSS_KVX_PM2:
+    pmc_metric_wfx = KVX_SFR_WFXL_VALUE(PMC_PM2C, __GLOSS_KVX_PM_SE);
     break;
-  case _KVX_PM3:
-    pmc_metric_wfx = KVX_SFR_WFXL_VALUE(PMC_PM3C, _KVX_PM_SE);
+  case __GLOSS_KVX_PM3:
+    pmc_metric_wfx = KVX_SFR_WFXL_VALUE(PMC_PM3C, __GLOSS_KVX_PM_SE);
     break;
   default:
     break;
@@ -109,24 +109,24 @@ void __kvx_counter_stop(unsigned int counter_num)
   __builtin_kvx_wfxl(KVX_SFR_PMC, pmc_metric_wfx);
 }
 
-void __kvx_counter_reset(unsigned int counter_num)
+void __gloss_kvx_counter_reset(unsigned int counter_num)
 {
 
   uint64_t pmc_metric_wfx = 0;
 
-  __kvx_assert(counter_num < _KVX_PM_NB);
+  __gloss_kvx_assert(counter_num < __GLOSS_KVX_PM_NB);
   switch (counter_num) {
-  case _KVX_PM0:
-    pmc_metric_wfx = KVX_SFR_WFXL_VALUE(PMC_PM0C, _KVX_PM_RE);
+  case __GLOSS_KVX_PM0:
+    pmc_metric_wfx = KVX_SFR_WFXL_VALUE(PMC_PM0C, __GLOSS_KVX_PM_RE);
     break;
-  case _KVX_PM1:
-    pmc_metric_wfx = KVX_SFR_WFXL_VALUE(PMC_PM1C, _KVX_PM_RE);
+  case __GLOSS_KVX_PM1:
+    pmc_metric_wfx = KVX_SFR_WFXL_VALUE(PMC_PM1C, __GLOSS_KVX_PM_RE);
     break;
-  case _KVX_PM2:
-    pmc_metric_wfx = KVX_SFR_WFXL_VALUE(PMC_PM2C, _KVX_PM_RE);
+  case __GLOSS_KVX_PM2:
+    pmc_metric_wfx = KVX_SFR_WFXL_VALUE(PMC_PM2C, __GLOSS_KVX_PM_RE);
     break;
-  case _KVX_PM3:
-    pmc_metric_wfx = KVX_SFR_WFXL_VALUE(PMC_PM3C, _KVX_PM_RE);
+  case __GLOSS_KVX_PM3:
+    pmc_metric_wfx = KVX_SFR_WFXL_VALUE(PMC_PM3C, __GLOSS_KVX_PM_RE);
     break;
   default:
     break;
@@ -136,23 +136,23 @@ void __kvx_counter_reset(unsigned int counter_num)
 
 
 
-void __kvx_counter_stop_all(void)
+void __gloss_kvx_counter_stop_all(void)
 {
-  uint64_t pmc_metric_wfx = KVX_SFR_WFXL_VALUE(PMC_PM0C, _KVX_PM_SE) |
-    KVX_SFR_WFXL_VALUE(PMC_PM1C, _KVX_PM_SE) |
-    KVX_SFR_WFXL_VALUE(PMC_PM2C, _KVX_PM_SE) |
-    KVX_SFR_WFXL_VALUE(PMC_PM3C, _KVX_PM_SE);
+  uint64_t pmc_metric_wfx = KVX_SFR_WFXL_VALUE(PMC_PM0C, __GLOSS_KVX_PM_SE) |
+    KVX_SFR_WFXL_VALUE(PMC_PM1C, __GLOSS_KVX_PM_SE) |
+    KVX_SFR_WFXL_VALUE(PMC_PM2C, __GLOSS_KVX_PM_SE) |
+    KVX_SFR_WFXL_VALUE(PMC_PM3C, __GLOSS_KVX_PM_SE);
 
   __builtin_kvx_wfxl(KVX_SFR_PMC, pmc_metric_wfx);
 }
 
 
-void __kvx_counter_reset_all(void)
+void __gloss_kvx_counter_reset_all(void)
 {
-  uint64_t pmc_metric_wfx = KVX_SFR_WFXL_VALUE(PMC_PM0C, _KVX_PM_RE) |
-    KVX_SFR_WFXL_VALUE(PMC_PM1C, _KVX_PM_RE) |
-    KVX_SFR_WFXL_VALUE(PMC_PM2C, _KVX_PM_RE) |
-    KVX_SFR_WFXL_VALUE(PMC_PM3C, _KVX_PM_RE);
+  uint64_t pmc_metric_wfx = KVX_SFR_WFXL_VALUE(PMC_PM0C, __GLOSS_KVX_PM_RE) |
+    KVX_SFR_WFXL_VALUE(PMC_PM1C, __GLOSS_KVX_PM_RE) |
+    KVX_SFR_WFXL_VALUE(PMC_PM2C, __GLOSS_KVX_PM_RE) |
+    KVX_SFR_WFXL_VALUE(PMC_PM3C, __GLOSS_KVX_PM_RE);
 
   __builtin_kvx_wfxl(KVX_SFR_PMC, pmc_metric_wfx);
 }

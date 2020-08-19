@@ -67,7 +67,7 @@ void __kvx_do_exceptions_pl0(int exception_class __attribute__((unused)), __kvx_
 int __kvx_do_scall(int syscall_nb __attribute__((unused)), __kvx_context_t *ctxt __attribute__((unused)), int arg0 __attribute__((unused)), int arg1 __attribute__((unused)), int arg2 __attribute__((unused)), int arg3 __attribute__((unused)), int arg4 __attribute__((unused)), int arg5 __attribute__((unused)))
 {
   /* enable hw_loops */
-  __kvx_hwloops_enable();
+  __gloss_kvx_hwloops_enable();
   switch (syscall_nb) {
   case 17: /* sc_write */ {
     register int buf asm ("r0") = arg1;
@@ -82,7 +82,7 @@ int __kvx_do_scall(int syscall_nb __attribute__((unused)), __kvx_context_t *ctxt
     /* Exit magic syscall. */
   }
   case 4095:
-    __kvx_cluster_poweroff();
+    __gloss_kvx_cluster_poweroff();
     break;
   default:
     return 0;
@@ -97,7 +97,7 @@ void __kvx_do_hwtrap(int hwtrap_cause  __attribute__((unused)), __kvx_context_t 
 {
   char *message;
   int msg_len;
-  int c_id = __kvx_get_cluster_id();
+  int c_id = __gloss_kvx_get_cluster_id();
 
   /* Manual sprintf to avoid messing with the stack */
   message = CLUS_ERROR_MESSAGE;
@@ -118,13 +118,13 @@ void __kvx_do_hwtrap(int hwtrap_cause  __attribute__((unused)), __kvx_context_t 
     exit(1);
   }
 
-  __kvx_cluster_poweroff();
+  __gloss_kvx_cluster_poweroff();
 }
 
 /** Default C-level interrupt handler.
  *   R0 is the interrupt line.
  */
-void (*__kvx_int_handlers[_KVX_MAX_INT_NUMBER + 1])(int);
+void (*__kvx_int_handlers[__GLOSS_KVX_MAX_INT_NUMBER + 1])(int);
 
 void __kvx_do_interrupt(int it_number __attribute__((unused)), __kvx_context_t *ctxt __attribute__((unused)))
 {
@@ -137,7 +137,7 @@ void __kvx_do_interrupt_dame(int it_number __attribute__((unused)), __kvx_contex
 {
   char *message;
   int msg_len;
-  int c_id = __kvx_get_cluster_id();
+  int c_id = __gloss_kvx_get_cluster_id();
 
   /* Manual sprintf to avoid messing with the stack */
   message = CLUS_DAME_MESSAGE;
@@ -158,14 +158,14 @@ void __kvx_do_interrupt_dame(int it_number __attribute__((unused)), __kvx_contex
     exit(1);
   }
 
-  __kvx_cluster_poweroff();
+  __gloss_kvx_cluster_poweroff();
 }
 
 void __kvx_do_debug(int debug_cause __attribute__((unused)), __kvx_context_t *ctxt __attribute__((unused)))
 {
   char *message;
   int msg_len;
-  int c_id = __kvx_get_cluster_id();
+  int c_id = __gloss_kvx_get_cluster_id();
 
   /* Manual sprintf to avoid messing with the stack */
   message = CLUS_ERROR_MESSAGE;
@@ -186,7 +186,7 @@ void __kvx_do_debug(int debug_cause __attribute__((unused)), __kvx_context_t *ct
     exit(1);
   }
 
-  __kvx_cluster_poweroff();
+  __gloss_kvx_cluster_poweroff();
 }
 
 
@@ -196,7 +196,7 @@ void __kvx_do_exceptions_pl0(int exception_class  __attribute__((unused)), __kvx
   if (exception_class != KV3_EC_SCALL) {
     char *message;
     int msg_len;
-    int c_id = __kvx_get_cluster_id();
+    int c_id = __gloss_kvx_get_cluster_id();
 
     /* Manual sprintf to avoid messing with the stack */
     message = CLUS_ERROR_MESSAGE;
@@ -216,6 +216,6 @@ void __kvx_do_exceptions_pl0(int exception_class  __attribute__((unused)), __kvx
     if (exit) {
       exit(1);
     }
-    __kvx_cluster_poweroff();
+    __gloss_kvx_cluster_poweroff();
   }
 }

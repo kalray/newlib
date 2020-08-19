@@ -30,8 +30,8 @@
  *    OR OTHERWISE), EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef _KVX_ASSERT_H
-#define _KVX_ASSERT_H
+#ifndef __GLOSS_KVX_ASSERT_H
+#define __GLOSS_KVX_ASSERT_H
 
 #ifndef __ASSEMBLER__
 
@@ -39,20 +39,20 @@
 #include <kv3/scall_no.h>
 #include <kv3/syscall.h>
 
-#  ifndef __kvx_assert
+#  ifndef __gloss_kvx_assert
 
 #    ifdef NDEBUG
-#      define __kvx_assert(expr) (__KVX_ASSERT_VOID_CAST(0))
+#      define __gloss_kvx_assert(expr) (__GLOSS_KVX_ASSERT_VOID_CAST(0))
 #    else
 #      ifdef __linux__
-#        define __kvx_assert(expr) (__KVX_ASSERT_VOID_CAST(0))
+#        define __gloss_kvx_assert(expr) (__GLOSS_KVX_ASSERT_VOID_CAST(0))
 #      else
-#        define __kvx_assert(expr) ((expr) ? __KVX_ASSERT_VOID_CAST(0) : (void)(__kvx_syscall_with_args(__NR_iss_exit, 1, 0, 0, 0, 0, 0)))
+#        define __gloss_kvx_assert(expr) ((expr) ? __GLOSS_KVX_ASSERT_VOID_CAST(0) : (void)(__kvx_syscall_with_args(__NR_iss_exit, 1, 0, 0, 0, 0, 0)))
 #      endif    /* __linux__ */
 #    endif      /* NDEBUG */
 
-#  endif        /*__kvx_assert */
+#  endif        /*__gloss_kvx_assert */
 
 #endif          /* !__ASSEMBLER__ */
 
-#endif          /* _KVX_ASSERT_H */
+#endif          /* __GLOSS_KVX_ASSERT_H */

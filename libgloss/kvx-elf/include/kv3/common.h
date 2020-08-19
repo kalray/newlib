@@ -30,8 +30,8 @@
  *    OR OTHERWISE), EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef _KVX_COMMON_H
-#define _KVX_COMMON_H
+#ifndef __GLOSS_KVX_COMMON_H
+#define __GLOSS_KVX_COMMON_H
 
 #ifndef __ASSEMBLER__
 #endif /* !__ASSEMBLER__ */
@@ -46,9 +46,9 @@
 #endif
 
 #if defined(__cplusplus) && __GNUC_PREREQ(2, 95)
-# define __KVX_ASSERT_VOID_CAST static_cast < void >
+# define __GLOSS_KVX_ASSERT_VOID_CAST static_cast < void >
 #else
-# define __KVX_ASSERT_VOID_CAST (void)
+# define __GLOSS_KVX_ASSERT_VOID_CAST (void)
 #endif
 
 #if  !defined(__clang__)
@@ -65,7 +65,7 @@
 /*
  * Compile time Check
  */
-#define _KVX_CT_ASSERT(X, MSG)						\
+#define __GLOSS_KVX_CT_ASSERT(X, MSG)						\
   ({									\
     extern int __error("Assertion failure: "#MSG) compile_time_check(); \
     ((X)?0:compile_time_check());					\
@@ -74,6 +74,6 @@
 /*
  * Unsupported feature guard
  */
-#define _KVX_UNSUPPORTED_FEATURE  __error("Unsupported feature")
+#define __GLOSS_KVX_UNSUPPORTED_FEATURE  __error("Unsupported feature")
 
 #endif

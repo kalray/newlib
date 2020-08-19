@@ -36,9 +36,9 @@
 
 	.section .boot.startup, "ax", @progbits
 	.align 8
-	.global _KVX_PE_STACK_ADDRESS
-	.global _KVX_PE_START_ADDRESS
-	.global _KVX_PE_ARGS_ADDRESS
+	.global __GLOSS_KVX_PE_STACK_ADDRESS
+	.global __GLOSS_KVX_PE_START_ADDRESS
+	.global __GLOSS_KVX_PE_ARGS_ADDRESS
 	.globl __kvx_pe_c_startup
 	.globl __kvx_rm_c_startup
 
@@ -69,7 +69,7 @@ __kvx_asm_start_rm:
 	goto .     # just in case ...
 	;;
 __kvx_asm_start_pe:
-	make $r2 = _KVX_PE_STACK_ADDRESS
+	make $r2 = __GLOSS_KVX_PE_STACK_ADDRESS
 	make $r1 = __kvx_pe_c_startup
 	;;
 	LOAD_PTR.xs $sp = $r0[$r2]  # init pe stack @ $r2 + pid * 8 (64 bits mode) or * 4 (32 bits mode)
@@ -82,9 +82,9 @@ __kvx_asm_start_pe:
 
 	.section .bss
 	.align 8
-	_KVX_PE_STACK_ADDRESS:   .space 0x80  # Space: 16 * 8 bytes or 16 * 4 bytes (64 or 32 bits modes)
-	_KVX_PE_START_ADDRESS:   .space 0x80
-	_KVX_PE_ARGS_ADDRESS:    .space 0x80
+	__GLOSS_KVX_PE_STACK_ADDRESS:   .space 0x80  # Space: 16 * 8 bytes or 16 * 4 bytes (64 or 32 bits modes)
+	__GLOSS_KVX_PE_START_ADDRESS:   .space 0x80
+	__GLOSS_KVX_PE_ARGS_ADDRESS:    .space 0x80
 
 
 	.section .exception.debug, "ax", @progbits ;\

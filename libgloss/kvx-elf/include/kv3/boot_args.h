@@ -30,8 +30,8 @@
  *    OR OTHERWISE), EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef _KVX_BOARD_BOOT_ARGS_H
-#define _KVX_BOARD_BOOT_ARGS_H
+#ifndef __KVX_BOARD_BOOT_ARGS_H
+#define __KVX_BOARD_BOOT_ARGS_H
 
 #include <stdint.h>
 
@@ -139,6 +139,6 @@ typedef __kvx_boot_args_mmap64_t __kvx_boot_args_mmap_t;
 typedef __kvx_boot_args_mmap32_t __kvx_boot_args_mmap_t;
 #endif
 
-extern void get_kvx_boot_args(kvx_boot_args_t *args);
+extern void __kvx_get_boot_args(kvx_boot_args_t *args);
 
-#endif  /*  _KVX_BOARD_BOOT_ARGS_H */
+#endif  /*  __KVX_BOARD_BOOT_ARGS_H */

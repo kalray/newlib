@@ -35,7 +35,7 @@
 
 /**
  * \fn void __kvx_start_pe(int cpuid, void *start_address, void *args_address, void *stack_address)
- * \brief Start the given function on the given PE (implies __kvx_set_pwc_wup)
+ * \brief Start the given function on the given PE (implies __gloss_kvx_set_pwc_wup)
  * \param start_address address of entry point (function) to execute on PE
  * \param args_address arguments address to be passed to function at start_address
  * \param stack_address address of new PE stack.

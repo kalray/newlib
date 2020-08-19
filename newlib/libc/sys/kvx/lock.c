@@ -112,11 +112,11 @@ static int __libc_recursive_unlock_base(_LOCK_T *lock, uint64_t myself)
 }
 
 /* Defined in bsp.c in libgloss. */
-extern int __kvx_get_cpu_id(void);
+extern int __gloss_kvx_get_cpu_id(void);
 
 static inline unsigned long long libc_get_id(void)
 {
-  return __kvx_get_cpu_id() + 1;
+  return __gloss_kvx_get_cpu_id() + 1;
 }
 
 static inline void libc_cache_flush(void)

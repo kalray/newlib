@@ -30,8 +30,8 @@
  *    OR OTHERWISE), EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef _KVX_SYSCALL_H
-#define _KVX_SYSCALL_H
+#ifndef __GLOSS_KVX_SYSCALL_H
+#define __GLOSS_KVX_SYSCALL_H
 
 #include <stdint.h>
 
@@ -66,4 +66,4 @@ extern uint64_t __kvx_syscall_with_args(const uint32_t syscall_nb,
                     uint64_t sc_arg0, uint64_t sc_arg1, uint64_t sc_arg2,
                     uint64_t sc_arg3, uint64_t sc_arg4, uint64_t sc_arg5);
 
-#endif      /* _KVX_SYSCALL_H */
+#endif      /* __GLOSS_KVX_SYSCALL_H */

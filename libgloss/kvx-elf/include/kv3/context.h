@@ -30,8 +30,8 @@
  *    OR OTHERWISE), EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef _KVX_CONTEXT_H
-#  define _KVX_CONTEXT_H
+#ifndef __GLOSS_KVX_CONTEXT_H
+#  define __GLOSS_KVX_CONTEXT_H
 
 #include <stdint.h>
 
@@ -85,4 +85,4 @@ extern void __kvx_ctx_load(__kvx_context_t *from);
  */
 extern void __kvx_switch_to_smem_user(void);
 
-#endif      /* _KVX_CONTEXT_H */
+#endif      /* __KVX_CONTEXT_H */

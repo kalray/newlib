@@ -41,9 +41,9 @@
 	.globl __kvx_asm_exceptions_handler
 	.proc __kvx_asm_exceptions_handler
 __kvx_asm_exceptions_handler:
-	ADD_PTR   $sp, $sp, -_KVX_CONTEXT64_SIZE    ## space for the registers
+	ADD_PTR   $sp, $sp, -__KVX_CONTEXT64_SIZE    ## space for the registers
 	;;
-	_kvx_context64_save $sp
+	__kvx_context64_save $sp
 	;;
 	get   $r0 = $es
 	copyd $r1 = $sp
@@ -95,7 +95,7 @@ __kvx_asm_interrupt_handler:
 	.global __kvx_do_interrupt_dame
 	.type __kvx_do_interrupt_dame, @function
 
-	compd.eq $r2 = $r0, _KVX_PE_INT_LINE_DAME
+	compd.eq $r2 = $r0, __GLOSS_KVX_PE_INT_LINE_DAME
 	make     $r3 = __kvx_do_interrupt
 	make     $r4 = __kvx_do_interrupt_dame
 	;;
@@ -147,9 +147,9 @@ __kvx_asm_return_from_exceptions:
 	;;
 	wfxl  $ps, $r2                ## disable interrupts for context restoration
 	;;
-	_kvx_context64_restore $sp
+	__kvx_context64_restore $sp
 	;;
-	ADD_PTR  $sp, $sp, _KVX_CONTEXT64_SIZE
+	ADD_PTR  $sp, $sp, __KVX_CONTEXT64_SIZE
 	;;
 	rfe
 	;;

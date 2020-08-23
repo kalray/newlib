@@ -41,6 +41,8 @@
 
 #ifndef _KVX_SCALL_NO_H_EMPTY
 
+#  ifndef _KVX_SCALL_NO_NATIF
+
 /* 'open'/'fcntl' flags that will be passed between newlib/host */
 #    define S_RDONLY    0x001
 #    define S_WRONLY    0x002
@@ -125,6 +127,8 @@
 #    define __NR_iss_readtimer      0xffd /* 4093 */
 #    define __NR_iss_printf         0xffe /* 4094 */
 #    define __NR_iss_exit           0xfff /* 4095 */
+
+#  endif    /* _KVX_SCALL_NO_NATIF */
 
 #endif      /*_KVX_SCALL_NO_H_EMPTY */
 

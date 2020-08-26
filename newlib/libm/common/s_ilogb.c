@@ -89,9 +89,9 @@ C99, POSIX
 	}
 	else if (hx<0x7ff00000) return (hx>>20)-1023;
 	#if FP_ILOGBNAN != INT_MAX
-	else if (hx>0x7ff00000) return FP_ILOGBNAN;	/* NAN */
+	else if (hx == 0x7ff00000 && lx == 0) return INT_MAX; /* +-inf */
 	#endif
-	else return INT_MAX;	/* infinite (or, possibly, NAN) */
+	else return FP_ILOGBNAN; /* NAN */
 }
 
 #endif /* _DOUBLE_IS_32BITS */

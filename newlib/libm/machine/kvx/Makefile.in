@@ -75,7 +75,8 @@ am__objects_1 = lib_a-feclearexcept.$(OBJEXT) \
 	lib_a-fesetexceptflag.$(OBJEXT) lib_a-fetestexcept.$(OBJEXT) \
 	lib_a-fegetround.$(OBJEXT) lib_a-fesetround.$(OBJEXT) \
 	lib_a-fegetenv.$(OBJEXT) lib_a-feholdexcept.$(OBJEXT) \
-	lib_a-fesetenv.$(OBJEXT) lib_a-feupdateenv.$(OBJEXT)
+	lib_a-fesetenv.$(OBJEXT) lib_a-feupdateenv.$(OBJEXT)  \
+	lib_a-sf_fdim.$(OBJEXT) lib_a-s_fdim.$(OBJEXT)
 am_lib_a_OBJECTS = $(am__objects_1)
 lib_a_OBJECTS = $(am_lib_a_OBJECTS)
 DEFAULT_INCLUDES = -I.@am__isrc@
@@ -205,7 +206,8 @@ LIB_SOURCES = \
 	feclearexcept.c fegetexceptflag.c feraiseexcept.c \
 	fesetexceptflag.c fetestexcept.c \
 	fegetround.c fesetround.c \
-	fegetenv.c feholdexcept.c fesetenv.c feupdateenv.c
+	fegetenv.c feholdexcept.c fesetenv.c feupdateenv.c \
+	s_fdim.c sf_fdim.c
 
 noinst_LIBRARIES = lib.a
 lib_a_SOURCES = $(LIB_SOURCES)
@@ -282,6 +284,18 @@ distclean-compile:
 
 .c.obj:
 	$(COMPILE) -c `$(CYGPATH_W) '$<'`
+
+lib_a-sf_fdim.o: sf_fdim.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-sf_fdim.o `test -f 'sf_fdim.c' || echo '$(srcdir)/'`sf_fdim.c
+
+lib_a-sf_fdim.obj: sf_fdim.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-sf_fdim.obj `if test -f 'sf_fdim.c'; then $(CYGPATH_W) 'sf_fdim.c'; else $(CYGPATH_W) '$(srcdir)/sf_fdim.c'; fi`
+
+lib_a-s_fdim.o: s_fdim.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-s_fdim.o `test -f 's_fdim.c' || echo '$(srcdir)/'`s_fdim.c
+
+lib_a-s_fdim.obj: s_fdim.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-s_fdim.obj `if test -f 's_fdim.c'; then $(CYGPATH_W) 's_fdim.c'; else $(CYGPATH_W) '$(srcdir)/s_fdim.c'; fi`
 
 lib_a-feclearexcept.o: feclearexcept.c
 	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-feclearexcept.o `test -f 'feclearexcept.c' || echo '$(srcdir)/'`feclearexcept.c

@@ -231,6 +231,11 @@
 #define _GLIBCXX_HAVE_SINHL
 #define _GLIBCXX_HAVE_TANL
 #define _GLIBCXX_HAVE_TANHL
+
+/* ilogb(0) must return (-2147483647 - 1) */
+#define FP_ILOGB0 (INT_MIN)
+/* ilogb(+-nan) must return (-2147483647 - 1) */
+#define FP_ILOGBNAN (INT_MIN)
 #endif
 
 #if defined(_C4x) || defined(_C3x)

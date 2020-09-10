@@ -77,7 +77,7 @@ am__objects_1 = lib_a-feclearexcept.$(OBJEXT) \
 	lib_a-fegetenv.$(OBJEXT) lib_a-feholdexcept.$(OBJEXT) \
 	lib_a-fesetenv.$(OBJEXT) lib_a-feupdateenv.$(OBJEXT)  \
 	lib_a-sf_fdim.$(OBJEXT) lib_a-s_fdim.$(OBJEXT)        \
-	lib_a-wf_exp.$(OBJEXT)
+	lib_a-wf_exp.$(OBJEXT) lib_a-w_pow.$(OBJEXT)
 am_lib_a_OBJECTS = $(am__objects_1)
 lib_a_OBJECTS = $(am_lib_a_OBJECTS)
 DEFAULT_INCLUDES = -I.@am__isrc@
@@ -208,7 +208,7 @@ LIB_SOURCES = \
 	fesetexceptflag.c fetestexcept.c \
 	fegetround.c fesetround.c \
 	fegetenv.c feholdexcept.c fesetenv.c feupdateenv.c \
-	s_fdim.c sf_fdim.c wf_exp.c
+	s_fdim.c sf_fdim.c wf_exp.c w_pow.c
 
 noinst_LIBRARIES = lib.a
 lib_a_SOURCES = $(LIB_SOURCES)
@@ -303,6 +303,12 @@ lib_a-wf_exp.o: wf_exp.c
 
 lib_a-wf_exp.obj: wf_exp.c
 	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-wf_exp.obj `if test -f 'wf_exp.c'; then $(CYGPATH_W) 'wf_exp.c'; else $(CYGPATH_W) '$(srcdir)/wf_exp.c'; fi`
+
+lib_a-w_pow.o: w_pow.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-w_pow.o `test -f 'w_pow.c' || echo '$(srcdir)/'`w_pow.c
+
+lib_a-w_pow.obj: w_pow.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-w_pow.obj `if test -f 'w_pow.c'; then $(CYGPATH_W) 'w_pow.c'; else $(CYGPATH_W) '$(srcdir)/w_pow.c'; fi`
 
 lib_a-feclearexcept.o: feclearexcept.c
 	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-feclearexcept.o `test -f 'feclearexcept.c' || echo '$(srcdir)/'`feclearexcept.c

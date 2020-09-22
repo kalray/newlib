@@ -78,15 +78,9 @@ float expf(float x){
                 int tmp2;
 
                 unround_k = x * 0x1.715476p0f;
-		#ifdef __clang__
-                ik = __builtin_kvx_fixedw(unround_k, ".rn");
-                carg = __builtin_kvx_fixedw(unround_k, ".rn");
-                k = __builtin_kvx_floatw(carg, ".rn");
-		#else
                 ik = __builtin_kvx_fixedw(unround_k, 0, ".rn");
                 carg = __builtin_kvx_fixedw(unround_k, 0, ".rn");
                 k = __builtin_kvx_floatw(carg, 0, ".rn");
-		#endif
                 late_overflow_test = ik > INT32_C(127);
                 late_underflow_test = k <= -126.0f;
                 tmp1 = late_overflow_test || late_underflow_test;

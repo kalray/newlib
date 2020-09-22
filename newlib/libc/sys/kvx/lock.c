@@ -73,8 +73,8 @@ static int __libc_recursive_trylock_base(_LOCK_T *lock, uint32_t myself)
 
   swap_success = __builtin_kvx_acswapw(&(lock->owner), myself, _KVX_RECURSIVE_NO_OWNER);
   if ((swap_success == 1)
-      || (__builtin_kvx_lwzu(&(lock->owner)) == myself)) {
-    uint64_t counter = __builtin_kvx_lwzu(&(lock->counter));
+      || (__builtin_kvx_lwz(&(lock->owner) == myself, ".u", 0))) {
+    uint64_t counter = __builtin_kvx_lwz(&(lock->counter), ".u", 0);
 
     counter += 1;
     *(volatile uint32_t *)&(lock->counter) = counter;
@@ -95,8 +95,8 @@ static int __libc_recursive_trylock_base(_LOCK_T *lock, uint32_t myself)
  */
 static int __libc_recursive_unlock_base(_LOCK_T *lock, uint64_t myself)
 {
-  uint32_t counter = __builtin_kvx_lwzu((void *)&(lock->counter));
-  uint32_t owner = __builtin_kvx_lwzu((void *)&(lock->owner));
+  uint32_t counter = __builtin_kvx_lwz((void *)&(lock->counter), ".u", 0);
+  uint32_t owner = __builtin_kvx_lwz((void *)&(lock->owner), ".u", 0);
 
   if (owner != myself) {
     return 0;

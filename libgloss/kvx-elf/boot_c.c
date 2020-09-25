@@ -279,7 +279,6 @@ static void __kvx_rm_init(void)
   __kvx_bss_section(tls_bss, tbss_sz);
 
   __kvx_bss_section(_bss_start, _bss_end - _bss_start);
-  __kvx_bss_section(_sbss_start, _sbss_end - _sbss_start);
 }
 
 static void __kvx_pe_init(int pid)

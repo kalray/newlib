@@ -39,9 +39,8 @@
 extern "C"	{
 #endif
 
-
-  extern void _init(void) __attribute__((weak));
-  extern void _fini(void) __attribute__((weak));
+  extern void  __libc_init_array(void);
+  extern void  __libc_fini_array(void);
 
   __thread struct _reent _impure_thread_data;
 
@@ -72,8 +71,8 @@ extern "C"	{
 
 
     /* Run the main function */
-    if (_init) _init ();
-    if (_fini) atexit (_fini);
+    __libc_init_array ();
+    atexit (__libc_fini_array);
 
     atexit (__kvx_newlib_flushall);
 

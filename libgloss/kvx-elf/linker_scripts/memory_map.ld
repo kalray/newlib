@@ -33,8 +33,8 @@
 MEMORY
 {
     /* Definitions of available memory regions */
-    internal_mem           : ORIGIN = 0x00000000, LENGTH = 4M
-    dsu                    : ORIGIN = 0x00A46000, LENGTH = 8K
-    alias_ddr              : ORIGIN = 0x80000000, LENGTH = 2147483647
-    ddr                    : ORIGIN = 0x100000000, LENGTH = 2147483647
+    internal_mem (rwx)           : ORIGIN = 0x00000000, LENGTH = 4M
+    dsu          (rwx)           : ORIGIN = 0x00A46000, LENGTH = 8K
+    alias_ddr    (rwx)           : ORIGIN = 0x80000000, LENGTH = 2147483647
+    ddr          (rwx)           : ORIGIN = 0x100000000, LENGTH = 2147483647
 }

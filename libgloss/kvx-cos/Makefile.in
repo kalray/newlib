@@ -59,8 +59,6 @@ GLOSS_OBJS = access.o chdir.o chmod.o close.o dup.o dup2.o  exit.o fcntl.o \
 
 NOSYS_OBJS = execve.o fork.o kill.o getpid.o wait.o
 
-CRT_FILES = crt0.o
-
 # Host specific makefile fragment comes in here.
 NEWLIB_CFLAGS = `if [ -d ${objroot}/newlib ]; then \
                   echo -I${objroot}/newlib/targ-include \
@@ -103,7 +101,7 @@ AR_FLAGS = rc
 # it to link is a good test, so we ignore all the errors for now.
 #
 
-all: libgloss.a $(CRT_FILES)
+all: libgloss.a
 
 #
 # here's where we build the board support packages for each target
@@ -124,7 +122,6 @@ distclean maintainer-clean realclean: clean
 .PHONY: install info install-info clean-info
 install:
 	$(INSTALL_PROGRAM) libgloss.a $(DESTDIR)$(tooldir)/lib${MULTISUBDIR};
-	$(INSTALL_PROGRAM) $(CRT_FILES) $(DESTDIR)$(tooldir)/lib${MULTISUBDIR};
 
 info:
 install-info:

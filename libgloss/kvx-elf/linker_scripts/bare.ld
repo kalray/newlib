@@ -61,11 +61,6 @@ DEBUG_BASE           = INTERNAL_RAM_BASE + INTERNAL_RAM_SIZE - DEBUG_SIZE;
 RamBase = DEFINED(RamBase) ? RamBase : ORIGIN(ddr);
 RamSize = DEFINED(RamSize) ? RamSize : LENGTH(ddr);
 
-MPPA_SPAWN_DIRECTORY_SIZE = DEFINED(MPPA_SPAWN_DIRECTORY_SIZE) ? MPPA_SPAWN_DIRECTORY_SIZE : 8K;
-
-MPPA_IMAGES_DIRECTORY_ADDRESS = DEFINED(MPPA_IMAGES_DIRECTORY_ADDRESS) ? MPPA_IMAGES_DIRECTORY_ADDRESS : RamBase;
-MPPA_IMAGES_DIRECTORY_SIZE = DEFINED(MPPA_IMAGES_DIRECTORY_SIZE) ? MPPA_IMAGES_DIRECTORY_SIZE : 32M;
-
 REGION_ALIAS("REGION_TLS", internal_mem);
 
 /* Definition of sections */
@@ -121,6 +116,22 @@ SECTIONS
     . = ALIGN(8);
   }  > internal_mem
 
+  .init_array ALIGN(64) :
+  {
+    . = ALIGN(64);
+    PROVIDE (__preinit_array_start = .);
+    KEEP (*(.preinit_array))
+    PROVIDE (__preinit_array_end = .);
+    PROVIDE (__init_array_start = .);
+    KEEP (*(SORT(.init_array.*)))
+    KEEP (*(.init_array))
+    PROVIDE (__init_array_end = .);
+    PROVIDE (__fini_array_start = .);
+    KEEP (*(.fini_array))
+    KEEP (*(SORT(.fini_array.*)))
+    PROVIDE (__fini_array_end = .);
+  } > internal_mem
+
   /* The bsp configuration arguments */
   .bsp_config ALIGN(8) : {
     KEEP(*(.bsp_config_desc))
@@ -141,39 +152,11 @@ SECTIONS
 
   /* This is the value of the GP base */
   _data_start = .;
-  .sdata  ALIGN(8) : {
-    *(.sdata .sdata.* .gnu.linkonce.s.*)
-  } > internal_mem
-
-  .sbss  ALIGN(8) : {
-    _sbss_start = .;
-    *(.dynsbss)
-    *(.sbss .sbss.* .gnu.linkonce.sb.*)
-    *(.scommon)
-    _sbss_end = .;
-  } > internal_mem
-
   .data   ALIGN(8) : {
     *(.data)
     *(.data.*)
     . = ALIGN(8);
   }  > internal_mem
-
-  .ctors ALIGN(8) : {
-    KEEP(*crtbegin.o(.ctors))
-    KEEP(*crtbegin.?(.ctors))
-    KEEP (*(EXCLUDE_FILE (*crtend.o *crtend?.o $OTHER_EXCLUDE_FILES) .ctors))
-    KEEP (*(SORT(.ctors.*)))
-    KEEP (*(.ctors))
-  }
-
-  .dtors ALIGN(8) : {
-    KEEP (*crtbegin.o(.dtors))
-    KEEP (*crtbegin?.o(.dtors))
-    KEEP (*(EXCLUDE_FILE (*crtend.o *crtend?.o $OTHER_EXCLUDE_FILES) .dtors))
-    KEEP (*(SORT(.dtors.*)))
-    KEEP (*(.dtors))
-  }
 
   .bss   ALIGN(8) : {
     _bss_start = .;

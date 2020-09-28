@@ -79,6 +79,9 @@ PORTABILITY
 		    errno = EDOM;
 	        } else {
 		    /* pow(x,y) overflow */
+		    z = __builtin_inf();
+		    y*= 0.5;
+		    if(x<0.0&&rint(y)!=y) z = -__builtin_inf();
 		    errno = ERANGE;
                 }
 		return z;

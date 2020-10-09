@@ -17,4 +17,3 @@ void _exit(int exitcode){
     __gloss_exit(exitcode);
 }
 
-void exit(int exitcode) __attribute__ ((weak, alias ("_exit")));

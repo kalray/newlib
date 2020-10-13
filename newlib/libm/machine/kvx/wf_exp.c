@@ -79,18 +79,18 @@ float expf(float x){
 
                 unround_k = x * 0x1.715476p0f;
                 ik = __builtin_kvx_fixedw(unround_k, 0, ".rn");
+                late_overflow_test = ik > INT32_C(127);
                 carg = __builtin_kvx_fixedw(unround_k, 0, ".rn");
                 k = __builtin_kvx_floatw(carg, 0, ".rn");
-                late_overflow_test = ik > INT32_C(127);
                 late_underflow_test = k <= -126.0f;
                 tmp1 = late_overflow_test || late_underflow_test;
                 tmp2 =  ! tmp1;
 
                 if (__builtin_expect(tmp2, 1)) {
-                    float carg0;
                     float exact_hi;
                     float tmp3;
                     float exact_lo;
+                    float exact_hi1;
                     float r;
                     float r2_;
                     float tmp4;
@@ -109,22 +109,22 @@ float expf(float x){
                     float exp_ik;
                     float std_result;
 
-                    carg0 =  - k;
-                    exact_hi = fmaf(carg0, 0x1.62ep-1f, x);
+                    exact_hi = __builtin_kvx_ffmsw(k, 0x1.62ep-1f, x, "");
                     tmp3 =  - k;
                     exact_lo = tmp3 * 0x1.0bfbe8p-15f;
-                    r = exact_hi + exact_lo;
+                    exact_hi1 = __builtin_kvx_ffmsw(k, 0x1.62ep-1f, x, "");
+                    r = exact_hi1 + exact_lo;
                     r2_ = r * r;
                     tmp4 = 0x1.55548cp-3f * r2_;
                     tmp5 = r * tmp4;
-                    tmp6 = fmaf(0x1p-1f, r2_, tmp5);
+                    tmp6 = __builtin_kvx_ffmaw(0x1p-1f, r2_, tmp5, "");
                     tmp7 = 0x1.5554cep-5f * r2_;
-                    tmp8 = fmaf(r2_, tmp7, tmp6);
+                    tmp8 = __builtin_kvx_ffmaw(r2_, tmp7, tmp6, "");
                     tmp9 = 0x1.6d6748p-10f * r2_;
                     tmp10 = r * tmp9;
-                    tmp11 = fmaf(0x1.123d02p-7f, r2_, tmp10);
+                    tmp11 = __builtin_kvx_ffmaw(0x1.123d02p-7f, r2_, tmp10, "");
                     r3_ = r * r2_;
-                    pre_sub_poly = fmaf(r3_, tmp11, tmp8);
+                    pre_sub_poly = __builtin_kvx_ffmaw(r3_, tmp11, tmp8, "");
                     tmp12 = exact_lo + pre_sub_poly;
                     tmp13 = exact_hi + tmp12;
                     poly = 1.0f + tmp13;
@@ -135,10 +135,10 @@ float expf(float x){
 
 
                     if (__builtin_expect(late_overflow_test, 0)) {
-                        float carg0;
                         float exact_hi;
                         float tmp3;
                         float exact_lo;
+                        float exact_hi1;
                         float r;
                         float r2_;
                         float tmp4;
@@ -161,22 +161,22 @@ float expf(float x){
                         float late_overflow_result;
                         int tmp17;
 
-                        carg0 =  - k;
-                        exact_hi = fmaf(carg0, 0x1.62ep-1f, x);
+                        exact_hi = __builtin_kvx_ffmsw(k, 0x1.62ep-1f, x, "");
                         tmp3 =  - k;
                         exact_lo = tmp3 * 0x1.0bfbe8p-15f;
-                        r = exact_hi + exact_lo;
+                        exact_hi1 = __builtin_kvx_ffmsw(k, 0x1.62ep-1f, x, "");
+                        r = exact_hi1 + exact_lo;
                         r2_ = r * r;
                         tmp4 = 0x1.55548cp-3f * r2_;
                         tmp5 = r * tmp4;
-                        tmp6 = fmaf(0x1p-1f, r2_, tmp5);
+                        tmp6 = __builtin_kvx_ffmaw(0x1p-1f, r2_, tmp5, "");
                         tmp7 = 0x1.5554cep-5f * r2_;
-                        tmp8 = fmaf(r2_, tmp7, tmp6);
+                        tmp8 = __builtin_kvx_ffmaw(r2_, tmp7, tmp6, "");
                         tmp9 = 0x1.6d6748p-10f * r2_;
                         tmp10 = r * tmp9;
-                        tmp11 = fmaf(0x1.123d02p-7f, r2_, tmp10);
+                        tmp11 = __builtin_kvx_ffmaw(0x1.123d02p-7f, r2_, tmp10, "");
                         r3_ = r * r2_;
-                        pre_sub_poly = fmaf(r3_, tmp11, tmp8);
+                        pre_sub_poly = __builtin_kvx_ffmaw(r3_, tmp11, tmp8, "");
                         tmp12 = exact_lo + pre_sub_poly;
                         tmp13 = exact_hi + tmp12;
                         poly = 1.0f + tmp13;
@@ -195,10 +195,10 @@ float expf(float x){
                             return late_overflow_result;
                         }
                     } else {
-                        float carg0;
                         float exact_hi;
                         float tmp3;
                         float exact_lo;
+                        float exact_hi1;
                         float r;
                         float r2_;
                         float tmp4;
@@ -221,22 +221,22 @@ float expf(float x){
                         float late_underflow_result;
                         int tmp17;
 
-                        carg0 =  - k;
-                        exact_hi = fmaf(carg0, 0x1.62ep-1f, x);
+                        exact_hi = __builtin_kvx_ffmsw(k, 0x1.62ep-1f, x, "");
                         tmp3 =  - k;
                         exact_lo = tmp3 * 0x1.0bfbe8p-15f;
-                        r = exact_hi + exact_lo;
+                        exact_hi1 = __builtin_kvx_ffmsw(k, 0x1.62ep-1f, x, "");
+                        r = exact_hi1 + exact_lo;
                         r2_ = r * r;
                         tmp4 = 0x1.55548cp-3f * r2_;
                         tmp5 = r * tmp4;
-                        tmp6 = fmaf(0x1p-1f, r2_, tmp5);
+                        tmp6 = __builtin_kvx_ffmaw(0x1p-1f, r2_, tmp5, "");
                         tmp7 = 0x1.5554cep-5f * r2_;
-                        tmp8 = fmaf(r2_, tmp7, tmp6);
+                        tmp8 = __builtin_kvx_ffmaw(r2_, tmp7, tmp6, "");
                         tmp9 = 0x1.6d6748p-10f * r2_;
                         tmp10 = r * tmp9;
-                        tmp11 = fmaf(0x1.123d02p-7f, r2_, tmp10);
+                        tmp11 = __builtin_kvx_ffmaw(0x1.123d02p-7f, r2_, tmp10, "");
                         r3_ = r * r2_;
-                        pre_sub_poly = fmaf(r3_, tmp11, tmp8);
+                        pre_sub_poly = __builtin_kvx_ffmaw(r3_, tmp11, tmp8, "");
                         tmp12 = exact_lo + pre_sub_poly;
                         tmp13 = exact_hi + tmp12;
                         poly = 1.0f + tmp13;

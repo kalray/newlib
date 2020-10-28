@@ -194,7 +194,7 @@ void __gloss_kvx_interrupt_configure_dame(void)
  * APIC routines
  */
 
-#include <machine/kv3/mppa3-80/cluster/gic.h>
+#include <machine/kv3/mppa3-80/gic.h>
 
 void __apic_gic_init(void)
 {
@@ -218,7 +218,7 @@ void __apic_gic_init(void)
   }
 }
 
-#include <machine/kv3/mppa3-80/cluster/mailbox.h>
+#include <machine/kv3/mppa3-80/mailbox.h>
 
 void __apic_mailbox_init(void)
 {
@@ -228,7 +228,9 @@ void __apic_mailbox_init(void)
   // Write zeroes
   for (i = 0; i < NB_APIC_MAILBOX_GROUP; i++) {
     for (j = 0; j < NB_APIC_MAILBOX_PER_GROUP; j++) {
+#ifdef __kvxarch_kv3_1
       mppa_mailbox_local->mailbox[i][j].access_policy.reg = 0;
+#endif
       mppa_mailbox_local->mailbox[i][j].mask.reg          = 0;
       mppa_mailbox_local->mailbox[i][j].funct.reg         = 0;
       mppa_mailbox_local->mailbox[i][j].mailbox.reg       = 0;
@@ -241,8 +243,9 @@ void __apic_mailbox_init(void)
  * L2 cache routines
  */
 
-#include <machine/kv3/mppa3-80/cluster/pwr_ctrl.h>
-#include <machine/kv3/mppa3-80/cluster/l2_cache.h>
+#include <machine/kv3/mppa3-80/pwr_ctrl.h>
+#include <machine/kv3/mppa3-80/secure_cluster_regs.h>
+#include <machine/kv3/mppa3-80/l2_cache.h>
 
 static void __l2_enable(void)
 {

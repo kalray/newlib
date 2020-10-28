@@ -1,13 +1,14 @@
 /*
- * trace.coolidge.dev
+ * trace.coolidge-v1.dev
  * Automatically generated from registers definition files. Do not edit
  * Copyright (c) Kalray 2020.
  */
 
-#ifndef _INCLUDED_DEVICES_TRACE_COOLIDGE_DEV_
-#define _INCLUDED_DEVICES_TRACE_COOLIDGE_DEV_
+#ifndef _INCLUDED_DEVICES_TRACE_COOLIDGE_V1_DEV_
+#define _INCLUDED_DEVICES_TRACE_COOLIDGE_V1_DEV_
 
 #include "device_inttype.h"
+
 
 struct mppa_trace_etb_entry {
 mppa_uint64 etb_entry :64; /*[63: 0]behavior: [:RD],Embedded Trace Buffer entry*/
@@ -494,7 +495,7 @@ mppa_uint8 unused1[4];
 typedef char assertion_for_mppa_trace_t[(sizeof(mppa_trace_t) == 524344)*2-1];// If this fails, then the size of mppa_trace_t as created by the compiler does not match the hardware size.
 
 #endif /* KVX_DISABLE_TYPECHECK */
-#endif // _INCLUDED_DEVICES_TRACE_COOLIDGE_DEV_
+#endif // _INCLUDED_DEVICES_TRACE_COOLIDGE_V1_DEV_
 
 /* -*- Mode: C; c-basic-offset: 2 -*- */
 /* vim:set ft=c sw=2 cindent: */

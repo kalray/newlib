@@ -35,7 +35,7 @@
 #include <sys/types.h>
 #include <stdint.h>
 
-#include <machine/kv3/mppa3-80/cluster/trace.h>
+#include <machine/kv3/mppa3-80/trace.h>
 #include <kv3/bsp.h>
 
 /* _POSIX_TIMERS is not defined for bare. Internal routine __gloss_kvx_nanosleep is provided and used in sleep implementation. */

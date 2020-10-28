@@ -1,25 +1,26 @@
 /*
- * l2_cache.coolidge.dev
+ * l2_cache.coolidge-v1.dev
  * Automatically generated from registers definition files. Do not edit
  * Copyright (c) Kalray 2020.
  */
 
-#ifndef _INCLUDED_DEVICES_L2_CACHE_COOLIDGE_DEV_
-#define _INCLUDED_DEVICES_L2_CACHE_COOLIDGE_DEV_
+#ifndef _INCLUDED_DEVICES_L2_CACHE_COOLIDGE_V1_DEV_
+#define _INCLUDED_DEVICES_L2_CACHE_COOLIDGE_V1_DEV_
 
 #include "device_inttype.h"
 
+
 struct mppa_l2_cache_tcm_tag {
 mppa_uint64 reserved_0:32;
-mppa_uint64 reader_clear :4; /*[35:32]behavior: [:WR],*/
+mppa_uint64 reader_clear :4; /*[35:32]behavior: [:R0, :WR],*/
 mppa_uint64 reserved_2:28;
 mppa_uint64 reserved_3:64;
-}  __attribute__((__packed__));
+};
 
-#ifndef K1_DISABLE_TYPECHECK
+#ifndef KVX_DISABLE_TYPECHECK
 typedef char assertion_for_struct_mppa_l2_cache_tcm_tag[(sizeof(struct mppa_l2_cache_tcm_tag) == 16)*2-1];// If this fails, then the size of struct mppa_l2_cache_tcm_tag as created by the compiler does not match the hardware size.
 
-#endif /* K1_DISABLE_TYPECHECK */
+#endif /* KVX_DISABLE_TYPECHECK */
 #define MPPA_L2_CACHE_TCM_TAG_READER_CLEAR__SHIFT 32
 #define MPPA_L2_CACHE_TCM_TAG_READER_CLEAR__MASK 0xf00000000UL
 
@@ -50,12 +51,12 @@ mppa_uint64 reader2 :17; /*[80:64]behavior: [:RD, :WR],*/
 mppa_uint64 reserved_2:15;
 mppa_uint64 reader3 :17; /*[112:96]behavior: [:RD, :WR],*/
 mppa_uint64 reserved_4:15;
-}  __attribute__((__packed__));
+};
 
-#ifndef K1_DISABLE_TYPECHECK
+#ifndef KVX_DISABLE_TYPECHECK
 typedef char assertion_for_struct_mppa_l2_cache_reader[(sizeof(struct mppa_l2_cache_reader) == 16)*2-1];// If this fails, then the size of struct mppa_l2_cache_reader as created by the compiler does not match the hardware size.
 
-#endif /* K1_DISABLE_TYPECHECK */
+#endif /* KVX_DISABLE_TYPECHECK */
 #define MPPA_L2_CACHE_READER_READER0__SHIFT 0
 #define MPPA_L2_CACHE_READER_READER0__MASK 0x1ffffUL
 #define MPPA_L2_CACHE_READER_READER1__SHIFT 32
@@ -92,12 +93,12 @@ typedef struct  {
 mppa_l2_cache_tcm_tag_t tcm_tag; /* offset: 0x0, size: 0x10 ( /!\ this is a 128bits register*/
 mppa_l2_cache_tcm_reader_t tcm_reader; /* offset: 0x10, size: 0x10 ( /!\ this is a 128bits register*/
 mppa_uint8 unused0[32];
-}  __attribute__((__packed__)) mppa_l2_cache_tcm_metadata_t;
+} mppa_l2_cache_tcm_metadata_t;
 
-#ifndef K1_DISABLE_TYPECHECK
+#ifndef KVX_DISABLE_TYPECHECK
 typedef char assertion_for_mppa_l2_cache_tcm_metadata_t[(sizeof(mppa_l2_cache_tcm_metadata_t) == 64)*2-1];// If this fails, then the size of mppa_l2_cache_tcm_metadata_t as created by the compiler does not match the hardware size.
 
-#endif /* K1_DISABLE_TYPECHECK */
+#endif /* KVX_DISABLE_TYPECHECK */
 struct mppa_l2_cache_tag {
 mppa_uint64 tag :24; /*[23: 0]behavior: [:RD, :WR],*/
 mppa_uint64 reserved_0:3;
@@ -106,19 +107,19 @@ mppa_uint64 atomic_allowed :1; /*[28:28]behavior: [:RD, :WR],*/
 mppa_uint64 write_allowed :1; /*[29:29]behavior: [:RD, :WR],*/
 mppa_uint64 valid :1; /*[30:30]behavior: [:RD, :WR],*/
 mppa_uint64 reserved_1:1;
-mppa_uint64 reader_clear :4; /*[35:32]behavior: [:WR],*/
+mppa_uint64 reader_clear :4; /*[35:32]behavior: [:R0, :WR],*/
 mppa_uint64 reserved_2:4;
-mppa_uint64 valid_clear :1; /*[40:40]behavior: [:WR],*/
+mppa_uint64 valid_clear :1; /*[40:40]behavior: [:R0, :WR],*/
 mppa_uint64 reserved_3:7;
-mppa_uint64 dirty_clear :1; /*[48:48]behavior: [:WR],*/
+mppa_uint64 dirty_clear :1; /*[48:48]behavior: [:R0, :WR],*/
 mppa_uint64 reserved_5:15;
 mppa_uint64 reserved_6:64;
-}  __attribute__((__packed__));
+};
 
-#ifndef K1_DISABLE_TYPECHECK
+#ifndef KVX_DISABLE_TYPECHECK
 typedef char assertion_for_struct_mppa_l2_cache_tag[(sizeof(struct mppa_l2_cache_tag) == 16)*2-1];// If this fails, then the size of struct mppa_l2_cache_tag as created by the compiler does not match the hardware size.
 
-#endif /* K1_DISABLE_TYPECHECK */
+#endif /* KVX_DISABLE_TYPECHECK */
 #define MPPA_L2_CACHE_TAG_TAG__SHIFT 0
 #define MPPA_L2_CACHE_TAG_TAG__MASK 0xffffffUL
 #define MPPA_L2_CACHE_TAG_UNDER_REFILL__SHIFT 27
@@ -196,12 +197,12 @@ typedef struct  {
 mppa_l2_cache_l2_tag_t l2_tag; /* offset: 0x0, size: 0x10 ( /!\ this is a 128bits register*/
 mppa_l2_cache_l2_reader_t l2_reader; /* offset: 0x10, size: 0x10 ( /!\ this is a 128bits register*/
 mppa_l2_cache_l2_dirty_t l2_dirty[2]; /* offset: 0x20, size: 0x20 ( /!\ this is a 128bits register*/
-}  __attribute__((__packed__)) mppa_l2_cache_l2_metadata_t;
+} mppa_l2_cache_l2_metadata_t;
 
-#ifndef K1_DISABLE_TYPECHECK
+#ifndef KVX_DISABLE_TYPECHECK
 typedef char assertion_for_mppa_l2_cache_l2_metadata_t[(sizeof(mppa_l2_cache_l2_metadata_t) == 64)*2-1];// If this fails, then the size of mppa_l2_cache_l2_metadata_t as created by the compiler does not match the hardware size.
 
-#endif /* K1_DISABLE_TYPECHECK */
+#endif /* KVX_DISABLE_TYPECHECK */
 typedef enum {
 MPPA_L2_CACHE_MISS = 0x0,
 MPPA_L2_CACHE_COHERENCY_RIGHT = 0x1,
@@ -223,12 +224,12 @@ mppa_uint64 job_number :3; /*[26:24]reset: 0x0,behavior: [:RD],*/
 mppa_uint64 proc_id :5; /*[31:27]reset: 0x0,behavior: [:RD],*/
 mppa_uint64 address :32; /*[63:32]behavior: [:RD],*/
 mppa_uint64 reserved_1:64;
-}  __attribute__((__packed__));
+};
 
-#ifndef K1_DISABLE_TYPECHECK
+#ifndef KVX_DISABLE_TYPECHECK
 typedef char assertion_for_struct_mppa_l2_cache_job_fifo[(sizeof(struct mppa_l2_cache_job_fifo) == 16)*2-1];// If this fails, then the size of struct mppa_l2_cache_job_fifo as created by the compiler does not match the hardware size.
 
-#endif /* K1_DISABLE_TYPECHECK */
+#endif /* KVX_DISABLE_TYPECHECK */
 #define MPPA_L2_CACHE_JOB_FIFO_VALID__SHIFT 0
 #define MPPA_L2_CACHE_JOB_FIFO_VALID__MASK 0xffffUL
 #define MPPA_L2_CACHE_JOB_FIFO_JOB_TYPE__SHIFT 16
@@ -281,12 +282,12 @@ struct mppa_l2_cache_cancel_cam {
 mppa_uint64 proc_cancel :17; /*[16: 0]reset: 0x0,behavior: [:RD],*/
 mppa_uint64 reserved_1:47;
 mppa_uint64 reserved_2:64;
-}  __attribute__((__packed__));
+};
 
-#ifndef K1_DISABLE_TYPECHECK
+#ifndef KVX_DISABLE_TYPECHECK
 typedef char assertion_for_struct_mppa_l2_cache_cancel_cam[(sizeof(struct mppa_l2_cache_cancel_cam) == 16)*2-1];// If this fails, then the size of struct mppa_l2_cache_cancel_cam as created by the compiler does not match the hardware size.
 
-#endif /* K1_DISABLE_TYPECHECK */
+#endif /* KVX_DISABLE_TYPECHECK */
 #define MPPA_L2_CACHE_CANCEL_CAM_PROC_CANCEL__SHIFT 0
 #define MPPA_L2_CACHE_CANCEL_CAM_PROC_CANCEL__MASK 0x1ffffUL
 
@@ -318,22 +319,22 @@ mppa_l2_cache_job_fifo_t job_fifo; /* offset: 0x0, size: 0x10 ( /!\ this is a 12
 mppa_l2_cache_pop_fifo_t pop_fifo; /* offset: 0x10, size: 0x10 ( /!\ this is a 128bits register*/
 mppa_l2_cache_cancel_cam_t cancel_cam; /* offset: 0x20, size: 0x10 ( /!\ this is a 128bits register*/
 mppa_uint8 unused0[16];
-}  __attribute__((__packed__)) mppa_l2_cache_jobfifo_t;
+} mppa_l2_cache_jobfifo_t;
 
-#ifndef K1_DISABLE_TYPECHECK
+#ifndef KVX_DISABLE_TYPECHECK
 typedef char assertion_for_mppa_l2_cache_jobfifo_t[(sizeof(mppa_l2_cache_jobfifo_t) == 64)*2-1];// If this fails, then the size of mppa_l2_cache_jobfifo_t as created by the compiler does not match the hardware size.
 
-#endif /* K1_DISABLE_TYPECHECK */
+#endif /* KVX_DISABLE_TYPECHECK */
 struct mppa_l2_cache_prefetch {
 mppa_uint64 address :40; /*[39: 0]behavior: [:WR],*/
 mppa_uint64 reserved_1:24;
 mppa_uint64 reserved_2:64;
-}  __attribute__((__packed__));
+};
 
-#ifndef K1_DISABLE_TYPECHECK
+#ifndef KVX_DISABLE_TYPECHECK
 typedef char assertion_for_struct_mppa_l2_cache_prefetch[(sizeof(struct mppa_l2_cache_prefetch) == 16)*2-1];// If this fails, then the size of struct mppa_l2_cache_prefetch as created by the compiler does not match the hardware size.
 
-#endif /* K1_DISABLE_TYPECHECK */
+#endif /* KVX_DISABLE_TYPECHECK */
 #define MPPA_L2_CACHE_PREFETCH_ADDRESS__SHIFT 0
 #define MPPA_L2_CACHE_PREFETCH_ADDRESS__MASK 0xffffffffffUL
 
@@ -369,13 +370,13 @@ mppa_l2_cache_l2_metadata_t l2_metadata[8192]; /* offset: 0x80000, size: 0x80000
 mppa_l2_cache_jobfifo_t jobfifo[16]; /* offset: 0x100000, size: 0x400 */
 mppa_uint8 unused0[1047552];
 mppa_l2_cache_prefetch_t prefetch; /* offset: 0x200000, size: 0x10 ( /!\ this is a 128bits register*/
-}  __attribute__((__packed__)) mppa_l2_cache_t;
+} mppa_l2_cache_t;
 
-#ifndef K1_DISABLE_TYPECHECK
+#ifndef KVX_DISABLE_TYPECHECK
 typedef char assertion_for_mppa_l2_cache_t[(sizeof(mppa_l2_cache_t) == 2097168)*2-1];// If this fails, then the size of mppa_l2_cache_t as created by the compiler does not match the hardware size.
 
-#endif /* K1_DISABLE_TYPECHECK */
-#endif // _INCLUDED_DEVICES_L2_CACHE_COOLIDGE_DEV_
+#endif /* KVX_DISABLE_TYPECHECK */
+#endif // _INCLUDED_DEVICES_L2_CACHE_COOLIDGE_V1_DEV_
 
 /* -*- Mode: C; c-basic-offset: 2 -*- */
 /* vim:set ft=c sw=2 cindent: */

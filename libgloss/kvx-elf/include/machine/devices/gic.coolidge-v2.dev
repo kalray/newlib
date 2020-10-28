@@ -1,0 +1,558 @@
+/*
+ * gic.coolidge-v2.dev
+ * Automatically generated from registers definition files. Do not edit
+ * Copyright (c) Kalray 2020.
+ */
+
+#ifndef _INCLUDED_DEVICES_GIC_COOLIDGE_V2_DEV_
+#define _INCLUDED_DEVICES_GIC_COOLIDGE_V2_DEV_
+
+#include "device_inttype.h"
+
+
+struct mppa_gic_v_enable {
+mppa_uint8 enable :1; /*[ 0: 0]behavior: [:RD, :WR],Enable bit*/
+mppa_uint8 reserved_1:7;
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_gic_v_enable[(sizeof(struct mppa_gic_v_enable) == 1)*2-1];// If this fails, then the size of struct mppa_gic_v_enable as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_GIC_V_ENABLE_ENABLE__SHIFT 0
+#define MPPA_GIC_V_ENABLE_ENABLE__MASK 0x1UL
+
+
+/***
+ * gic enable register definition
+ * Enable the interrupt generation
+ *
+ * Permissions:
+ * ANY: ker => [:RD, :WR],
+ * ANY: usr => [:RD, :WR],
+ * Size: 1 byte (min access size = 1 byte)
+ * Reset value: Not initialized
+ */
+typedef union {
+mppa_uint8 reg;
+mppa_uint8 bword;
+struct mppa_gic_v_enable _;
+} mppa_gic_enable_t;
+
+/***
+ * gic status register definition
+ * Interrupt status
+ *
+ * Permissions:
+ * ANY: ker => [:RD, :WR],
+ * ANY: usr => [:RD, :WR],
+ * Size: 8 bytes (min access size = 8 bytes)
+ * Reset value: Not initialized
+ */
+typedef union {
+mppa_uint64 reg;
+mppa_uint64 dword;
+} mppa_gic_status_t;
+
+/***
+ * gic status_lac register definition
+ * Interrupt status load and clear
+ *
+ * Permissions:
+ * ANY: ker => [:RD],
+ * ANY: usr => [:RD],
+ * Size: 8 bytes (min access size = 8 bytes)
+ * Reset value: Not initialized
+ */
+typedef union {
+mppa_uint64 reg;
+mppa_uint64 dword;
+} mppa_gic_status_lac_t;
+
+struct mppa_gic_ring_level {
+mppa_uint32 ring_level :2; /*[ 1: 0]reset: 0x3,behavior: [:RD, :WR],Protection ring level, value is relative to current initiator ring level*/
+mppa_uint32 data_lock :1; /*[ 2: 2]reset: 0x0,behavior: [:RD, :WR],If set all protected registers are RO*/
+mppa_uint32 lock :1; /*[ 3: 3]reset: 0x0,behavior: [:RD, :WR],Auto-lock. RO if it is set, only cleared on the next reset*/
+mppa_uint32 reserved_1:28;
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_gic_ring_level[(sizeof(struct mppa_gic_ring_level) == 4)*2-1];// If this fails, then the size of struct mppa_gic_ring_level as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_GIC_RING_LEVEL_RING_LEVEL__SHIFT 0
+#define MPPA_GIC_RING_LEVEL_RING_LEVEL__MASK 0x3UL
+#define MPPA_GIC_RING_LEVEL_DATA_LOCK__SHIFT 2
+#define MPPA_GIC_RING_LEVEL_DATA_LOCK__MASK 0x4UL
+#define MPPA_GIC_RING_LEVEL_LOCK__SHIFT 3
+#define MPPA_GIC_RING_LEVEL_LOCK__MASK 0x8UL
+
+
+/***
+ * gic ring_config register definition
+ * Ring Protection Config
+ *
+ * Permissions:
+ * RM: ker => [:RD, :WR],
+ * RM: usr => [:RD, :WR],
+ * PE: ker => [:RD, :WR],
+ * PE: usr => [:RD, :WR],
+ * Size: 4 bytes (min access size = 4 bytes)
+ * Reset value: 0x3
+ */
+typedef union {
+mppa_uint32 reg;
+mppa_uint32 word;
+struct mppa_gic_ring_level _;
+} mppa_gic_ring_config_t;
+
+struct mppa_gic_ring_level_abs {
+mppa_uint32 ring_level :2; /*[ 1: 0]reset: 0x3,behavior: [:RD],Absolute value of protection ring level*/
+mppa_uint32 reserved_1:30;
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_gic_ring_level_abs[(sizeof(struct mppa_gic_ring_level_abs) == 4)*2-1];// If this fails, then the size of struct mppa_gic_ring_level_abs as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_GIC_RING_LEVEL_ABS_RING_LEVEL__SHIFT 0
+#define MPPA_GIC_RING_LEVEL_ABS_RING_LEVEL__MASK 0x3UL
+
+
+/***
+ * gic ring_level_abs_value register definition
+ * Absolute value of protection ring level
+ *
+ * Permissions:
+ * RM: ker => [:RD],
+ * RM: usr => [:RD],
+ * PE: ker => [:RD],
+ * PE: usr => [:RD],
+ * Size: 4 bytes (min access size = 4 bytes)
+ * Reset value: 0x3
+ */
+typedef union {
+mppa_uint32 reg;
+mppa_uint32 word;
+struct mppa_gic_ring_level_abs _;
+} mppa_gic_ring_level_abs_value_t;
+
+/***
+ * gic group_gic group definition
+ *
+ * Size: 1024/0x400 bytes
+ */
+#define MPPA_GIC_GROUP_GIC_ENABLE_NUMBER 157
+#define MPPA_GIC_GROUP_GIC_STATUS_NUMBER 3
+#define MPPA_GIC_GROUP_GIC_STATUS_LAC_NUMBER 3
+typedef struct  {
+mppa_gic_enable_t enable[157]; /* offset: 0x0, size: 0x9D ( /!\ this is a 8bits register*/
+mppa_uint8 unused0[99];
+mppa_gic_status_t status[3]; /* offset: 0x100, size: 0x18 ( /!\ this is a 64bits register*/
+mppa_uint8 unused1[8];
+mppa_gic_status_lac_t status_lac[3]; /* offset: 0x120, size: 0x18 ( /!\ this is a 64bits register*/
+mppa_uint8 unused2[8];
+mppa_gic_ring_config_t ring_level_config; /* offset: 0x140, size: 0x4 */
+mppa_gic_ring_level_abs_value_t ring_level_abs_val; /* offset: 0x144, size: 0x4 */
+mppa_uint8 unused3[696];
+} mppa_gic_group_gic_t;
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_mppa_gic_group_gic_t[(sizeof(mppa_gic_group_gic_t) == 1024)*2-1];// If this fails, then the size of mppa_gic_group_gic_t as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+struct mppa_gic_config {
+mppa_uint32 two_steps_auth :1; /*[ 0: 0]reset: 0x0,behavior: [:RD, :WR],Enable two-steps authentication. RO if 'lock' bit is set*/
+mppa_uint32 wr_dis :1; /*[ 1: 1]reset: 0x0,behavior: [:RD, :WR],Disable writes in whole regbank. RO if 'lock' bit is set*/
+mppa_uint32 lock :1; /*[ 2: 2]reset: 0x0,behavior: [:RD, :WR],Auto-lock. RO if it is set, only cleared on the next reset*/
+mppa_uint32 reserved_1:29;
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_gic_config[(sizeof(struct mppa_gic_config) == 4)*2-1];// If this fails, then the size of struct mppa_gic_config as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_GIC_CONFIG_TWO_STEPS_AUTH__SHIFT 0
+#define MPPA_GIC_CONFIG_TWO_STEPS_AUTH__MASK 0x1UL
+#define MPPA_GIC_CONFIG_WR_DIS__SHIFT 1
+#define MPPA_GIC_CONFIG_WR_DIS__MASK 0x2UL
+#define MPPA_GIC_CONFIG_LOCK__SHIFT 2
+#define MPPA_GIC_CONFIG_LOCK__MASK 0x4UL
+
+
+/***
+ * gic init_config register definition
+ * Initiator Protection Config
+ *
+ * Permissions:
+ * RM: ker => [:RD, :WR],
+ * RM: usr => [:RD, :WR],
+ * PE: ker => [:RD, :WR],
+ * PE: usr => [:RD, :WR],
+ * Size: 4 bytes (min access size = 4 bytes)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint32 reg;
+mppa_uint32 word;
+struct mppa_gic_config _;
+} mppa_gic_init_config_t;
+
+struct mppa_gic_allow_rd {
+mppa_uint32 read_mask_enable :32; /*[31: 0]reset: 0xFFFFFFFF,behavior: [:RD, :WR],Mask of allowed initiators for read accesses. RO if 'INITIATOR_PROTECT_CONFIG.lock' bit is set*/
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_gic_allow_rd[(sizeof(struct mppa_gic_allow_rd) == 4)*2-1];// If this fails, then the size of struct mppa_gic_allow_rd as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_GIC_ALLOW_RD_READ_MASK_ENABLE__SHIFT 0
+#define MPPA_GIC_ALLOW_RD_READ_MASK_ENABLE__MASK 0xffffffffUL
+
+
+/***
+ * gic allow_ld register definition
+ * Allowed Initiators for read accesses
+ *
+ * Permissions:
+ * RM: ker => [:RD, :WR],
+ * RM: usr => [:RD, :WR],
+ * PE: ker => [:RD, :WR],
+ * PE: usr => [:RD, :WR],
+ * Size: 4 bytes (min access size = 4 bytes)
+ * Reset value: 0xFFFFFFFF
+ */
+typedef union {
+mppa_uint32 reg;
+mppa_uint32 word;
+struct mppa_gic_allow_rd _;
+} mppa_gic_allow_ld_t;
+
+struct mppa_gic_allow_wr {
+mppa_uint32 write_mask_enable :32; /*[31: 0]reset: 0xFFFFFFFF,behavior: [:RD, :WR],Mask of allowed initiators for write accesses. RO if 'INITIATOR_PROTECT_CONFIG.lock' bit is set*/
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_gic_allow_wr[(sizeof(struct mppa_gic_allow_wr) == 4)*2-1];// If this fails, then the size of struct mppa_gic_allow_wr as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_GIC_ALLOW_WR_WRITE_MASK_ENABLE__SHIFT 0
+#define MPPA_GIC_ALLOW_WR_WRITE_MASK_ENABLE__MASK 0xffffffffUL
+
+
+/***
+ * gic allow_st register definition
+ * Allowed Initiators for write accesses
+ *
+ * Permissions:
+ * RM: ker => [:RD, :WR],
+ * RM: usr => [:RD, :WR],
+ * PE: ker => [:RD, :WR],
+ * PE: usr => [:RD, :WR],
+ * Size: 4 bytes (min access size = 4 bytes)
+ * Reset value: 0xFFFFFFFF
+ */
+typedef union {
+mppa_uint32 reg;
+mppa_uint32 word;
+struct mppa_gic_allow_wr _;
+} mppa_gic_allow_st_t;
+
+struct mppa_gic_enabled_mask {
+mppa_uint32 write_mask_subscribers :32; /*[31: 0]reset: 0x0,behavior: [:RD],Mask of enabled initiators
+Bits description:
+[0..15]: PEs,
+16: RM,
+17: DSU,
+18: Crypto DMA0,
+19: Crypto DMA1,
+20: AXI Write,
+21: AXI Read,
+22: DMA Tx,
+23: DMA Rx*/
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_gic_enabled_mask[(sizeof(struct mppa_gic_enabled_mask) == 4)*2-1];// If this fails, then the size of struct mppa_gic_enabled_mask as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_GIC_ENABLED_MASK_WRITE_MASK_SUBSCRIBERS__SHIFT 0
+#define MPPA_GIC_ENABLED_MASK_WRITE_MASK_SUBSCRIBERS__MASK 0xffffffffUL
+
+
+/***
+ * gic subscribe_write register definition
+ * Mask of enabled initiators
+ *
+ * Permissions:
+ * RM: ker => [:RD],
+ * RM: usr => [:RD],
+ * PE: ker => [:RD],
+ * PE: usr => [:RD],
+ * Size: 4 bytes (min access size = 4 bytes)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint32 reg;
+mppa_uint32 word;
+struct mppa_gic_enabled_mask _;
+} mppa_gic_subscribe_write_t;
+
+struct mppa_gic_subscribe {
+mppa_uint32 magic_value :32; /*[31: 0]reset: 0x0,behavior: [:WR],Write 'magic value' <TDB> to subscribe.*/
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_gic_subscribe[(sizeof(struct mppa_gic_subscribe) == 4)*2-1];// If this fails, then the size of struct mppa_gic_subscribe as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_GIC_SUBSCRIBE_MAGIC_VALUE__SHIFT 0
+#define MPPA_GIC_SUBSCRIBE_MAGIC_VALUE__MASK 0xffffffffUL
+
+
+/***
+ * gic subscribe register definition
+ * Initiator subscribe register
+ *
+ * Permissions:
+ * RM: ker => [:WR],
+ * RM: usr => [:WR],
+ * PE: ker => [:WR],
+ * PE: usr => [:WR],
+ * Size: 4 bytes (min access size = 4 bytes)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint32 reg;
+mppa_uint32 word;
+struct mppa_gic_subscribe _;
+} mppa_gic_subscribe_t;
+
+/***
+ * gic protect group definition
+ *
+ * Size: 28/0x1C bytes
+ */
+typedef struct  {
+mppa_gic_init_config_t config; /* offset: 0x0, size: 0x4 */
+mppa_gic_allow_ld_t read_mask_enable; /* offset: 0x4, size: 0x4 */
+mppa_gic_allow_st_t write_mask_enable; /* offset: 0x8, size: 0x4 */
+mppa_gic_subscribe_write_t write_mask_subscribers; /* offset: 0xC, size: 0x4 */
+mppa_gic_subscribe_t subscribe_write; /* offset: 0x10, size: 0x4 */
+mppa_gic_ring_config_t ring_level_config; /* offset: 0x14, size: 0x4 */
+mppa_gic_ring_level_abs_value_t ring_level_abs_value; /* offset: 0x18, size: 0x4 */
+} mppa_gic_protect_t;
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_mppa_gic_protect_t[(sizeof(mppa_gic_protect_t) == 28)*2-1];// If this fails, then the size of mppa_gic_protect_t as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+struct mppa_gic_debug_addr_low {
+mppa_uint32 addr_31_0 :32; /*[31: 0]reset: 0x0,behavior: [:RD],Address in error (low part)*/
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_gic_debug_addr_low[(sizeof(struct mppa_gic_debug_addr_low) == 4)*2-1];// If this fails, then the size of struct mppa_gic_debug_addr_low as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_GIC_DEBUG_ADDR_LOW_ADDR_31_0__SHIFT 0
+#define MPPA_GIC_DEBUG_ADDR_LOW_ADDR_31_0__MASK 0xffffffffUL
+
+
+/***
+ * gic addr_31_0 register definition
+ * In case of register access error, contains the low part of address
+ *
+ * Permissions:
+ * RM: ker => [:RD],
+ * RM: usr => [:RD],
+ * PE: ker => [:RD],
+ * PE: usr => [:RD],
+ * Size: 4 bytes (min access size = 4 bytes)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint32 reg;
+mppa_uint32 word;
+struct mppa_gic_debug_addr_low _;
+} mppa_gic_addr_31_0_t;
+
+struct mppa_gic_debug_addr_high {
+mppa_uint32 addr_63_32 :32; /*[31: 0]reset: 0x0,behavior: [:RD],Address in error (high part)*/
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_gic_debug_addr_high[(sizeof(struct mppa_gic_debug_addr_high) == 4)*2-1];// If this fails, then the size of struct mppa_gic_debug_addr_high as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_GIC_DEBUG_ADDR_HIGH_ADDR_63_32__SHIFT 0
+#define MPPA_GIC_DEBUG_ADDR_HIGH_ADDR_63_32__MASK 0xffffffffUL
+
+
+/***
+ * gic addr_63_32 register definition
+ * In case of register access error, contains the high part of address
+ *
+ * Permissions:
+ * RM: ker => [:RD],
+ * RM: usr => [:RD],
+ * PE: ker => [:RD],
+ * PE: usr => [:RD],
+ * Size: 4 bytes (min access size = 4 bytes)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint32 reg;
+mppa_uint32 word;
+struct mppa_gic_debug_addr_high _;
+} mppa_gic_addr_63_32_t;
+
+struct mppa_gic_debug_err_status {
+mppa_uint32 error :1; /*[ 0: 0]reset: 0x0,behavior: [:RD, :WR],Set if an error is detected.
+This bit is sticky, so the register is frozen up to this bit is clear.*/
+mppa_uint32 error_type :13; /*[13: 1]reset: 0x0,behavior: [:RD, :WR],Error type
+[1] : Initiator : unauthorised read,
+[2] : Initiator : unauthorised write,
+[3] : Initiator : two step authorisation,
+[4] : Initiator : write disable,
+[5] : Decoder   : decode,
+[6] : Decoder   : access,
+[7] : Decoder   : size,
+[8] : Decoder   : ring,
+[9] : Decoder   : lock,
+[10]: Decoder   : atomic,
+[11]: Ring      : overflow,
+[12]: Register  : parity on read,
+[13]: Register  : parity on the fly*/
+mppa_uint32 reserved_0:2;
+mppa_uint32 ring_level :2; /*[17:16]reset: 0x0,behavior: [:RD, :WR],Ring Level*/
+mppa_uint32 write :1; /*[18:18]reset: 0x0,behavior: [:RD, :WR],'1' for read, '0' for write*/
+mppa_uint32 size :3; /*[21:19]reset: 0x0,behavior: [:RD, :WR],Size*/
+mppa_uint32 initiator :5; /*[26:22]reset: 0x0,behavior: [:RD, :WR],Initiator number*/
+mppa_uint32 reserved_2:5;
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_gic_debug_err_status[(sizeof(struct mppa_gic_debug_err_status) == 4)*2-1];// If this fails, then the size of struct mppa_gic_debug_err_status as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_GIC_DEBUG_ERR_STATUS_ERROR__SHIFT 0
+#define MPPA_GIC_DEBUG_ERR_STATUS_ERROR__MASK 0x1UL
+#define MPPA_GIC_DEBUG_ERR_STATUS_ERROR_TYPE__SHIFT 1
+#define MPPA_GIC_DEBUG_ERR_STATUS_ERROR_TYPE__MASK 0x3ffeUL
+#define MPPA_GIC_DEBUG_ERR_STATUS_RING_LEVEL__SHIFT 16
+#define MPPA_GIC_DEBUG_ERR_STATUS_RING_LEVEL__MASK 0x30000UL
+#define MPPA_GIC_DEBUG_ERR_STATUS_WRITE__SHIFT 18
+#define MPPA_GIC_DEBUG_ERR_STATUS_WRITE__MASK 0x40000UL
+#define MPPA_GIC_DEBUG_ERR_STATUS_SIZE__SHIFT 19
+#define MPPA_GIC_DEBUG_ERR_STATUS_SIZE__MASK 0x380000UL
+#define MPPA_GIC_DEBUG_ERR_STATUS_INITIATOR__SHIFT 22
+#define MPPA_GIC_DEBUG_ERR_STATUS_INITIATOR__MASK 0x7c00000UL
+
+
+/***
+ * gic err_status register definition
+ * In case of register access error, contains the high part of address
+ *
+ * Permissions:
+ * RM: ker => [:RD, :WR],
+ * RM: usr => [:RD, :WR],
+ * PE: ker => [:RD, :WR],
+ * PE: usr => [:RD, :WR],
+ * Size: 4 bytes (min access size = 4 bytes)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint32 reg;
+mppa_uint32 word;
+struct mppa_gic_debug_err_status _;
+} mppa_gic_err_status_t;
+
+struct mppa_gic_error_injection {
+mppa_uint32 enable :1; /*[ 0: 0]reset: 0x0,behavior: [:RD, :WR],Enable the injection of error*/
+mppa_uint32 error_type :4; /*[ 4: 1]reset: 0x0,behavior: [:RD, :WR],Error type to inject:
+[1] : Initiator : unauthorised read,
+[2] : Initiator : unauthorised write,
+[3] : Initiator : two step authorisation,
+[4] : Initiator : write disable,
+[5] : Decoder   : decode,
+[6] : Decoder   : access,
+[7] : Decoder   : size,
+[8] : Decoder   : ring,
+[9] : Decoder   : lock,
+[10]: Decoder   : atomic,
+[11]: Ring      : overflow,
+[12]: Register  : parity on read,
+[13]: Register  : parity on the fly*/
+mppa_uint32 reserved_1:27;
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_gic_error_injection[(sizeof(struct mppa_gic_error_injection) == 4)*2-1];// If this fails, then the size of struct mppa_gic_error_injection as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_GIC_ERROR_INJECTION_ENABLE__SHIFT 0
+#define MPPA_GIC_ERROR_INJECTION_ENABLE__MASK 0x1UL
+#define MPPA_GIC_ERROR_INJECTION_ERROR_TYPE__SHIFT 1
+#define MPPA_GIC_ERROR_INJECTION_ERROR_TYPE__MASK 0x1eUL
+
+
+/***
+ * gic error_injection register definition
+ * Poisoning register
+ *
+ * Permissions:
+ * RM: ker => [:RD, :WR],
+ * RM: usr => [:RD, :WR],
+ * PE: ker => [:RD, :WR],
+ * PE: usr => [:RD, :WR],
+ * Size: 4 bytes (min access size = 4 bytes)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint32 reg;
+mppa_uint32 word;
+struct mppa_gic_error_injection _;
+} mppa_gic_error_injection_t;
+
+/***
+ * gic debug_reg group definition
+ *
+ * Size: 24/0x18 bytes
+ */
+typedef struct  {
+mppa_gic_addr_31_0_t addr_31_0; /* offset: 0x0, size: 0x4 */
+mppa_gic_addr_63_32_t addr_63_32; /* offset: 0x4, size: 0x4 */
+mppa_gic_err_status_t err_status; /* offset: 0x8, size: 0x4 */
+mppa_gic_error_injection_t error_injection; /* offset: 0xC, size: 0x4 */
+mppa_gic_ring_config_t dbg_ring_level_config; /* offset: 0x10, size: 0x4 */
+mppa_gic_ring_level_abs_value_t dbg_ring_level_abs_val; /* offset: 0x14, size: 0x4 */
+} mppa_gic_debug_reg_t;
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_mppa_gic_debug_reg_t[(sizeof(mppa_gic_debug_reg_t) == 24)*2-1];// If this fails, then the size of mppa_gic_debug_reg_t as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+/***
+ * gic device definition
+ * MPPA APIC gic
+ *
+ * Size: 131000/0x1FFB8 bytes
+ */
+#define MPPA_GIC_GIC_NUMBER 72
+typedef struct  {
+mppa_gic_group_gic_t gic[18][4]; /* offset: 0x0, size: 0x12000 */
+mppa_uint8 unused0[57216];
+mppa_gic_protect_t initiator_protect; /* offset: 0x1FF80, size: 0x1C */
+mppa_gic_debug_reg_t debug_regs; /* offset: 0x1FF9C, size: 0x18 */
+mppa_uint8 unused1[4];
+} mppa_gic_t;
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_mppa_gic_t[(sizeof(mppa_gic_t) == 131000)*2-1];// If this fails, then the size of mppa_gic_t as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#endif // _INCLUDED_DEVICES_GIC_COOLIDGE_V2_DEV_
+
+/* -*- Mode: C; c-basic-offset: 2 -*- */
+/* vim:set ft=c sw=2 cindent: */

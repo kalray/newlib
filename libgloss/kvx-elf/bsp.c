@@ -249,14 +249,27 @@ void __apic_mailbox_init(void)
 
 static void __l2_enable(void)
 {
-  /* Enable L1 cache */
-  __gloss_kvx_volatile_write64((void *)&(mppa_pwr_ctrl_local->global_config.set), 1 << PWR_GLOB_CACHE_EN_IDX);
+  /* Enable L2 cache */
+#if defined __kvxarch_kv3_1
+  __gloss_kvx_volatile_write64((void *) &mppa_pwr_ctrl_local->global_config.set, 1 << PWR_GLOB_CACHE_EN_IDX);
+#elif defined __kvxarch_kv3_2
+  __gloss_kvx_volatile_write64((void *) &mppa_secure_cluster_regs_local->global_config.set, 1 << PWR_GLOB_CACHE_EN_IDX);
+#else
+#error unsupported arch
+#endif
 }
 
 static void __l2_disable(void)
 {
-  /* Enable L1 cache */
-  __gloss_kvx_volatile_write64((void *)&(mppa_pwr_ctrl_local->global_config.clear), 1 << PWR_GLOB_CACHE_EN_IDX);
+  /* Disable L2 cache */
+#if defined(__kvxarch_kv3_1)
+  __gloss_kvx_volatile_write64((void *) &mppa_pwr_ctrl_local->global_config.clear, 1 << PWR_GLOB_CACHE_EN_IDX);
+#elif defined(__kvxarch_kv3_2)
+  __gloss_kvx_volatile_write64((void *) &mppa_secure_cluster_regs_local->global_config.clear,
+			       1 << PWR_GLOB_CACHE_EN_IDX);
+#else
+#error unsupported arch
+#endif
 }
 
 void __l2_init_metadata(void)
@@ -281,7 +294,13 @@ void __l2_init_metadata(void)
   ecc_status = mppa_pwr_ctrl_local->ecc_status.reg;
 
   if (ecc_status != 0) {
-    ecc_status = mppa_pwr_ctrl_local->ecc_status_clear.reg;
+#if defined(__kvxarch_kv3_1)
+     ecc_status = mppa_pwr_ctrl_local->ecc_status_clear.reg;
+#elif defined(__kvxarch_kv3_2)
+     ecc_status = mppa_secure_cluster_regs_local->ecc_status_clear.reg;
+#else
+#error unsupported arch
+#endif
   }
 
   __l2_disable();
@@ -293,22 +312,58 @@ void __l2_init_metadata(void)
 
 void __gloss_kvx_set_pwr_pen_uen(void)
 {
+#ifdef __kvxarch_kv3_1
   __gloss_kvx_volatile_write64((void *)&(mppa_pwr_ctrl_local->global_config.set), MPPA_PWR_CTRL_GLOBAL_CONFIG_USER_EN__MASK | MPPA_PWR_CTRL_GLOBAL_CONFIG_PE_EN__MASK);
+#endif
 }
 
 void __gloss_kvx_clear_pwc_reset_on_wup(int cpuid)
 {
-  __gloss_kvx_volatile_write64((void *)&(mppa_pwr_ctrl_local->vector_proc_control.reset_on_wakeup.clear), (1ULL << cpuid));
+#ifdef __kvxarch_kv3_1
+  __gloss_kvx_volatile_write64((void *) &mppa_pwr_ctrl_local->vector_proc_control.reset_on_wakeup.clear, 1ULL << cpuid);
+#elif defined(__kvxarch_kv3_2)
+  if (cpuid != __GLOSS_KVX_RM_ID) {
+    __gloss_kvx_volatile_write64((void *) &mppa_pwr_ctrl_local->vector_proc_control.reset_on_wakeup.clear,
+				 1ULL << cpuid);
+  } else {
+    __gloss_kvx_volatile_write64((void *) &mppa_secure_cluster_regs_local->rm_control.clear,
+				 1ULL << MPPA_SECURE_CLUSTER_REGS_PROC_CONFIG_RESET_ON_WAKEUP__SHIFT);
+  }
+#else
+#error unsupported arch
+#endif
 }
 
 void __gloss_kvx_set_pwc_wup(int cpuid)
 {
-  __gloss_kvx_volatile_write64((void *)&(mppa_pwr_ctrl_local->vector_proc_control.wup.set), (1ULL << cpuid));
+#ifdef __kvxarch_kv3_1
+  __gloss_kvx_volatile_write64((void *) &mppa_pwr_ctrl_local->vector_proc_control.wup.set, 1ULL << cpuid);
+#elif defined(__kvxarch_kv3_2)
+  if (cpuid != __GLOSS_KVX_RM_ID) {
+    __gloss_kvx_volatile_write64((void *) &mppa_pwr_ctrl_local->vector_proc_control.wup.set, 1ULL << cpuid);
+  } else {
+    __gloss_kvx_volatile_write64((void *) &mppa_secure_cluster_regs_local->rm_control.set,
+				 1ULL << MPPA_SECURE_CLUSTER_REGS_PROC_CONFIG_WAKEUP__SHIFT);
+  }
+#else
+#error unsupported arch
+#endif
 }
 
 void __gloss_kvx_clear_pwc_wup(int cpuid)
 {
-  __gloss_kvx_volatile_write64((void *)&(mppa_pwr_ctrl_local->vector_proc_control.wup.clear), (1ULL << cpuid));
+#ifdef __kvxarch_kv3_1
+  __gloss_kvx_volatile_write64((void *) &mppa_pwr_ctrl_local->vector_proc_control.wup.clear, 1ULL << cpuid);
+#elif defined(__kvxarch_kv3_2)
+  if (cpuid != __GLOSS_KVX_RM_ID) {
+    __gloss_kvx_volatile_write64((void *) &mppa_pwr_ctrl_local->vector_proc_control.wup.clear, 1ULL << cpuid);
+  } else {
+    __gloss_kvx_volatile_write64((void *) &mppa_secure_cluster_regs_local->rm_control.clear,
+				 1ULL << MPPA_SECURE_CLUSTER_REGS_PROC_CONFIG_WAKEUP__SHIFT);
+  }
+#else
+#error unsupported arch
+#endif
 }
 
 void __gloss_kvx_pwc_init(void)

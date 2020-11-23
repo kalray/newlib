@@ -213,7 +213,9 @@ void __apic_gic_init(void)
 	mppa_gic_local->gic[i][j].status[k].reg = 0xFFFFFFFFFFFFFFFFULL;
       }
 
+#ifdef __kvxarch_kv3_1
       mppa_gic_local->gic[i][j].access_policy.reg = 0;
+#endif
     }
   }
 }

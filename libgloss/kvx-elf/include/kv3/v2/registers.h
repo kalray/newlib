@@ -96,6 +96,7 @@
 #define KVX_SFR_MMC 28 // Memory Management Control $mmc $s28
 #define KVX_SFR_TEL 29 // TLB Entry Low $tel $s29
 #define KVX_SFR_TEH 30 // TLB Entry High $teh $s30
+#define KVX_SFR_IXC 31 // Inter-Extension Communications $ixc $s31
 #define KVX_SFR_SYO 32 // Syscall Owners $syo $s32
 #define KVX_SFR_HTO 33 // Hardware Trap Owners $hto $s33
 #define KVX_SFR_ITO 34 // Interrupt Owners $ito $s34
@@ -133,6 +134,10 @@
 #define KVX_SFR_ES_PL1 85 // Exception Syndrome PL 1 $es_pl1 $s85
 #define KVX_SFR_ES_PL2 86 // Exception Syndrome PL 2 $es_pl2 $s86
 #define KVX_SFR_ES_PL3 87 // Exception Syndrome PL 3 $es_pl3 $s87
+#define KVX_SFR_SID_PL0 88 // Stream ID PL 0 $sid_pl0 $s88
+#define KVX_SFR_SID_PL1 89 // Stream ID PL 1 $sid_pl1 $s89
+#define KVX_SFR_SID_PL2 90 // Stream ID PL 2 $sid_pl2 $s90
+#define KVX_SFR_SID_PL3 91 // Stream ID PL 3 $sid_pl3 $s91
 #define KVX_SFR_SYOW 96 // Alias to SYO register $syow $s96
 #define KVX_SFR_HTOW 97 // Alias to HTO register $htow $s97
 #define KVX_SFR_ITOW 98 // Alias to ITO register $itow $s98
@@ -145,6 +150,7 @@
 #define KVX_SFR_EV 140 // Exception Vector alias on EV_PL<i> $ev $s140
 #define KVX_SFR_SR 144 // System Register alias on SR_PL<i> $sr $s144
 #define KVX_SFR_ES 148 // Exception Syndrome alias on ES_PL<i> $es $s148
+#define KVX_SFR_SID 152 // Stream ID alias on SID_PL<i> $sid $s152
 #define KVX_SFR_VSFR0 256 // Virtual SFR 0 $vsfr0 $s256
 #define KVX_SFR_VSFR1 257 // Virtual SFR 1 $vsfr1 $s257
 #define KVX_SFR_VSFR2 258 // Virtual SFR 2 $vsfr2 $s258

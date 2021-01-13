@@ -1,7 +1,7 @@
 /*
  * gic.h
  * Automatically generated from registers definition files. Do not edit
- * Copyright (c) Kalray 2020.
+ * Copyright (c) Kalray 2021.
  */
 
 #ifndef _INCLUDED_MPPA3_80_GIC_H_

@@ -1,7 +1,7 @@
 /*
  * mailbox.h
  * Automatically generated from registers definition files. Do not edit
- * Copyright (c) Kalray 2020.
+ * Copyright (c) Kalray 2021.
  */
 
 #ifndef _INCLUDED_V1_MAILBOX_H_

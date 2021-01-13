@@ -1,7 +1,7 @@
 /*
  * pwr_ctrl.coolidge-v2.dev
  * Automatically generated from registers definition files. Do not edit
- * Copyright (c) Kalray 2020.
+ * Copyright (c) Kalray 2021.
  */
 
 #ifndef _INCLUDED_DEVICES_PWR_CTRL_COOLIDGE_V2_DEV_

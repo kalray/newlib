@@ -113,7 +113,11 @@ __kvx_asm_debug_handler:
 
 	get   $r0 = $es
 	;;
+	#ifdef __kvxarch_kv3_1
 	extfz  $r0 = $r0, (KVX_SFR_ES_DC_WIDTH + KVX_SFR_ES_DC_SHIFT - 1), KVX_SFR_ES_DC_SHIFT ## Extract DC from ES
+	#else
+	extfz  $r0 = $r0, (KVX_SFR_ES_DCV2_WIDTH + KVX_SFR_ES_DCV2_SHIFT - 1), KVX_SFR_ES_DCV2_SHIFT ## Extract DCF from ES
+	#endif
 	call  __kvx_do_debug       ## jump to C code
 	;;
 	goto __kvx_asm_return_from_exceptions

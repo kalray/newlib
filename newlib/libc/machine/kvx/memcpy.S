@@ -38,7 +38,7 @@ memcpy:
    compd.geu $r3 = $r2, 256
    copyd $r6 = $r0
    ;;
-   cb.deqz $r3? .Lreamining_256
+   cb.deqz $r3? .Lremaining_256
    ;;
    lq.u $r32r33 = 0[$r1]
    addd $r2 = $r2, -256
@@ -182,7 +182,7 @@ memcpy:
    sq 240[$r0] = $r62r63
    addd $r0 = $r0, 256
    ;;
-.Lreamining_256:
+.Lremaining_256:
    andd $r11 = $r2, 16
    srld $r7 = $r2, 5
    ;;
@@ -202,7 +202,7 @@ memcpy:
    andd $r10 = $r2, 8
    andd $r9 = $r2, 4
    cb.deqz $r11? .Lloop_remaining_16
-   lq.dnez $r11? $r32r33 = 0[$r1]
+   lq.dnez $r11? $r32r33 = [$r1]
    ;;
    sq 0[$r0] = $r32r33
    addd $r1 = $r1, 16
@@ -212,7 +212,7 @@ memcpy:
    andd $r8 = $r2, 2
    andd $r7 = $r2, 1
    cb.deqz $r10? .Lloop_remaining_8
-   ld.dnez $r10? $r32 = 0[$r1]
+   ld.dnez $r10? $r32 = [$r1]
    ;;
    sd 0[$r0] = $r32
    addd $r1 = $r1, 8
@@ -220,7 +220,7 @@ memcpy:
    ;;
 .Lloop_remaining_8:
    cb.deqz $r9? .Lloop_remaining_4
-   lwz.dnez $r9? $r32 = 0[$r1]
+   lwz.dnez $r9? $r32 = [$r1]
    ;;
    sw 0[$r0] = $r32
    addd $r1 = $r1, 4
@@ -228,16 +228,16 @@ memcpy:
    ;;
 .Lloop_remaining_4:
    cb.deqz $r8? .Lloop_remaining_2
-   lhz.dnez $r8? $r32 = 0[$r1]
+   lhz.dnez $r8? $r32 = [$r1]
    ;;
    sh 0[$r0] = $r32
    addd $r1 = $r1, 2
    addd $r0 = $r0, 2
    ;;
 .Lloop_remaining_2:
-   lbz.dnez $r7? $r32 = 0[$r1]
+   lbz.dnez $r7? $r32 = [$r1]
    ;;
-   sb.dnez $r7? 0[$r0] = $r32
+   sb.dnez $r7? [$r0] = $r32
    ;;
 .Lreturn:
    copyd $r0 = $r6

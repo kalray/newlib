@@ -66,6 +66,7 @@
 .proc memset
 .align 16
 memset:
+#ifdef __kv3_1__
 	make $r32 = 0
 	make $r33 = 0
 	/* Check if length < MEMSET_ZERO_MIN_ALIGN */
@@ -183,6 +184,7 @@ memset:
 	ret
 	;;
 
+#endif//__kv3_1__
 .align 16
 .Lmemset_non_0_pattern:
 	/* Preserve return value */

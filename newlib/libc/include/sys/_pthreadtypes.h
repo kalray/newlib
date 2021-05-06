@@ -249,7 +249,12 @@ typedef __uint32_t pthread_spinlock_t;        /* POSIX Spin Lock Object */
 /* POSIX Reader/Writer Lock Types */
 
 #if defined(_POSIX_READER_WRITER_LOCKS)
+#if defined(__CLUSTER_OS__)
+/* size is dependent on 32/64 bits pointers */
+typedef uintptr_t pthread_rwlock_t;        /* POSIX RWLock Object */
+#else
 typedef __uint32_t pthread_rwlock_t;         /* POSIX RWLock Object */
+#endif
 
 #define _PTHREAD_RWLOCK_INITIALIZER ((pthread_rwlock_t) 0xFFFFFFFF)
 

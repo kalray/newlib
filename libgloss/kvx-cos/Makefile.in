@@ -56,7 +56,8 @@ GLOSS_OBJS = access.o alarm.o chdir.o chmod.o clock.o clock_gettime.o \
 	     clock_getres.o sys_sysconf.o close.o dup.o dup2.o  exit.o fcntl.o \
 	     fstat.o getpagesize.o gettimeofday.o isatty.o link.o lseek.o \
 	     mkdir.o open.o pause.o read.o rmdir.o sbrk.o stat.o unlink.o write.o \
-	     asm_syscalls.o mkfifo.o nanosleep.o times.o sleep.o usleep.o
+	     asm_syscalls.o mkfifo.o nanosleep.o times.o sleep.o usleep.o \
+	     getdents.o ids.o stubs.o
 
 NOSYS_OBJS = execve.o fork.o kill.o getpid.o wait.o
 

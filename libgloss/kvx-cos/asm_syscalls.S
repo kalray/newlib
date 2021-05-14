@@ -117,6 +117,41 @@ SYSCALL_ENTRY(mkdir)
 	;;
 SYSCALL_END_ENTRY(mkdir)
 
+SYSCALL_ENTRY(getdents)
+	scall __NR_getdents
+	;;
+	ret
+	;;
+SYSCALL_END_ENTRY(getdents)
+
+SYSCALL_ENTRY(getuid)
+	scall __NR_getuid
+	;;
+	ret
+	;;
+SYSCALL_END_ENTRY(getuid)
+
+SYSCALL_ENTRY(geteuid)
+	scall __NR_geteuid
+	;;
+	ret
+	;;
+SYSCALL_END_ENTRY(geteuid)
+
+SYSCALL_ENTRY(getgid)
+	scall __NR_getgid
+	;;
+	ret
+	;;
+SYSCALL_END_ENTRY(getgid)
+
+SYSCALL_ENTRY(getegid)
+	scall __NR_getegid
+	;;
+	ret
+	;;
+SYSCALL_END_ENTRY(getegid)
+
 SYSCALL_ENTRY(mkfifo)
 	scall __NR_iss_mkfifo
 	;;

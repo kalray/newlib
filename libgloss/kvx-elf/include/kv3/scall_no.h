@@ -73,14 +73,19 @@
 #    define __NR_write          17
 #    define __NR_chmod          18
 #    define __NR_isatty         19
+#    define __NR_getuid         24
 #    define __NR_dup            28
 #    define __NR_dup2           29
+#    define __NR_mkdir          39
+#    define __NR_rmdir          40
+#    define __NR_getgid         47
 #    define __NR_fcntl          48
-#    define __NR_mkdir          50
-#    define __NR_rmdir          51
+#    define __NR_geteuid        49
+#    define __NR_getegid        50
 #    define __NR_access         52
 #    define __NR_chdir          54
 #    define __NR_mkfifo         55
+#    define __NR_getdents       141
 #    define __NR_cache_flush    196
 #    define __NR_exit_thread    197
 #    define __NR_send_command   198
@@ -91,7 +96,10 @@
 
 
 /* Special syscalls for internal use by the ISS */
-
+#    define __NR_iss_getuid         0xfce /* 4046 */
+#    define __NR_iss_geteuid        0xfcf /* 4047 */
+#    define __NR_iss_getgid         0xfd0 /* 4048 */
+#    define __NR_iss_getegid        0xfd1 /* 4049 */
 #    define __NR_BREAKPOINT_PL0     0xfd2 /* 4050 */
 #    define __NR_BREAKPOINT_PL1     0xfd3 /* 4051 */
 #    define __NR_BREAKPOINT_PL2     0xfd4 /* 4052 */

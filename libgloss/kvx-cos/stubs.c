@@ -145,3 +145,19 @@ int sched_setscheduler(pid_t pid, int policy, const struct sched_param *param)
 	errno = -ENOSYS;
 	return -1;
 }
+
+
+long _pathconf(const char *path, int name) {
+        errno = -EINVAL;
+        return -1;
+}
+
+long pathconf(const char *path, int name)
+        __attribute__ ((weak, alias ("_pathconf")));
+
+char* _getcwd(char *buf, size_t size) {
+        errno = -EINVAL;
+        return -1;
+}
+
+char* getcwd(char *buf, size_t size) __attribute__ ((weak, alias ("_getcwd")));

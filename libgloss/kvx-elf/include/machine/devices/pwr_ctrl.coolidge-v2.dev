@@ -558,93 +558,6 @@ mppa_uint32 word[2];
 struct mppa_pwr_ctrl_pc _;
 } mppa_pwr_ctrl_pe_reset_pc_t;
 
-struct mppa_pwr_ctrl_global_config {
-mppa_uint64 reserved_0:8;
-mppa_uint64 secure_mst_weak :24; /*[31: 8]reset: 0xFFFFFF,behavior: [:RD, :WR],Weak secure status of masters*/
-mppa_uint64 reserved_2:32;
-};
-
-#ifndef KVX_DISABLE_TYPECHECK
-typedef char assertion_for_struct_mppa_pwr_ctrl_global_config[(sizeof(struct mppa_pwr_ctrl_global_config) == 8)*2-1];// If this fails, then the size of struct mppa_pwr_ctrl_global_config as created by the compiler does not match the hardware size.
-
-#endif /* KVX_DISABLE_TYPECHECK */
-#define MPPA_PWR_CTRL_GLOBAL_CONFIG_SECURE_MST_WEAK__SHIFT 8
-#define MPPA_PWR_CTRL_GLOBAL_CONFIG_SECURE_MST_WEAK__MASK 0xffffff00ULL
-
-
-/***
- * pwr_ctrl global_config_write register definition
- *
- * Permissions:
- * RM: ker => [:RD, :WR],
- * RM: usr => [:CUSTOM],
- * PE: ker => [:CUSTOM],
- * PE: usr => [:CUSTOM],
- * Size: 8 bytes (min access size = 4 bytes)
- * Reset value: 0xFFFFFF00
- */
-typedef union {
-mppa_uint64 reg;
-mppa_uint64 dword;
-mppa_uint32 word[2];
-struct mppa_pwr_ctrl_global_config _;
-} mppa_pwr_ctrl_global_config_write_t;
-
-/***
- * pwr_ctrl global_config_set register definition
- *
- * Permissions:
- * RM: ker => [:RD, :WR],
- * RM: usr => [:CUSTOM],
- * PE: ker => [:CUSTOM],
- * PE: usr => [:CUSTOM],
- * Size: 8 bytes (min access size = 4 bytes)
- * Reset value: 0xFFFFFF00
- */
-typedef union {
-mppa_uint64 reg;
-mppa_uint64 dword;
-mppa_uint32 word[2];
-struct mppa_pwr_ctrl_global_config _;
-} mppa_pwr_ctrl_global_config_set_t;
-
-/***
- * pwr_ctrl global_config_clear register definition
- *
- * Permissions:
- * RM: ker => [:RD, :WR],
- * RM: usr => [:CUSTOM],
- * PE: ker => [:CUSTOM],
- * PE: usr => [:CUSTOM],
- * Size: 8 bytes (min access size = 4 bytes)
- * Reset value: 0xFFFFFF00
- */
-typedef union {
-mppa_uint64 reg;
-mppa_uint64 dword;
-mppa_uint32 word[2];
-struct mppa_pwr_ctrl_global_config _;
-} mppa_pwr_ctrl_global_config_clear_t;
-
-/***
- * pwr_ctrl config group definition
- * Global Power Control
- *
- * Size: 64/0x40 bytes
- */
-typedef struct  {
-mppa_pwr_ctrl_global_config_write_t write; /* offset: 0x0, size: 0x8 */
-mppa_uint8 unused0[8];
-mppa_pwr_ctrl_global_config_set_t set; /* offset: 0x10, size: 0x8 */
-mppa_uint8 unused1[8];
-mppa_pwr_ctrl_global_config_clear_t clear; /* offset: 0x20, size: 0x8 */
-mppa_uint8 unused2[24];
-} mppa_pwr_ctrl_config_t;
-
-#ifndef KVX_DISABLE_TYPECHECK
-typedef char assertion_for_mppa_pwr_ctrl_config_t[(sizeof(mppa_pwr_ctrl_config_t) == 64)*2-1];// If this fails, then the size of mppa_pwr_ctrl_config_t as created by the compiler does not match the hardware size.
-
-#endif /* KVX_DISABLE_TYPECHECK */
 struct mppa_pwr_ctrl_global_status {
 mppa_uint64 rm_wup :1; /*[ 0: 0]reset: 0x0,behavior: [:RD],wake-up bit from bootmode to RM*/
 mppa_uint64 res1 :1; /*[ 1: 1]reset: 0x1,behavior: [:R1],Top reset*/
@@ -1367,8 +1280,7 @@ mppa_uint8 unused1[64];
 mppa_pwr_ctrl_vector_proc_status_t vector_proc_status; /* offset: 0x1100, size: 0x28 */
 mppa_uint8 unused2[3800];
 mppa_pwr_ctrl_pe_reset_pc_t pe_reset_pc; /* offset: 0x2000, size: 0x8 */
-mppa_uint8 unused3[8248];
-mppa_pwr_ctrl_config_t global_config; /* offset: 0x4040, size: 0x40 */
+mppa_uint8 unused3[8312];
 mppa_pwr_ctrl_global_status_t global_status; /* offset: 0x4080, size: 0x8 */
 mppa_uint8 unused4[184];
 mppa_pwr_ctrl_ecc_status_t ecc_status; /* offset: 0x4140, size: 0x8 */

@@ -44,13 +44,17 @@ struct mppa_l2_cache_tcm_tag _;
 
 struct mppa_l2_cache_reader {
 mppa_uint64 reader0 :17; /*[16: 0]behavior: [:RD, :WR],*/
-mppa_uint64 reserved_0:15;
+mppa_uint64 reserved_0:7;
+mppa_uint64 way0 :8; /*[31:24]behavior: [:RD, :WR],*/
 mppa_uint64 reader1 :17; /*[48:32]behavior: [:RD, :WR],*/
-mppa_uint64 reserved_1:15;
+mppa_uint64 reserved_1:7;
+mppa_uint64 way1 :8; /*[63:56]behavior: [:RD, :WR],*/
 mppa_uint64 reader2 :17; /*[80:64]behavior: [:RD, :WR],*/
-mppa_uint64 reserved_2:15;
+mppa_uint64 reserved_2:7;
+mppa_uint64 way2 :8; /*[95:88]behavior: [:RD, :WR],*/
 mppa_uint64 reader3 :17; /*[112:96]behavior: [:RD, :WR],*/
-mppa_uint64 reserved_4:15;
+mppa_uint64 reserved_3:7;
+mppa_uint64 way3 :8; /*[127:120]behavior: [:RD, :WR],*/
 };
 
 #ifndef KVX_DISABLE_TYPECHECK
@@ -59,12 +63,20 @@ typedef char assertion_for_struct_mppa_l2_cache_reader[(sizeof(struct mppa_l2_ca
 #endif /* KVX_DISABLE_TYPECHECK */
 #define MPPA_L2_CACHE_READER_READER0__SHIFT 0
 #define MPPA_L2_CACHE_READER_READER0__MASK 0x1ffffUL
+#define MPPA_L2_CACHE_READER_WAY0__SHIFT 24
+#define MPPA_L2_CACHE_READER_WAY0__MASK 0xff000000UL
 #define MPPA_L2_CACHE_READER_READER1__SHIFT 32
 #define MPPA_L2_CACHE_READER_READER1__MASK 0x1ffff00000000UL
+#define MPPA_L2_CACHE_READER_WAY1__SHIFT 56
+#define MPPA_L2_CACHE_READER_WAY1__MASK 0xff00000000000000UL
 #define MPPA_L2_CACHE_READER_READER2__SHIFT 64
 #define MPPA_L2_CACHE_READER_READER2__MASK 0x1ffff0000000000000000UL
+#define MPPA_L2_CACHE_READER_WAY2__SHIFT 88
+#define MPPA_L2_CACHE_READER_WAY2__MASK 0xff0000000000000000000000UL
 #define MPPA_L2_CACHE_READER_READER3__SHIFT 96
 #define MPPA_L2_CACHE_READER_READER3__MASK 0x1ffff000000000000000000000000UL
+#define MPPA_L2_CACHE_READER_WAY3__SHIFT 120
+#define MPPA_L2_CACHE_READER_WAY3__MASK 0xff000000000000000000000000000000UL
 
 
 /***

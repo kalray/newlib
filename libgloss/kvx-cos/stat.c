@@ -13,7 +13,7 @@ int sc_stat(const char *filename, int *);
 int _stat(const char *filename, struct stat *st)
 {
     int ret;
-    int res[13];
+    uint64_t res[13];
 
     ret = sc_stat(filename, res);
 

@@ -577,12 +577,13 @@ typedef char assertion_for_struct_mppa_pwr_ctrl_global_config[(sizeof(struct mpp
  * RM: usr => [:CUSTOM],
  * PE: ker => [:CUSTOM],
  * PE: usr => [:CUSTOM],
- * Size: 8 bytes (min access size = 8 bytes)
+ * Size: 8 bytes (min access size = 4 bytes)
  * Reset value: 0xFFFFFF00
  */
 typedef union {
 mppa_uint64 reg;
 mppa_uint64 dword;
+mppa_uint32 word[2];
 struct mppa_pwr_ctrl_global_config _;
 } mppa_pwr_ctrl_global_config_write_t;
 
@@ -594,12 +595,13 @@ struct mppa_pwr_ctrl_global_config _;
  * RM: usr => [:CUSTOM],
  * PE: ker => [:CUSTOM],
  * PE: usr => [:CUSTOM],
- * Size: 8 bytes (min access size = 8 bytes)
+ * Size: 8 bytes (min access size = 4 bytes)
  * Reset value: 0xFFFFFF00
  */
 typedef union {
 mppa_uint64 reg;
 mppa_uint64 dword;
+mppa_uint32 word[2];
 struct mppa_pwr_ctrl_global_config _;
 } mppa_pwr_ctrl_global_config_set_t;
 
@@ -611,12 +613,13 @@ struct mppa_pwr_ctrl_global_config _;
  * RM: usr => [:CUSTOM],
  * PE: ker => [:CUSTOM],
  * PE: usr => [:CUSTOM],
- * Size: 8 bytes (min access size = 8 bytes)
+ * Size: 8 bytes (min access size = 4 bytes)
  * Reset value: 0xFFFFFF00
  */
 typedef union {
 mppa_uint64 reg;
 mppa_uint64 dword;
+mppa_uint32 word[2];
 struct mppa_pwr_ctrl_global_config _;
 } mppa_pwr_ctrl_global_config_clear_t;
 
@@ -639,6 +642,7 @@ mppa_uint8 unused2[24];
 typedef char assertion_for_mppa_pwr_ctrl_config_t[(sizeof(mppa_pwr_ctrl_config_t) == 64)*2-1];// If this fails, then the size of mppa_pwr_ctrl_config_t as created by the compiler does not match the hardware size.
 
 #endif /* KVX_DISABLE_TYPECHECK */
+
 struct mppa_pwr_ctrl_global_status {
 mppa_uint64 rm_wup :1; /*[ 0: 0]reset: 0x0,wake-up bit from bootmode to RM*/
 mppa_uint64 reset :1; /*[ 1: 1]reset: 0x0,Top reset*/

@@ -141,18 +141,20 @@ static void __kvx_low_level_startup()
     __builtin_kvx_set(KVX_SFR_SPS,
 		     (__builtin_kvx_get(KVX_SFR_PS) & (~KVX_SFR_PS_PL_MASK))|0x1);
 
-    __asm__ __volatile__ (
-			  "make $r1 = spc_pl1_label\n"
+    __asm__ goto __volatile__ (
+			  "make $r1 = %l0\n"
 			  ";;\n"
 			  "set $spc = $r1\n"
 			  ";;\n"
 			  "rfe\n"
 			  ";;\n"
-			  "spc_pl1_label:\n"
-			  : /* no outputs */ : : "r1");
-
-    /* set ev_pl1 to default exception vector as for privilege level 0 */
-    __builtin_kvx_set(KVX_SFR_EV, (uintptr_t)&KVX_EXCEPTION_ADDRESS);
+			  : /* no outputs */
+                          : /* no inputs */
+                          : "r1" /* clobbers */
+                          : spc_pl1_label ); /* labels */
+    spc_pl1_label:
+        /* set ev_pl1 to default exception vector as for privilege level 0 */
+        __builtin_kvx_set(KVX_SFR_EV, (uintptr_t)&KVX_EXCEPTION_ADDRESS);
   }
 
   /* If power controler exists, switch it on */

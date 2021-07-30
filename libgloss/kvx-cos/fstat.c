@@ -6,7 +6,7 @@
 /***************************************************************
  *	fstat
  ***************************************************************/
-int sc_fstat(int fd, int *res);
+int sc_fstat(int fd, uint64_t *res);
 
 static inline int __gloss_fstat(int fd, struct stat *st)
 {

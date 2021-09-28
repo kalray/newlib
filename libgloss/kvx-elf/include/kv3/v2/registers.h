@@ -145,6 +145,10 @@
 #define KVX_SFR_SID_PL1 89 // Stream ID PL 1 $sid_pl1 $s89
 #define KVX_SFR_SID_PL2 90 // Stream ID PL 2 $sid_pl2 $s90
 #define KVX_SFR_SID_PL3 91 // Stream ID PL 3 $sid_pl3 $s91
+#define KVX_SFR_SR1_PL0 92 // System Register 1 PL 0 $sr1_pl0 $s92
+#define KVX_SFR_SR1_PL1 93 // System Register 1 PL 1 $sr1_pl1 $s93
+#define KVX_SFR_SR1_PL2 94 // System Register 1 PL 2 $sr1_pl2 $s94
+#define KVX_SFR_SR1_PL3 95 // System Register 1 PL 3 $sr1_pl3 $s95
 #define KVX_SFR_SYOW 96 // Alias to SYO register $syow $s96
 #define KVX_SFR_HTOW 97 // Alias to HTO register $htow $s97
 #define KVX_SFR_ITOW 98 // Alias to ITO register $itow $s98
@@ -158,6 +162,7 @@
 #define KVX_SFR_SR 144 // System Register alias on SR_PL<i> $sr $s144
 #define KVX_SFR_ES 148 // Exception Syndrome alias on ES_PL<i> $es $s148
 #define KVX_SFR_SID 152 // Stream ID alias on SID_PL<i> $sid $s152
+#define KVX_SFR_SR1 156 // System Register 1 alias on SR1_PL<i> $sr1 $s156
 #define KVX_SFR_VSFR0 256 // Virtual SFR 0 $vsfr0 $s256
 #define KVX_SFR_VSFR1 257 // Virtual SFR 1 $vsfr1 $s257
 #define KVX_SFR_VSFR2 258 // Virtual SFR 2 $vsfr2 $s258

@@ -103,8 +103,8 @@
 #define KVX_SFR_DO 35 // Debug Owners $do $s35
 #define KVX_SFR_MO 36 // Miscellaneous Owners $mo $s36
 #define KVX_SFR_PSO 37 // PS register fields Owners $pso $s37
-#define KVX_SFR_TPC0 38 // Trace PC configuration register 0 $tpc0 $s38
-#define KVX_SFR_TPC1 39 // Trace PC configuration register 1 $tpc1 $s39
+#define KVX_SFR_TPCM0 38 // Trace PC message register 0 $tpcm0 $s38
+#define KVX_SFR_TPCM1 39 // Trace PC message register 1 $tpcm1 $s39
 #define KVX_SFR_DBA0 41 // Breakpoint Address 0 $dba0 $s41
 #define KVX_SFR_DBA1 42 // Breakpoint Address 1 $dba1 $s42
 #define KVX_SFR_DWA0 43 // Watchpoint Address 0 $dwa0 $s43
@@ -119,7 +119,8 @@
 #define KVX_SFR_DBA3 52 // Breakpoint Address 3 $dba3 $s52
 #define KVX_SFR_DWA2 53 // Watchpoint Address 2 $dwa2 $s53
 #define KVX_SFR_DWA3 54 // Watchpoint Address 3 $dwa3 $s54
-#define KVX_SFR_TPC2 55 // Trace PC configuration register 2 $tpc2 $s55
+#define KVX_SFR_TPCM2 55 // Trace PC message register 2 $tpcm2 $s55
+#define KVX_SFR_TPCMC 56 // Trace PC message control register $tpcmc $s56
 #define KVX_SFR_SPC_PL0 64 // Shadow PC PL 0 $spc_pl0 $s64
 #define KVX_SFR_SPC_PL1 65 // Shadow PC PL 1 $spc_pl1 $s65
 #define KVX_SFR_SPC_PL2 66 // Shadow PC PL 2 $spc_pl2 $s66
@@ -2164,12 +2165,12 @@
 #define KVX_SFR_MO_COMM_WFXM_CLEAR _LLCONST(0xc)
 #define KVX_SFR_MO_COMM_WFXM_SET _LLCONST(0xc00000000)
 
-#define KVX_SFR_MO_TPC_MASK _LLCONST(0x3000000000) // TPC 0, 1 & 2 register owner.
-#define KVX_SFR_MO_TPC_SHIFT 36
-#define KVX_SFR_MO_TPC_WIDTH 2
-#define KVX_SFR_MO_TPC_WFXM_MASK _LLCONST(0x3000000000)
-#define KVX_SFR_MO_TPC_WFXM_CLEAR _LLCONST(0x30)
-#define KVX_SFR_MO_TPC_WFXM_SET _LLCONST(0x3000000000)
+#define KVX_SFR_MO_TPCM_MASK _LLCONST(0x3000000000) // TPCM 0, 1, 2 & control register owner.
+#define KVX_SFR_MO_TPCM_SHIFT 36
+#define KVX_SFR_MO_TPCM_WIDTH 2
+#define KVX_SFR_MO_TPCM_WFXM_MASK _LLCONST(0x3000000000)
+#define KVX_SFR_MO_TPCM_WFXM_CLEAR _LLCONST(0x30)
+#define KVX_SFR_MO_TPCM_WFXM_SET _LLCONST(0x3000000000)
 
 #define KVX_SFR_MOW_MMI_MASK _LLCONST(0x3) // Memory Management Instructions owner.
 #define KVX_SFR_MOW_MMI_SHIFT 0
@@ -2297,12 +2298,12 @@
 #define KVX_SFR_MOW_COMM_WFXM_CLEAR _LLCONST(0xc)
 #define KVX_SFR_MOW_COMM_WFXM_SET _LLCONST(0xc00000000)
 
-#define KVX_SFR_MOW_TPC_MASK _LLCONST(0x3000000000) // TPC 0, 1 & 2 register owner.
-#define KVX_SFR_MOW_TPC_SHIFT 36
-#define KVX_SFR_MOW_TPC_WIDTH 2
-#define KVX_SFR_MOW_TPC_WFXM_MASK _LLCONST(0x3000000000)
-#define KVX_SFR_MOW_TPC_WFXM_CLEAR _LLCONST(0x30)
-#define KVX_SFR_MOW_TPC_WFXM_SET _LLCONST(0x3000000000)
+#define KVX_SFR_MOW_TPCM_MASK _LLCONST(0x3000000000) // TPCM 0, 1, 2 & control register owner.
+#define KVX_SFR_MOW_TPCM_SHIFT 36
+#define KVX_SFR_MOW_TPCM_WIDTH 2
+#define KVX_SFR_MOW_TPCM_WFXM_MASK _LLCONST(0x3000000000)
+#define KVX_SFR_MOW_TPCM_WFXM_CLEAR _LLCONST(0x30)
+#define KVX_SFR_MOW_TPCM_WFXM_SET _LLCONST(0x3000000000)
 
 #define KVX_SFR_PS_PL_MASK _LLCONST(0x3) // Current Privilege Level
 #define KVX_SFR_PS_PL_SHIFT 0
@@ -5183,42 +5184,49 @@
 #define KVX_SFR_TEH_PN_WFXM_CLEAR _LLCONST(0x1ff)
 #define KVX_SFR_TEH_PN_WFXM_SET _LLCONST(0x1ff00000000)
 
-#define KVX_SFR_TPC0_TPC_0_MASK _LLCONST(0xffffffffffffffff) // Trace PC configuration
-#define KVX_SFR_TPC0_TPC_0_SHIFT 0
-#define KVX_SFR_TPC0_TPC_0_WIDTH 64
-#define KVX_SFR_TPC0_TPC_0_WFXL_MASK _LLCONST(0xffffffff)
-#define KVX_SFR_TPC0_TPC_0_WFXL_CLEAR _LLCONST(0xffffffff)
-#define KVX_SFR_TPC0_TPC_0_WFXL_SET _LLCONST(0xffffffff00000000)
-#define KVX_SFR_TPC0_TPC_0_WFXM_MASK _LLCONST(0xffffffff00000000)
-#define KVX_SFR_TPC0_TPC_0_WFXM_CLEAR _LLCONST(0xffffffff)
-#define KVX_SFR_TPC0_TPC_0_WFXM_SET _LLCONST(0xffffffff00000000)
+#define KVX_SFR_TPCM0_TPCM_0_MASK _LLCONST(0xffffffffffffffff) // Trace PC message 0
+#define KVX_SFR_TPCM0_TPCM_0_SHIFT 0
+#define KVX_SFR_TPCM0_TPCM_0_WIDTH 64
+#define KVX_SFR_TPCM0_TPCM_0_WFXL_MASK _LLCONST(0xffffffff)
+#define KVX_SFR_TPCM0_TPCM_0_WFXL_CLEAR _LLCONST(0xffffffff)
+#define KVX_SFR_TPCM0_TPCM_0_WFXL_SET _LLCONST(0xffffffff00000000)
+#define KVX_SFR_TPCM0_TPCM_0_WFXM_MASK _LLCONST(0xffffffff00000000)
+#define KVX_SFR_TPCM0_TPCM_0_WFXM_CLEAR _LLCONST(0xffffffff)
+#define KVX_SFR_TPCM0_TPCM_0_WFXM_SET _LLCONST(0xffffffff00000000)
 
-#define KVX_SFR_TPC1_TPC_1_MASK _LLCONST(0xffffffffffffffff) // Trace PC configuration
-#define KVX_SFR_TPC1_TPC_1_SHIFT 0
-#define KVX_SFR_TPC1_TPC_1_WIDTH 64
-#define KVX_SFR_TPC1_TPC_1_WFXL_MASK _LLCONST(0xffffffff)
-#define KVX_SFR_TPC1_TPC_1_WFXL_CLEAR _LLCONST(0xffffffff)
-#define KVX_SFR_TPC1_TPC_1_WFXL_SET _LLCONST(0xffffffff00000000)
-#define KVX_SFR_TPC1_TPC_1_WFXM_MASK _LLCONST(0xffffffff00000000)
-#define KVX_SFR_TPC1_TPC_1_WFXM_CLEAR _LLCONST(0xffffffff)
-#define KVX_SFR_TPC1_TPC_1_WFXM_SET _LLCONST(0xffffffff00000000)
+#define KVX_SFR_TPCM1_TPCM_1_MASK _LLCONST(0xffffffffffffffff) // Trace PC message 1
+#define KVX_SFR_TPCM1_TPCM_1_SHIFT 0
+#define KVX_SFR_TPCM1_TPCM_1_WIDTH 64
+#define KVX_SFR_TPCM1_TPCM_1_WFXL_MASK _LLCONST(0xffffffff)
+#define KVX_SFR_TPCM1_TPCM_1_WFXL_CLEAR _LLCONST(0xffffffff)
+#define KVX_SFR_TPCM1_TPCM_1_WFXL_SET _LLCONST(0xffffffff00000000)
+#define KVX_SFR_TPCM1_TPCM_1_WFXM_MASK _LLCONST(0xffffffff00000000)
+#define KVX_SFR_TPCM1_TPCM_1_WFXM_CLEAR _LLCONST(0xffffffff)
+#define KVX_SFR_TPCM1_TPCM_1_WFXM_SET _LLCONST(0xffffffff00000000)
 
-#define KVX_SFR_TPC2_TPC_2_MASK _LLCONST(0x7fffffffffffffff) // Trace PC configuration
-#define KVX_SFR_TPC2_TPC_2_SHIFT 0
-#define KVX_SFR_TPC2_TPC_2_WIDTH 63
-#define KVX_SFR_TPC2_TPC_2_WFXL_MASK _LLCONST(0xffffffff)
-#define KVX_SFR_TPC2_TPC_2_WFXL_CLEAR _LLCONST(0xffffffff)
-#define KVX_SFR_TPC2_TPC_2_WFXL_SET _LLCONST(0xffffffff00000000)
-#define KVX_SFR_TPC2_TPC_2_WFXM_MASK _LLCONST(0x7fffffff00000000)
-#define KVX_SFR_TPC2_TPC_2_WFXM_CLEAR _LLCONST(0x7fffffff)
-#define KVX_SFR_TPC2_TPC_2_WFXM_SET _LLCONST(0x7fffffff00000000)
+#define KVX_SFR_TPCM2_TPCM_2_MASK _LLCONST(0xffffffffffffffff) // Trace PC message 2
+#define KVX_SFR_TPCM2_TPCM_2_SHIFT 0
+#define KVX_SFR_TPCM2_TPCM_2_WIDTH 64
+#define KVX_SFR_TPCM2_TPCM_2_WFXL_MASK _LLCONST(0xffffffff)
+#define KVX_SFR_TPCM2_TPCM_2_WFXL_CLEAR _LLCONST(0xffffffff)
+#define KVX_SFR_TPCM2_TPCM_2_WFXL_SET _LLCONST(0xffffffff00000000)
+#define KVX_SFR_TPCM2_TPCM_2_WFXM_MASK _LLCONST(0xffffffff00000000)
+#define KVX_SFR_TPCM2_TPCM_2_WFXM_CLEAR _LLCONST(0xffffffff)
+#define KVX_SFR_TPCM2_TPCM_2_WFXM_SET _LLCONST(0xffffffff00000000)
 
-#define KVX_SFR_TPC2_TPC_valid_MASK _LLCONST(0x8000000000000000) // Trace PC configuration valid bit
-#define KVX_SFR_TPC2_TPC_valid_SHIFT 63
-#define KVX_SFR_TPC2_TPC_valid_WIDTH 1
-#define KVX_SFR_TPC2_TPC_valid_WFXM_MASK _LLCONST(0x8000000000000000)
-#define KVX_SFR_TPC2_TPC_valid_WFXM_CLEAR _LLCONST(0x80000000)
-#define KVX_SFR_TPC2_TPC_valid_WFXM_SET _LLCONST(0x8000000000000000)
+#define KVX_SFR_TPCMC_TPCM_PLD_MASK _LLCONST(0x1f) // Trace PC message payload size
+#define KVX_SFR_TPCMC_TPCM_PLD_SHIFT 0
+#define KVX_SFR_TPCMC_TPCM_PLD_WIDTH 5
+#define KVX_SFR_TPCMC_TPCM_PLD_WFXL_MASK _LLCONST(0x1f)
+#define KVX_SFR_TPCMC_TPCM_PLD_WFXL_CLEAR _LLCONST(0x1f)
+#define KVX_SFR_TPCMC_TPCM_PLD_WFXL_SET _LLCONST(0x1f00000000)
+
+#define KVX_SFR_TPCMC_TPCM_STS_MASK _LLCONST(0x60) // Trace PC message status
+#define KVX_SFR_TPCMC_TPCM_STS_SHIFT 5
+#define KVX_SFR_TPCMC_TPCM_STS_WIDTH 2
+#define KVX_SFR_TPCMC_TPCM_STS_WFXL_MASK _LLCONST(0x60)
+#define KVX_SFR_TPCMC_TPCM_STS_WFXL_CLEAR _LLCONST(0x60)
+#define KVX_SFR_TPCMC_TPCM_STS_WFXL_SET _LLCONST(0x6000000000)
 
 #define KVX_SFR_DC0_BE_MASK _LLCONST(0x1) // Breakpoint 0 Enable
 #define KVX_SFR_DC0_BE_SHIFT 0

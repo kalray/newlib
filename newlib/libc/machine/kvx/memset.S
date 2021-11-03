@@ -35,18 +35,18 @@
 #define MEMSET_ZERO_MIN_ALIGN	64
 
 /*
- * Optimized memset for k1c architecture
+ * Optimized memset for kvx architecture
  *
- * In order to optimize memset on K1c, we can use various things:
+ * In order to optimize memset on kvx, we can use various things:
  * - conditionnal store which avoid branch penalty
- * - store half/word/double/quad/octuple to store up to 16 bytes at a time
+ * - store half/word/double/quad/octuple to store up to 32 bytes at a time
  * - dzerol to zero a cacheline when the pattern is '0' (often the case)
  * - hardware loop for steady cases.
  *
  * First, we assume that memset is mainly used for zeroing areas. In order
  * to optimize this case, we consider it to be the fast path of the algorithm.
  * In both cases (0 and non 0 pattern), we start by checking if the size is
- * below a minimum size. If so, we skip the alignment part. Indeed, the k1c
+ * below a minimum size. If so, we skip the alignment part. Indeed, the kvx
  * supports misalignment and the penalty for letting it do unaligned accesses is
  * lower than trying to realigning us. So for small sizes, we don't even bother
  * to realign. Minor difference is that in the memset with 0, we skip after the

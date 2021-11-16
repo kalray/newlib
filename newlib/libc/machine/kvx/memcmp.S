@@ -1,0 +1,384 @@
+/*
+ * Copyright 2021
+ * Kalray Inc. All rights reserved.
+ *
+ * This software is furnished under license and may be used and copied only
+ * in accordance with the following terms and conditions.  Subject to these
+ * conditions, you may download, copy, install, use, modify and distribute
+ * modified or unmodified copies of this software in source and/or binary
+ * form. No title or ownership is transferred hereby.
+ *
+ * 1) Any source code used, modified or distributed must reproduce and
+ *    retain this copyright notice and list of conditions as they appear in
+ *    the source file.
+ *
+ * 2) No right is granted to use any trade name, trademark, or logo of
+ *    Kalray Inc.  The "Kalray Inc" name may not be
+ *    used to endorse or promote products derived from this software
+ *    without the prior written permission of Kalray Inc.
+ *
+ * 3) THIS SOFTWARE IS PROVIDED "AS-IS" AND ANY EXPRESS OR IMPLIED
+ *    WARRANTIES, INCLUDING BUT NOT LIMITED TO, ANY IMPLIED WARRANTIES OF
+ *    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR
+ *    NON-INFRINGEMENT ARE DISCLAIMED. IN NO EVENT SHALL KALRAY BE LIABLE
+ *    FOR ANY DAMAGES WHATSOEVER, AND IN PARTICULAR, KALRAY SHALL NOT BE
+ *    LIABLE FOR DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ *    CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ *    SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+ *    BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ *    WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+ *    OR OTHERWISE), EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+.text
+.global memcmp
+.proc memcmp
+.align 16
+memcmp:
+   cb.deqz $r2? .Lreturn
+   so -32[$r12] = $r28r29r30r31
+   compd.geu $r3 = $r2, 128
+   ;;
+   cb.deqz $r3? .Lremaining_128
+   ;;
+   lo.u $r32r33r34r35 = 0[$r0]
+   addd $r2 = $r2, -128
+   ;;
+   lo.u $r36r37r38r39 = 0[$r1]
+   ;;
+   lo.u $r40r41r42r43 = 32[$r0]
+   srld $r7 = $r2, 7
+   ;;
+   lo.u $r44r45r46r47 = 32[$r1]
+   ;;
+   lo.u $r48r49r50r51 = 64[$r0]
+   ;;
+   lo.u $r52r53r54r55 = 64[$r1]
+   ;;
+   lo.u $r56r57r58r59 = 96[$r0]
+   ;;
+   lo.u $r60r61r62r63 = 96[$r1]
+   addd $r1 = $r1, 128
+   addd $r0 = $r0, 128
+   ;;
+   cb.deqz $r7? .Lstreaming_remaining
+   ;;
+   loopdo $r7? .Lstreaming_kernel
+   ;;
+   compd.ne $r28 = $r32, $r36
+   compd.ne $r29 = $r33, $r37
+   compd.ne $r30 = $r34, $r38
+   compd.ne $r31 = $r35, $r39
+   ;;
+   cb.dnez $r28? .Lstreaming_kernel_exit
+   copyd $r4 = $r32
+   copyd $r5 = $r36
+   addd $r2 = $r2, -128
+   ;;
+   cb.dnez $r29? .Lstreaming_kernel_exit
+   copyd $r4 = $r33
+   copyd $r5 = $r37
+   ;;
+   cb.dnez $r30? .Lstreaming_kernel_exit
+   copyd $r4 = $r34
+   copyd $r5 = $r38
+   compd.ne $r28 = $r40, $r44
+   compd.ne $r29 = $r41, $r45
+   ;;
+   cb.dnez $r31? .Lstreaming_kernel_exit
+   copyd $r4 = $r35
+   copyd $r5 = $r39
+   compd.ne $r30 = $r42, $r46
+   compd.ne $r31 = $r43, $r47
+   ;;
+   lo.u $r32r33r34r35 = 0[$r0]
+   cb.dnez $r28? .Lstreaming_kernel_exit
+   copyd $r4 = $r40
+   copyd $r5 = $r44
+   ;;
+   lo.u $r36r37r38r39= 0[$r1]
+   cb.dnez $r29? .Lstreaming_kernel_exit
+   copyd $r4 = $r41
+   copyd $r5 = $r45
+   ;;
+   cb.dnez $r30? .Lstreaming_kernel_exit
+   copyd $r4 = $r42
+   copyd $r5 = $r46
+   compd.ne $r28 = $r48, $r52
+   compd.ne $r29 = $r49, $r53
+   ;;
+   cb.dnez $r31? .Lstreaming_kernel_exit
+   copyd $r4 = $r43
+   copyd $r5 = $r47
+   compd.ne $r30 = $r50, $r54
+   compd.ne $r31 = $r51, $r55
+   ;;
+   lo.u $r40r41r42r43 = 32[$r0]
+   cb.dnez $r28? .Lstreaming_kernel_exit
+   copyd $r4 = $r48
+   copyd $r5 = $r52
+   ;;
+   lo.u $r44r45r46r47 = 32[$r1]
+   cb.dnez $r29? .Lstreaming_kernel_exit
+   copyd $r4 = $r49
+   copyd $r5 = $r53
+   ;;
+   cb.dnez $r30? .Lstreaming_kernel_exit
+   copyd $r4 = $r50
+   copyd $r5 = $r54
+   compd.ne $r28 = $r56, $r60
+   compd.ne $r29 = $r57, $r61
+   ;;
+   cb.dnez $r31? .Lstreaming_kernel_exit
+   copyd $r4 = $r51
+   copyd $r5 = $r55
+   compd.ne $r30 = $r58, $r62
+   compd.ne $r31 = $r59, $r63
+   ;;
+   lo.u $r48r49r50r51 = 64[$r0]
+   cb.dnez $r28? .Lstreaming_kernel_exit
+   copyd $r4 = $r56
+   copyd $r5 = $r60
+   ;;
+   lo.u $r52r53r54r55 = 64[$r1]
+   cb.dnez $r29? .Lstreaming_kernel_exit
+   copyd $r4 = $r57
+   copyd $r5 = $r61
+   ;;
+   cb.dnez $r30? .Lstreaming_kernel_exit
+   copyd $r4 = $r58
+   copyd $r5 = $r62
+   ;;
+   cb.dnez $r31? .Lstreaming_kernel_exit
+   copyd $r4 = $r59
+   copyd $r5 = $r63
+   lo.u $r56r57r58r59= 96[$r0]
+   ;;
+   lo.u $r60r61r62r63= 96[$r1]
+   addd $r1 = $r1, 128
+   addd $r0 = $r0, 128
+   ;;
+.Lstreaming_kernel:
+.Lstreaming_remaining:
+   compd.ne $r28 = $r32, $r36
+   compd.ne $r29 = $r33, $r37
+   compd.ne $r30 = $r34, $r38
+   compd.ne $r31 = $r35, $r39
+   ;;
+   cb.dnez $r28? .Lstreaming_kernel_exit
+   copyd $r4 = $r32
+   copyd $r5 = $r36
+   ;;
+   cb.dnez $r29? .Lstreaming_kernel_exit
+   copyd $r4 = $r33
+   copyd $r5 = $r37
+   ;;
+   cb.dnez $r30? .Lstreaming_kernel_exit
+   copyd $r4 = $r34
+   copyd $r5 = $r38
+   compd.ne $r28 = $r40, $r44
+   compd.ne $r29 = $r41, $r45
+   ;;
+   cb.dnez $r31? .Lstreaming_kernel_exit
+   copyd $r4 = $r35
+   copyd $r5 = $r39
+   compd.ne $r30 = $r42, $r46
+   compd.ne $r31 = $r43, $r47
+   ;;
+   cb.dnez $r28? .Lstreaming_kernel_exit
+   copyd $r4 = $r40
+   copyd $r5 = $r44
+   ;;
+   cb.dnez $r29? .Lstreaming_kernel_exit
+   copyd $r4 = $r41
+   copyd $r5 = $r45
+   ;;
+   cb.dnez $r30? .Lstreaming_kernel_exit
+   copyd $r4 = $r42
+   copyd $r5 = $r46
+   compd.ne $r28 = $r48, $r52
+   compd.ne $r29 = $r49, $r53
+   ;;
+   cb.dnez $r31? .Lstreaming_kernel_exit
+   copyd $r4 = $r43
+   copyd $r5 = $r47
+   compd.ne $r30 = $r50, $r54
+   compd.ne $r31 = $r51, $r55
+   ;;
+   cb.dnez $r28? .Lstreaming_kernel_exit
+   copyd $r4 = $r48
+   copyd $r5 = $r52
+   ;;
+   cb.dnez $r29? .Lstreaming_kernel_exit
+   copyd $r4 = $r49
+   copyd $r5 = $r53
+   ;;
+   cb.dnez $r30? .Lstreaming_kernel_exit
+   copyd $r4 = $r50
+   copyd $r5 = $r54
+   compd.ne $r28 = $r56, $r60
+   compd.ne $r29 = $r57, $r61
+   ;;
+   cb.dnez $r31? .Lstreaming_kernel_exit
+   copyd $r4 = $r51
+   copyd $r5 = $r55
+   compd.ne $r30 = $r58, $r62
+   compd.ne $r31 = $r59, $r63
+   ;;
+   cb.dnez $r28? .Lstreaming_kernel_exit
+   copyd $r4 = $r56
+   copyd $r5 = $r60
+   ;;
+   cb.dnez $r29? .Lstreaming_kernel_exit
+   copyd $r4 = $r57
+   copyd $r5 = $r61
+   ;;
+   cb.dnez $r30? .Lstreaming_kernel_exit
+   copyd $r4 = $r58
+   copyd $r5 = $r62
+   ;;
+   cb.dnez $r31? .Lstreaming_kernel_exit
+   copyd $r4 = $r59
+   copyd $r5 = $r63
+   ;;
+.Lremaining_128:
+   andd $r11 = $r2, 16
+   srld $r7 = $r2, 5
+   srld $r10 = $r2, 5
+   ;;
+   cb.deqz $r7? .Lloop_remaining_32
+   lo.dnez $r7? $r32r33r34r35 = [$r0]
+   ;;
+   lo $r36r37r38r39 = 0[$r1]
+   ;;
+   loopdo $r7? .Lloop_kernel_256
+   ;;
+   compd.ne $r28 = $r32, $r36
+   compd.ne $r29 = $r33, $r37
+   compd.ne $r30 = $r34, $r38
+   compd.ne $r31 = $r35, $r39
+   ;;
+   cb.dnez $r28? .Lstreaming_kernel_exit
+   copyd $r4 = $r32
+   copyd $r5 = $r36
+   ;;
+   cb.dnez $r29? .Lstreaming_kernel_exit
+   copyd $r4 = $r33
+   copyd $r5 = $r37
+   addd $r10 = $r10, -1
+   ;;
+   cb.dnez $r30? .Lstreaming_kernel_exit
+   copyd $r4 = $r34
+   copyd $r5 = $r38
+   addd $r1 = $r1, 32
+   addd $r0 = $r0, 32
+   ;;
+   cb.dnez $r31? .Lstreaming_kernel_exit
+   copyd $r4 = $r35
+   copyd $r5 = $r39
+   ;;
+   cb.deqz $r10? .Lloop_remaining_32
+   lo.dnez $r10? $r32r33r34r35 = [$r0]
+   ;;
+   lo $r36r37r38r39 = 0[$r1]
+   ;;
+.Lloop_kernel_256:
+.Lloop_remaining_32:
+   andd $r10 = $r2, 8
+   andd $r9 = $r2, 4
+   cb.deqz $r11? .Lloop_remaining_16
+   lq.dnez $r11? $r32r33 = [$r0]
+   ;;
+   lq $r36r37 = 0[$r1]
+   addd $r1 = $r1, 16
+   addd $r0 = $r0, 16
+   ;;
+   compd.ne $r28 = $r32, $r36
+   compd.ne $r29 = $r33, $r37
+   ;;
+   cb.dnez $r28? .Lstreaming_kernel_exit
+   copyd $r4 = $r32
+   copyd $r5 = $r36
+   ;;
+   cb.dnez $r29? .Lstreaming_kernel_exit
+   copyd $r4 = $r33
+   copyd $r5 = $r37
+   ;;
+.Lloop_remaining_16:
+   andd $r8 = $r2, 2
+   andd $r7 = $r2, 1
+   cb.deqz $r10? .Lloop_remaining_8
+   ld.dnez $r10? $r32 = [$r0]
+   ;;
+   ld $r36 = 0[$r1]
+   addd $r1 = $r1, 8
+   addd $r0 = $r0, 8
+   ;;
+   compd.ne $r28 = $r32, $r36
+   ;;
+   cb.dnez $r28? .Lstreaming_kernel_exit
+   copyd $r4 = $r32
+   copyd $r5 = $r36
+   ;;
+.Lloop_remaining_8:
+   cb.deqz $r9? .Lloop_remaining_4
+   lwz.dnez $r9? $r32 = [$r0]
+   ;;
+   lwz $r36 = 0[$r1]
+   addd $r1 = $r1, 4
+   addd $r0 = $r0, 4
+   ;;
+   compd.ne $r28 = $r32, $r36
+   ;;
+   cb.dnez $r28? .Lstreaming_kernel_exit
+   copyd $r4 = $r32
+   copyd $r5 = $r36
+   ;;
+.Lloop_remaining_4:
+   cb.deqz $r8? .Lloop_remaining_2
+   lhz.dnez $r8? $r32 = [$r0]
+   ;;
+   lhz $r36 = 0[$r1]
+   addd $r1 = $r1, 2
+   addd $r0 = $r0, 2
+   ;;
+   compd.ne $r28 = $r32, $r36
+   ;;
+   cb.dnez $r28? .Lstreaming_kernel_exit
+   copyd $r4 = $r32
+   copyd $r5 = $r36
+   ;;
+.Lloop_remaining_2:
+   cb.deqz $r7? .Lreturn
+   lbz.dnez $r7? $r32 = [$r0]
+   ;;
+   lbz $r36 = 0[$r1]
+   ;;
+   compd.ne $r28 = $r32, $r36
+   ;;
+   cb.dnez $r28? .Lstreaming_kernel_exit
+   copyd $r4 = $r32
+   copyd $r5 = $r36
+   ;;
+.Lreturn:
+   make $r0 = 0
+   lo $r28r29r30r31 = -32[$r12]
+   ret
+   ;;
+.Lstreaming_kernel_exit:
+   xord $r0 = $r4, $r5
+   ;;
+   ctzd $r0 = $r0
+   ;;
+   andd $r0 = $r0, 0x38
+   ;;
+   srad $r4 = $r4, $r0
+   srad $r5 = $r5, $r0
+   ;;
+   andd $r4 = $r4, 0xff
+   andd $r5 = $r5, 0xff
+   ;;
+   sbfw $r0 = $r5, $r4
+   lo $r28r29r30r31 = -32[$r12]
+   ret
+   ;;
+.endp memcmp

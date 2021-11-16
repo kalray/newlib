@@ -70,7 +70,7 @@ ARFLAGS = cru
 lib_a_AR = $(AR) $(ARFLAGS)
 lib_a_LIBADD =
 am_lib_a_OBJECTS = lib_a-setjmp.$(OBJEXT) lib_a-memset.$(OBJEXT) \
-	lib_a-memcpy.$(OBJEXT) lib_a-rpmatch.$(OBJEXT) \
+	lib_a-memcpy.$(OBJEXT) lib_a-memcmp.$(OBJEXT) lib_a-rpmatch.$(OBJEXT) \
 	lib_a-arc4random.$(OBJEXT) lib_a-arc4random_uniform.$(OBJEXT) \
 	lib_a-hash_page.$(OBJEXT) lib_a-isatty.$(OBJEXT) lib_a-_isatty.$(OBJEXT) lib_a-execve.$(OBJEXT)
 lib_a_OBJECTS = $(am_lib_a_OBJECTS)
@@ -200,7 +200,7 @@ AUTOMAKE_OPTIONS = foreign
 INCLUDES = $(NEWLIB_CFLAGS) $(CROSS_CFLAGS) $(TARGET_CFLAGS) -I$(newlib_basedir)/libc/search
 AM_CCASFLAGS = $(INCLUDES)
 noinst_LIBRARIES = lib.a
-lib_a_SOURCES = setjmp.S memset.S memcpy.S rpmatch.c arc4random.c arc4random_uniform.c hash_page.c isatty.c _isatty.c execve.c
+lib_a_SOURCES = setjmp.S memset.S memcpy.S memcmp.S rpmatch.c arc4random.c arc4random_uniform.c hash_page.c isatty.c _isatty.c execve.c
 lib_a_CCASFLAGS = $(AM_CCASFLAGS)
 lib_a_CFLAGS = $(AM_CFLAGS)
 ACLOCAL_AMFLAGS = -I ../../.. -I ../../../..
@@ -280,6 +280,12 @@ lib_a-memcpy.o: memcpy.S
 
 lib_a-memcpy.obj: memcpy.S
 	$(CCAS) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CCASFLAGS) $(CCASFLAGS) -c -o lib_a-memcpy.obj `if test -f 'memcpy.S'; then $(CYGPATH_W) 'memcpy.S'; else $(CYGPATH_W) '$(srcdir)/memcpy.S'; fi`
+
+lib_a-memcmp.o: memcmp.S
+	$(CCAS) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CCASFLAGS) $(CCASFLAGS) -c -o lib_a-memcmp.o `test -f 'memcmp.S' || echo '$(srcdir)/'`memcmp.S
+
+lib_a-memcmp.obj: memcmp.S
+	$(CCAS) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CCASFLAGS) $(CCASFLAGS) -c -o lib_a-memcmp.obj `if test -f 'memcmp.S'; then $(CYGPATH_W) 'memcmp.S'; else $(CYGPATH_W) '$(srcdir)/memcmp.S'; fi`
 
 lib_a-isatty.o: isatty.c
 	$(CCAS) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CCASFLAGS) $(CCASFLAGS) -c -o lib_a-isatty.o `test -f 'isatty.c' || echo '$(srcdir)/'`isatty.c

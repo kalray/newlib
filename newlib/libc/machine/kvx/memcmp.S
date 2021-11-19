@@ -34,19 +34,23 @@
 .proc memcmp
 .align 16
 memcmp:
-   cb.deqz $r2? .Lreturn
+   cb.deqz $r2? .Lreturn_early
    so -32[$r12] = $r28r29r30r31
-   compd.geu $r3 = $r2, 128
+   compd.geu $r3 = $r2, 192
+   make $r6 = 0
    ;;
-   cb.deqz $r3? .Lremaining_128
+   so -64[$r12] = $r24r25r26r27
+   cb.deqz $r3? .Lremaining_160
    ;;
    lo.u $r32r33r34r35 = 0[$r0]
-   addd $r2 = $r2, -128
+   addd $r2 = $r2, -192
    ;;
    lo.u $r36r37r38r39 = 0[$r1]
+   make $r4 = 0xaaaaaaaaaaaaaaab
+   make $r6 = 1
    ;;
    lo.u $r40r41r42r43 = 32[$r0]
-   srld $r7 = $r2, 7
+   muludt $r4r5 = $r2, $r4
    ;;
    lo.u $r44r45r46r47 = 32[$r1]
    ;;
@@ -57,10 +61,26 @@ memcmp:
    lo.u $r56r57r58r59 = 96[$r0]
    ;;
    lo.u $r60r61r62r63 = 96[$r1]
-   addd $r1 = $r1, 128
-   addd $r0 = $r0, 128
+   ;;
+   lo.u $r24r25r26r27 = 128[$r0]
+   extfz $r7 = $r5, 32+7-1, 7
+   ;;
+   so -96[$r12] = $r20r21r22r23
+   ;;
+   lo.u $r20r21r22r23 = 128[$r1]
+   ;;
+   so -128[$r12] = $r16r17r18r19
+   ;;
+   lo.u $r16r17r18r19 = 160[$r0]
+   ;;
+   sq -144[$r12] = $r14r15
+   ;;
+   lq.u $r14r15 = 160[$r1]
    ;;
    cb.deqz $r7? .Lstreaming_remaining
+   lq.u $r10r11 = 176[$r1]
+   addd $r1 = $r1, 192
+   addd $r0 = $r0, 192
    ;;
    loopdo $r7? .Lstreaming_kernel
    ;;
@@ -72,7 +92,7 @@ memcmp:
    cb.dnez $r28? .Lstreaming_kernel_exit
    copyd $r4 = $r32
    copyd $r5 = $r36
-   addd $r2 = $r2, -128
+   addd $r2 = $r2, -192
    ;;
    cb.dnez $r29? .Lstreaming_kernel_exit
    copyd $r4 = $r33
@@ -147,15 +167,61 @@ memcmp:
    cb.dnez $r30? .Lstreaming_kernel_exit
    copyd $r4 = $r58
    copyd $r5 = $r62
+   compd.ne $r28 = $r24, $r20
+   compd.ne $r29 = $r25, $r21
    ;;
    cb.dnez $r31? .Lstreaming_kernel_exit
    copyd $r4 = $r59
    copyd $r5 = $r63
    lo.u $r56r57r58r59= 96[$r0]
    ;;
+   cb.dnez $r28? .Lstreaming_kernel_exit
+   copyd $r4 = $r24
+   copyd $r5 = $r20
    lo.u $r60r61r62r63= 96[$r1]
-   addd $r1 = $r1, 128
-   addd $r0 = $r0, 128
+   ;;
+   cb.dnez $r29? .Lstreaming_kernel_exit
+   copyd $r4 = $r25
+   copyd $r5 = $r21
+   compd.ne $r30 = $r26, $r22
+   compd.ne $r31 = $r27, $r23
+   ;;
+   cb.dnez $r30? .Lstreaming_kernel_exit
+   copyd $r4 = $r26
+   copyd $r5 = $r22
+   compd.ne $r28 = $r16, $r14
+   compd.ne $r29 = $r17, $r15
+   ;;
+   cb.dnez $r31? .Lstreaming_kernel_exit
+   copyd $r4 = $r27
+   copyd $r5 = $r23
+   lo.u $r24r25r26r27 = 128[$r0]
+   ;;
+   cb.dnez $r28? .Lstreaming_kernel_exit
+   copyd $r4 = $r16
+   copyd $r5 = $r14
+   lo.u $r20r21r22r23 = 128[$r1]
+   ;;
+   cb.dnez $r29? .Lstreaming_kernel_exit
+   copyd $r4 = $r17
+   copyd $r5 = $r15
+   compd.ne $r30 = $r18, $r10
+   compd.ne $r31 = $r19, $r11
+   ;;
+   cb.dnez $r30? .Lstreaming_kernel_exit
+   copyd $r4 = $r18
+   copyd $r5 = $r10
+   ;;
+   cb.dnez $r31? .Lstreaming_kernel_exit
+   copyd $r4 = $r19
+   copyd $r5 = $r11
+   lo.u $r16r17r18r19 = 160[$r0]
+   ;;
+   lq.u $r14r15 = 160[$r1]
+   ;;
+   lq.u $r10r11 = 176[$r1]
+   addd $r1 = $r1, 192
+   addd $r0 = $r0, 192
    ;;
 .Lstreaming_kernel:
 .Lstreaming_remaining:
@@ -235,12 +301,53 @@ memcmp:
    cb.dnez $r30? .Lstreaming_kernel_exit
    copyd $r4 = $r58
    copyd $r5 = $r62
+   compd.ne $r28 = $r24, $r20
+   compd.ne $r29 = $r25, $r21
    ;;
    cb.dnez $r31? .Lstreaming_kernel_exit
    copyd $r4 = $r59
    copyd $r5 = $r63
    ;;
-.Lremaining_128:
+   cb.dnez $r28? .Lstreaming_kernel_exit
+   copyd $r4 = $r24
+   copyd $r5 = $r20
+   ;;
+   cb.dnez $r29? .Lstreaming_kernel_exit
+   copyd $r4 = $r25
+   copyd $r5 = $r21
+   compd.ne $r30 = $r26, $r22
+   compd.ne $r31 = $r27, $r23
+   ;;
+   cb.dnez $r30? .Lstreaming_kernel_exit
+   copyd $r4 = $r26
+   copyd $r5 = $r22
+   compd.ne $r28 = $r16, $r14
+   compd.ne $r29 = $r17, $r15
+   ;;
+   cb.dnez $r31? .Lstreaming_kernel_exit
+   copyd $r4 = $r27
+   copyd $r5 = $r23
+   ;;
+   cb.dnez $r28? .Lstreaming_kernel_exit
+   copyd $r4 = $r16
+   copyd $r5 = $r14
+   ;;
+   cb.dnez $r29? .Lstreaming_kernel_exit
+   copyd $r4 = $r17
+   copyd $r5 = $r15
+   compd.ne $r30 = $r18, $r10
+   compd.ne $r31 = $r19, $r11
+   ;;
+   cb.dnez $r30? .Lstreaming_kernel_exit
+   copyd $r4 = $r18
+   copyd $r5 = $r10
+   ;;
+   cb.dnez $r31? .Lstreaming_kernel_exit
+   copyd $r4 = $r19
+   copyd $r5 = $r11
+   ;;
+.Lremaining_160:
+   lo.dnez $r6? $r24r25r26r27 = -64[$r12]
    andd $r11 = $r2, 16
    srld $r7 = $r2, 5
    srld $r10 = $r2, 5
@@ -360,25 +467,36 @@ memcmp:
    copyd $r5 = $r36
    ;;
 .Lreturn:
+   lq.dnez $r6? $r14r15 = -144[$r12]
+   ;;
+   lo.dnez $r6? $r16r17r18r19 = -128[$r12]
+   ;;
+   lo.dnez $r6? $r20r21r22r23 = -96[$r12]
+   ;;
+.Lreturn_early:
    make $r0 = 0
    lo $r28r29r30r31 = -32[$r12]
    ret
    ;;
 .Lstreaming_kernel_exit:
    xord $r0 = $r4, $r5
+   lq.dnez $r6? $r14r15 = -144[$r12]
    ;;
    ctzd $r0 = $r0
+   lo.dnez $r6? $r16r17r18r19 = -128[$r12]
    ;;
    andd $r0 = $r0, 0x38
+   lo.dnez $r6? $r20r21r22r23 = -96[$r12]
    ;;
    srad $r4 = $r4, $r0
    srad $r5 = $r5, $r0
+   lo.dnez $r6? $r24r25r26r27 = -64[$r12]
    ;;
    andd $r4 = $r4, 0xff
    andd $r5 = $r5, 0xff
+   lo $r28r29r30r31 = -32[$r12]
    ;;
    sbfw $r0 = $r5, $r4
-   lo $r28r29r30r31 = -32[$r12]
    ret
    ;;
 .endp memcmp

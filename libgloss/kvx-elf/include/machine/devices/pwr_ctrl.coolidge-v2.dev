@@ -823,6 +823,213 @@ mppa_uint32 word[2];
 struct mppa_pwr_ctrl_v_dsu_time_stamp _;
 } mppa_pwr_ctrl_dsu_timestamp_t;
 
+struct mppa_pwr_ctrl_sp_control {
+mppa_uint64 start :1; /*[ 0: 0]reset: 0x0,behavior: [:RD, :WR],SMEM Profiling Start:
+
+Once this bit is set to 1 by the software, all SMEM Profiling Counters will start counting.
+This bit is automatically cleared by hardware when it is 1 and a SMEM Profiling Counter whose spc_control.sp_ie bit is set overflows (i.e. increments by one or more and wraps from 0xFFFFFFFF FFFFFF.. to 0x00000000 000000..) When this happens:
+
+- an interrupt is issued by the SMEM Profiling module
+
+- all SMEM Profiling Counters stop counting and their current value remains frozen
+
+- sp_status.ie_num is set to the relevant value
+
+If a SPC overflows while its spc_control.sp_ie bit is not set, nothing happens: the overflowing PM just wraps around silently to 0x00000000 000000.. and continues counting. The other SPCs continue counting too, and no interrupt is sent
+
+SMEM Profiling Counters will start counting again as soon as the software re-sets sp_control.start.*/
+mppa_uint64 reserved_1:63;
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_pwr_ctrl_sp_control[(sizeof(struct mppa_pwr_ctrl_sp_control) == 8)*2-1];// If this fails, then the size of struct mppa_pwr_ctrl_sp_control as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_PWR_CTRL_SP_CONTROL_START__SHIFT 0
+#define MPPA_PWR_CTRL_SP_CONTROL_START__MASK 0x1ULL
+
+
+/***
+ * pwr_ctrl sp_control register definition
+ * Permissions:
+ * RM: ker => [:RD, :WR],
+ * RM: usr => [:RD, :WR],
+ * PE: ker => [:RD, :WR],
+ * PE: usr => [:RD, :WR],
+ * Size: 8 bytes (min access size = 8 bytes)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint64 reg;
+mppa_uint64 dword;
+struct mppa_pwr_ctrl_sp_control _;
+} mppa_pwr_ctrl_sp_control_t;
+
+struct mppa_pwr_ctrl_sp_status {
+mppa_uint64 ie_num :5; /*[ 4: 0]reset: 0x0,behavior: [:RD],SMEM Profiling Interrupt Event Number:
+
+When an SMEM Profiling Counter whose spc_control.sp_ie bit is set overflows, this field is set equal to the number of this SPC.*/
+mppa_uint64 reserved_1:59;
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_pwr_ctrl_sp_status[(sizeof(struct mppa_pwr_ctrl_sp_status) == 8)*2-1];// If this fails, then the size of struct mppa_pwr_ctrl_sp_status as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_PWR_CTRL_SP_STATUS_IE_NUM__SHIFT 0
+#define MPPA_PWR_CTRL_SP_STATUS_IE_NUM__MASK 0x1fULL
+
+
+/***
+ * pwr_ctrl sp_status register definition
+ * Permissions:
+ * RM: ker => [:RD],
+ * RM: usr => [:RD],
+ * PE: ker => [:RD],
+ * PE: usr => [:RD],
+ * Size: 8 bytes (min access size = 8 bytes)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint64 reg;
+mppa_uint64 dword;
+struct mppa_pwr_ctrl_sp_status _;
+} mppa_pwr_ctrl_sp_status_t;
+
+struct mppa_pwr_ctrl_spc_control {
+mppa_uint16 sp_code_sel :5; /*[ 4: 0]reset: 0x0,behavior: [:RD, :WR],SMEM Profiling Counter Code Selection:
+
+SMEM Profiling Counter counts the event selected by this field. Supported values are:
+
+- 0x0 : RE    : Reset: SPC is set to 0
+
+- 0x1 : SE    : Stop: SPC stops counting
+
+- 0x2 : SCC   : SMEM Clock Cycle: SPC is incremented every clock cycle
+
+- 0x4 : TCME  : TCM Event: SPC is incremented every time an access hits SMEM Bank<bank_sel>'s TCM
+
+- 0x5 : TCMLE : TCM Load Event: SPC is incremented every time a load access hits SMEM Bank<bank_sel>'s TCM
+
+- 0x6 : TCMDLE: TCM Doucle Load Event: SPC is incremented every time a double load access hits SMEM Bank<bank_sel>'s TCM
+
+- 0x8 : L2CE  : L2 Cache Event: SPC is incremented every time an access hits SMEM Bank<bank_sel>'s L2 Cache
+
+- 0x9 : L2CLE : L2 Cache Load Event: SPC is incremented every time a load access hits SMEM Bank<bank_sel>'s L2 Cache
+
+- 0xA : SHTE  : Shoot-Through Event: SPC is incremented every time a shoot-through access hits SMEM Bank<bank_sel>'s L2 Cache
+
+- 0xB : SHTE  : Shoot-Through Load Event: SPC is incremented every time a shoot-through load access hits SMEM Bank<bank_sel>'s L2 Cache
+
+- 0xC : SBSC  : SMEM Bank Stall Cycle: SPC is incremented every time SMEM Bank<bank_sel> is stalled
+
+- 0xD : SBMSC : SMEM Bank Memory Stall Cycle: SPC is incremented every time SMEM Bank<bank_sel> is stalled due to ECC correction, atomic operation or non 64-bit aligned access
+
+- 0x10: L2RE  : L2 Cache Refill Event: SPC is incremented every time any SMEM Bank sent a Refill request outside of the Cluster
+
+- 0x11: L2WBE : L2 Cache Write-Back Event: SPC is incremented every time any SMEM Bank sent a non-null Write-Back request outside of the Cluster
+
+- 0x14: L2CMF : L2 Cache Maintenance Flush Event: SPC is incremented every time an L2 Cache Maintenance Flush operation to any SMEM Bank
+
+- 0x15: L2CMI : L2 Cache Maintenance Invalidate Event: SPC is incremented every time an L2 Cache Maintenance Invalidate operation to any SMEM Bank
+
+- 0x16: L2CMP : L2 Cache Maintenance Purge Event: SPC is incremented every time an L2 Cache Maintenance Flush operation to any SMEM Bank
+
+- 0x18: RL2CMF: Remote L2 Cache Maintenance Flush Event: SPC is incremented every time DSU's L2 Remote module sends an L2 Cache Maintenance Flush operation to any SMEM Bank
+
+- 0x19: RL2CMI: Remote L2 Cache Maintenance Invalidate Event: SPC is incremented every time DSU's L2 Remote module sends an L2 Cache Maintenance Invalidate operation to any SMEM Bank
+
+- 0x1A: RL2CMP: Remote L2 Cache Maintenance Purge Event: SPC is incremented every time DSU's L2 Remote module sends an L2 Cache Maintenance Flush operation to any SMEM Bank
+
+All other codes are reserved.*/
+mppa_uint16 reserved_0:3;
+mppa_uint16 sp_ie :4; /*[11: 8]reset: 0x0,behavior: [:RD, :WR],SMEM Profiling Counter Bank Selection:
+
+SMEM Profiling Counter counts the events that occurs in the SMEM Bank selected by this field. Supported values are:
+
+- 0x0-0xf: Bank 0-15
+
+Though, this field is only relevant when spc_control.sp_code_sel is in between 0x4-0xf.*/
+mppa_uint16 reserved_2:4;
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_pwr_ctrl_spc_control[(sizeof(struct mppa_pwr_ctrl_spc_control) == 2)*2-1];// If this fails, then the size of struct mppa_pwr_ctrl_spc_control as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_PWR_CTRL_SPC_CONTROL_SP_CODE_SEL__SHIFT 0
+#define MPPA_PWR_CTRL_SPC_CONTROL_SP_CODE_SEL__MASK 0x1fUL
+#define MPPA_PWR_CTRL_SPC_CONTROL_SP_IE__SHIFT 8
+#define MPPA_PWR_CTRL_SPC_CONTROL_SP_IE__MASK 0xf00UL
+
+
+/***
+ * pwr_ctrl spc_control register definition
+ * Permissions:
+ * RM: ker => [:RD, :WR],
+ * RM: usr => [:RD, :WR],
+ * PE: ker => [:RD, :WR],
+ * PE: usr => [:RD, :WR],
+ * Size: 2 bytes (min access size = 2 bytes)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint16 reg;
+mppa_uint16 hword;
+struct mppa_pwr_ctrl_spc_control _;
+} mppa_pwr_ctrl_spc_control_t;
+
+struct mppa_pwr_ctrl_spc_reg {
+mppa_uint64 spc_reg :64; /*[63: 0]reset: 0x0,behavior: [:RD, :WR],SMEM Profiling Counter:
+
+SMEM Profiling Counter are updated according to common sp_control and dedicated spc_control registers.
+
+This Counter is Read/Write: this allows the software to set this counter to a chosen value in order to trigger this SPC overflow for instance.*/
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_pwr_ctrl_spc_reg[(sizeof(struct mppa_pwr_ctrl_spc_reg) == 8)*2-1];// If this fails, then the size of struct mppa_pwr_ctrl_spc_reg as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_PWR_CTRL_SPC_REG_SPC_REG__SHIFT 0
+#define MPPA_PWR_CTRL_SPC_REG_SPC_REG__MASK 0xffffffffffffffffULL
+
+
+/***
+ * pwr_ctrl spc_reg register definition
+ * Permissions:
+ * RM: ker => [:RD, :WR],
+ * RM: usr => [:RD, :WR],
+ * PE: ker => [:RD, :WR],
+ * PE: usr => [:RD, :WR],
+ * Size: 8 bytes (min access size = 8 bytes)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint64 reg;
+mppa_uint64 dword;
+struct mppa_pwr_ctrl_spc_reg _;
+} mppa_pwr_ctrl_spc_reg_t;
+
+/***
+ * pwr_ctrl smem_profiling group definition
+ * SMEM Profiling Group of Registers
+ *
+ * Size: 256/0x100 bytes
+ */
+#define MPPA_PWR_CTRL_SMEM_PROFILING_SPC_CONTROL_NUMBER 24
+#define MPPA_PWR_CTRL_SMEM_PROFILING_SPC_REG_NUMBER 24
+typedef struct  {
+mppa_pwr_ctrl_sp_control_t sp_control; /* offset: 0x0, size: 0x8 */
+mppa_pwr_ctrl_sp_status_t sp_status; /* offset: 0x8, size: 0x8 */
+mppa_pwr_ctrl_spc_control_t spc_control[24]; /* offset: 0x10, size: 0x30 ( /!\ this is a 16bits register*/
+mppa_pwr_ctrl_spc_reg_t spc_reg[24]; /* offset: 0x40, size: 0xC0 ( /!\ this is a 64bits register*/
+} mppa_pwr_ctrl_smem_profiling_t;
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_mppa_pwr_ctrl_smem_profiling_t[(sizeof(mppa_pwr_ctrl_smem_profiling_t) == 256)*2-1];// If this fails, then the size of mppa_pwr_ctrl_smem_profiling_t as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
 struct mppa_pwr_ctrl_ring_level {
 mppa_uint32 ring_level :2; /*[ 1: 0]reset: 0x3,behavior: [:RD, :WR],Protection ring level, value is relative to current initiator ring level*/
 mppa_uint32 data_lock :1; /*[ 2: 2]reset: 0x0,behavior: [:RD, :WR],If set all protected registers are RO*/
@@ -1289,12 +1496,14 @@ mppa_pwr_ctrl_ecc_status_clear_t ecc_status_clear; /* offset: 0x4150, size: 0x8 
 mppa_uint8 unused6[8];
 mppa_pwr_ctrl_secure_status_t secure_status; /* offset: 0x4160, size: 0x20 */
 mppa_pwr_ctrl_dsu_timestamp_t dsu_timestamp; /* offset: 0x4180, size: 0x8 */
-mppa_pwr_ctrl_ring_config_t ring_level_config; /* offset: 0x4188, size: 0x4 */
-mppa_pwr_ctrl_ring_level_abs_value_t ring_level_abs_val; /* offset: 0x418C, size: 0x4 */
-mppa_uint8 unused7[3568];
+mppa_uint8 unused7[632];
+mppa_pwr_ctrl_smem_profiling_t smem_profiling; /* offset: 0x4400, size: 0x100 */
+mppa_uint8 unused8[2680];
+mppa_pwr_ctrl_ring_config_t ring_level_config; /* offset: 0x4F78, size: 0x4 */
+mppa_pwr_ctrl_ring_level_abs_value_t ring_level_abs_val; /* offset: 0x4F7C, size: 0x4 */
 mppa_pwr_ctrl_protect_t initiator_protect; /* offset: 0x4F80, size: 0x1C */
 mppa_pwr_ctrl_debug_reg_t debug_regs; /* offset: 0x4F9C, size: 0x18 */
-mppa_uint8 unused8[4];
+mppa_uint8 unused9[4];
 } mppa_pwr_ctrl_t;
 
 #ifndef KVX_DISABLE_TYPECHECK

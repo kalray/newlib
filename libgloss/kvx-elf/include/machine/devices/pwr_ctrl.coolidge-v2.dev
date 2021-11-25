@@ -829,13 +829,13 @@ mppa_uint64 start :1; /*[ 0: 0]reset: 0x0,behavior: [:RD, :WR],SMEM Profiling St
 Once this bit is set to 1 by the software, all SMEM Profiling Counters will start counting.
 This bit is automatically cleared by hardware when it is 1 and a SMEM Profiling Counter whose spc_control.sp_ie bit is set overflows (i.e. increments by one or more and wraps from 0xFFFFFFFF FFFFFF.. to 0x00000000 000000..) When this happens:
 
-- an interrupt is issued by the SMEM Profiling module
+- an interrupt (pulse) is issued by the SMEM Profiling module
 
 - all SMEM Profiling Counters stop counting and their current value remains frozen
 
 - sp_status.ie_num is set to the relevant value
 
-If a SPC overflows while its spc_control.sp_ie bit is not set, nothing happens: the overflowing PM just wraps around silently to 0x00000000 000000.. and continues counting. The other SPCs continue counting too, and no interrupt is sent
+If a SPC overflows while its spc_control.sp_ie bit is not set, nothing happens: the overflowing SPC just wraps around silently to 0x00000000 000000.. and continues counting. The other SPCs continue counting too, and no interrupt is sent
 
 SMEM Profiling Counters will start counting again as soon as the software re-sets sp_control.start.*/
 mppa_uint64 reserved_1:63;
@@ -899,7 +899,11 @@ struct mppa_pwr_ctrl_sp_status _;
 struct mppa_pwr_ctrl_spc_control {
 mppa_uint16 sp_code_sel :5; /*[ 4: 0]reset: 0x0,behavior: [:RD, :WR],SMEM Profiling Counter Code Selection:
 
-SMEM Profiling Counter counts the event selected by this field. Supported values are:
+SMEM Profiling Counter counts the event selected by this field.
+
+This counting is per Bank or Global: when spc_control.sp_global is 1, the events to all SMEM Banks are summed; otherwise, only events to spc_control.sp_bank_sel SMEM Bank are counted.
+
+Supported values are:
 
 - 0x0 : RE    : Reset: SPC is set to 0
 
@@ -907,50 +911,56 @@ SMEM Profiling Counter counts the event selected by this field. Supported values
 
 - 0x2 : SCC   : SMEM Clock Cycle: SPC is incremented every clock cycle
 
-- 0x4 : TCME  : TCM Event: SPC is incremented every time an access hits SMEM Bank<bank_sel>'s TCM
+- 0x4 : TCME  : TCM Event: SPC is incremented every time an access hits SMEM Bank's TCM
 
-- 0x5 : TCMLE : TCM Load Event: SPC is incremented every time a load access hits SMEM Bank<bank_sel>'s TCM
+- 0x5 : TCMLE : TCM Load Event: SPC is incremented every time a load access hits SMEM Bank's TCM
 
-- 0x6 : TCMDLE: TCM Doucle Load Event: SPC is incremented every time a double load access hits SMEM Bank<bank_sel>'s TCM
+- 0x6 : TCMDLE: TCM Doucle Load Event: SPC is incremented every time a double load access hits SMEM Bank's TCM
 
-- 0x8 : L2CE  : L2 Cache Event: SPC is incremented every time an access hits SMEM Bank<bank_sel>'s L2 Cache
+- 0x8 : L2CE  : L2 Cache Event: SPC is incremented every time an access hits SMEM Bank's L2 Cache
 
-- 0x9 : L2CLE : L2 Cache Load Event: SPC is incremented every time a load access hits SMEM Bank<bank_sel>'s L2 Cache
+- 0x9 : L2CLE : L2 Cache Load Event: SPC is incremented every time a load access hits SMEM Bank's L2 Cache
 
-- 0xA : SHTE  : Shoot-Through Event: SPC is incremented every time a shoot-through access hits SMEM Bank<bank_sel>'s L2 Cache
+- 0xA : SHTE  : Shoot-Through Event: SPC is incremented every time a shoot-through access hits SMEM Bank's L2 Cache
 
-- 0xB : SHTE  : Shoot-Through Load Event: SPC is incremented every time a shoot-through load access hits SMEM Bank<bank_sel>'s L2 Cache
+- 0xB : SHTLE : Shoot-Through Load Event: SPC is incremented every time a shoot-through load access hits SMEM Bank's L2 Cache
 
-- 0xC : SBSC  : SMEM Bank Stall Cycle: SPC is incremented every time SMEM Bank<bank_sel> is stalled
+- 0xC : SBSC  : SMEM Bank Stall Cycle: SPC is incremented every time SMEM Bank is stalled
 
-- 0xD : SBMSC : SMEM Bank Memory Stall Cycle: SPC is incremented every time SMEM Bank<bank_sel> is stalled due to ECC correction, atomic operation or non 64-bit aligned access
+- 0xD : SBMSC : SMEM Bank Memory Stall Cycle: SPC is incremented every time SMEM Bank is stalled due to ECC correction, atomic operation or non 64-bit aligned access
 
-- 0x10: L2RE  : L2 Cache Refill Event: SPC is incremented every time any SMEM Bank sent a Refill request outside of the Cluster
+- 0x10: L2RE  : L2 Cache Refill Event: SPC is incremented every time SMEM Bank sent a Refill request outside of the Cluster
 
-- 0x11: L2WBE : L2 Cache Write-Back Event: SPC is incremented every time any SMEM Bank sent a non-null Write-Back request outside of the Cluster
+- 0x11: L2WBE : L2 Cache Write-Back Event: SPC is incremented every time SMEM Bank sent a non-null Write-Back request outside of the Cluster
 
-- 0x14: L2CMF : L2 Cache Maintenance Flush Event: SPC is incremented every time an L2 Cache Maintenance Flush operation to any SMEM Bank
+- 0x14: L2CMF : L2 Cache Maintenance Flush Event: SPC is incremented every time an L2 Cache Maintenance Flush operation hits SMEM Bank
 
-- 0x15: L2CMI : L2 Cache Maintenance Invalidate Event: SPC is incremented every time an L2 Cache Maintenance Invalidate operation to any SMEM Bank
+- 0x15: L2CMI : L2 Cache Maintenance Invalidate Event: SPC is incremented every time an L2 Cache Maintenance Invalidate operation hits SMEM Bank
 
-- 0x16: L2CMP : L2 Cache Maintenance Purge Event: SPC is incremented every time an L2 Cache Maintenance Flush operation to any SMEM Bank
+- 0x16: L2CMP : L2 Cache Maintenance Purge Event: SPC is incremented every time an L2 Cache Maintenance Purge operation hits SMEM Bank
 
-- 0x18: RL2CMF: Remote L2 Cache Maintenance Flush Event: SPC is incremented every time DSU's L2 Remote module sends an L2 Cache Maintenance Flush operation to any SMEM Bank
+- 0x18: RL2CMF: Remote L2 Cache Maintenance Flush Event: SPC is incremented every time an L2 Cache Maintenance Flush operation from DSU's L2 Remote module hits SMEM Bank
 
-- 0x19: RL2CMI: Remote L2 Cache Maintenance Invalidate Event: SPC is incremented every time DSU's L2 Remote module sends an L2 Cache Maintenance Invalidate operation to any SMEM Bank
+- 0x19: RL2CMI: Remote L2 Cache Maintenance Invalidate Event: SPC is incremented every time an L2 Cache Maintenance Invalidate operation from DSU's L2 Remote module hits SMEM Bank
 
-- 0x1A: RL2CMP: Remote L2 Cache Maintenance Purge Event: SPC is incremented every time DSU's L2 Remote module sends an L2 Cache Maintenance Flush operation to any SMEM Bank
+- 0x1A: RL2CMP: Remote L2 Cache Maintenance Purge Event: SPC is incremented every time an L2 Cache Maintenance Purge operation from DSU's L2 Remote module hits SMEM Bank
 
 All other codes are reserved.*/
 mppa_uint16 reserved_0:3;
-mppa_uint16 sp_ie :4; /*[11: 8]reset: 0x0,behavior: [:RD, :WR],SMEM Profiling Counter Bank Selection:
+mppa_uint16 sp_bank_sel :4; /*[11: 8]reset: 0x0,behavior: [:RD, :WR],SMEM Profiling Counter Bank Selection:
 
 SMEM Profiling Counter counts the events that occurs in the SMEM Bank selected by this field. Supported values are:
 
 - 0x0-0xf: Bank 0-15
 
-Though, this field is only relevant when spc_control.sp_code_sel is in between 0x4-0xf.*/
-mppa_uint16 reserved_2:4;
+Though, this field is only relevant when spc_control.sp_global is 0.*/
+mppa_uint16 sp_global :1; /*[12:12]reset: 0x0,behavior: [:RD, :WR],SMEM Profiling Counter Global:
+
+If set to 1, SMEM Profiling Counter counts the events that occurs in all the SMEM Banks (i.e. events are summed per SMEM Bank). In this case bank_sel field is irrelevant.*/
+mppa_uint16 reserved_1:2;
+mppa_uint16 sp_ie :1; /*[15:15]reset: 0x0,behavior: [:RD, :WR],SMEM Profiling Counter Interrupt Enable:
+
+If set to 1, this bit enables interrupt generation if SMEM Profiling Counter overflows.*/
 };
 
 #ifndef KVX_DISABLE_TYPECHECK
@@ -959,8 +969,12 @@ typedef char assertion_for_struct_mppa_pwr_ctrl_spc_control[(sizeof(struct mppa_
 #endif /* KVX_DISABLE_TYPECHECK */
 #define MPPA_PWR_CTRL_SPC_CONTROL_SP_CODE_SEL__SHIFT 0
 #define MPPA_PWR_CTRL_SPC_CONTROL_SP_CODE_SEL__MASK 0x1fUL
-#define MPPA_PWR_CTRL_SPC_CONTROL_SP_IE__SHIFT 8
-#define MPPA_PWR_CTRL_SPC_CONTROL_SP_IE__MASK 0xf00UL
+#define MPPA_PWR_CTRL_SPC_CONTROL_SP_BANK_SEL__SHIFT 8
+#define MPPA_PWR_CTRL_SPC_CONTROL_SP_BANK_SEL__MASK 0xf00UL
+#define MPPA_PWR_CTRL_SPC_CONTROL_SP_GLOBAL__SHIFT 12
+#define MPPA_PWR_CTRL_SPC_CONTROL_SP_GLOBAL__MASK 0x1000UL
+#define MPPA_PWR_CTRL_SPC_CONTROL_SP_IE__SHIFT 15
+#define MPPA_PWR_CTRL_SPC_CONTROL_SP_IE__MASK 0x8000UL
 
 
 /***

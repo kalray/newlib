@@ -69,7 +69,8 @@ LIBRARIES = $(noinst_LIBRARIES)
 ARFLAGS = cru
 lib_a_AR = $(AR) $(ARFLAGS)
 lib_a_LIBADD =
-am_lib_a_OBJECTS = lib_a-lock.$(OBJEXT) lib_a-secure_getenv.$(OBJEXT)
+am_lib_a_OBJECTS = lib_a-lock.$(OBJEXT) lib_a-secure_getenv.$(OBJEXT) \
+  lib_a-setgethostname.$(OBJEXT) lib_a-getrusage.$(OBJEXT)
 lib_a_OBJECTS = $(am_lib_a_OBJECTS)
 DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp =
@@ -194,7 +195,7 @@ AUTOMAKE_OPTIONS = cygnus
 INCLUDES = -I$(srcdir)/include $(NEWLIB_CFLAGS) $(CROSS_CFLAGS) $(TARGET_CFLAGS)
 AM_CCASFLAGS = $(INCLUDES)
 noinst_LIBRARIES = lib.a
-lib_a_SOURCES = lock.c secure_getenv.c
+lib_a_SOURCES = lock.c secure_getenv.c setgethostname.c getrusage.c
 lib_a_CCASFLAGS = $(AM_CCASFLAGS)
 lib_a_CFLAGS = $(AM_CFLAGS)
 
@@ -270,6 +271,18 @@ lib_a-secure_getenv.o: secure_getenv.c
 
 lib_a-secure_getenv.obj: secure_getenv.c
 	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-secure_getenv.obj `if test -f 'secure_getenv.c'; then $(CYGPATH_W) 'secure_getenv.c'; else $(CYGPATH_W) '$(srcdir)/secure_getenv.c'; fi`
+
+lib_a-setgethostname.o: setgethostname.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-setgethostname.o `test -f 'setgethostname.c' || echo '$(srcdir)/'`setgethostname.c
+
+lib_a-setgethostname.obj: setgethostname.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-setgethostname.obj `if test -f 'setgethostname.c'; then $(CYGPATH_W) 'setgethostname.c'; else $(CYGPATH_W) '$(srcdir)/setgethostname.c'; fi`
+
+lib_a-getrusage.o: getrusage.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-getrusage.o `test -f 'getrusage.c' || echo '$(srcdir)/'`getrusage.c
+
+lib_a-getrusage.obj: getrusage.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-getrusage.obj `if test -f 'getrusage.c'; then $(CYGPATH_W) 'getrusage.c'; else $(CYGPATH_W) '$(srcdir)/getrusage.c'; fi`
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \

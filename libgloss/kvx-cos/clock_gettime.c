@@ -47,6 +47,7 @@ clock_gettime(clockid_t clock_id, struct timespec *tp)
     {
       case CLOCK_REALTIME:
       case CLOCK_MONOTONIC:
+      case CLOCK_THREAD_CPUTIME_ID:
         retval = gettimeofday (&tv, NULL);
         if (retval == 0) {
           tp->tv_sec = tv.tv_sec;

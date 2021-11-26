@@ -20,5 +20,6 @@ int	getrusage (int, struct rusage*);
 #ifdef __cplusplus
 }
 #endif
+
 #endif /* !_SYS_RESOURCE_H_ */
 

@@ -826,8 +826,6 @@ struct mppa_pwr_ctrl_v_dsu_time_stamp _;
 struct mppa_pwr_ctrl_sp_control {
 mppa_uint64 start :1; /*[ 0: 0]reset: 0x0,behavior: [:RD, :WR],SMEM Profiling Start:
 
-This bit is set to 1 by default.
-
 When 1, all SMEM Profiling Counters (SPC) are counting.
 
 When 0, all counters are stopped. This allows the software to clear all SPC and re-start them simultaneously for instance.*/

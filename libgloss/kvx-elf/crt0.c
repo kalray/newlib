@@ -41,6 +41,7 @@ extern "C"	{
 
   extern void  __libc_init_array(void);
   extern void  __libc_fini_array(void);
+  extern int trace_pc_config(void) __attribute__((weak));
 
   __thread struct _reent _impure_thread_data;
 
@@ -51,6 +52,13 @@ extern "C"	{
     _REENT->_stdin = &(_REENT->__sf[0]);
     _REENT->_stdout = &(_REENT->__sf[1]);
     _REENT->_stderr = &(_REENT->__sf[2]);
+  }
+
+  int __kvx_trace_pc_init(void)
+  {
+    if (trace_pc_config)
+      return trace_pc_config();
+    return 0;
   }
 
   extern int    _fwalk_reent (struct _reent *, int (*)(struct _reent *, FILE *));
@@ -69,14 +77,16 @@ extern "C"	{
 
     __kvx_finish_newlib_init();
 
-
     /* Run the main function */
     __libc_init_array ();
     atexit (__libc_fini_array);
 
     atexit (__kvx_newlib_flushall);
 
-    res = main(argc, argv, envp);
+
+    res = __kvx_trace_pc_init();
+    if (!res)
+      res = main(argc, argv, envp);
 
     exit(res);
     while(1);

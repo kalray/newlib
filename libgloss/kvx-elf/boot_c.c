@@ -132,6 +132,10 @@ static void __kvx_low_level_startup()
 
     __builtin_kvx_wfxm(KVX_SFR_MOW, 0x100000000);
 
+    #ifndef __kvxarch_kv3_1
+    __builtin_kvx_wfxm(KVX_SFR_MOW, 1ULL << KVX_SFR_MOW_TPCM_SHIFT);
+    #endif
+
     /* Delegate all traps to PL1 except DE, *ECC, *PAR */
     __builtin_kvx_wfxl(KVX_SFR_HTOW, 0x145505500000000);
 
@@ -323,6 +327,7 @@ void __kvx_do_thread_exit(void)
 
 /* Defined in newlib: libgloss/kvx-elf/crt0.c */
 void __kvx_finish_newlib_init(void);
+int __kvx_trace_pc_init(void);
 
 /** Do PE startup **/
 static void __kvx_do_pe_startup(void)
@@ -340,7 +345,9 @@ static void __kvx_do_pe_startup(void)
 
   __kvx_finish_newlib_init();
 
+  __kvx_trace_pc_init();
   __kvx_code_ptr(args_ptr);
+
   __kvx_do_thread_exit();
 }
 

@@ -1,7 +1,7 @@
 /*
  * trace.h
  * Automatically generated from registers definition files. Do not edit
- * Copyright (c) Kalray 2021.
+ * Copyright (c) Kalray 2022.
  */
 
 #ifndef _INCLUDED_V2_TRACE_H_

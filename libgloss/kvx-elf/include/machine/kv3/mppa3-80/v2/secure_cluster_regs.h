@@ -1,7 +1,7 @@
 /*
  * secure_cluster_regs.h
  * Automatically generated from registers definition files. Do not edit
- * Copyright (c) Kalray 2021.
+ * Copyright (c) Kalray 2022.
  */
 
 #ifndef _INCLUDED_V2_SECURE_CLUSTER_REGS_H_

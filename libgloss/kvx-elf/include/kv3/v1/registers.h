@@ -4874,7 +4874,7 @@
 #define KVX_SFR_TEL_FN_WFXM_CLEAR _LLCONST(0xff)
 #define KVX_SFR_TEL_FN_WFXM_SET _LLCONST(0xff00000000)
 
-#define KVX_SFR_TEH_ASN_MASK _LLCONST(0x1ff) // Adress Space Number
+#define KVX_SFR_TEH_ASN_MASK _LLCONST(0x1ff) // Address Space Number
 #define KVX_SFR_TEH_ASN_SHIFT 0
 #define KVX_SFR_TEH_ASN_WIDTH 9
 #define KVX_SFR_TEH_ASN_WFXL_MASK _LLCONST(0x1ff)

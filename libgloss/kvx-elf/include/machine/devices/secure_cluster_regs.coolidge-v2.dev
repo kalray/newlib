@@ -345,7 +345,7 @@ mppa_uint64 smem_psht_dis :10; /*[13: 4]reset: 0x0,behavior: [:RD, :WR],Disable 
 mppa_uint64 reserved_1:19;
 mppa_uint64 dsu_ecc_bypass :1; /*[33:33]reset: 0x0,behavior: [:RD, :WR],Bypass ECC in dsu memory*/
 mppa_uint64 smem_ecc_bypass :1; /*[34:34]reset: 0x0,behavior: [:RD, :WR],Bypass ECC in smem memory*/
-mppa_uint64 smem_burst_len :3; /*[37:35]reset: 0x1,behavior: [:RD, :WR],Configure maximum burst length for Smart Arbitration Protocol (SAP) in smem*/
+mppa_uint64 smem_burst_len :3; /*[37:35]reset: 0x7,behavior: [:RD, :WR],Configure maximum burst length for Smart Arbitration Protocol (SAP) in smem*/
 mppa_uint64 axi_burst_dis :1; /*[38:38]reset: 0x0,behavior: [:RD, :WR],AXI2SMEM only generates 1-flit transaction*/
 mppa_uint64 smem_dcld_dis :1; /*[39:39]reset: 0x0,behavior: [:RD, :WR],Disable DCLD in SMEM*/
 mppa_uint64 reserved_3:24;
@@ -384,7 +384,7 @@ typedef char assertion_for_struct_mppa_secure_cluster_regs_global_config[(sizeof
  * PE: ker => [:RD, :WR],
  * PE: usr => [:RD, :WR],
  * Size: 8 bytes (min access size = 8 bytes)
- * Reset value: 0x800000000
+ * Reset value: 0x3800000000
  */
 typedef union {
 mppa_uint64 reg;
@@ -401,7 +401,7 @@ struct mppa_secure_cluster_regs_global_config _;
  * PE: ker => [:RD, :WR],
  * PE: usr => [:RD, :WR],
  * Size: 8 bytes (min access size = 1 byte)
- * Reset value: 0x800000000
+ * Reset value: 0x3800000000
  */
 typedef union {
 mppa_uint64 reg;
@@ -421,7 +421,7 @@ struct mppa_secure_cluster_regs_global_config _;
  * PE: ker => [:RD, :WR],
  * PE: usr => [:RD, :WR],
  * Size: 8 bytes (min access size = 1 byte)
- * Reset value: 0x800000000
+ * Reset value: 0x3800000000
  */
 typedef union {
 mppa_uint64 reg;

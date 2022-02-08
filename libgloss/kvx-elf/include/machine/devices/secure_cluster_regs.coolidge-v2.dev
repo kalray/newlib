@@ -1084,6 +1084,40 @@ mppa_uint32 word;
 struct mppa_secure_cluster_regs_locked_route_write_enable _;
 } mppa_secure_cluster_regs_locked_route_write_enable_t;
 
+struct mppa_secure_cluster_regs_ext_axi_pl_view {
+mppa_uint32 PL_Value :2; /*[ 1: 0]reset: 0x0,behavior: [:RD, :WR],PL value assigned to incoming AXI transactions if override bit is set*/
+mppa_uint32 reserved_0:29;
+mppa_uint32 override :1; /*[31:31]reset: 0x0,behavior: [:RD, :WR],When set, override default PL for incoming AXI transactions*/
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_secure_cluster_regs_ext_axi_pl_view[(sizeof(struct mppa_secure_cluster_regs_ext_axi_pl_view) == 4)*2-1];// If this fails, then the size of struct mppa_secure_cluster_regs_ext_axi_pl_view as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_SECURE_CLUSTER_REGS_EXT_AXI_PL_VIEW_PL_VALUE__SHIFT 0
+#define MPPA_SECURE_CLUSTER_REGS_EXT_AXI_PL_VIEW_PL_VALUE__MASK 0x3UL
+#define MPPA_SECURE_CLUSTER_REGS_EXT_AXI_PL_VIEW_OVERRIDE__SHIFT 31
+#define MPPA_SECURE_CLUSTER_REGS_EXT_AXI_PL_VIEW_OVERRIDE__MASK 0x80000000UL
+
+
+/***
+ * secure_cluster_regs ext_axi_pl register definition
+ * External API with priority Level handler
+ *
+ * Permissions:
+ * RM: ker => [:RD, :WR],
+ * RM: usr => [:RD, :WR],
+ * PE: ker => [:RD, :WR],
+ * PE: usr => [:RD, :WR],
+ * Size: 4 bytes (min access size = 4 bytes)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint32 reg;
+mppa_uint32 word;
+struct mppa_secure_cluster_regs_ext_axi_pl_view _;
+} mppa_secure_cluster_regs_ext_axi_pl_t;
+
 struct mppa_secure_cluster_regs_ring_level {
 mppa_uint32 ring_level :2; /*[ 1: 0]reset: 0x3,behavior: [:RD, :WR],Protection ring level, value is relative to current initiator ring level*/
 mppa_uint32 data_lock :1; /*[ 2: 2]reset: 0x0,behavior: [:RD, :WR],If set all protected registers are RO*/
@@ -1564,12 +1598,14 @@ mppa_secure_cluster_regs_locked_route_error_cnt_t lac_locked_route_error_cnt; /*
 mppa_uint8 unused8[276];
 mppa_secure_cluster_regs_locked_route_vchan_t locked_route; /* offset: 0x360, size: 0x60 */
 mppa_secure_cluster_regs_locked_route_write_enable_t locked_route_write_enable; /* offset: 0x3C0, size: 0x4 */
-mppa_secure_cluster_regs_ring_config_t ring_level_config; /* offset: 0x3C4, size: 0x4 */
-mppa_secure_cluster_regs_ring_level_abs_value_t ring_level_abs_val; /* offset: 0x3C8, size: 0x4 */
-mppa_uint8 unused9[2996];
+mppa_uint8 unused9[28];
+mppa_secure_cluster_regs_ext_axi_pl_t ext_axi_pl; /* offset: 0x3E0, size: 0x4 */
+mppa_secure_cluster_regs_ring_config_t ring_level_config; /* offset: 0x3E4, size: 0x4 */
+mppa_secure_cluster_regs_ring_level_abs_value_t ring_level_abs_val; /* offset: 0x3E8, size: 0x4 */
+mppa_uint8 unused10[2964];
 mppa_secure_cluster_regs_protect_t initiator_protect; /* offset: 0xF80, size: 0x1C */
 mppa_secure_cluster_regs_debug_reg_t debug_regs; /* offset: 0xF9C, size: 0x18 */
-mppa_uint8 unused10[4];
+mppa_uint8 unused11[4];
 } mppa_secure_cluster_regs_t;
 
 #ifndef KVX_DISABLE_TYPECHECK

@@ -21,6 +21,8 @@
 #define mppa_uintptr __kvx_uintptr_t
 #define mppa_int64 __kvx_int64_t
 #define mppa_uint64 __kvx_uint64_t
+#define mppa_int128 __kvx_int128_t
+#define mppa_uint128 __kvx_uint128_t
 #else
 #ifndef __DEVICE_INTTYPE
 #define __DEVICE_INTTYPE
@@ -34,6 +36,8 @@ typedef signed long mppa_intptr;
 typedef unsigned long mppa_uintptr;
 typedef signed long long mppa_int64;
 typedef unsigned long long mppa_uint64;
+typedef __int128 mppa_int128;
+typedef unsigned __int128 mppa_uint128;
 #endif
 #endif
 

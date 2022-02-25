@@ -11,10 +11,9 @@
 
 
 struct mppa_l2_cache_tcm_tag {
-mppa_uint64 reserved_0:32;
-mppa_uint64 reader_clear :4; /*[35:32]behavior: [:R0, :WR],*/
-mppa_uint64 reserved_2:28;
-mppa_uint64 reserved_3:64;
+mppa_uint128 reserved_0:32;
+mppa_uint128 reader_clear :4; /*[35:32]behavior: [:R0, :WR],*/
+mppa_uint128 reserved_2:92;
 };
 
 #ifndef KVX_DISABLE_TYPECHECK
@@ -36,25 +35,27 @@ typedef char assertion_for_struct_mppa_l2_cache_tcm_tag[(sizeof(struct mppa_l2_c
  * Reset value: Not initialized
  */
 typedef union {
+mppa_uint128 dreg;
 mppa_uint64 reg[2];
+mppa_uint128 ddword;
 mppa_uint64 dword[2];
 mppa_uint32 word[4];
 struct mppa_l2_cache_tcm_tag _;
 } mppa_l2_cache_tcm_tag_t;
 
 struct mppa_l2_cache_reader {
-mppa_uint64 reader0 :17; /*[16: 0]behavior: [:RD, :WR],*/
-mppa_uint64 reserved_0:7;
-mppa_uint64 way0 :8; /*[31:24]behavior: [:RD, :WR],*/
-mppa_uint64 reader1 :17; /*[48:32]behavior: [:RD, :WR],*/
-mppa_uint64 reserved_1:7;
-mppa_uint64 way1 :8; /*[63:56]behavior: [:RD, :WR],*/
-mppa_uint64 reader2 :17; /*[80:64]behavior: [:RD, :WR],*/
-mppa_uint64 reserved_2:7;
-mppa_uint64 way2 :8; /*[95:88]behavior: [:RD, :WR],*/
-mppa_uint64 reader3 :17; /*[112:96]behavior: [:RD, :WR],*/
-mppa_uint64 reserved_3:7;
-mppa_uint64 way3 :8; /*[127:120]behavior: [:RD, :WR],*/
+mppa_uint128 reader0 :17; /*[16: 0]behavior: [:RD, :WR],*/
+mppa_uint128 reserved_0:7;
+mppa_uint128 way0 :8; /*[31:24]behavior: [:RD, :WR],*/
+mppa_uint128 reader1 :17; /*[48:32]behavior: [:RD, :WR],*/
+mppa_uint128 reserved_1:7;
+mppa_uint128 way1 :8; /*[63:56]behavior: [:RD, :WR],*/
+mppa_uint128 reader2 :17; /*[80:64]behavior: [:RD, :WR],*/
+mppa_uint128 reserved_2:7;
+mppa_uint128 way2 :8; /*[95:88]behavior: [:RD, :WR],*/
+mppa_uint128 reader3 :17; /*[112:96]behavior: [:RD, :WR],*/
+mppa_uint128 reserved_3:7;
+mppa_uint128 way3 :8; /*[127:120]behavior: [:RD, :WR],*/
 };
 
 #ifndef KVX_DISABLE_TYPECHECK
@@ -90,7 +91,9 @@ typedef char assertion_for_struct_mppa_l2_cache_reader[(sizeof(struct mppa_l2_ca
  * Reset value: Not initialized
  */
 typedef union {
+mppa_uint128 dreg;
 mppa_uint64 reg[2];
+mppa_uint128 ddword;
 mppa_uint64 dword[2];
 struct mppa_l2_cache_reader _;
 } mppa_l2_cache_tcm_reader_t;
@@ -112,20 +115,19 @@ typedef char assertion_for_mppa_l2_cache_tcm_metadata_t[(sizeof(mppa_l2_cache_tc
 
 #endif /* KVX_DISABLE_TYPECHECK */
 struct mppa_l2_cache_tag {
-mppa_uint64 tag :24; /*[23: 0]behavior: [:RD, :WR],*/
-mppa_uint64 reserved_0:3;
-mppa_uint64 under_refill :1; /*[27:27]behavior: [:RD, :WR],*/
-mppa_uint64 atomic_allowed :1; /*[28:28]behavior: [:RD, :WR],*/
-mppa_uint64 write_allowed :1; /*[29:29]behavior: [:RD, :WR],*/
-mppa_uint64 valid :1; /*[30:30]behavior: [:RD, :WR],*/
-mppa_uint64 reserved_1:1;
-mppa_uint64 reader_clear :4; /*[35:32]behavior: [:R0, :WR],*/
-mppa_uint64 reserved_2:4;
-mppa_uint64 valid_clear :1; /*[40:40]behavior: [:R0, :WR],*/
-mppa_uint64 reserved_3:7;
-mppa_uint64 dirty_clear :1; /*[48:48]behavior: [:R0, :WR],*/
-mppa_uint64 reserved_5:15;
-mppa_uint64 reserved_6:64;
+mppa_uint128 tag :24; /*[23: 0]behavior: [:RD, :WR],*/
+mppa_uint128 reserved_0:3;
+mppa_uint128 under_refill :1; /*[27:27]behavior: [:RD, :WR],*/
+mppa_uint128 atomic_allowed :1; /*[28:28]behavior: [:RD, :WR],*/
+mppa_uint128 write_allowed :1; /*[29:29]behavior: [:RD, :WR],*/
+mppa_uint128 valid :1; /*[30:30]behavior: [:RD, :WR],*/
+mppa_uint128 reserved_1:1;
+mppa_uint128 reader_clear :4; /*[35:32]behavior: [:R0, :WR],*/
+mppa_uint128 reserved_2:4;
+mppa_uint128 valid_clear :1; /*[40:40]behavior: [:R0, :WR],*/
+mppa_uint128 reserved_3:7;
+mppa_uint128 dirty_clear :1; /*[48:48]behavior: [:R0, :WR],*/
+mppa_uint128 reserved_5:79;
 };
 
 #ifndef KVX_DISABLE_TYPECHECK
@@ -161,7 +163,9 @@ typedef char assertion_for_struct_mppa_l2_cache_tag[(sizeof(struct mppa_l2_cache
  * Reset value: Not initialized
  */
 typedef union {
+mppa_uint128 dreg;
 mppa_uint64 reg[2];
+mppa_uint128 ddword;
 mppa_uint64 dword[2];
 mppa_uint32 word[4];
 struct mppa_l2_cache_tag _;
@@ -178,7 +182,9 @@ struct mppa_l2_cache_tag _;
  * Reset value: Not initialized
  */
 typedef union {
+mppa_uint128 dreg;
 mppa_uint64 reg[2];
+mppa_uint128 ddword;
 mppa_uint64 dword[2];
 struct mppa_l2_cache_reader _;
 } mppa_l2_cache_l2_reader_t;
@@ -194,7 +200,9 @@ struct mppa_l2_cache_reader _;
  * Reset value: Not initialized
  */
 typedef union {
+mppa_uint128 dreg;
 mppa_uint64 reg[2];
+mppa_uint128 ddword;
 mppa_uint64 dword[2];
 } mppa_l2_cache_l2_dirty_t;
 
@@ -228,15 +236,15 @@ MPPA_L2_CACHE_ATOMIC = 0x2,
 } mppa_l2_cache_access_type_value_t;
 
 struct mppa_l2_cache_job_fifo {
-mppa_uint64 valid :16; /*[15: 0]reset: 0x0,behavior: [:RD],*/
-mppa_uint64 job_type :2; /*[17:16]reset: 0x0,behavior: [:RD],values: job_type,*/
-mppa_uint64 access_type :2; /*[19:18]reset: 0x0,behavior: [:RD],values: access_type,*/
-mppa_uint64 eviction_suggestion :4; /*[23:20]reset: 0x0,behavior: [:RD],*/
-mppa_uint64 job_number :3; /*[26:24]reset: 0x0,behavior: [:RD],*/
-mppa_uint64 proc_id :5; /*[31:27]reset: 0x0,behavior: [:RD],*/
-mppa_uint64 address :32; /*[63:32]behavior: [:RD],*/
-mppa_uint64 sid :9; /*[72:64]behavior: [:RD],*/
-mppa_uint64 reserved_1:55;
+mppa_uint128 valid :16; /*[15: 0]reset: 0x0,behavior: [:RD],*/
+mppa_uint128 job_type :2; /*[17:16]reset: 0x0,behavior: [:RD],values: job_type,*/
+mppa_uint128 access_type :2; /*[19:18]reset: 0x0,behavior: [:RD],values: access_type,*/
+mppa_uint128 eviction_suggestion :4; /*[23:20]reset: 0x0,behavior: [:RD],*/
+mppa_uint128 job_number :3; /*[26:24]reset: 0x0,behavior: [:RD],*/
+mppa_uint128 proc_id :5; /*[31:27]reset: 0x0,behavior: [:RD],*/
+mppa_uint128 address :32; /*[63:32]behavior: [:RD],*/
+mppa_uint128 sid :9; /*[72:64]behavior: [:RD],*/
+mppa_uint128 reserved_1:55;
 };
 
 #ifndef KVX_DISABLE_TYPECHECK
@@ -272,7 +280,9 @@ typedef char assertion_for_struct_mppa_l2_cache_job_fifo[(sizeof(struct mppa_l2_
  * Reset value: 0x0
  */
 typedef union {
+mppa_uint128 dreg;
 mppa_uint64 reg[2];
+mppa_uint128 ddword;
 mppa_uint64 dword[2];
 struct mppa_l2_cache_job_fifo _;
 } mppa_l2_cache_job_fifo_t;
@@ -288,15 +298,16 @@ struct mppa_l2_cache_job_fifo _;
  * Reset value: 0x0
  */
 typedef union {
+mppa_uint128 dreg;
 mppa_uint64 reg[2];
+mppa_uint128 ddword;
 mppa_uint64 dword[2];
 struct mppa_l2_cache_job_fifo _;
 } mppa_l2_cache_pop_fifo_t;
 
 struct mppa_l2_cache_cancel_cam {
-mppa_uint64 proc_cancel :17; /*[16: 0]reset: 0x0,behavior: [:RD],*/
-mppa_uint64 reserved_1:47;
-mppa_uint64 reserved_2:64;
+mppa_uint128 proc_cancel :17; /*[16: 0]reset: 0x0,behavior: [:RD],*/
+mppa_uint128 reserved_1:111;
 };
 
 #ifndef KVX_DISABLE_TYPECHECK
@@ -318,7 +329,9 @@ typedef char assertion_for_struct_mppa_l2_cache_cancel_cam[(sizeof(struct mppa_l
  * Reset value: 0x0
  */
 typedef union {
+mppa_uint128 dreg;
 mppa_uint64 reg[2];
+mppa_uint128 ddword;
 mppa_uint64 dword[2];
 struct mppa_l2_cache_cancel_cam _;
 } mppa_l2_cache_cancel_cam_t;
@@ -341,9 +354,8 @@ typedef char assertion_for_mppa_l2_cache_jobfifo_t[(sizeof(mppa_l2_cache_jobfifo
 
 #endif /* KVX_DISABLE_TYPECHECK */
 struct mppa_l2_cache_prefetch {
-mppa_uint64 address :40; /*[39: 0]behavior: [:WR],*/
-mppa_uint64 reserved_1:24;
-mppa_uint64 reserved_2:64;
+mppa_uint128 address :40; /*[39: 0]behavior: [:WR],*/
+mppa_uint128 reserved_1:88;
 };
 
 #ifndef KVX_DISABLE_TYPECHECK
@@ -365,7 +377,9 @@ typedef char assertion_for_struct_mppa_l2_cache_prefetch[(sizeof(struct mppa_l2_
  * Reset value: Not initialized
  */
 typedef union {
+mppa_uint128 dreg;
 mppa_uint64 reg[2];
+mppa_uint128 ddword;
 mppa_uint64 dword[2];
 struct mppa_l2_cache_prefetch _;
 } mppa_l2_cache_prefetch_t;
@@ -384,7 +398,7 @@ mppa_l2_cache_tcm_metadata_t tcm_metadata[8192]; /* offset: 0x0, size: 0x80000 *
 mppa_l2_cache_l2_metadata_t l2_metadata[8192]; /* offset: 0x80000, size: 0x80000 */
 mppa_l2_cache_jobfifo_t jobfifo[16]; /* offset: 0x100000, size: 0x400 */
 mppa_uint8 unused0[1047552];
-mppa_l2_cache_prefetch_t prefetch; /* offset: 0x200000, size: 0x10 ( /!\ this is a 128bits register*/
+mppa_l2_cache_prefetch_t prefetch; /* offset: 0x200000, size: 0x10 */
 } mppa_l2_cache_t;
 
 #ifndef KVX_DISABLE_TYPECHECK

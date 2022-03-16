@@ -38,8 +38,9 @@ memcmp:
    so -32[$r12] = $r28r29r30r31
    compd.geu $r3 = $r2, 192
    make $r6 = 0
+   addd $r12 = $r12, -144
    ;;
-   so -64[$r12] = $r24r25r26r27
+   so 80[$r12] = $r24r25r26r27
    cb.deqz $r3? .Lremaining_160
    ;;
    lo.u $r32r33r34r35 = 0[$r0]
@@ -65,15 +66,15 @@ memcmp:
    lo.u $r24r25r26r27 = 128[$r0]
    extfz $r7 = $r5, 32+7-1, 7
    ;;
-   so -96[$r12] = $r20r21r22r23
+   so 48[$r12] = $r20r21r22r23
    ;;
    lo.u $r20r21r22r23 = 128[$r1]
    ;;
-   so -128[$r12] = $r16r17r18r19
+   so 16[$r12] = $r16r17r18r19
    ;;
    lo.u $r16r17r18r19 = 160[$r0]
    ;;
-   sq -144[$r12] = $r14r15
+   sq 0[$r12] = $r14r15
    ;;
    lq.u $r14r15 = 160[$r1]
    ;;
@@ -347,7 +348,7 @@ memcmp:
    copyd $r5 = $r11
    ;;
 .Lremaining_160:
-   lo.dnez $r6? $r24r25r26r27 = -64[$r12]
+   lo.dnez $r6? $r24r25r26r27 = 80[$r12]
    andd $r11 = $r2, 16
    srld $r7 = $r2, 5
    srld $r10 = $r2, 5
@@ -467,34 +468,36 @@ memcmp:
    copyd $r5 = $r36
    ;;
 .Lreturn:
-   lq.dnez $r6? $r14r15 = -144[$r12]
+   lq.dnez $r6? $r14r15 = 0[$r12]
    ;;
-   lo.dnez $r6? $r16r17r18r19 = -128[$r12]
+   lo.dnez $r6? $r16r17r18r19 = 16[$r12]
    ;;
-   lo.dnez $r6? $r20r21r22r23 = -96[$r12]
+   lo.dnez $r6? $r20r21r22r23 = 48[$r12]
    ;;
 .Lreturn_early:
+   addd $r12 = $r12, 144
    make $r0 = 0
-   lo $r28r29r30r31 = -32[$r12]
+   lo $r28r29r30r31 = 112[$r12]
    ret
    ;;
 .Lstreaming_kernel_exit:
    xord $r0 = $r4, $r5
-   lq.dnez $r6? $r14r15 = -144[$r12]
+   lq.dnez $r6? $r14r15 = 0[$r12]
    ;;
    ctzd $r0 = $r0
-   lo.dnez $r6? $r16r17r18r19 = -128[$r12]
+   lo.dnez $r6? $r16r17r18r19 = 16[$r12]
    ;;
    andd $r0 = $r0, 0x38
-   lo.dnez $r6? $r20r21r22r23 = -96[$r12]
+   lo.dnez $r6? $r20r21r22r23 = 48[$r12]
    ;;
    srad $r4 = $r4, $r0
    srad $r5 = $r5, $r0
-   lo.dnez $r6? $r24r25r26r27 = -64[$r12]
+   lo.dnez $r6? $r24r25r26r27 = 80[$r12]
    ;;
    andd $r4 = $r4, 0xff
    andd $r5 = $r5, 0xff
-   lo $r28r29r30r31 = -32[$r12]
+   addd $r12 = $r12, 144
+   lo $r28r29r30r31 = 112[$r12]
    ;;
    sbfw $r0 = $r5, $r4
    ret

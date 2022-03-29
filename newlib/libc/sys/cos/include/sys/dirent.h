@@ -57,7 +57,7 @@ struct dirent {
 	unsigned long long d_off;
 	unsigned short d_reclen;
 	unsigned char d_type;
-	char d_name[];
+	char d_name[MAXNAMLEN];
 };
 
 /* File types for `d_type'.  */

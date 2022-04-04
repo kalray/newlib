@@ -70,7 +70,7 @@ ARFLAGS = cru
 lib_a_AR = $(AR) $(ARFLAGS)
 lib_a_LIBADD =
 am_lib_a_OBJECTS = lib_a-lock.$(OBJEXT) lib_a-secure_getenv.$(OBJEXT) \
-  lib_a-setgethostname.$(OBJEXT) lib_a-getrusage.$(OBJEXT)
+  lib_a-setgethostname.$(OBJEXT) lib_a-getrusage.$(OBJEXT) lib_a-basedirname.$(OBJEXT)
 lib_a_OBJECTS = $(am_lib_a_OBJECTS)
 DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp =
@@ -195,7 +195,7 @@ AUTOMAKE_OPTIONS = cygnus
 INCLUDES = -I$(srcdir)/include $(NEWLIB_CFLAGS) $(CROSS_CFLAGS) $(TARGET_CFLAGS)
 AM_CCASFLAGS = $(INCLUDES)
 noinst_LIBRARIES = lib.a
-lib_a_SOURCES = lock.c secure_getenv.c setgethostname.c getrusage.c
+lib_a_SOURCES = lock.c secure_getenv.c setgethostname.c getrusage.c basedirname.c
 lib_a_CCASFLAGS = $(AM_CCASFLAGS)
 lib_a_CFLAGS = $(AM_CFLAGS)
 
@@ -283,6 +283,12 @@ lib_a-getrusage.o: getrusage.c
 
 lib_a-getrusage.obj: getrusage.c
 	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-getrusage.obj `if test -f 'getrusage.c'; then $(CYGPATH_W) 'getrusage.c'; else $(CYGPATH_W) '$(srcdir)/getrusage.c'; fi`
+
+lib_a-basedirname.o: basedirname.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-basedirname.o `test -f 'basedirname.c' || echo '$(srcdir)/'`basedirname.c
+
+lib_a-basedirname.obj: basedirname.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CFLAGS) $(CFLAGS) -c -o lib_a-basedirname.obj `if test -f 'basedirname.c'; then $(CYGPATH_W) 'basedirname.c'; else $(CYGPATH_W) '$(srcdir)/basedirname.c'; fi`
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \

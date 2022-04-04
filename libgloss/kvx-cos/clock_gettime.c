@@ -30,6 +30,7 @@
  *    OR OTHERWISE), EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#define _GNU_SOURCE
 #include <errno.h>
 #include <time.h>
 #include <sys/time.h>
@@ -48,6 +49,11 @@ clock_gettime(clockid_t clock_id, struct timespec *tp)
       case CLOCK_REALTIME:
       case CLOCK_MONOTONIC:
       case CLOCK_THREAD_CPUTIME_ID:
+      case CLOCK_MONOTONIC_RAW:
+      case CLOCK_MONOTONIC_COARSE:
+      case CLOCK_BOOTTIME:
+      case CLOCK_REALTIME_ALARM:
+      case CLOCK_BOOTTIME_ALARM:
         retval = gettimeofday (&tv, NULL);
         if (retval == 0) {
           tp->tv_sec = tv.tv_sec;

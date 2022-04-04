@@ -342,6 +342,7 @@ extern "C" {
 #define _POSIX_MONOTONIC_CLOCK                 200112L
 #define _POSIX_READER_WRITER_LOCKS             200112L
 #define _POSIX_PATH_MAX                        256
+#define _POSIX_TIMEOUTS                        1
 #endif /* __CLUSTER_OS__ */
 
 /* RTEMS adheres to POSIX -- 1003.1b with some features from annexes.  */

@@ -221,7 +221,7 @@ int	pthread_attr_setguardsize (pthread_attr_t *__attr, size_t __guardsize);
  * compatibility.
  */
 #if __GNU_VISIBLE
-#if defined(__rtems__) 
+#if defined(__rtems__) || defined(__CLUSTER_OS__)
 int	pthread_attr_setaffinity_np (pthread_attr_t *__attr,
 				     size_t __cpusetsize,
 				     const cpu_set_t *__cpuset);

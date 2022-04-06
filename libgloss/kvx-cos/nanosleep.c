@@ -22,8 +22,10 @@ int nanosleep(const struct timespec *req, struct timespec *rem){
 		const unsigned long long ticks = (unsigned long long)(((float)sec + (float)nsec / (float)NANOSEC_PER_SECOND) * freq);
 
 		while (ticks > (mppa_pwr_ctrl_local->dsu_timestamp.reg - start)) {
-			// perhaps we can yield here ? FIXME to be specified
-			;
+			/* Let other threads run and
+			 * handle cancellation points.
+			 */
+			pthread_yield();
 		}
 
 		if (rem) {

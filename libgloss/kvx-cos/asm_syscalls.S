@@ -187,6 +187,13 @@ SYSCALL_ENTRY(stat)
 	;;
 SYSCALL_END_ENTRY(stat)
 
+SYSCALL_ENTRY(lstat)
+	scall __NR_lstat
+	;;
+	ret
+	;;
+SYSCALL_END_ENTRY(lstat)
+
 SYSCALL_ENTRY(unlink)
 	scall __NR_unlink
 	;;

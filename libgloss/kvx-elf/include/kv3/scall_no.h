@@ -85,17 +85,18 @@
 #    define __NR_access         52
 #    define __NR_chdir          54
 #    define __NR_mkfifo         55
+#    define __NR_lstat          107
 #    define __NR_getdents       141
 #    define __NR_cache_flush    196
 #    define __NR_exit_thread    197
 #    define __NR_send_command   198
 #    define __NR_readtimer      200
-#define  __NR_probe_address_space 201
-
-#    define __NR_last_syscall 202 /* Set to highest syscall number */
+#    define __NR_probe_address_space 201
+#    define __NR_last_syscall   202 /* Set to highest syscall number */
 
 
 /* Special syscalls for internal use by the ISS */
+#    define __NR_iss_lstat          0xfcd /* 4045 */
 #    define __NR_iss_getuid         0xfce /* 4046 */
 #    define __NR_iss_geteuid        0xfcf /* 4047 */
 #    define __NR_iss_getgid         0xfd0 /* 4048 */

@@ -110,7 +110,7 @@ int sched_setparam(pid_t pid, const struct sched_param *param)
 	return -1;
 }
 
-int lstat(const char *pathname, struct stat *statbuf)
+int mknod(const char *__path, mode_t __mode, dev_t __dev)
 {
 	errno = -ENOSYS;
 	return -1;
@@ -146,7 +146,6 @@ int sched_setscheduler(pid_t pid, int policy, const struct sched_param *param)
 	return -1;
 }
 
-
 long _pathconf(const char *path, int name) {
         errno = -EINVAL;
         return -1;
@@ -157,7 +156,7 @@ long pathconf(const char *path, int name)
 
 char* _getcwd(char *buf, size_t size) {
         errno = -EINVAL;
-        return -1;
+        return NULL;
 }
 
 char* getcwd(char *buf, size_t size) __attribute__ ((weak, alias ("_getcwd")));

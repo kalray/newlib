@@ -29,17 +29,20 @@
  *    WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
  *    OR OTHERWISE), EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+.cfi_sections .debug_frame
 .text
 .global memcmp
 .proc memcmp
 .align 16
 memcmp:
+   .cfi_startproc
    cb.deqz $r2? .Lreturn_early
    so -32[$r12] = $r28r29r30r31
    compd.geu $r3 = $r2, 192
    make $r6 = 0
    addd $r12 = $r12, -144
    ;;
+   .cfi_def_cfa_offset 144
    so 80[$r12] = $r24r25r26r27
    cb.deqz $r3? .Lremaining_160
    ;;
@@ -499,7 +502,11 @@ memcmp:
    addd $r12 = $r12, 144
    lo $r28r29r30r31 = 112[$r12]
    ;;
+  .cfi_def_cfa_offset 0
    sbfw $r0 = $r5, $r4
    ret
    ;;
+  .cfi_endproc
 .endp memcmp
+.type name, @function
+.size memcmp, . -memcmp

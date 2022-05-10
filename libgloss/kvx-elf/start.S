@@ -58,9 +58,9 @@ _start:
 	;;
 	compw.eq $r1 = $r0, 0x10
 	;;
-	cb.weqz $r1, __kvx_asm_start_pe
+	cb.weqz $r1, .L__kvx_asm_start_pe
 	;;
-__kvx_asm_start_rm:
+#__kvx_asm_start_rm:
 	make $sp = _rm_stack_start
 	make $r1 = __kvx_rm_c_startup
 	;;
@@ -68,7 +68,7 @@ __kvx_asm_start_rm:
 	;;
 	goto .     # just in case ...
 	;;
-__kvx_asm_start_pe:
+.L__kvx_asm_start_pe:
 	make $r2 = __GLOSS_KVX_PE_STACK_ADDRESS
 	make $r1 = __kvx_pe_c_startup
 	;;

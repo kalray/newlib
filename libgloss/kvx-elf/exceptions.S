@@ -53,29 +53,29 @@ __kvx_asm_exceptions_handler:
         ;;
 	extfz  $r0 = $r0, (KVX_SFR_ES_EC_WIDTH + KVX_SFR_ES_EC_SHIFT - 1), KVX_SFR_ES_EC_SHIFT ## Extract 2 lsb of $es.ec
         ;;
-	cb.deqz $r0? __kvx_asm_debug_handler ## $es.ec = KV3_EC_DEBUG
+	cb.deqz $r0? .L__kvx_asm_debug_handler ## $es.ec = KV3_EC_DEBUG
 	compd.eq $r2 = $r0, KV3_EC_HWTRAP
         ;;
-	cb.dnez $r2? __kvx_asm_hwtrap_handler ## $es.ec = KV3_EC_HWTRAP
+	cb.dnez $r2? .L__kvx_asm_hwtrap_handler ## $es.ec = KV3_EC_HWTRAP
 	compd.eq $r2 = $r0, KV3_EC_INTERRUPT
         ;;
-	cb.dnez $r2? __kvx_asm_interrupt_handler ## $es.ec = KV3_EC_INTERRUPT
+	cb.dnez $r2? .L__kvx_asm_interrupt_handler ## $es.ec = KV3_EC_INTERRUPT
 	compd.eq $r2 = $r0, KV3_EC_SCALL
         ;;
-	cb.dnez $r2? __kvx_asm_scall_handler ## $es.ec = KV3_EC_SCALL
+	cb.dnez $r2? .L__kvx_asm_scall_handler ## $es.ec = KV3_EC_SCALL
 	compd.eq $r2 = $r0, KV3_EC_DE_HWTRAP
         ;;
-	cb.dnez $r2? __kvx_asm_hwtrap_handler ## $es.ec = KV3_EC_DE_HWTRAP
+	cb.dnez $r2? .L__kvx_asm_hwtrap_handler ## $es.ec = KV3_EC_DE_HWTRAP
 	compd.eq $r2 = $r0, KV3_EC_DE_INTERRUPT
         ;;
-	cb.dnez $r2? __kvx_asm_hwtrap_handler ## $es.ec = KV3_EC_DE_INTERRUPT
+	cb.dnez $r2? .L__kvx_asm_hwtrap_handler ## $es.ec = KV3_EC_DE_INTERRUPT
 	compd.eq $r2 = $r0, KV3_EC_DE_SCALL
         ;;
-	cb.dnez $r2? __kvx_asm_hwtrap_handler ## $es.ec = KV3_EC_DE_SCALL
+	cb.dnez $r2? .L__kvx_asm_hwtrap_handler ## $es.ec = KV3_EC_DE_SCALL
         ;;
-	goto __kvx_asm_bad_exception_handler
+	goto .L__kvx_asm_bad_exception_handler
         ;;
-__kvx_asm_hwtrap_handler:
+.L__kvx_asm_hwtrap_handler:
         .global __kvx_do_hwtrap
         .type __kvx_do_hwtrap, @function
 	get   $r0 = $es
@@ -83,9 +83,9 @@ __kvx_asm_hwtrap_handler:
 	extfz  $r0 = $r0, (KVX_SFR_ES_HTC_WIDTH + KVX_SFR_ES_HTC_SHIFT - 1), KVX_SFR_ES_HTC_SHIFT ## Extract HTC from ES
 	call  __kvx_do_hwtrap       ## jump to C code
         ;;
-	goto __kvx_asm_return_from_exceptions
+	goto .L__kvx_asm_return_from_exceptions
         ;;
-__kvx_asm_interrupt_handler:
+.L__kvx_asm_interrupt_handler:
 	get   $r0 = $es
 	;;
 	extfz $r0 = $r0, (KVX_SFR_ES_ITN_WIDTH + KVX_SFR_ES_ITN_SHIFT - 1), KVX_SFR_ES_ITN_SHIFT ## Extract ITN from ES
@@ -105,9 +105,9 @@ __kvx_asm_interrupt_handler:
 	## according to the number of the interrupt we took
 	icall $r3
 	;;
-	goto __kvx_asm_return_from_exceptions
+	goto .L__kvx_asm_return_from_exceptions
 	;;
-__kvx_asm_debug_handler:
+.L__kvx_asm_debug_handler:
 	.global __kvx_do_debug
 	.type __kvx_do_debug, @function
 
@@ -120,9 +120,9 @@ __kvx_asm_debug_handler:
 	#endif
 	call  __kvx_do_debug       ## jump to C code
 	;;
-	goto __kvx_asm_return_from_exceptions
+	goto .L__kvx_asm_return_from_exceptions
 	;;
-__kvx_asm_scall_handler:
+.L__kvx_asm_scall_handler:
 	.global __kvx_do_scall
 	.type __kvx_do_scall, @function
 
@@ -139,14 +139,14 @@ __kvx_asm_scall_handler:
 	;;
 	sd 0[$sp] = $r0 ## Store back return value (r0) into context register r0
 	;;
-	goto __kvx_asm_return_from_exceptions
+	goto .L__kvx_asm_return_from_exceptions
 	;;
-__kvx_asm_bad_exception_handler:
+.L__kvx_asm_bad_exception_handler:
 	make $r0 = 1
 	;;
 	scall 4095
 	;;
-__kvx_asm_return_from_exceptions:
+.L__kvx_asm_return_from_exceptions:
 	make  $r2 = KVX_SFR_PS_IE_MASK
 	;;
 	wfxl  $ps, $r2                ## disable interrupts for context restoration

@@ -9,7 +9,7 @@
 
 #ifndef __ASSEMBLER__
 
-#include "machine/devices/trace.coolidge-v1.dev"
+#include "machine/devices/trace.coolidge-v2.dev"
 
 enum {
 	MPPA_TRACE_0__ADDR = 0x10100000,

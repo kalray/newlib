@@ -11,15 +11,15 @@
 
 #include "machine/devices/l2_cache.coolidge-v2.dev"
 
-enum {
-	MPPA_L2_LOCAL__ADDR = 0x400000,
-	MPPA_L2_CACHE_0__ADDR = 0x1400000,
-	MPPA_L2_CACHE_1__ADDR = 0x2400000,
-	MPPA_L2_CACHE_2__ADDR = 0x3400000,
-	MPPA_L2_CACHE_3__ADDR = 0x4400000,
-	MPPA_L2_CACHE_4__ADDR = 0x5400000,
-};
+#define MPPA_L2_LOCAL__ADDR  0x400000
+__attribute__ ((__unused__))
+static volatile mppa_l2_cache_t *mppa_l2_local = (mppa_l2_cache_t *) (MPPA_L2_LOCAL__ADDR);
 
+#define MPPA_L2_CACHE_0__ADDR  0x1400000
+#define MPPA_L2_CACHE_1__ADDR  0x2400000
+#define MPPA_L2_CACHE_2__ADDR  0x3400000
+#define MPPA_L2_CACHE_3__ADDR  0x4400000
+#define MPPA_L2_CACHE_4__ADDR  0x5400000
 #define MPPA_L2_CACHE_COUNT  5
 
 static volatile mppa_l2_cache_t *const mppa_l2_cache[MPPA_L2_CACHE_COUNT] = {
@@ -29,9 +29,6 @@ static volatile mppa_l2_cache_t *const mppa_l2_cache[MPPA_L2_CACHE_COUNT] = {
 	(mppa_l2_cache_t *) (MPPA_L2_CACHE_3__ADDR),
 	(mppa_l2_cache_t *) (MPPA_L2_CACHE_4__ADDR),
 };
-
-__attribute__ ((__unused__))
-static volatile mppa_l2_cache_t *mppa_l2_local = (mppa_l2_cache_t *) (MPPA_L2_LOCAL__ADDR);
 
 #endif				/* __ASSEMBLER__ */
 

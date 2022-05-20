@@ -11,10 +11,7 @@
 
 #include "machine/devices/secure_cluster_regs.coolidge-v1.dev"
 
-enum {
-	MPPA_SECURE_CLUSTER_REGS_0__ADDR = 0xCC2000,
-};
-
+#define MPPA_SECURE_CLUSTER_REGS_0__ADDR  0xCC2000
 #define MPPA_SECURE_CLUSTER_REGS_COUNT  1
 
 static volatile mppa_secure_cluster_regs_t *const mppa_secure_cluster_regs[MPPA_SECURE_CLUSTER_REGS_COUNT] = {

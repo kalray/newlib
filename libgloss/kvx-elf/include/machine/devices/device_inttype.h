@@ -1,7 +1,7 @@
 /*
  * device_inttype.h
  * Automatically generated from registers definition files. Do not edit
- * Copyright (c) Kalray 2020.
+ * Copyright (c) Kalray 2022.
  */
 
 #ifndef _INCLUDED_DEVICE_INTTYPE_H_

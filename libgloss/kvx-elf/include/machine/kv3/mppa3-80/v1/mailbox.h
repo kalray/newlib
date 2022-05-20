@@ -11,16 +11,22 @@
 
 #include "machine/devices/mailbox.coolidge-v1.dev"
 
-enum {
-	MPPA_MAILBOX_LOCAL__ADDR = 0xA00000,
-	MPPA_SECURE_APIC_MAILBOX__ADDR = 0xD40000,
-	MPPA_MAILBOX_0__ADDR = 0x1A00000,
-	MPPA_MAILBOX_1__ADDR = 0x2A00000,
-	MPPA_MAILBOX_2__ADDR = 0x3A00000,
-	MPPA_MAILBOX_3__ADDR = 0x4A00000,
-	MPPA_MAILBOX_4__ADDR = 0x5A00000,
+#define MPPA_MAILBOX_LOCAL__ADDR  0xA00000
+__attribute__ ((__unused__))
+static volatile mppa_mailbox_t *mppa_mailbox_local = (mppa_mailbox_t *) (MPPA_MAILBOX_LOCAL__ADDR);
+
+#define MPPA_SECURE_APIC_MAILBOX_0__ADDR  0xD40000
+#define MPPA_SECURE_APIC_MAILBOX_COUNT  1
+
+static volatile mppa_mailbox_t *const mppa_secure_apic_mailbox[MPPA_SECURE_APIC_MAILBOX_COUNT] = {
+	(mppa_mailbox_t *) (MPPA_SECURE_APIC_MAILBOX_0__ADDR),
 };
 
+#define MPPA_MAILBOX_0__ADDR  0x1A00000
+#define MPPA_MAILBOX_1__ADDR  0x2A00000
+#define MPPA_MAILBOX_2__ADDR  0x3A00000
+#define MPPA_MAILBOX_3__ADDR  0x4A00000
+#define MPPA_MAILBOX_4__ADDR  0x5A00000
 #define MPPA_MAILBOX_COUNT  5
 
 static volatile mppa_mailbox_t *const mppa_mailbox[MPPA_MAILBOX_COUNT] = {
@@ -30,11 +36,6 @@ static volatile mppa_mailbox_t *const mppa_mailbox[MPPA_MAILBOX_COUNT] = {
 	(mppa_mailbox_t *) (MPPA_MAILBOX_3__ADDR),
 	(mppa_mailbox_t *) (MPPA_MAILBOX_4__ADDR),
 };
-
-__attribute__ ((__unused__))
-static volatile mppa_mailbox_t *mppa_mailbox_local = (mppa_mailbox_t *) (MPPA_MAILBOX_LOCAL__ADDR);
-__attribute__ ((__unused__))
-static volatile mppa_mailbox_t *mppa_secure_apic_mailbox = (mppa_mailbox_t *) (MPPA_SECURE_APIC_MAILBOX__ADDR);
 
 #endif				/* __ASSEMBLER__ */
 

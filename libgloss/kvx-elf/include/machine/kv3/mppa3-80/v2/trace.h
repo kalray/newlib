@@ -11,10 +11,7 @@
 
 #include "machine/devices/trace.coolidge-v2.dev"
 
-enum {
-	MPPA_TRACE_0__ADDR = 0x10100000,
-};
-
+#define MPPA_TRACE_0__ADDR  0x10100000
 #define MPPA_TRACE_COUNT  1
 
 static volatile mppa_trace_t *const mppa_trace[MPPA_TRACE_COUNT] = {

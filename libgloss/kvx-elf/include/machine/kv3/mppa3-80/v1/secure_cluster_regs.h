@@ -11,11 +11,24 @@
 
 #include "machine/devices/secure_cluster_regs.coolidge-v1.dev"
 
-#define MPPA_SECURE_CLUSTER_REGS_0__ADDR  0xCC2000
-#define MPPA_SECURE_CLUSTER_REGS_COUNT  1
+#define MPPA_SECURE_CLUSTER_REGS_LOCAL__ADDR  0xCC2000
+__attribute__ ((__unused__))
+static volatile mppa_secure_cluster_regs_t *mppa_secure_cluster_regs_local =
+    (mppa_secure_cluster_regs_t *) (MPPA_SECURE_CLUSTER_REGS_LOCAL__ADDR);
+
+#define MPPA_SECURE_CLUSTER_REGS_0__ADDR  0x1CC2000
+#define MPPA_SECURE_CLUSTER_REGS_1__ADDR  0x2CC2000
+#define MPPA_SECURE_CLUSTER_REGS_2__ADDR  0x3CC2000
+#define MPPA_SECURE_CLUSTER_REGS_3__ADDR  0x4CC2000
+#define MPPA_SECURE_CLUSTER_REGS_4__ADDR  0x5CC2000
+#define MPPA_SECURE_CLUSTER_REGS_COUNT  5
 
 static volatile mppa_secure_cluster_regs_t *const mppa_secure_cluster_regs[MPPA_SECURE_CLUSTER_REGS_COUNT] = {
 	(mppa_secure_cluster_regs_t *) (MPPA_SECURE_CLUSTER_REGS_0__ADDR),
+	(mppa_secure_cluster_regs_t *) (MPPA_SECURE_CLUSTER_REGS_1__ADDR),
+	(mppa_secure_cluster_regs_t *) (MPPA_SECURE_CLUSTER_REGS_2__ADDR),
+	(mppa_secure_cluster_regs_t *) (MPPA_SECURE_CLUSTER_REGS_3__ADDR),
+	(mppa_secure_cluster_regs_t *) (MPPA_SECURE_CLUSTER_REGS_4__ADDR),
 };
 
 #endif				/* __ASSEMBLER__ */

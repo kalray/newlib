@@ -52,6 +52,8 @@ OBJCOPY = `if [ -f ${objroot}/../binutils/objcopy ] ; \
 	then echo ${objroot}/../binutils/objcopy ; \
 	else t='$(program_transform_name)'; echo objcopy | sed -e $$t ; fi`
 
+CRT_OBJS = gcrt0.o
+
 GLOSS_OBJS = access.o alarm.o chdir.o chmod.o clock.o clock_gettime.o \
 	     clock_getres.o sys_sysconf.o close.o dup.o dup2.o  exit.o fcntl.o \
 	     fstat.o getpagesize.o gettimeofday.o isatty.o link.o lseek.o \
@@ -98,12 +100,21 @@ AR_FLAGS = rc
 .c.s:
 	$(CC) $(CFLAGS_FOR_TARGET) -S $(INCLUDES) $(CFLAGS) $<
 
+%.o: %.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(CFLAGS) -c -o $@ $<
+
+%.o: %.s
+	$(CC) $(CFLAGS_FOR_TARGET) $(CFLAGS) -c -o $@ $<
+
+gcrt0.o: gmon.o mcount.o
+	$(CC) $(CFLAGS_FOR_TARGET) $(CFLAGS) -r -o $@ $^
+
 #
 # build a test program for each target board. Just trying to get
 # it to link is a good test, so we ignore all the errors for now.
 #
 
-all: libgloss.a
+all: libgloss.a $(CRT_OBJS)
 
 #
 # here's where we build the board support packages for each target
@@ -122,8 +133,8 @@ distclean maintainer-clean realclean: clean
 	rm -f Makefile config.status a.out
 
 .PHONY: install info install-info clean-info
-install:
-	$(INSTALL_PROGRAM) libgloss.a $(DESTDIR)$(tooldir)/lib${MULTISUBDIR};
+install: libgloss.a $(CRT_OBJS)
+	$(INSTALL_PROGRAM) $^ $(DESTDIR)$(tooldir)/lib${MULTISUBDIR}/
 
 info:
 install-info:

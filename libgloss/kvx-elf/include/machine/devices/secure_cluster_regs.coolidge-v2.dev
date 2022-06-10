@@ -339,8 +339,7 @@ struct mppa_secure_cluster_regs_l2_remote_access_config_view _;
 struct mppa_secure_cluster_regs_global_config {
 mppa_uint64 smem_meta_init :1; /*[ 0: 0]reset: 0x0,behavior: [:RD, :WR],SMEM metadata initialization (transition from 0 to 1 sets all metadata to default value)*/
 mppa_uint64 reserved_0:1;
-mppa_uint64 l2_cache_en :1; /*[ 2: 2]reset: 0x0,behavior: [:RD, :WR],Level2 cache enable*/
-mppa_uint64 l2_cache_config :1; /*[ 3: 3]reset: 0x0,behavior: [:RD, :WR],Level2 cache config (0=half SMEM cache, 1=quarter SMEM cache)*/
+mppa_uint64 l2_cache_config_ratio :2; /*[ 3: 2]reset: 0x0,behavior: [:RD, :WR],L2 cache config: 00b=off, 01b=L2 ratio 1/8 (1MB), 10b=L2 ratio 1/4 (2MB), 11b=L2 ratio 1/2 (4MB).*/
 mppa_uint64 smem_psht_rd_dis :10; /*[13: 4]reset: 0x0,behavior: [:RD, :WR],Disable Read Peripheral Shoot-Through (0: DSU; 1: DMA-Tx; ...; 9: DMA-PCIe-Rx*/
 mppa_uint64 smem_psht_wr_dis :10; /*[23:14]reset: 0x0,behavior: [:RD, :WR],Disable Write Peripheral Shoot-Through (0: DSU; 1: DMA-Tx; ...; 9: DMA-PCIe-Rx*/
 mppa_uint64 reserved_1:9;
@@ -359,10 +358,8 @@ typedef char assertion_for_struct_mppa_secure_cluster_regs_global_config[(sizeof
 #endif /* KVX_DISABLE_TYPECHECK */
 #define MPPA_SECURE_CLUSTER_REGS_GLOBAL_CONFIG_SMEM_META_INIT__SHIFT 0
 #define MPPA_SECURE_CLUSTER_REGS_GLOBAL_CONFIG_SMEM_META_INIT__MASK 0x1ULL
-#define MPPA_SECURE_CLUSTER_REGS_GLOBAL_CONFIG_L2_CACHE_EN__SHIFT 2
-#define MPPA_SECURE_CLUSTER_REGS_GLOBAL_CONFIG_L2_CACHE_EN__MASK 0x4ULL
-#define MPPA_SECURE_CLUSTER_REGS_GLOBAL_CONFIG_L2_CACHE_CONFIG__SHIFT 3
-#define MPPA_SECURE_CLUSTER_REGS_GLOBAL_CONFIG_L2_CACHE_CONFIG__MASK 0x8ULL
+#define MPPA_SECURE_CLUSTER_REGS_GLOBAL_CONFIG_L2_CACHE_CONFIG_RATIO__SHIFT 2
+#define MPPA_SECURE_CLUSTER_REGS_GLOBAL_CONFIG_L2_CACHE_CONFIG_RATIO__MASK 0xcULL
 #define MPPA_SECURE_CLUSTER_REGS_GLOBAL_CONFIG_SMEM_PSHT_RD_DIS__SHIFT 4
 #define MPPA_SECURE_CLUSTER_REGS_GLOBAL_CONFIG_SMEM_PSHT_RD_DIS__MASK 0x3ff0ULL
 #define MPPA_SECURE_CLUSTER_REGS_GLOBAL_CONFIG_SMEM_PSHT_WR_DIS__SHIFT 14

@@ -276,6 +276,7 @@ static void __l2_disable(void)
 
 void __l2_init_metadata(void)
 {
+#if defined(__kvxarch_kv3_1)
   int i;
   uint64_t ecc_status;
 
@@ -296,16 +297,22 @@ void __l2_init_metadata(void)
   ecc_status = mppa_pwr_ctrl_local->ecc_status.reg;
 
   if (ecc_status != 0) {
-#if defined(__kvxarch_kv3_1)
      ecc_status = mppa_pwr_ctrl_local->ecc_status_clear.reg;
-#elif defined(__kvxarch_kv3_2)
-     ecc_status = mppa_secure_cluster_regs_local->ecc_status_clear.reg;
-#else
-#error unsupported arch
-#endif
   }
 
   __l2_disable();
+#elif defined(__kvxarch_kv3_2)
+  #define PWR_GLOB_CACHE_INIT_IDX (0)
+  /* Init L2 cache metadata */
+  mppa_secure_cluster_regs_local->global_config.set.reg =
+    (1 << PWR_GLOB_CACHE_INIT_IDX);
+  __builtin_kvx_fence();
+  mppa_secure_cluster_regs_local->global_config.clear.reg =
+    (1 << PWR_GLOB_CACHE_INIT_IDX);
+  __builtin_kvx_fence();
+#else
+#error unsupported arch
+#endif
 }
 
 /**

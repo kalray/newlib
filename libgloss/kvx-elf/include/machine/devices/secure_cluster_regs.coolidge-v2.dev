@@ -350,7 +350,7 @@ mppa_uint64 smem_burst_len :3; /*[37:35]reset: 0x7,behavior: [:RD, :WR],Configur
 mppa_uint64 axi_burst_dis :1; /*[38:38]reset: 0x0,behavior: [:RD, :WR],AXI2SMEM only generates 1-flit transaction*/
 mppa_uint64 smem_dcld_dis :1; /*[39:39]reset: 0x0,behavior: [:RD, :WR],Disable DCLD in SMEM*/
 mppa_uint64 smem_replay_watchdog :16; /*[55:40]reset: 0x0,behavior: [:RD, :WR],SMEM Replay Watchdog: when different than 0, SMEM Replay are initiated every smem_replay_watchdog clock cycles*/
-mppa_uint64 reserved_3:8;
+mppa_uint64 smem_replay_shift :8; /*[63:56]reset: 0x0,behavior: [:RD, :WR],SMEM Replay Shift: SMEM Replay Watchdog is multiplied by 2**smem_replay_shift*/
 };
 
 #ifndef KVX_DISABLE_TYPECHECK
@@ -379,6 +379,8 @@ typedef char assertion_for_struct_mppa_secure_cluster_regs_global_config[(sizeof
 #define MPPA_SECURE_CLUSTER_REGS_GLOBAL_CONFIG_SMEM_DCLD_DIS__MASK 0x8000000000ULL
 #define MPPA_SECURE_CLUSTER_REGS_GLOBAL_CONFIG_SMEM_REPLAY_WATCHDOG__SHIFT 40
 #define MPPA_SECURE_CLUSTER_REGS_GLOBAL_CONFIG_SMEM_REPLAY_WATCHDOG__MASK 0xffff0000000000ULL
+#define MPPA_SECURE_CLUSTER_REGS_GLOBAL_CONFIG_SMEM_REPLAY_SHIFT__SHIFT 56
+#define MPPA_SECURE_CLUSTER_REGS_GLOBAL_CONFIG_SMEM_REPLAY_SHIFT__MASK 0xff00000000000000ULL
 
 
 /***

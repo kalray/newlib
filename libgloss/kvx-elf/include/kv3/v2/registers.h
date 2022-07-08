@@ -127,7 +127,7 @@
 #define KVX_SFR_PM7 60 // Performance Monitor 7 $pm7 $s60
 #define KVX_SFR_PMC2 61 // Performance Monitor Control 2 $pmc2 $s61
 #define KVX_SFR_SRHPC 62 // Last sequence rupture helper PC when uninferrable $srhpc $s62
-#define KVX_SFR_CC 63 // Cycle counter, always running $cc $s63
+#define KVX_SFR_FRCC 63 // Free running cycle counter $frcc $s63
 #define KVX_SFR_SPC_PL0 64 // Shadow PC PL 0 $spc_pl0 $s64
 #define KVX_SFR_SPC_PL1 65 // Shadow PC PL 1 $spc_pl1 $s65
 #define KVX_SFR_SPC_PL2 66 // Shadow PC PL 2 $spc_pl2 $s66

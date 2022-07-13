@@ -133,7 +133,13 @@ static void __kvx_low_level_startup()
     __builtin_kvx_wfxm(KVX_SFR_MOW, 0x100000000);
 
     #ifndef __kvxarch_kv3_1
-    __builtin_kvx_wfxm(KVX_SFR_MOW, 1ULL << KVX_SFR_MOW_TPCM_SHIFT);
+    __builtin_kvx_wfxm(KVX_SFR_MOW,
+              (1ULL << KVX_SFR_MOW_TPCM_SHIFT)
+            | (1ULL << KVX_SFR_MOW_PM4_SHIFT)
+            | (1ULL << KVX_SFR_MOW_PM5_SHIFT)
+            | (1ULL << KVX_SFR_MOW_PM6_SHIFT)
+            | (1ULL << KVX_SFR_MOW_PM7_SHIFT)
+    );
     #endif
 
     /* Delegate all traps to PL1 except DE, *ECC, *PAR */

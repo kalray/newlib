@@ -30,6 +30,7 @@
  *    OR OTHERWISE), EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
 #include <kv3/registers.h>
@@ -325,6 +326,13 @@ void __kvx_do_thread_exit(void)
 void __kvx_finish_newlib_init(void);
 int __kvx_trace_pc_init(void);
 
+extern int mppa_trace_pc_enable (bool enable)  __attribute__((weak));
+static  void __kvx_trace_pc_disable(void)
+{
+  if (mppa_trace_pc_enable)
+    mppa_trace_pc_enable(false);
+}
+
 /** Do PE startup **/
 static void __kvx_do_pe_startup(void)
 {
@@ -343,6 +351,7 @@ static void __kvx_do_pe_startup(void)
 
   __kvx_trace_pc_init();
   __kvx_code_ptr(args_ptr);
+  __kvx_trace_pc_disable();
 
   __kvx_do_thread_exit();
 }

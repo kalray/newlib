@@ -70,7 +70,7 @@ ARFLAGS = cru
 lib_a_AR = $(AR) $(ARFLAGS)
 lib_a_LIBADD =
 am_lib_a_OBJECTS = lib_a-setjmp.$(OBJEXT) lib_a-memset.$(OBJEXT) \
-	lib_a-memcpy.$(OBJEXT) lib_a-memcmp.$(OBJEXT) lib_a-strcmp.$(OBJEXT) \
+	lib_a-memcpy.$(OBJEXT) lib_a-memcmp.$(OBJEXT) lib_a-strcmp.$(OBJEXT) lib_a-strlen.$(OBJEXT) \
 	lib_a-rpmatch.$(OBJEXT) lib_a-arc4random.$(OBJEXT) lib_a-arc4random_uniform.$(OBJEXT) \
 	lib_a-hash_page.$(OBJEXT) lib_a-isatty.$(OBJEXT) lib_a-_isatty.$(OBJEXT) lib_a-execve.$(OBJEXT)
 lib_a_OBJECTS = $(am_lib_a_OBJECTS)
@@ -200,7 +200,7 @@ AUTOMAKE_OPTIONS = foreign
 INCLUDES = $(NEWLIB_CFLAGS) $(CROSS_CFLAGS) $(TARGET_CFLAGS) -I$(newlib_basedir)/libc/search
 AM_CCASFLAGS = $(INCLUDES)
 noinst_LIBRARIES = lib.a
-lib_a_SOURCES = setjmp.S memset.S memcpy.S memcmp.S strcmp.c rpmatch.c arc4random.c arc4random_uniform.c hash_page.c isatty.c _isatty.c execve.c
+lib_a_SOURCES = setjmp.S memset.S memcpy.S memcmp.S strcmp.c strlen.c rpmatch.c arc4random.c arc4random_uniform.c hash_page.c isatty.c _isatty.c execve.c
 lib_a_CCASFLAGS = $(AM_CCASFLAGS)
 lib_a_CFLAGS = $(AM_CFLAGS)
 ACLOCAL_AMFLAGS = -I ../../.. -I ../../../..
@@ -292,6 +292,12 @@ lib_a-strcmp.o: strcmp.c
 
 lib_a-strcmp.obj: strcmp.c
 	$(CCAS) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CCASFLAGS) $(CCASFLAGS) -c -o lib_a-strcmp.obj `if test -f 'strcmp.c'; then $(CYGPATH_W) 'strcmp.c'; else $(CYGPATH_W) '$(srcdir)/strcmp.c'; fi`
+
+lib_a-strlen.o: strlen.c
+	$(CCAS) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CCASFLAGS) $(CCASFLAGS) -c -o lib_a-strlen.o `test -f 'strlen.c' || echo '$(srcdir)/'`strlen.c
+
+lib_a-strlen.obj: strlen.c
+	$(CCAS) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CCASFLAGS) $(CCASFLAGS) -c -o lib_a-strlen.obj `if test -f 'strlen.c'; then $(CYGPATH_W) 'strlen.c'; else $(CYGPATH_W) '$(srcdir)/strlen.c'; fi`
 
 lib_a-isatty.o: isatty.c
 	$(CCAS) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(lib_a_CCASFLAGS) $(CCASFLAGS) -c -o lib_a-isatty.o `test -f 'isatty.c' || echo '$(srcdir)/'`isatty.c

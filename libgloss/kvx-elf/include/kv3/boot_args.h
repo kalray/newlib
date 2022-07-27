@@ -82,8 +82,6 @@
  *                                 +-------------------------+
  */
 
-extern void *MPPA_ARGAREA_START __attribute__((weak));
-
 #  define __MPPA_MAGIC_BOOT_ARGS_VALUE 0xDEADBEEF
 
 typedef struct kvx_boot_args {
@@ -138,6 +136,8 @@ typedef __kvx_boot_args_mmap64_t __kvx_boot_args_mmap_t;
 #else
 typedef __kvx_boot_args_mmap32_t __kvx_boot_args_mmap_t;
 #endif
+
+extern __kvx_boot_args_mmap_t MPPA_ARGAREA_START __attribute__((weak));
 
 extern void __kvx_get_boot_args(kvx_boot_args_t *args);
 

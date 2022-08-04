@@ -52,6 +52,9 @@
 #define UNALIGNED(type, X) ((uintptr_t)X & (sizeof(type) - 1))
 /* Nonzero if either X or Y is not aligned on a "type" boundary */
 #define UNALIGNED2(type, X, Y) (UNALIGNED(type, X) | UNALIGNED(type, Y))
+/* Create a mask to round down an address to a "type" boundary */
+#define ALIGN_MASK(type) (~(sizeof(type) - 1))
+
 
 /* Smallest page size */
 #define PAGE_SIZE (4096)

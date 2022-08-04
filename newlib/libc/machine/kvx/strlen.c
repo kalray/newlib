@@ -72,15 +72,10 @@ strlen(const char *str) {
 
         a256++;
 
-        /* Align pointer if needed */
-        uint64_t align_offset = UNALIGNED(uint64x4_t, a256);
-        if (align_offset) {
-            /* Round down address to 32 bytes alignment, which means we will be
-               checking some previous bytes twice, but remove page cross check
-               from the main loop */
-            a256 = (uint64x4_t *)((uintptr_t)a256 & ~align_offset);
-        }
-
+        /* Round down address to 32 bytes alignment, which means we will be
+            checking some previous bytes twice, but remove page cross check
+            from the main loop */
+        a256 = (uint64x4_t *)((uintptr_t)a256 & ALIGN_MASK(uint64x4_t));
 
     /* Page cross on the first load is rare, so read 1 byte at a time until
        the pointer is aligned.

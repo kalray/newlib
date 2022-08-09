@@ -32,116 +32,82 @@
 
 #include "asm.h"
 
-	## int setjmp(jmp_buf)
-	##
-	## Basically setjmp saves the set of callee saved registers in jmp_buf
-	## Also saving cs, the loop registers, ra and sp
+/*
+ * Saved layout is as follows:
+ * 0x00: $r18 $r19
+ * 0x10: $r20 $r21 $r22 $r23
+ * 0x30: $r24 $r25 $r26 $r27
+ * 0x50: $r28 $r29 $r30 $r31
+ * 0x70: $r13 $r14 $ls  $le
+ * 0x90: $lc  $cs  $ra  $r12
+ *
+ * Warning: $ra offset (0xa0) must be set in gdb port
+ * in gdb/gdb/kvx-common-tdep.c
+ */
+
+    ## int setjmp(jmp_buf)
+    ##
+    ## Basically setjmp saves the set of callee saved registers in jmp_buf
+    ## Also saving cs, the loop registers, ra and sp
 _ENTRY(setjmp)
-	.file 1 "setjmp.S"
-	.loc 1 12 0
-	.loc 1 12 0
-	## All preserved registers
-	sq	0x0[$r0] = $r18r19
+    .file 1 "setjmp.S"
+    .loc 1 54 0
+    ## All preserved registers
+    sq 0x00[$r0] = $r18r19
+    copyd   $r32 = $r13
+    get     $r34 = $ls
 ;;
-	sq	0x10[$r0] = $r20r21
+    so 0x10[$r0] = $r20r21r22r23
+    copyd   $r33 = $r14
+    get     $r35 = $le
 ;;
-	sq	0x20[$r0] = $r22r23
+    so 0x30[$r0] = $r24r25r26r27
+    get     $r36 = $lc
 ;;
-	sq	0x30[$r0] = $r24r25
+    so 0x50[$r0] = $r28r29r30r31
+    get     $r37 = $cs
 ;;
-	sq	0x40[$r0] = $r26r27
+    so 0x70[$r0] = $r32r33r34r35
+    get     $r38 = $ra
+    copyd   $r39 = $r12
 ;;
-	sq	0x50[$r0] = $r28r29
+    so 0x90[$r0] = $r36r37r38r39
+    ## Must return zero if called to set up jmp_buf
+    make     $r0 = 0
+    ret
 ;;
-	sq	0x60[$r0] = $r30r31
-;;
-	sd	0x70[$r0] = $r13
-;;
-	sd	0x78[$r0] = $r14
-	get     $r1 = $ls
-;;
-	sd	0x80[$r0] = $r1
-	get     $r1 = $le
-;;
-	sd	0x88[$r0] = $r1
-	get     $r1 = $lc
-;;
-	sd	0x90[$r0] = $r1
-	get     $r1 = $cs
-;;
-	sd	0x98[$r0] = $r1
-	get     $r1 = $ra
-;;
-	sd	0xa0[$r0] = $r1    ## Warning!!!! $ra offset must be set in gdb port in gdb/gdb/k1-common-tdep.c
-;;
-	sd	0xa8[$r0] = $r12
-	make    $r0 = 0
-;;
-	## Must return zero if called to set up jm_buf
-	ret
-;;
-	.endp setjmp
+    .endp setjmp
 
 
 
-	## void longjmp(jmp_buf env, int val)
-	##
-	## Basically restore the saved register set found in env to processor
-	## Restoring also sp. Note that it jumps back to original location
+    ## void longjmp(jmp_buf env, int val)
+    ##
+    ## Basically restore the saved register set found in env to processor
+    ## Restoring also sp. Note that it jumps back to original location
 _ENTRY(longjmp)
-        .loc 1 55 0
-        .loc 1 55 0
-	lq	$r18r19 = 0x0[$r0]
+        .loc 1 88 0
+    lo $r32r33r34r35 = 0x70[$r0]
 ;;
-	lq	$r20r21 = 0x10[$r0]
+    lo $r36r37r38r39 = 0x90[$r0]
+    copyd   $r13 = $r32
+    copyd   $r14 = $r33
+    set     $ls = $r34
 ;;
-	lq	$r22r23 = 0x20[$r0]
+    lq $r18r19 = 0x00[$r0]
+    set     $le = $r35
 ;;
-	lq	$r24r25 = 0x30[$r0]
+    lo $r20r21r22r23 = 0x10[$r0]
+    set     $lc = $r36
 ;;
-	lq	$r26r27 = 0x40[$r0]
+    lo $r24r25r26r27 = 0x30[$r0]
+    set     $cs = $r37
 ;;
-	lq	$r28r29 = 0x50[$r0]
+    lo $r28r29r30r31 = 0x50[$r0]
+    set     $ra = $r38
+    copyd   $r12 = $r39
 ;;
-	lq	$r30r31 = 0x60[$r0]
+    ## Finally if called with val==0, return one else val
+    maxud   $r0 = $r1, 1
+    ret
 ;;
-	ld	$r13 = 0x70[$r0]
-;;
-	ld	$r14 = 0x78[$r0]
-;;
-	ld	$r2  = 0x80[$r0]
-;;
-	ld	$r2  = 0x88[$r0]
-	set     $ls  = $r2
-;;
-	ld	$r2  = 0x90[$r0]
-	set     $le  = $r2
-;;
-	ld	$r2  = 0x98[$r0]
-	set     $lc  = $r2
-;;
-	ld	$r2  = 0xa0[$r0]
-	set     $cs  = $r2
-;;
-	set     $ra  = $r2
-;;
-	ld	$r12 = 0xa8[$r0]
-	copyd   $r0 = $r1
-	make    $r2 = 1
-;;
-	## Finally if called with val==0, return one else val
-
-	## FIXME AUTO: reuse cmoved.weqz
-	## cmoved.weqz $r0? $r0 = $r2
-
-        ## start of cmoved replacement
-	cb.weqz $r0, 1f
-	;;
-	ret
-	;;
-1:
-	copyd $r0 = $r2
-	ret
-	;;
-        ## end of cmoved replacement
-	.endp longjmp
+    .endp longjmp

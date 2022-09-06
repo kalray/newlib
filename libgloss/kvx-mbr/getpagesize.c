@@ -35,5 +35,5 @@
 /* Used by mallocr.c and sbrk.c */
 int getpagesize()
 {
-  return 8192;
+  return 4096;
 }

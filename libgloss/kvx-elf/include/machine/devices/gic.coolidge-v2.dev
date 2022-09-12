@@ -138,16 +138,16 @@ struct mppa_gic_ring_level_abs _;
 } mppa_gic_ring_level_abs_value_t;
 
 /***
- * gic group_gic group definition
+ * gic gic group definition
  *
  * Size: 1024/0x400 bytes
  */
-#define MPPA_GIC_GROUP_GIC_ENABLE_NUMBER 157
-#define MPPA_GIC_GROUP_GIC_STATUS_NUMBER 3
-#define MPPA_GIC_GROUP_GIC_STATUS_LAC_NUMBER 3
+#define MPPA_GIC_GIC_ENABLE_NUMBER 159
+#define MPPA_GIC_GIC_STATUS_NUMBER 3
+#define MPPA_GIC_GIC_STATUS_LAC_NUMBER 3
 typedef struct  {
-mppa_gic_enable_t enable[157]; /* offset: 0x0, size: 0x9D ( /!\ this is a 8bits register*/
-mppa_uint8 unused0[99];
+mppa_gic_enable_t enable[159]; /* offset: 0x0, size: 0x9F ( /!\ this is a 8bits register*/
+mppa_uint8 unused0[97];
 mppa_gic_status_t status[3]; /* offset: 0x100, size: 0x18 ( /!\ this is a 64bits register*/
 mppa_uint8 unused1[8];
 mppa_gic_status_lac_t status_lac[3]; /* offset: 0x120, size: 0x18 ( /!\ this is a 64bits register*/
@@ -155,10 +155,10 @@ mppa_uint8 unused2[8];
 mppa_gic_ring_config_t ring_level_config; /* offset: 0x140, size: 0x4 */
 mppa_gic_ring_level_abs_value_t ring_level_abs_val; /* offset: 0x144, size: 0x4 */
 mppa_uint8 unused3[696];
-} mppa_gic_group_gic_t;
+} mppa_gic_gic_t;
 
 #ifndef KVX_DISABLE_TYPECHECK
-typedef char assertion_for_mppa_gic_group_gic_t[(sizeof(mppa_gic_group_gic_t) == 1024)*2-1];// If this fails, then the size of mppa_gic_group_gic_t as created by the compiler does not match the hardware size.
+typedef char assertion_for_mppa_gic_gic_t[(sizeof(mppa_gic_gic_t) == 1024)*2-1];// If this fails, then the size of mppa_gic_gic_t as created by the compiler does not match the hardware size.
 
 #endif /* KVX_DISABLE_TYPECHECK */
 struct mppa_gic_config {
@@ -603,7 +603,7 @@ typedef char assertion_for_mppa_gic_debug_reg_t[(sizeof(mppa_gic_debug_reg_t) ==
  */
 #define MPPA_GIC_GIC_NUMBER 72
 typedef struct  {
-mppa_gic_group_gic_t gic[18][4]; /* offset: 0x0, size: 0x12000 */
+mppa_gic_gic_t gic[18][4]; /* offset: 0x0, size: 0x12000 */
 mppa_uint8 unused0[57216];
 mppa_gic_protect_t initiator_protect; /* offset: 0x1FF80, size: 0x1C */
 mppa_gic_debug_reg_t debug_regs; /* offset: 0x1FF9C, size: 0x18 */

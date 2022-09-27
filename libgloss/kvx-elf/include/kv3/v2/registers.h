@@ -166,6 +166,10 @@
 #define KVX_SFR_DOW 99 // Alias to DO register $dow $s99
 #define KVX_SFR_MOW 100 // Alias to MO register $mow $s100
 #define KVX_SFR_PSOW 101 // Alias to PSO register $psow $s101
+#define KVX_SFR_TPCC_PL0 104 // Trace PC Context $tpcc_pl0 $s104
+#define KVX_SFR_TPCC_PL1 105 // Trace PC Context $tpcc_pl1 $s105
+#define KVX_SFR_TPCC_PL2 106 // Trace PC Context $tpcc_pl2 $s106
+#define KVX_SFR_TPCC_PL3 107 // Trace PC Context $tpcc_pl3 $s107
 #define KVX_SFR_SPC 128 // Shadow PC alias on SPC_PL<i> $spc $s128
 #define KVX_SFR_SPS 132 // Shadow PS alias on PS_PL<i> $sps $s132
 #define KVX_SFR_EA 136 // Effective Address alias on EA_PL<i> $ea $s136
@@ -174,6 +178,7 @@
 #define KVX_SFR_ES 148 // Exception Syndrome alias on ES_PL<i> $es $s148
 #define KVX_SFR_SID 152 // Stream ID alias on SID_PL<i> $sid $s152
 #define KVX_SFR_SR1 156 // System Register 1 alias on SR1_PL<i> $sr1 $s156
+#define KVX_SFR_TPCC 168 // Trace PC Context alias on TPCC_PL<i> $tpcc $s168
 #define KVX_SFR_VSFR0 256 // Virtual SFR 0 $vsfr0 $s256
 #define KVX_SFR_VSFR1 257 // Virtual SFR 1 $vsfr1 $s257
 #define KVX_SFR_VSFR2 258 // Virtual SFR 2 $vsfr2 $s258

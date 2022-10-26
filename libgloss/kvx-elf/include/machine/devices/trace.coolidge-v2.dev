@@ -583,11 +583,79 @@ mppa_uint32 word;
 struct mppa_trace_timestamp_hw_enable _;
 } mppa_trace_timestamp_hw_enable_t;
 
+struct mppa_trace_etb_hst_mode {
+mppa_uint32 etb_hst_mode :1; /*[ 0: 0]reset: 0x0,behavior: [:RD, :WR],Embedded TRACE Buffer High Speed Trace Mode Enable bit:
+0 - HST Disabled,
+1 - HST Enabled
+*/
+mppa_uint32 reserved_1:31;
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_trace_etb_hst_mode[(sizeof(struct mppa_trace_etb_hst_mode) == 4)*2-1];// If this fails, then the size of struct mppa_trace_etb_hst_mode as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_TRACE_ETB_HST_MODE_ETB_HST_MODE__SHIFT 0
+#define MPPA_TRACE_ETB_HST_MODE_ETB_HST_MODE__MASK 0x1UL
+
+
+/***
+ * trace etb_hst_mode register definition
+ * Embedded TRACE Buffer High Speed Trace Mode Enable Register.
+ *
+ * Permissions:
+ * RM: ker => [:RD, :WR],
+ * RM: usr => [:RD, :WR],
+ * PE: ker => [:RD, :WR],
+ * PE: usr => [:RD, :WR],
+ * Size: 4 bytes (min access size = 4 bytes)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint32 reg;
+mppa_uint32 word;
+struct mppa_trace_etb_hst_mode _;
+} mppa_trace_etb_hst_mode_t;
+
+struct mppa_trace_etb_flush_mode {
+mppa_uint32 etb_flush_mode :1; /*[ 0: 0]reset: 0x0,behavior: [:RD, :WR],Embedded TRACE Buffer Flush Mode Enable bit:
+0 - Flush Disabled,
+1 - Flush Enabled
+*/
+mppa_uint32 reserved_1:31;
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_trace_etb_flush_mode[(sizeof(struct mppa_trace_etb_flush_mode) == 4)*2-1];// If this fails, then the size of struct mppa_trace_etb_flush_mode as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_TRACE_ETB_FLUSH_MODE_ETB_FLUSH_MODE__SHIFT 0
+#define MPPA_TRACE_ETB_FLUSH_MODE_ETB_FLUSH_MODE__MASK 0x1UL
+
+
+/***
+ * trace etb_flush_mode register definition
+ * Embedded TRACE Buffer Flush Mode Enable Register.
+ *
+ * Permissions:
+ * RM: ker => [:RD, :WR],
+ * RM: usr => [:RD, :WR],
+ * PE: ker => [:RD, :WR],
+ * PE: usr => [:RD, :WR],
+ * Size: 4 bytes (min access size = 4 bytes)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint32 reg;
+mppa_uint32 word;
+struct mppa_trace_etb_flush_mode _;
+} mppa_trace_etb_flush_mode_t;
+
 /***
  * trace device definition
  * Coolidge system TRACE
  *
- * Size: 524352/0x80040 bytes
+ * Size: 524360/0x80048 bytes
  */
 #define MPPA_TRACE_ETB_ENTRY_NUMBER 32768
 typedef struct  {
@@ -608,10 +676,12 @@ mppa_trace_etb_wmark_it_t etb_wmark_it; /* offset: 0x80030, size: 0x4 */
 mppa_trace_trace_sw_hw_sel_t trace_sw_hw_sel; /* offset: 0x80034, size: 0x4 */
 mppa_trace_formatter_flush_hw_t formatter_flush_hw; /* offset: 0x80038, size: 0x4 */
 mppa_trace_timestamp_hw_enable_t timestamp_hw_enable; /* offset: 0x8003C, size: 0x4 */
+mppa_trace_etb_hst_mode_t etb_hst_mode; /* offset: 0x80040, size: 0x4 */
+mppa_trace_etb_flush_mode_t etb_flush_mode; /* offset: 0x80044, size: 0x4 */
 } mppa_trace_t;
 
 #ifndef KVX_DISABLE_TYPECHECK
-typedef char assertion_for_mppa_trace_t[(sizeof(mppa_trace_t) == 524352)*2-1];// If this fails, then the size of mppa_trace_t as created by the compiler does not match the hardware size.
+typedef char assertion_for_mppa_trace_t[(sizeof(mppa_trace_t) == 524360)*2-1];// If this fails, then the size of mppa_trace_t as created by the compiler does not match the hardware size.
 
 #endif /* KVX_DISABLE_TYPECHECK */
 #endif // _INCLUDED_DEVICES_TRACE_COOLIDGE_V2_DEV_

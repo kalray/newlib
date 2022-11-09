@@ -87,9 +87,7 @@ int mlockall(int flags)
 {
 	int ret = 0;
 
-	if (flags != MCL_CURRENT &&
-		flags != MCL_FUTURE &&
-		flags != MCL_ONFAULT) {
+	if (!(flags & (MCL_CURRENT | MCL_FUTURE | MCL_ONFAULT))) {
 		errno = -EINVAL;
 		ret = -1;
 	}

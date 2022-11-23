@@ -122,7 +122,7 @@ static inline unsigned long long libc_get_id(void)
 static inline void libc_cache_flush(void)
 {
   /* Full memory barrier */
-  __builtin_kvx_dinval();
+  __builtin_kvx_d1inval();
   __builtin_kvx_fence();
 }
 

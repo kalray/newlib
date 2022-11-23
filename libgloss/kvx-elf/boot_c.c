@@ -106,7 +106,7 @@ static void __kvx_low_level_startup()
   }
 
   __builtin_kvx_wfxm(KVX_SFR_PCR, KVX_SFR_WFXM_VALUE(PCR_L1CE, 1)); /* L1 coherency enable */
-  __builtin_kvx_dinval(); /* invalidate the data cache after turning on the L1 coherency so that we don't keep hot data in the cache that the directory is not aware of  */
+  __builtin_kvx_d1inval(); /* invalidate the data cache after turning on the L1 coherency so that we don't keep hot data in the cache that the directory is not aware of  */
 
   /* Check PL : if PL0 : switch to PL1, if not
    *(i.e. with jtag already in PL1) do nothing

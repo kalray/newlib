@@ -418,12 +418,20 @@ extern void __gloss_kvx_cluster_poweroff(void);
  */
 
 /**
- * \fn uint64_t __gloss_kvx_volatile_write64(void *addr, uint64_t val)
+ * \fn void __gloss_kvx_volatile_write64(void *addr, uint64_t val)
  * \brief Peripheral write of 64 bits
  * \param addr Pointer to the adress where data will be written
  * \param val Data to write
  */
 extern void __gloss_kvx_volatile_write64(void *addr, uint64_t val);
+
+/**
+ * \fn void __gloss_kvx_volatile_write32(void *addr, uint32_t val)
+ * \brief Peripheral write of 32 bits
+ * \param addr Pointer to the adress where data will be written
+ * \param val Data to write
+ */
+extern void __gloss_kvx_volatile_write32(void *addr, uint32_t val);
 
 #endif /* __ASSEMBLER__ */
 

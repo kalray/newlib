@@ -335,7 +335,7 @@ void __gloss_kvx_clear_pwc_reset_on_wup(int cpuid)
     __gloss_kvx_volatile_write64((void *) &mppa_pwr_ctrl_local->vector_proc_control.reset_on_wakeup.clear,
 				 1ULL << cpuid);
   } else {
-    __gloss_kvx_volatile_write64((void *) &mppa_secure_cluster_regs_local->rm_control.clear,
+    __gloss_kvx_volatile_write32((void *) &mppa_secure_cluster_regs_local->rm_control.clear,
 				 1ULL << MPPA_SECURE_CLUSTER_REGS_PROC_CONFIG_RESET_ON_WAKEUP__SHIFT);
   }
 #else
@@ -351,7 +351,7 @@ void __gloss_kvx_set_pwc_wup(int cpuid)
   if (cpuid != __GLOSS_KVX_RM_ID) {
     __gloss_kvx_volatile_write64((void *) &mppa_pwr_ctrl_local->vector_proc_control.wup.set, 1ULL << cpuid);
   } else {
-    __gloss_kvx_volatile_write64((void *) &mppa_secure_cluster_regs_local->rm_control.set,
+    __gloss_kvx_volatile_write32((void *) &mppa_secure_cluster_regs_local->rm_control.set,
 				 1ULL << MPPA_SECURE_CLUSTER_REGS_PROC_CONFIG_WAKEUP__SHIFT);
   }
 #else
@@ -367,7 +367,7 @@ void __gloss_kvx_clear_pwc_wup(int cpuid)
   if (cpuid != __GLOSS_KVX_RM_ID) {
     __gloss_kvx_volatile_write64((void *) &mppa_pwr_ctrl_local->vector_proc_control.wup.clear, 1ULL << cpuid);
   } else {
-    __gloss_kvx_volatile_write64((void *) &mppa_secure_cluster_regs_local->rm_control.clear,
+    __gloss_kvx_volatile_write32((void *) &mppa_secure_cluster_regs_local->rm_control.clear,
 				 1ULL << MPPA_SECURE_CLUSTER_REGS_PROC_CONFIG_WAKEUP__SHIFT);
   }
 #else
@@ -407,4 +407,9 @@ void __gloss_kvx_cluster_poweroff(void)
 void __gloss_kvx_volatile_write64(void *addr, uint64_t val)
 {
   *(volatile uint64_t *)addr = val;
+}
+
+void __gloss_kvx_volatile_write32(void *addr, uint32_t val)
+{
+  *(volatile uint32_t *)addr = val;
 }

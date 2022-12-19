@@ -51,13 +51,17 @@ memmove:
    fall back to a backwards copy, otherwise take the memcpy path. */
 
    cb.deqz $r2? .Lreturn
-   # $r4 = src < dst
-   compd.ltu $r4 = $r1, $r0
    # $r5 = src + length
    addd $r5 = $r1, $r2
    # Save return value (dst)
    copyd $r6 = $r0
+   addd $r12 = $r12, -64
+   so.dnez $r2? -32[$r12] = $r28r29r30r31
    ;;
+   .cfi_def_cfa_offset 64
+   so 0[$r12] = $r24r25r26r27
+   # $r4 = src < dst
+   compd.ltu $r4 = $r1, $r0
    # $r7 = dst < $r5
    compd.ltu $r7 = $r0, $r5
    ;;
@@ -78,28 +82,44 @@ memcpy:
    .cfi_startproc
    cb.deqz $r2? .Lreturn
    compd.geu $r3 = $r2, STREAMING_THRESHOLD
+   so.dnez $r2? -32[$r12] = $r28r29r30r31
    copyd $r6 = $r0
+   addd $r12 = $r12, -64
    ;;
+   .cfi_def_cfa_offset 64
+   so 0[$r12] = $r24r25r26r27
 #endif
    cb.deqz $r3? .Lremaining_256
    ;;
    lq.u $r32r33 = 0[$r1]
    addd $r2 = $r2, -256
+   andd $r7 = $r2, 255
    ;;
    lq.u $r34r35 = 16[$r1]
+   srld $r7 = $r7, 5
    ;;
    lq.u $r36r37 = 32[$r1]
-   srld $r7 = $r2, 8
    ;;
    lq.u $r38r39 = 48[$r1]
    ;;
    lq.u $r40r41 = 64[$r1]
+   compd.gt $r3 = $r7, 1
+   compd.gt $r4 = $r7, 2
+   compd.gt $r5 = $r7, 3
    ;;
    lq.u $r42r43 = 80[$r1]
+   compd.gt $r8 = $r7, 4
+   compd.gt $r9 = $r7, 5
+   compd.gt $r10 = $r7, 6
    ;;
    lq.u $r44r45 = 96[$r1]
+   andd $r24 = $r2, 16
+   andd $r25 = $r2, 8
+   andd $r26 = $r2, 4
    ;;
    lq.u $r46r47 = 112[$r1]
+   andd $r27 = $r2, 2
+   andd $r28 = $r2, 1
    ;;
    lq.u $r48r49 = 128[$r1]
    ;;
@@ -117,6 +137,7 @@ memcpy:
    ;;
    lq.u $r62r63 = 240[$r1]
    addd $r1 = $r1, 256
+   srld $r7 = $r2, 8
    ;;
    cb.deqz $r7? .Lstreaming_remaining_256
    ;;
@@ -191,38 +212,123 @@ memcpy:
    ;;
 .Lstreaming_kernel_256:
 .Lstreaming_remaining_256:
-   sq 0[$r0] = $r32r33
+   so 0[$r0] = $r32r33r34r35
+   addd $r11 = $r1, 32
+   srld $r7 = $r2, 5
    ;;
-   sq 16[$r0] = $r34r35
+   lo.u.dnez $r7? $r32r33r34r35 = [$r1]
+   cmoved.dnez $r7? $r1 = $r11
+   compd.gt $r7 = $r7, 0
    ;;
-   sq 32[$r0] = $r36r37
+   so 32[$r0] = $r36r37r38r39
+   addd $r11 = $r1, 32
    ;;
-   sq 48[$r0] = $r38r39
+   lo.u.dnez $r3? $r36r37r38r39 = [$r1]
+   cmoved.dnez $r3? $r1 = $r11
    ;;
-   sq 64[$r0] = $r40r41
+   so 64[$r0] = $r40r41r42r43
+   addd $r11 = $r1, 32
    ;;
-   sq 80[$r0] = $r42r43
+   lo.u.dnez $r4? $r40r41r42r43 = [$r1]
+   cmoved.dnez $r4? $r1 = $r11
    ;;
-   sq 96[$r0] = $r44r45
+   so 96[$r0] = $r44r45r46r47
+   addd $r11 = $r1, 32
    ;;
-   sq 112[$r0] = $r46r47
+   lo.u.dnez $r5? $r44r45r46r47 = [$r1]
+   cmoved.dnez $r5? $r1 = $r11
    ;;
-   sq 128[$r0] = $r48r49
+   so 128[$r0] = $r48r49r50r51
+   addd $r11 = $r1, 32
    ;;
-   sq 144[$r0] = $r50r51
+   lo.u.dnez $r8? $r48r49r50r51 = [$r1]
+   cmoved.dnez $r8? $r1 = $r11
    ;;
-   sq 160[$r0] = $r52r53
+   so 160[$r0] = $r52r53r54r55
+   addd $r11 = $r1, 32
    ;;
-   sq 176[$r0] = $r54r55
+   lo.u.dnez $r9? $r52r53r54r55 = [$r1]
+   cmoved.dnez $r9? $r1 = $r11
    ;;
-   sq 192[$r0] = $r56r57
+   so 192[$r0] = $r56r57r58r59
+   addd $r11 = $r1, 32
    ;;
-   sq 208[$r0] = $r58r59
+   lo.u.dnez $r10? $r56r57r58r59 = [$r1]
+   cmoved.dnez $r10? $r1 = $r11
    ;;
-   sq 224[$r0] = $r60r61
-   ;;
-   sq 240[$r0] = $r62r63
+   so 224[$r0] = $r60r61r62r63
    addd $r0 = $r0, 256
+   addd $r11 = $r1, 16
+   ;;
+   lq.u.dnez $r24? $r60r61 = [$r1]
+   cmoved.dnez $r24? $r1 = $r11
+   ;;
+   addd $r11 = $r1, 8
+   ld.u.dnez $r25? $r62 = [$r1]
+   ;;
+   cmoved.dnez $r25? $r1 = $r11
+   ;;
+   addd $r11 = $r1, 4
+   lwz.u.dnez $r26? $r63 = [$r1]
+   ;;
+   cmoved.dnez $r26? $r1 = $r11
+   ;;
+   addd $r11 = $r1, 2
+   lhz.u.dnez $r27? $r29 = [$r1]
+   ;;
+   cmoved.dnez $r27? $r1 = $r11
+   addd $r11 = $r10, $r9
+   addd $r31 = $r5, $r4
+   ;;
+   lbz.u.dnez $r28? $r30 = [$r1]
+   addd $r11 = $r11, $r8
+   addd $r31 = $r31, $r3
+   ;;
+   so.dnez $r7? [$r0] = $r32r33r34r35
+   addd $r11 = $r11, $r7
+   ;;
+   so.dnez $r3? 32[$r0] = $r36r37r38r39
+   addd $r11 = $r11, $r31
+   ;;
+   so.dnez $r4? 64[$r0] = $r40r41r42r43
+   muld $r4 = $r11, 32
+   ;;
+   so.dnez $r5? 96[$r0] = $r44r45r46r47
+   ;;
+   so.dnez $r8? 128[$r0] = $r48r49r50r51
+   addd $r32 = $r0, $r4
+   ;;
+   so.dnez $r9? 160[$r0] = $r52r53r54r55
+   addd $r11 = $r32, 16
+   addd $r8 = $r32, 0
+   ;;
+   so.dnez $r10? 192[$r0] = $r56r57r58r59
+   cmoved.dnez $r24? $r8 = $r11
+   ;;
+   sq.dnez $r24? [$r32] = $r60r61
+   addd $r5 = $r8, 8
+   addd $r0 = $r8, 0
+   ;;
+   sd.dnez $r25? [$r8] = $r62
+   cmoved.dnez $r25? $r0 = $r5
+   ;;
+   sw.dnez $r26? [$r0] = $r63
+   addd $r5 = $r0, 4
+   ;;
+   cmoved.dnez $r26? $r0 = $r5
+   ;;
+   sh.dnez $r27? [$r0] = $r29
+   addd $r5 = $r0, 2
+   ;;
+   cmoved.dnez $r27? $r0 = $r5
+   lo $r24r25r26r27 = 0[$r12]
+   ;;
+   sb.dnez $r28? [$r0] = $r30
+   ;;
+   lo $r28r29r30r31 = 32[$r12]
+   addd $r12 = $r12, 64
+   copyd $r0 = $r6
+   ret
    ;;
 .Lremaining_256:
    andd $r11 = $r2, 16
@@ -282,6 +388,7 @@ memcpy:
    sb.dnez $r7? [$r0] = $r32
    ;;
 .Lreturn:
+   addd $r12 = $r12, 64
    copyd $r0 = $r6
    ret
    ;;
@@ -491,8 +598,8 @@ memcpy:
 .Lbackwards_loop_remaining_2:
    lbz.dnez $r7? $r32 = -1[$r1]
    ;;
+   addd $r12 = $r12, 64
    sb.dnez $r7? -1[$r0] = $r32
-   ;;
    copyd $r0 = $r6
    ret
    ;;

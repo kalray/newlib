@@ -96,6 +96,8 @@
 
 
 /* Special syscalls for internal use by the ISS */
+#    define __NR_iss_trace_en_set   0xfcb /* 4043 */
+#    define __NR_iss_sim_mode_set   0xfcc /* 4044 */
 #    define __NR_iss_lstat          0xfcd /* 4045 */
 #    define __NR_iss_getuid         0xfce /* 4046 */
 #    define __NR_iss_geteuid        0xfcf /* 4047 */

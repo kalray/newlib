@@ -1,7 +1,7 @@
 /*
  * pwr_ctrl.h
  * Automatically generated from registers definition files. Do not edit
- * Copyright (c) Kalray 2022.
+ * Copyright (c) Kalray 2023.
  */
 
 #ifndef _INCLUDED_V2_PWR_CTRL_H_

@@ -34,8 +34,8 @@
 #define __SYS_LOCK_H__
 
 #include <stdint.h>
-#include <mppa_bare_runtime/kv3/atomic.h>
-#include <mppa_bare_runtime/kv3/cache.h>
+#include <mppa_bare_runtime/kvx/atomic.h>
+#include <mppa_bare_runtime/kvx/cache.h>
 
 /*
  * Lock routines for mppa bare runtime toolchain.

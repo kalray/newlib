@@ -30,12 +30,12 @@
  *    OR OTHERWISE), EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <kv3/asm_macros.h>
-#include <kv3/asm_context.h>
-#include <kv3/registers.h>
-#include <kv3/trap.h>
+#include <kvx/asm_macros.h>
+#include <kvx/asm_context.h>
+#include <kvx/registers.h>
+#include <kvx/trap.h>
 
-#include <kv3/bsp.h>
+#include <kvx/bsp.h>
 
 	.section .exceptions, "ax", @progbits
 	.globl __kvx_asm_exceptions_handler

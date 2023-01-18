@@ -32,8 +32,8 @@
 
 #include <stdint.h>
 #include <assert.h>
-#include <kv3/registers.h>
-#include <kv3/bsp.h>
+#include <kvx/registers.h>
+#include <kvx/bsp.h>
 
 /**
  * Core routines

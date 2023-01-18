@@ -90,9 +90,9 @@ distclean maintainer-clean realclean: clean
 install:
 	$(INSTALL_PROGRAM) libgloss.a $(DESTDIR)$(tooldir)/lib${MULTISUBDIR};
 	$(INSTALL_PROGRAM) $(CRT_FILES) $(DESTDIR)$(tooldir)/lib${MULTISUBDIR};
-	${mkinstalldirs} ${DESTDIR}${tooldir}/include/kv3;
-	for i in ${srcdir}/include/kv3/*.h; do \
-	  ${INSTALL_DATA} $$i ${DESTDIR}${tooldir}/include/kv3/`basename $$i`; \
+	${mkinstalldirs} ${DESTDIR}${tooldir}/include/kvx;
+	for i in ${srcdir}/include/kvx/*.h; do \
+	  ${INSTALL_DATA} $$i ${DESTDIR}${tooldir}/include/kvx/`basename $$i`; \
 	done
 	${mkinstalldirs} ${DESTDIR}${tooldir}/lib;
 	for i in ${srcdir}/linker_scripts/*.ld; do \

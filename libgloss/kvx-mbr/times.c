@@ -34,8 +34,8 @@
 #include <sys/times.h>
 #include <errno.h>
 
-#include <mppa_bare_runtime/kv3/cpu.h>
-#include <mppa_bare_runtime/kv3/diagnostic.h>
+#include <mppa_bare_runtime/kvx/cpu.h>
+#include <mppa_bare_runtime/kvx/diagnostic.h>
 
 clock_t __gloss_times(struct tms *buf)
 {

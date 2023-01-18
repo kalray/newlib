@@ -30,8 +30,8 @@
  *    OR OTHERWISE), EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <kv3/context.h>
-#include <kv3/registers.h>
+#include <kvx/context.h>
+#include <kvx/registers.h>
 
 unsigned int __kvx_get_privilege_level(void)
 {

@@ -33,15 +33,15 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
-#include <kv3/registers.h>
-#include <kv3/trap.h>
-#include <kv3/boot_args.h>
-#include <kv3/context.h>
-#include <kv3/assert.h>
-#include <kv3/linker_symbols.h>
+#include <kvx/registers.h>
+#include <kvx/trap.h>
+#include <kvx/boot_args.h>
+#include <kvx/context.h>
+#include <kvx/assert.h>
+#include <kvx/linker_symbols.h>
 
-#include <kv3/boot_c.h>
-#include <kv3/bsp.h>
+#include <kvx/boot_c.h>
+#include <kvx/bsp.h>
 
 void __kvx_start_pe(int cpuid, void *start_address, void *args_address, void *stack_address)
 {

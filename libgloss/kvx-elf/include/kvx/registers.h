@@ -33,9 +33,9 @@
 #ifndef _REGISTERS_H_
 
 #if defined __kvxarch_kv3_1
-#include "kv3/v1/registers.h"
+#include "kvx/kv3_v1/registers.h"
 #elif defined __kvxarch_kv3_2
-#include "kv3/v2/registers.h"
+#include "kvx/kv3_v2/registers.h"
 #else
 #error "Unknown Coolidge version"
 #endif

@@ -30,7 +30,7 @@
  *    OR OTHERWISE), EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <kv3/syscall.h>
+#include <kvx/syscall.h>
 
 uint64_t __kvx_syscall(const uint32_t syscall_nb)
 {

@@ -30,8 +30,8 @@
  *    OR OTHERWISE), EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <kv3/asm_macros.h>
-#include <kv3/registers.h>
+#include <kvx/asm_macros.h>
+#include <kvx/registers.h>
 #define __NL__
 
 	.section .boot.startup, "ax", @progbits

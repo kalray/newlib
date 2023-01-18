@@ -34,9 +34,9 @@
 #include <sys/times.h>
 #include <errno.h>
 
-#include <kv3/diagnostic.h>
+#include <kvx/diagnostic.h>
 
-#include <kv3/bsp.h>
+#include <kvx/bsp.h>
 
 clock_t __gloss_times(struct tms *buf)
 {

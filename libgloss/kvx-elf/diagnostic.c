@@ -30,9 +30,9 @@
  *    OR OTHERWISE), EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <kv3/assert.h>
-#include <kv3/registers.h>
-#include <kv3/diagnostic.h>
+#include <kvx/assert.h>
+#include <kvx/registers.h>
+#include <kvx/diagnostic.h>
 
 int __gloss_kvx_counter_control(void)
 {

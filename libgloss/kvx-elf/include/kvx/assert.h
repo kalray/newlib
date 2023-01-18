@@ -35,9 +35,9 @@
 
 #ifndef __ASSEMBLER__
 
-#include <kv3/common.h>
-#include <kv3/scall_no.h>
-#include <kv3/syscall.h>
+#include <kvx/common.h>
+#include <kvx/scall_no.h>
+#include <kvx/syscall.h>
 
 #  ifndef __gloss_kvx_assert
 

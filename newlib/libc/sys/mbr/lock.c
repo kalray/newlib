@@ -33,10 +33,10 @@
 #include <stdlib.h>
 #include <sys/lock.h>
 
-#include <mppa_bare_runtime/kv3/context.h>
-#include <mppa_bare_runtime/kv3/syscall.h>
-#include <mppa_bare_runtime/kv3/scall_no.h>
-#include <mppa_bare_runtime/kv3/registers.h>
+#include <mppa_bare_runtime/kvx/context.h>
+#include <mppa_bare_runtime/kvx/syscall.h>
+#include <mppa_bare_runtime/kvx/scall_no.h>
+#include <mppa_bare_runtime/kvx/registers.h>
 
 static inline unsigned long long libc_get_id(void)
 {

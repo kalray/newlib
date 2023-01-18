@@ -30,7 +30,7 @@
  *    OR OTHERWISE), EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <mppa_bare_runtime/kv3/scall_no.h>
+#include <mppa_bare_runtime/kvx/scall_no.h>
 
 #include <fcntl.h>
 #include <stdarg.h>

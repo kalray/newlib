@@ -30,7 +30,7 @@
  *    OR OTHERWISE), EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <kv3/boot_args.h>
+#include <kvx/boot_args.h>
 
 static char *argv_default[] = { "main", 0, };
 static char *envp_default[] = { 0, };

@@ -35,7 +35,7 @@
 #include <time.h>
 
 #include <machine/kv3/mppa3-80/trace.h>
-#include <kv3/bsp.h>
+#include <kvx/bsp.h>
 
 #define NANOSEC_PER_SECOND (1000000000uLL)
 

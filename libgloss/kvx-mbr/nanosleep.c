@@ -32,7 +32,7 @@
 
 #include <errno.h>
 #include <time.h>
-#include <mppa_bare_runtime/kv3/cpu.h>
+#include <mppa_bare_runtime/kvx/cpu.h>
 #include <machine/kv3/mppa3-80/pwr_ctrl.h>
 #include <sys/types.h>
 #include <stdint.h>

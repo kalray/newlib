@@ -30,10 +30,10 @@
  *    OR OTHERWISE), EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <kv3/context.h>
-#include <kv3/trap.h>
+#include <kvx/context.h>
+#include <kvx/trap.h>
 
-#include <kv3/bsp.h>
+#include <kvx/bsp.h>
 
 #ifdef __GNUC__
 #define UNUSED(x) UNUSED_ ## x __attribute__((__unused__))

@@ -30,7 +30,7 @@
  *    OR OTHERWISE), EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <mppa_bare_runtime/kv3/scall_no.h>
+#include <mppa_bare_runtime/kvx/scall_no.h>
 
 	.section .text, "ax", @progbits
 	.align 4

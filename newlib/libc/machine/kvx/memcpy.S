@@ -141,7 +141,7 @@ memcpy:
    ;;
    cb.deqz $r7? .Lstreaming_remaining_256
    ;;
-   loopdo $r7? .Lstreaming_kernel_256
+   loopdo $r7, .Lstreaming_kernel_256
    ;;
    sq 0[$r0] = $r32r33
    addd $r2 = $r2, -256
@@ -336,7 +336,7 @@ memcpy:
    ;;
    cb.deqz $r7? .Lloop_remaining_32
    ;;
-   loopdo $r7? .Lloop_kernel_256
+   loopdo $r7, .Lloop_kernel_256
    ;;
    lo $r32r33r34r35 = 0[$r1]
    addd $r1 = $r1, 32
@@ -439,7 +439,7 @@ memcpy:
    ;;
    cb.deqz $r7? .Lbackwards_streaming_remaining_256
    ;;
-   loopdo $r7? .Lbackwards_streaming_kernel_256
+   loopdo $r7, .Lbackwards_streaming_kernel_256
    ;;
    sq -16[$r0] = $r32r33
    addd $r2 = $r2, -256
@@ -549,7 +549,7 @@ memcpy:
    ;;
    cb.deqz $r7? .Lbackwards_loop_remaining_32
    ;;
-   loopdo $r7? .Lbackwards_loop_kernel_256
+   loopdo $r7, .Lbackwards_loop_kernel_256
    ;;
    lo $r32r33r34r35 = -32[$r1]
    addd $r1 = $r1, -32

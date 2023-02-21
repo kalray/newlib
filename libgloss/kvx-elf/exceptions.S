@@ -41,7 +41,7 @@
 	.globl __kvx_asm_exceptions_handler
 	.proc __kvx_asm_exceptions_handler
 __kvx_asm_exceptions_handler:
-	ADD_PTR   $sp, $sp, -__KVX_CONTEXT64_SIZE    ## space for the registers
+	ADD_PTR   $sp= $sp, -__KVX_CONTEXT64_SIZE    ## space for the registers
 	;;
 	__kvx_context64_save $sp
 	;;
@@ -153,7 +153,7 @@ __kvx_asm_exceptions_handler:
 	;;
 	__kvx_context64_restore $sp
 	;;
-	ADD_PTR  $sp, $sp, __KVX_CONTEXT64_SIZE
+	ADD_PTR  $sp= $sp, __KVX_CONTEXT64_SIZE
 	;;
 	rfe
 	;;

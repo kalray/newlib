@@ -86,7 +86,7 @@ memcmp:
    addd $r1 = $r1, 192
    addd $r0 = $r0, 192
    ;;
-   loopdo $r7? .Lstreaming_kernel
+   loopdo $r7, .Lstreaming_kernel
    ;;
    compd.ne $r28 = $r32, $r36
    compd.ne $r29 = $r33, $r37
@@ -361,7 +361,7 @@ memcmp:
    ;;
    lo $r36r37r38r39 = 0[$r1]
    ;;
-   loopdo $r7? .Lloop_kernel_256
+   loopdo $r7, .Lloop_kernel_256
    ;;
    compd.ne $r28 = $r32, $r36
    compd.ne $r29 = $r33, $r37

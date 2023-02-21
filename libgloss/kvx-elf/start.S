@@ -58,7 +58,7 @@ _start:
 	;;
 	compw.eq $r1 = $r0, 0x10
 	;;
-	cb.weqz $r1, .L__kvx_asm_start_pe
+	cb.weqz $r1? .L__kvx_asm_start_pe
 	;;
 #__kvx_asm_start_rm:
 	make $sp = _rm_stack_start

@@ -36,6 +36,8 @@
 #include "kvx/kv3_v1/registers.h"
 #elif defined __kvxarch_kv3_2
 #include "kvx/kv3_v2/registers.h"
+#elif defined __kvxarch_kv4_1
+#include "kvx/kv4_v1/registers.h"
 #else
 #error "Unknown Coolidge version"
 #endif

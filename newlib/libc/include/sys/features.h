@@ -343,6 +343,9 @@ extern "C" {
 #define _POSIX_READER_WRITER_LOCKS             200112L
 #define _POSIX_PATH_MAX                        256
 #define _POSIX_TIMEOUTS                        1
+/* flush instead of close before calling dtor (see findfp.c)
+ * to avoid the lost of stdout for io communication */
+#define _STDIO_BSD_SEMANTICS                   1
 #endif /* __CLUSTER_OS__ */
 
 /* RTEMS adheres to POSIX -- 1003.1b with some features from annexes.  */

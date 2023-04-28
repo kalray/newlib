@@ -816,8 +816,12 @@ extern __FILE __sf[3];
 #define __ATTRIBUTE_IMPURE_PTR__
 #endif
 
+#ifndef __CLUSTER_OS__
 extern struct _reent *_impure_ptr __ATTRIBUTE_IMPURE_PTR__;
 extern struct _reent *const _global_impure_ptr __ATTRIBUTE_IMPURE_PTR__;
+#else
+extern struct _reent * _global_impure_ptr __ATTRIBUTE_IMPURE_PTR__;
+#endif
 
 void _reclaim_reent (struct _reent *);
 

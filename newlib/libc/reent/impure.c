@@ -9,6 +9,20 @@
 #define __ATTRIBUTE_IMPURE_DATA__
 #endif
 
+#ifdef __CLUSTER_OS__
+
+__thread struct _reent __ATTRIBUTE_IMPURE_DATA__ impure_data;
+__thread struct _reent *__ATTRIBUTE_IMPURE_PTR__ _impure_ptr;
+struct _reent *_global_impure_ptr;
+
+struct _reent *
+__getreent (void)
+{
+  return _impure_ptr;
+}
+
+#else
+
 /* Redeclare these symbols locally as weak so that the file containing
    their definitions (along with a lot of other stuff) isn't sucked in
    unless they are actually used by other compilation units.  This is
@@ -26,3 +40,5 @@ extern struct _reent reent_data __attribute__ ((alias("impure_data")));
 #endif
 struct _reent *__ATTRIBUTE_IMPURE_PTR__ _impure_ptr = &impure_data;
 struct _reent *const __ATTRIBUTE_IMPURE_PTR__ _global_impure_ptr = &impure_data;
+
+#endif

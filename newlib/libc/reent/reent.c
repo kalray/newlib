@@ -31,7 +31,7 @@ void
 _reclaim_reent (struct _reent *ptr)
 {
 #ifndef _REENT_THREAD_LOCAL
-  if (ptr != _impure_ptr)
+  if (ptr != _REENT)
 #endif
     {
       /* used by mprec routines. */

@@ -290,8 +290,13 @@ mppa_uint64 dword[2];
 struct mppa_l2_cache_job_fifo _;
 } mppa_l2_cache_pop_fifo_t;
 
+typedef enum {
+MPPA_L2_CACHE_CAM_NB_RM = 0x1,
+MPPA_L2_CACHE_CAM_NB_PE = 0x10,
+} mppa_l2_cache_nb_proc_value_t;
+
 struct mppa_l2_cache_cancel_cam {
-mppa_uint128 proc_cancel :17; /*[16: 0]reset: 0x0,behavior: [:RD],*/
+mppa_uint128 proc_cancel :17; /*[16: 0]reset: 0x0,behavior: [:RD],values: nb_proc,*/
 mppa_uint128 reserved_1:111;
 };
 

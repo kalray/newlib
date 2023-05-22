@@ -4,11 +4,10 @@
 
 #include <unistd.h>
 #include <errno.h>
+#include <hal/cos_link_configs.h>
 
 extern void *_sbrk (ptrdiff_t);
 
-extern char _heap_start ;
-extern char _heap_end;
 static char * _heap_ptr = NULL; /* calulated using symbols from the linker script: _heap_start and _heap_end */
 static char *_end_of_allocatable_mem = NULL;
 

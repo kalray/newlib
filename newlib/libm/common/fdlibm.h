@@ -102,7 +102,7 @@
 
    FLT_SMALLEST_EXP
 	REAL_FLT_MIN's exponent - EXP_BIAS (1 if denormals are not supported,
-	-22 if they are).
+	-23 if they are).
 */
 
 #ifdef _FLT_NO_DENORMALS
@@ -118,7 +118,7 @@
 #define FLT_UWORD_MIN 0x00000001
 #define FLT_UWORD_EXP_MIN 0x43160000
 #define FLT_UWORD_LOG_MIN 0x42cff1b5
-#define FLT_SMALLEST_EXP -22
+#define FLT_SMALLEST_EXP -23 /* Preserve rounding at subnormal limit */
 #endif
 
 #ifdef __STDC__

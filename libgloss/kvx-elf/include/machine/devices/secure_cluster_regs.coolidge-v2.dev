@@ -538,6 +538,36 @@ mppa_uint8 bword[4];
 struct mppa_secure_cluster_regs_proc_config _;
 } mppa_secure_cluster_regs_write_t;
 
+struct mppa_secure_cluster_regs_proc_config_reserved {
+mppa_uint32 reserved_1:32;
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_secure_cluster_regs_proc_config_reserved[(sizeof(struct mppa_secure_cluster_regs_proc_config_reserved) == 4)*2-1];// If this fails, then the size of struct mppa_secure_cluster_regs_proc_config_reserved as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+
+
+/***
+ * secure_cluster_regs reserved register definition
+ * Reserved bytes.
+ *
+ * Permissions:
+ * RM: ker => [:RD, :WR],
+ * RM: usr => [:RD, :WR],
+ * PE: ker => [:RD, :WR],
+ * PE: usr => [:RD, :WR],
+ * Size: 4 bytes (min access size = 1 byte)
+ * Reset value: Not initialized
+ */
+typedef union {
+mppa_uint32 reg;
+mppa_uint32 word;
+mppa_uint16 hword[2];
+mppa_uint8 bword[4];
+struct mppa_secure_cluster_regs_proc_config_reserved _;
+} mppa_secure_cluster_regs_reserved_t;
+
 /***
  * secure_cluster_regs set register definition
  * Written data is considered as a mask where bits at 1 set register corresponding
@@ -588,11 +618,14 @@ struct mppa_secure_cluster_regs_proc_config _;
  */
 typedef struct  {
 mppa_secure_cluster_regs_write_t write; /* offset: 0x0, size: 0x4 */
-mppa_uint8 unused0[12];
+mppa_secure_cluster_regs_reserved_t reserved_write; /* offset: 0x4, size: 0x4 */
+mppa_uint8 unused0[8];
 mppa_secure_cluster_regs_set_t set; /* offset: 0x10, size: 0x4 */
-mppa_uint8 unused1[12];
+mppa_secure_cluster_regs_reserved_t reserved_set; /* offset: 0x14, size: 0x4 */
+mppa_uint8 unused1[8];
 mppa_secure_cluster_regs_clear_t clear; /* offset: 0x20, size: 0x4 */
-mppa_uint8 unused2[28];
+mppa_secure_cluster_regs_reserved_t reserved_clear; /* offset: 0x24, size: 0x4 */
+mppa_uint8 unused2[24];
 } mppa_secure_cluster_regs_proc_control_t;
 
 #ifndef KVX_DISABLE_TYPECHECK
@@ -644,7 +677,8 @@ struct mppa_secure_cluster_regs_proc_status _;
  */
 typedef struct  {
 mppa_secure_cluster_regs_proc_sts_t proc_sts; /* offset: 0x0, size: 0x4 */
-mppa_uint8 unused0[12];
+mppa_secure_cluster_regs_reserved_t reserved_status; /* offset: 0x4, size: 0x4 */
+mppa_uint8 unused0[8];
 } mppa_secure_cluster_regs_proc_status_t;
 
 #ifndef KVX_DISABLE_TYPECHECK

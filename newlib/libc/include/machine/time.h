@@ -12,4 +12,10 @@
 int nanosleep (const struct timespec *, struct timespec *);
 #endif
 
+#ifdef __CLUSTER_OS__
+#define TIME_UTC 1
+int
+timespec_get (struct timespec *ts, int base);
+#endif
+
 #endif	/* _MACHTIME_H_ */

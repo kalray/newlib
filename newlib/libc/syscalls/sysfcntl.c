@@ -9,7 +9,7 @@ fcntl (int fd,
      int flag,
      int arg)
 {
-#ifdef HAVE_FCNTL
+#if defined HAVE_FCNTL || defined __KVX__
   return _fcntl_r (_REENT, fd, flag, arg);
 #else /* !HAVE_FCNTL */
   errno = ENOSYS;

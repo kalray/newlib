@@ -14,6 +14,8 @@
 
 #ifdef __CLUSTER_OS__
 #define __DYNAMIC_REENT__
+#define _REENT_GLOBAL_ATEXIT
+#define _REENT_GLOBAL_STDIO_STREAMS
 #endif
 
 /* exceptions first */

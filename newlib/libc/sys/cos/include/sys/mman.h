@@ -35,6 +35,10 @@
 
 #include <sys/types.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /*
  * Protection attributes
  */
@@ -113,5 +117,9 @@ int posix_madvise(void *, size_t, int);
 
 int mprotect(const void *, size_t, int);
 int msync(void *, size_t, int);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* !_SYS_MMAN_H_ */

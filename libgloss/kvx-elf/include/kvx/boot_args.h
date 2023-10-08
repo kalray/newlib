@@ -131,7 +131,7 @@ typedef __SIZE_TYPE__ local_pointer_size_t;
 /*
  * Map the correct type for the local handling of boot args.
  */
-#if defined(__KV3_64__)
+#if defined(__KVX_64__)
 typedef __kvx_boot_args_mmap64_t __kvx_boot_args_mmap_t;
 #else
 typedef __kvx_boot_args_mmap32_t __kvx_boot_args_mmap_t;

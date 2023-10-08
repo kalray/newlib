@@ -201,7 +201,7 @@ static void __kvx_setup_tls(uint8_t *_tls_base)
 {
   uintptr_t tls_address = (uintptr_t)_tls_base;
 
-#ifdef __KV3_64__
+#ifdef __KVX_64__
   __asm__ __volatile__ ("addd $tp = %0, 0\n\t;;" : /* no outputs */ : "r"(tls_address) : "$r13");
 #else
   __asm__ __volatile__ ("addw $tp = %0, 0\n\t;;" : /* no outputs */ : "r"(tls_address) : "$r13");

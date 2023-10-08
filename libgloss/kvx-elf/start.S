@@ -45,12 +45,12 @@
 	.global _start
 	.proc _start
 _start:
-#ifdef __KV3_64__
+#ifdef __KVX_64__
 	make $r0 = 0x1000000000000
 	;;
 	wfxl $ps, $r0      #    go 64b
 	;;
-#endif /* __KV3_64__ */
+#endif /* __KVX_64__ */
 	# Get proc ID
 	get $r5 = $pcr
 	;;

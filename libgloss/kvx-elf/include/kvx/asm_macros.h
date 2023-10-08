@@ -33,7 +33,7 @@
 #ifndef _ASM_MACROS_H
 #define _ASM_MACROS_H
 
-#ifndef __KV3_64__
+#ifndef __KVX_64__
 #define LOAD_PTR lwz
 #define ADD_PTR addw
 #else

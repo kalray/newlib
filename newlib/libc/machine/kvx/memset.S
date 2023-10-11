@@ -85,9 +85,9 @@ memset:
 	cb.dnez $r7? .Ldzerol_done
 	;;
 	/* Compute the length that will be copied to align on 64 bytes boundary */
-	andw $r6 = $r5, 0x3F
+	andd $r6 = $r5, 0x3F
 	/* Check if address is aligned on 64 bytes */
-	andw $r9 = $r0, 0x3F
+	andd $r9 = $r0, 0x3F
 	/* Alignment */
 	nop
 	;;
@@ -96,33 +96,33 @@ memset:
 	/* Remove unaligned part from length */
 	sbfd $r2 = $r6, $r2
 	/* Check if we need to copy 1 byte */
-	andw $r4 = $r5, (1 << 0)
+	andd $r4 = $r5, (1 << 0)
 	;;
 	/* If we are not aligned, store byte */
 	sb.dnez $r4? [$r0] = $r32
 	/* Check if we need to copy 2 bytes */
-	andw $r4 = $r5, (1 << 1)
+	andd $r4 = $r5, (1 << 1)
 	/* Add potentially copied part for next store offset */
 	addd $r0 = $r0, $r4
 	;;
 	sh.dnez $r4? [$r0] = $r32
 	/* Check if we need to copy 4 bytes */
-	andw $r4 = $r5, (1 << 2)
+	andd $r4 = $r5, (1 << 2)
 	addd $r0 = $r0, $r4
 	;;
 	sw.dnez $r4? [$r0] = $r32
 	/* Check if we need to copy 8 bytes */
-	andw $r4 = $r5, (1 << 3)
+	andd $r4 = $r5, (1 << 3)
 	addd $r0 = $r0, $r4
 	;;
 	sd.dnez $r4? [$r0] = $r32
 	/* Check if we need to copy 16 bytes */
-	andw $r4 = $r5, (1 << 4)
+	andd $r4 = $r5, (1 << 4)
 	addd $r0 = $r0, $r4
 	;;
 	sq.dnez $r4? [$r0] = $r32r33
 	/* Check if we need to copy 32 bytes */
-	andw $r4 = $r5, (1 << 5)
+	andd $r4 = $r5, (1 << 5)
 	addd $r0 = $r0, $r4
 	;;
 	so.dnez $r4? [$r0] = $r32r33r34r35
@@ -137,7 +137,7 @@ memset:
 	cb.deqz $r2? .Lmemset_done
 	;;
 	/* Remaining bytes for 16 bytes store */
-	andw $r8 = $r2, (1 << 5)
+	andd $r8 = $r2, (1 << 5)
 	/* Skip dzerol if there are not enough data for 64 bytes store */
 	cb.deqz $r10? .Ldzerol_done
 	/* Update length to copy */
@@ -157,23 +157,23 @@ memset:
 	so.dnez $r8? [$r0] = $r32r33r34r35
 	addd $r0 = $r0, $r8
 	/* Remaining bytes for 16 bytes store */
-	andw $r8 = $r2, (1 << 4)
+	andd $r8 = $r2, (1 << 4)
 	cb.deqz $r2? .Lmemset_done
 	;;
 	sq.dnez $r8? [$r0] = $r32r33
 	addd $r0 = $r0, $r8
 	/* Remaining bytes for 8 bytes store */
-	andw $r8 = $r2, (1 << 3)
+	andd $r8 = $r2, (1 << 3)
 	;;
 	sd.dnez $r8? [$r0] = $r32
 	addd $r0 = $r0, $r8
 	/* Remaining bytes for 4 bytes store */
-	andw $r8 = $r2, (1 << 2)
+	andd $r8 = $r2, (1 << 2)
 	;;
 	sw.dnez $r8? [$r0] = $r32
 	addd $r0 = $r0, $r8
 	/* Remaining bytes for 2 bytes store */
-	andw $r8 = $r2, (1 << 1)
+	andd $r8 = $r2, (1 << 1)
 	;;
 	sh.dnez $r8? [$r0] = $r32
 	addd $r0 = $r0, $r8
@@ -197,9 +197,9 @@ memset:
 	negd $r5 = $r0
 	;;
 	/* Check if we are aligned on 32 bytes */
-	andw $r9 = $r0, 0x1F
+	andd $r9 = $r0, 0x1F
 	/* Compute the length that will be copied to align on 32 bytes boundary */
-	andw $r6 = $r5, 0x1F
+	andd $r6 = $r5, 0x1F
 	/*
 	 * If size < MIN_SIZE_FOR_ALIGN bits, directly go to so, it will be done
 	 * unaligned but that is still better that what we can do with sb
@@ -211,30 +211,30 @@ memset:
 	/* If we are already aligned on 32 bytes, jump to main "so" loop */
 	cb.deqz $r9? .Laligned_32
 	/* Check if we need to copy 1 byte */
-	andw $r4 = $r5, (1 << 0)
+	andd $r4 = $r5, (1 << 0)
 	;;
 	/* If we are not aligned, store byte */
 	sb.dnez $r4? [$r0] = $r32
 	/* Check if we need to copy 2 bytes */
-	andw $r4 = $r5, (1 << 1)
+	andd $r4 = $r5, (1 << 1)
 	/* Add potentially copied part for next store offset */
 	addd $r0 = $r0, $r4
 	;;
 	sh.dnez $r4? [$r0] = $r32
 	/* Check if we need to copy 4 bytes */
-	andw $r4 = $r5, (1 << 2)
+	andd $r4 = $r5, (1 << 2)
 	addd $r0 = $r0, $r4
 	;;
 	sw.dnez $r4? [$r0] = $r32
 	/* Check if we need to copy 8 bytes */
-	andw $r4 = $r5, (1 << 3)
+	andd $r4 = $r5, (1 << 3)
 	addd $r0 = $r0, $r4
 	/* Copy second part of pattern for sq */
 	copyd $r33 = $r32
 	;;
 	sd.dnez $r4? [$r0] = $r32
 	/* Check if we need to copy 16 bytes */
-	andw $r4 = $r5, (1 << 4)
+	andd $r4 = $r5, (1 << 4)
 	addd $r0 = $r0, $r4
 	;;
 	sq.dnez $r4? [$r0] = $r32r33
@@ -250,7 +250,7 @@ memset:
 	;;
 	copyq $r34r35 = $r32, $r33
 	/* Remaining bytes for 16 bytes store */
-	andw $r8 = $r2, (1 << 4)
+	andd $r8 = $r2, (1 << 4)
 	make $r11 = 32
 	/* Check if there are enough data for 32 bytes store */
 	cb.deqz $r10? .Laligned_32_done
@@ -269,18 +269,18 @@ memset:
 	sq.dnez $r8? [$r0] = $r32r33
 	addd $r0 = $r0, $r8
 	/* Remaining bytes for 8 bytes store */
-	andw $r8 = $r2, (1 << 3)
+	andd $r8 = $r2, (1 << 3)
 	cb.deqz $r2? .Lmemset_done
 	;;
 	sd.dnez $r8? [$r0] = $r32
 	addd $r0 = $r0, $r8
 	/* Remaining bytes for 4 bytes store */
-	andw $r8 = $r2, (1 << 2)
+	andd $r8 = $r2, (1 << 2)
 	;;
 	sw.dnez $r8? [$r0] = $r32
 	addd $r0 = $r0, $r8
 	/* Remaining bytes for 2 bytes store */
-	andw $r8 = $r2, (1 << 1)
+	andd $r8 = $r2, (1 << 1)
 	;;
 	sh.dnez $r8? [$r0] = $r32
 	addd $r0 = $r0, $r8

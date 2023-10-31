@@ -168,7 +168,7 @@
 	lq.u  $r6r7  = __KVX_CONTEXT_SPS_CS[\from]  ## $sps  - $cs
 	;;
 	set   $spc   = $r2
-	xord  $r33   = $r6, $r33         # generate a mask of ones with a '1' at each bit where the current $sps ($r33) differs from the $sps ($r6) to be restored
+	eord  $r33   = $r6, $r33         # generate a mask of ones with a '1' at each bit where the current $sps ($r33) differs from the $sps ($r6) to be restored
 	notd  $r34   = $r6               # prepare WFXL clear mask on LSBs
 	slld  $r35   = $r6, 32           # prepare WFXL set mask on MSBs
 	ld.u  $r8    = __KVX_CONTEXT_LC[\from]      ## $lc

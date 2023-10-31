@@ -484,7 +484,7 @@ memcmp:
    ret
    ;;
 .Lstreaming_kernel_exit:
-   xord $r0 = $r4, $r5
+   eord $r0 = $r4, $r5
    lq.dnez $r6? $r14r15 = 0[$r12]
    ;;
    ctzd $r0 = $r0

@@ -621,6 +621,8 @@ HAVE_LIBM_MACHINE_NDS32_FALSE
 HAVE_LIBM_MACHINE_NDS32_TRUE
 HAVE_LIBM_MACHINE_MIPS_FALSE
 HAVE_LIBM_MACHINE_MIPS_TRUE
+HAVE_LIBM_MACHINE_KVX_FALSE
+HAVE_LIBM_MACHINE_KVX_TRUE
 HAVE_LIBM_MACHINE_I386_FALSE
 HAVE_LIBM_MACHINE_I386_TRUE
 HAVE_LIBM_MACHINE_ARM_FALSE
@@ -715,6 +717,8 @@ HAVE_LIBC_MACHINE_M32C_FALSE
 HAVE_LIBC_MACHINE_M32C_TRUE
 HAVE_LIBC_MACHINE_LM32_FALSE
 HAVE_LIBC_MACHINE_LM32_TRUE
+HAVE_LIBC_MACHINE_KVX_FALSE
+HAVE_LIBC_MACHINE_KVX_TRUE
 HAVE_LIBC_MACHINE_IQ2000_FALSE
 HAVE_LIBC_MACHINE_IQ2000_TRUE
 HAVE_LIBC_MACHINE_I960_FALSE
@@ -807,6 +811,12 @@ HAVE_LIBC_SYS_MMIXWARE_DIR_FALSE
 HAVE_LIBC_SYS_MMIXWARE_DIR_TRUE
 HAVE_LIBC_SYS_M88KBUG_DIR_FALSE
 HAVE_LIBC_SYS_M88KBUG_DIR_TRUE
+HAVE_LIBC_SYS_COS_DIR_FALSE
+HAVE_LIBC_SYS_COS_DIR_TRUE
+HAVE_LIBC_SYS_MBR_DIR_FALSE
+HAVE_LIBC_SYS_MBR_DIR_TRUE
+HAVE_LIBC_SYS_KVX_DIR_FALSE
+HAVE_LIBC_SYS_KVX_DIR_TRUE
 HAVE_LIBC_SYS_H8500HMS_DIR_FALSE
 HAVE_LIBC_SYS_H8500HMS_DIR_TRUE
 HAVE_LIBC_SYS_H8300HMS_DIR_FALSE
@@ -5407,6 +5417,27 @@ else
   HAVE_LIBC_SYS_H8500HMS_DIR_TRUE='#'
   HAVE_LIBC_SYS_H8500HMS_DIR_FALSE=
 fi
+ if test "${sys_dir}" = kvx; then
+  HAVE_LIBC_SYS_KVX_DIR_TRUE=
+  HAVE_LIBC_SYS_KVX_DIR_FALSE='#'
+else
+  HAVE_LIBC_SYS_KVX_DIR_TRUE='#'
+  HAVE_LIBC_SYS_KVX_DIR_FALSE=
+fi
+ if test "${sys_dir}" = mbr; then
+  HAVE_LIBC_SYS_MBR_DIR_TRUE=
+  HAVE_LIBC_SYS_MBR_DIR_FALSE='#'
+else
+  HAVE_LIBC_SYS_MBR_DIR_TRUE='#'
+  HAVE_LIBC_SYS_MBR_DIR_FALSE=
+fi
+ if test "${sys_dir}" = cos; then
+  HAVE_LIBC_SYS_COS_DIR_TRUE=
+  HAVE_LIBC_SYS_COS_DIR_FALSE='#'
+else
+  HAVE_LIBC_SYS_COS_DIR_TRUE='#'
+  HAVE_LIBC_SYS_COS_DIR_FALSE=
+fi
  if test "${sys_dir}" = m88kbug; then
   HAVE_LIBC_SYS_M88KBUG_DIR_TRUE=
   HAVE_LIBC_SYS_M88KBUG_DIR_FALSE='#'
@@ -5890,6 +5921,13 @@ else
   HAVE_LIBC_MACHINE_IQ2000_TRUE='#'
   HAVE_LIBC_MACHINE_IQ2000_FALSE=
 fi
+ if test "${machine_dir}" = kvx; then
+  HAVE_LIBC_MACHINE_KVX_TRUE=
+  HAVE_LIBC_MACHINE_KVX_FALSE='#'
+else
+  HAVE_LIBC_MACHINE_KVX_TRUE='#'
+  HAVE_LIBC_MACHINE_KVX_FALSE=
+fi
  if test "${machine_dir}" = lm32; then
   HAVE_LIBC_MACHINE_LM32_TRUE=
   HAVE_LIBC_MACHINE_LM32_FALSE='#'
@@ -6326,6 +6364,14 @@ fi
 else
   HAVE_LIBM_MACHINE_I386_TRUE='#'
   HAVE_LIBM_MACHINE_I386_FALSE=
+fi
+
+   if test "${libm_machine_dir}" = "kvx"; then
+  HAVE_LIBM_MACHINE_KVX_TRUE=
+  HAVE_LIBM_MACHINE_KVX_FALSE='#'
+else
+  HAVE_LIBM_MACHINE_KVX_TRUE='#'
+  HAVE_LIBM_MACHINE_KVX_FALSE=
 fi
 
    if test "${libm_machine_dir}" = "mips"; then
@@ -7639,6 +7685,18 @@ if test -z "${HAVE_LIBC_SYS_H8500HMS_DIR_TRUE}" && test -z "${HAVE_LIBC_SYS_H850
   as_fn_error $? "conditional \"HAVE_LIBC_SYS_H8500HMS_DIR\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
+if test -z "${HAVE_LIBC_SYS_KVX_DIR_TRUE}" && test -z "${HAVE_LIBC_SYS_KVX_DIR_FALSE}"; then
+  as_fn_error $? "conditional \"HAVE_LIBC_SYS_KVX_DIR\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${HAVE_LIBC_SYS_MBR_DIR_TRUE}" && test -z "${HAVE_LIBC_SYS_MBR_DIR_FALSE}"; then
+  as_fn_error $? "conditional \"HAVE_LIBC_SYS_MBR_DIR\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${HAVE_LIBC_SYS_COS_DIR_TRUE}" && test -z "${HAVE_LIBC_SYS_COS_DIR_FALSE}"; then
+  as_fn_error $? "conditional \"HAVE_LIBC_SYS_COS_DIR\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
 if test -z "${HAVE_LIBC_SYS_M88KBUG_DIR_TRUE}" && test -z "${HAVE_LIBC_SYS_M88KBUG_DIR_FALSE}"; then
   as_fn_error $? "conditional \"HAVE_LIBC_SYS_M88KBUG_DIR\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
@@ -7821,6 +7879,10 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${HAVE_LIBC_MACHINE_IQ2000_TRUE}" && test -z "${HAVE_LIBC_MACHINE_IQ2000_FALSE}"; then
   as_fn_error $? "conditional \"HAVE_LIBC_MACHINE_IQ2000\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${HAVE_LIBC_MACHINE_KVX_TRUE}" && test -z "${HAVE_LIBC_MACHINE_KVX_FALSE}"; then
+  as_fn_error $? "conditional \"HAVE_LIBC_MACHINE_KVX\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${HAVE_LIBC_MACHINE_LM32_TRUE}" && test -z "${HAVE_LIBC_MACHINE_LM32_FALSE}"; then
@@ -8009,6 +8071,10 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${HAVE_LIBM_MACHINE_I386_TRUE}" && test -z "${HAVE_LIBM_MACHINE_I386_FALSE}"; then
   as_fn_error $? "conditional \"HAVE_LIBM_MACHINE_I386\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${HAVE_LIBM_MACHINE_KVX_TRUE}" && test -z "${HAVE_LIBM_MACHINE_KVX_FALSE}"; then
+  as_fn_error $? "conditional \"HAVE_LIBM_MACHINE_KVX\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${HAVE_LIBM_MACHINE_MIPS_TRUE}" && test -z "${HAVE_LIBM_MACHINE_MIPS_FALSE}"; then

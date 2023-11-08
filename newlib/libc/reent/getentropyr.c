@@ -1,3 +1,4 @@
+#ifndef _NO_GETENTROPY
 /* Reentrant version of getentropy system call. */
 
 #include <reent.h>
@@ -51,3 +52,4 @@ _getentropy_r (struct _reent *ptr,
 }
 
 #endif /* ! defined (REENTRANT_SYSCALLS_PROVIDED) */
+#endif /* ! _NO_GETENTROPY */

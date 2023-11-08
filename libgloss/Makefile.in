@@ -245,7 +245,8 @@ am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
  configure.lineno config.status.lineno
 mkinstalldirs = $(SHELL) $(top_srcdir)/../mkinstalldirs
 CONFIG_HEADER = config.h
-CONFIG_CLEAN_FILES = epiphany/Makefile i386/Makefile m32r/Makefile \
+CONFIG_CLEAN_FILES = epiphany/Makefile i386/Makefile kvx-cos/Makefile \
+	kvx-elf/Makefile kvx-mbr/Makefile m32r/Makefile \
 	m68hc11/Makefile nds32/Makefile m68k/Makefile pa/Makefile \
 	i960/Makefile sparc_leon/Makefile sparc/Makefile mips/Makefile \
 	rs6000/Makefile mn10200/Makefile mn10300/Makefile \
@@ -1278,6 +1279,12 @@ distclean-hdr:
 epiphany/Makefile: $(top_builddir)/config.status $(top_srcdir)/epiphany/Makefile.in
 	cd $(top_builddir) && $(SHELL) ./config.status $@
 i386/Makefile: $(top_builddir)/config.status $(top_srcdir)/i386/Makefile.in
+	cd $(top_builddir) && $(SHELL) ./config.status $@
+kvx-cos/Makefile: $(top_builddir)/config.status $(top_srcdir)/kvx-cos/Makefile.in
+	cd $(top_builddir) && $(SHELL) ./config.status $@
+kvx-elf/Makefile: $(top_builddir)/config.status $(top_srcdir)/kvx-elf/Makefile.in
+	cd $(top_builddir) && $(SHELL) ./config.status $@
+kvx-mbr/Makefile: $(top_builddir)/config.status $(top_srcdir)/kvx-mbr/Makefile.in
 	cd $(top_builddir) && $(SHELL) ./config.status $@
 m32r/Makefile: $(top_builddir)/config.status $(top_srcdir)/m32r/Makefile.in
 	cd $(top_builddir) && $(SHELL) ./config.status $@

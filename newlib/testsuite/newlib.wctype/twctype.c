@@ -37,7 +37,7 @@ int main()
   else
     {
       setlocale (LC_CTYPE, "C-UTF-8");
-      CHECK (iswalpha(0x0967));
+      CHECK (!iswalpha(0x0967));
       CHECK (!iswalpha(0x128e));
       CHECK (iswalnum(0x1d7ce));
       CHECK (!iswalnum(0x1d800));

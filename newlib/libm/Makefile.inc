@@ -67,6 +67,9 @@ if HAVE_LIBM_MACHINE_I386
 include %D%/machine/i386/Makefile.inc
 include %D%/ld80/Makefile.inc
 endif
+if HAVE_LIBM_MACHINE_KVX
+include %D%/machine/kvx/Makefile.inc
+endif
 if HAVE_LIBM_MACHINE_MIPS
 include %D%/machine/mips/Makefile.inc
 endif

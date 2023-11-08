@@ -519,12 +519,15 @@ case "${host}" in
 	;;
 
   kvx-*-elf | kvx-*-llvmosp)
+	syscall_dir=syscalls
+	newlib_cflags="${newlib_cflags}"
 	sys_dir=kvx
 	# crt0 is provided by libgloss.
 	have_crt0="no"
 	;;
 
   kvx-*-mbr)
+	syscall_dir=syscalls
 	sys_dir=mbr
 	# crt0 is provided by libgloss.
 	have_crt0="no"
@@ -534,6 +537,7 @@ case "${host}" in
 	posix_dir=posix
 	sys_dir=cos
 	newlib_cflags="${newlib_cflags} -DGETREENT_PROVIDED"
+	newlib_cflags="${newlib_cflags} -D_NO_ISATTY -D_NO_GETENTROPY"
 	# crt0 is provided by libgloss.
 	have_crt0="no"
 	;;
@@ -764,7 +768,6 @@ newlib_cflags="${newlib_cflags} -DCLOCK_PROVIDED -DMALLOC_PROVIDED -DEXIT_PROVID
 	;;
   kvx-*-*)
 	newlib_cflags="${newlib_cflags} -D_COMPILING_NEWLIB"
- 	syscall_dir=syscalls
 	;;
   lm32-*-*)
 	syscall_dir=syscalls

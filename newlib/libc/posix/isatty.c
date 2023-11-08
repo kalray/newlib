@@ -1,3 +1,5 @@
+#ifndef _NO_ISATTY
+
 /* isatty.c */
 
 #include <unistd.h>
@@ -8,3 +10,5 @@ isatty (int fd)
 {
   return _isatty (fd);
 }
+
+#endif /* !_NO_ISATTY */

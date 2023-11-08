@@ -790,7 +790,11 @@ extern struct _reent * _global_impure_ptr __ATTRIBUTE_IMPURE_PTR__;
 #define __ATTRIBUTE_IMPURE_DATA__
 #endif
 
+#ifndef __CLUSTER_OS__
 extern struct _reent _impure_data __ATTRIBUTE_IMPURE_DATA__;
+#else
+extern __thread struct _reent _impure_data __ATTRIBUTE_IMPURE_DATA__;
+#endif
 
 /* #define _REENT_ONLY define this to get only reentrant routines */
 

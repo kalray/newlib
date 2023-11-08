@@ -49,9 +49,6 @@ extern "C"	{
   {
     _REENT_INIT_PTR(&_impure_thread_data);
     /* Finish initialization of reent */
-    _REENT->_stdin = &(_REENT->__sf[0]);
-    _REENT->_stdout = &(_REENT->__sf[1]);
-    _REENT->_stderr = &(_REENT->__sf[2]);
   }
 
   int __kvx_trace_pc_init(void)
@@ -61,11 +58,9 @@ extern "C"	{
     return 0;
   }
 
-  extern int    _fwalk_reent (struct _reent *, int (*)(struct _reent *, FILE *));
   void __kvx_newlib_flushall()
   {
-    /* Flush all I/O for the current core */
-    _fwalk_reent (_REENT, _fflush_r);
+     /* There are no thread-specific FILE objects */
   }
 
   extern int main (int argc, char **argv, char **env);

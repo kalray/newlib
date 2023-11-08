@@ -4,7 +4,7 @@
 
 #ifdef __CLUSTER_OS__
 
-__thread struct _reent __ATTRIBUTE_IMPURE_DATA__ impure_data;
+__thread struct _reent __ATTRIBUTE_IMPURE_DATA__ _impure_data;
 __thread struct _reent *__ATTRIBUTE_IMPURE_PTR__ _impure_ptr;
 struct _reent *_global_impure_ptr;
 
@@ -30,5 +30,6 @@ struct _reent __ATTRIBUTE_IMPURE_DATA__ _impure_data = _REENT_INIT (_impure_data
 extern struct _reent reent_data __attribute__ ((alias("_impure_data")));
 #endif
 struct _reent *__ATTRIBUTE_IMPURE_PTR__ _impure_ptr = &_impure_data;
+#endif
 
 #endif /* _REENT_THREAD_LOCAL */

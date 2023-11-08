@@ -1,3 +1,4 @@
+#ifndef _NO_GETENTROPY
 /* connector for getentropy */
 
 #include <reent.h>
@@ -10,3 +11,4 @@ getentropy (void *buf,
 {
   return _getentropy_r (_REENT, buf, buflen);
 }
+#endif /* !_NO_GETENTROPY */

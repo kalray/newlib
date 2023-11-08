@@ -66,6 +66,18 @@ case "${target}" in
 	AC_CONFIG_FILES([i386/Makefile])
 	subdirs="$subdirs i386"
 	;;
+  kvx-*-cos*)
+	AC_CONFIG_FILES([kvx-cos/Makefile])
+	subdirs="$subdirs kvx-cos"
+	;;
+  kvx-*-elf*)
+	AC_CONFIG_FILES([kvx-elf/Makefile])
+	subdirs="$subdirs kvx-elf"
+	;;
+  kvx-*-mbr*)
+	AC_CONFIG_FILES([kvx-mbr/Makefile])
+	subdirs="$subdirs kvx-mbr"
+	;;
   m32r-*-*)
 	AC_CONFIG_FILES([m32r/Makefile])
 	subdirs="$subdirs m32r"

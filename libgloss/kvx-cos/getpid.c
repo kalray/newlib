@@ -9,7 +9,9 @@
 int
 _getpid ()
 {
-  return 0x1000 | (__cos_get_cluster_id() << 4) | __cos_get_cpu_id();
+  const int pcid = mppa_cos_get_physical_cluster_id();
+
+  return 0x1000 | (pcid << 4);
 }
 
 int getpid ()

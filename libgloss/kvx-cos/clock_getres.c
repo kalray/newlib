@@ -50,11 +50,13 @@ clock_getres (clockid_t clock_id, struct timespec *res)
 
 	if (__builtin_expect (clk_tck != -1, 1))
 	  {
+	    long int pres = 1000000000 / clk_tck;
+
 	    /* This implementation assumes that the realtime clock has a
-	       resolution higher than 1 second.  This is the case for any
+	       resolution higher than 1 second. This is the case for any
 	       reasonable implementation.  */
 	    res->tv_sec = 0;
-	    res->tv_nsec = 1000000000 / clk_tck;
+	    res->tv_nsec = pres == 0 ? 1 : pres;
 
 	    retval = 0;
 	  }

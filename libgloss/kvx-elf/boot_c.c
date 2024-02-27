@@ -174,6 +174,21 @@ void __kvx_pe_libc_start(void *_args)
 static kvx_boot_args_t __kvx_libc_args;
 
 extern int execute_main_on_rm __attribute((weak));
+extern int mppa_trace_pc_enable (bool enable)  __attribute__((weak));
+extern int trace_pc_config(void) __attribute__((weak));
+
+static  void __kvx_trace_pc_disable(void)
+{
+  if (mppa_trace_pc_enable)
+    mppa_trace_pc_enable(false);
+}
+
+int __kvx_trace_pc_init(void)
+{
+  if (trace_pc_config)
+    return trace_pc_config();
+  return 0;
+}
 
 /** Start the main program on RM or on PE0 **/
 static void __kvx_do_rm_startup(void)
@@ -183,7 +198,9 @@ static void __kvx_do_rm_startup(void)
   if(&execute_main_on_rm) {
     __kvx_do_rm_before_startup();
     /* jump to libc */
+    __kvx_trace_pc_init();
     __start1(__kvx_libc_args.argc, __kvx_libc_args.argv, __kvx_libc_args.envp);
+    __kvx_trace_pc_disable();
   }
   else {
     /* Execute main on pe0 */
@@ -324,14 +341,6 @@ void __kvx_do_thread_exit(void)
 
 /* Defined in newlib: libgloss/kvx-elf/crt0.c */
 void __kvx_finish_newlib_init(void);
-int __kvx_trace_pc_init(void);
-
-extern int mppa_trace_pc_enable (bool enable)  __attribute__((weak));
-static  void __kvx_trace_pc_disable(void)
-{
-  if (mppa_trace_pc_enable)
-    mppa_trace_pc_enable(false);
-}
 
 /** Do PE startup **/
 static void __kvx_do_pe_startup(void)

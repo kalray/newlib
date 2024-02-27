@@ -41,7 +41,6 @@ extern "C"	{
 
   extern void  __libc_init_array(void);
   extern void  __libc_fini_array(void);
-  extern int trace_pc_config(void) __attribute__((weak));
 
   __thread struct _reent _impure_thread_data;
 
@@ -54,13 +53,6 @@ extern "C"	{
     _REENT->_stdout = &(_REENT->__sf[1]);
     _REENT->_stderr = &(_REENT->__sf[2]);
     */
-  }
-
-  int __kvx_trace_pc_init(void)
-  {
-    if (trace_pc_config)
-      return trace_pc_config();
-    return 0;
   }
 
   void __kvx_newlib_flushall()
@@ -83,10 +75,7 @@ extern "C"	{
 
     atexit (__kvx_newlib_flushall);
 
-
-    res = __kvx_trace_pc_init();
-    if (!res)
-      res = main(argc, argv, envp);
+    res = main(argc, argv, envp);
 
     exit(res);
     while(1);

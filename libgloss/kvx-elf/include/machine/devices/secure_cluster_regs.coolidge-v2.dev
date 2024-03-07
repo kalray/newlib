@@ -1,0 +1,1589 @@
+/*
+ * secure_cluster_regs.coolidge-v2.dev
+ * Automatically generated from registers definition files. Do not edit
+ * Copyright (c) Kalray 2024.
+ */
+
+#ifndef _INCLUDED_DEVICES_SECURE_CLUSTER_REGS_COOLIDGE_V2_DEV_
+#define _INCLUDED_DEVICES_SECURE_CLUSTER_REGS_COOLIDGE_V2_DEV_
+
+#include "device_inttype.h"
+
+
+struct mppa_secure_cluster_regs_rm_lockstep_cfg_view {
+mppa_uint32 disable :1; /*[ 0: 0]reset: 0x0,behavior: [:RD, :WR],Disable RM lockstep*/
+mppa_uint32 poison_pulse :1; /*[ 1: 1]reset: 0x0,behavior: [:R0, :WR],Inject a single fault on lockstep comparators (1 clk cycle)*/
+mppa_uint32 poison_step :1; /*[ 2: 2]reset: 0x0,behavior: [:RD, :WR],Inject consecutive faults on lockstep comparators*/
+mppa_uint32 reserved_1:29;
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_secure_cluster_regs_rm_lockstep_cfg_view[(sizeof(struct mppa_secure_cluster_regs_rm_lockstep_cfg_view) == 4)*2-1];// If this fails, then the size of struct mppa_secure_cluster_regs_rm_lockstep_cfg_view as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_SECURE_CLUSTER_REGS_RM_LOCKSTEP_CFG_VIEW_DISABLE__SHIFT 0
+#define MPPA_SECURE_CLUSTER_REGS_RM_LOCKSTEP_CFG_VIEW_DISABLE__MASK 0x1UL
+#define MPPA_SECURE_CLUSTER_REGS_RM_LOCKSTEP_CFG_VIEW_POISON_PULSE__SHIFT 1
+#define MPPA_SECURE_CLUSTER_REGS_RM_LOCKSTEP_CFG_VIEW_POISON_PULSE__MASK 0x2UL
+#define MPPA_SECURE_CLUSTER_REGS_RM_LOCKSTEP_CFG_VIEW_POISON_STEP__SHIFT 2
+#define MPPA_SECURE_CLUSTER_REGS_RM_LOCKSTEP_CFG_VIEW_POISON_STEP__MASK 0x4UL
+
+
+/***
+ * secure_cluster_regs rm_lockstep_cfg_reg register definition
+ * RM lockstep config register
+ *
+ * Permissions:
+ * RM: ker => [:RD, :WR],
+ * RM: usr => [:RD, :WR],
+ * PE: ker => [:RD, :WR],
+ * PE: usr => [:RD, :WR],
+ * Size: 4 bytes (min access size = 4 bytes)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint32 reg;
+mppa_uint32 word;
+struct mppa_secure_cluster_regs_rm_lockstep_cfg_view _;
+} mppa_secure_cluster_regs_rm_lockstep_cfg_reg_t;
+
+struct mppa_secure_cluster_regs_crypto_acc_view {
+mppa_uint32 config :2; /*[ 1: 0]behavior: [:RD, :WR],Crypto accelerator config*/
+mppa_uint32 reserved_1:30;
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_secure_cluster_regs_crypto_acc_view[(sizeof(struct mppa_secure_cluster_regs_crypto_acc_view) == 4)*2-1];// If this fails, then the size of struct mppa_secure_cluster_regs_crypto_acc_view as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_SECURE_CLUSTER_REGS_CRYPTO_ACC_VIEW_CONFIG__SHIFT 0
+#define MPPA_SECURE_CLUSTER_REGS_CRYPTO_ACC_VIEW_CONFIG__MASK 0x3UL
+
+
+/***
+ * secure_cluster_regs crypto_acc_reg register definition
+ * Crypto accelerator register
+ *
+ * Permissions:
+ * RM: ker => [:RD, :WR],
+ * RM: usr => [:RD, :WR],
+ * PE: ker => [:RD, :WR],
+ * PE: usr => [:RD, :WR],
+ * Size: 4 bytes (min access size = 4 bytes)
+ * Reset value: Not initialized
+ */
+typedef union {
+mppa_uint32 reg;
+mppa_uint32 word;
+struct mppa_secure_cluster_regs_crypto_acc_view _;
+} mppa_secure_cluster_regs_crypto_acc_reg_t;
+
+struct mppa_secure_cluster_regs_secure_mst_config_view {
+mppa_uint32 pe :16; /*[15: 0]reset: 0xFFFF,behavior: [:RD, :WR],Secure state of PEs*/
+mppa_uint32 rm :1; /*[16:16]reset: 0x1,behavior: [:RD],Secure state of RM : always secure (read-only)*/
+mppa_uint32 dsu :1; /*[17:17]reset: 0x1,behavior: [:RD, :WR],Secure state of DSU*/
+mppa_uint32 cacc_0 :1; /*[18:18]reset: 0x1,behavior: [:RD, :WR],Secure state of Crypto0*/
+mppa_uint32 cacc_1 :1; /*[19:19]reset: 0x1,behavior: [:RD, :WR],Secure state of Crypto1*/
+mppa_uint32 axi_wr :1; /*[20:20]reset: 0x1,behavior: [:RD, :WR],Secure state of AXI Write*/
+mppa_uint32 axi_rd :1; /*[21:21]reset: 0x1,behavior: [:RD, :WR],Secure state of AXI Read*/
+mppa_uint32 dma_tx :1; /*[22:22]reset: 0x1,behavior: [:RD, :WR],Secure state of DMA Tx*/
+mppa_uint32 dma_rx :1; /*[23:23]reset: 0x1,behavior: [:RD, :WR],Secure state of DMA Rx*/
+mppa_uint32 dma_eth_tx :1; /*[24:24]reset: 0x1,behavior: [:RD, :WR],Secure state of DMA Ethernet Tx*/
+mppa_uint32 dma_eth_rx :1; /*[25:25]reset: 0x1,behavior: [:RD, :WR],Secure state of DMA Ethernet Rx*/
+mppa_uint32 dma_pcie_tx :1; /*[26:26]reset: 0x1,behavior: [:RD, :WR],Secure state of DMA PCIe Rx*/
+mppa_uint32 reserved_1:5;
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_secure_cluster_regs_secure_mst_config_view[(sizeof(struct mppa_secure_cluster_regs_secure_mst_config_view) == 4)*2-1];// If this fails, then the size of struct mppa_secure_cluster_regs_secure_mst_config_view as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_SECURE_CLUSTER_REGS_SECURE_MST_CONFIG_VIEW_PE__SHIFT 0
+#define MPPA_SECURE_CLUSTER_REGS_SECURE_MST_CONFIG_VIEW_PE__MASK 0xffffUL
+#define MPPA_SECURE_CLUSTER_REGS_SECURE_MST_CONFIG_VIEW_RM__SHIFT 16
+#define MPPA_SECURE_CLUSTER_REGS_SECURE_MST_CONFIG_VIEW_RM__MASK 0x10000UL
+#define MPPA_SECURE_CLUSTER_REGS_SECURE_MST_CONFIG_VIEW_DSU__SHIFT 17
+#define MPPA_SECURE_CLUSTER_REGS_SECURE_MST_CONFIG_VIEW_DSU__MASK 0x20000UL
+#define MPPA_SECURE_CLUSTER_REGS_SECURE_MST_CONFIG_VIEW_CACC_0__SHIFT 18
+#define MPPA_SECURE_CLUSTER_REGS_SECURE_MST_CONFIG_VIEW_CACC_0__MASK 0x40000UL
+#define MPPA_SECURE_CLUSTER_REGS_SECURE_MST_CONFIG_VIEW_CACC_1__SHIFT 19
+#define MPPA_SECURE_CLUSTER_REGS_SECURE_MST_CONFIG_VIEW_CACC_1__MASK 0x80000UL
+#define MPPA_SECURE_CLUSTER_REGS_SECURE_MST_CONFIG_VIEW_AXI_WR__SHIFT 20
+#define MPPA_SECURE_CLUSTER_REGS_SECURE_MST_CONFIG_VIEW_AXI_WR__MASK 0x100000UL
+#define MPPA_SECURE_CLUSTER_REGS_SECURE_MST_CONFIG_VIEW_AXI_RD__SHIFT 21
+#define MPPA_SECURE_CLUSTER_REGS_SECURE_MST_CONFIG_VIEW_AXI_RD__MASK 0x200000UL
+#define MPPA_SECURE_CLUSTER_REGS_SECURE_MST_CONFIG_VIEW_DMA_TX__SHIFT 22
+#define MPPA_SECURE_CLUSTER_REGS_SECURE_MST_CONFIG_VIEW_DMA_TX__MASK 0x400000UL
+#define MPPA_SECURE_CLUSTER_REGS_SECURE_MST_CONFIG_VIEW_DMA_RX__SHIFT 23
+#define MPPA_SECURE_CLUSTER_REGS_SECURE_MST_CONFIG_VIEW_DMA_RX__MASK 0x800000UL
+#define MPPA_SECURE_CLUSTER_REGS_SECURE_MST_CONFIG_VIEW_DMA_ETH_TX__SHIFT 24
+#define MPPA_SECURE_CLUSTER_REGS_SECURE_MST_CONFIG_VIEW_DMA_ETH_TX__MASK 0x1000000UL
+#define MPPA_SECURE_CLUSTER_REGS_SECURE_MST_CONFIG_VIEW_DMA_ETH_RX__SHIFT 25
+#define MPPA_SECURE_CLUSTER_REGS_SECURE_MST_CONFIG_VIEW_DMA_ETH_RX__MASK 0x2000000UL
+#define MPPA_SECURE_CLUSTER_REGS_SECURE_MST_CONFIG_VIEW_DMA_PCIE_TX__SHIFT 26
+#define MPPA_SECURE_CLUSTER_REGS_SECURE_MST_CONFIG_VIEW_DMA_PCIE_TX__MASK 0x4000000UL
+
+
+/***
+ * secure_cluster_regs secure_mst_config_reg register definition
+ * Secure master config
+ *
+ * Permissions:
+ * RM: ker => [:RD, :WR],
+ * RM: usr => [:RD, :WR],
+ * PE: ker => [:RD, :WR],
+ * PE: usr => [:RD, :WR],
+ * Size: 4 bytes (min access size = 4 bytes)
+ * Reset value: 0x7FFFFFF
+ */
+typedef union {
+mppa_uint32 reg;
+mppa_uint32 word;
+struct mppa_secure_cluster_regs_secure_mst_config_view _;
+} mppa_secure_cluster_regs_secure_mst_config_reg_t;
+
+struct mppa_secure_cluster_regs_securedbg_get_cmd_payload_view {
+mppa_uint32 val :32; /*[31: 0]reset: 0x0,behavior: [:RD, :WR],Value*/
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_secure_cluster_regs_securedbg_get_cmd_payload_view[(sizeof(struct mppa_secure_cluster_regs_securedbg_get_cmd_payload_view) == 4)*2-1];// If this fails, then the size of struct mppa_secure_cluster_regs_securedbg_get_cmd_payload_view as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_SECURE_CLUSTER_REGS_SECUREDBG_GET_CMD_PAYLOAD_VIEW_VAL__SHIFT 0
+#define MPPA_SECURE_CLUSTER_REGS_SECUREDBG_GET_CMD_PAYLOAD_VIEW_VAL__MASK 0xffffffffUL
+
+
+/***
+ * secure_cluster_regs securedbg_get_cmd_payload_reg register definition
+ * Payload data as replied by secure debug service to the 'get' commands by
+ * JTAG, see Secure Debug Application Note
+ *
+ * Permissions:
+ * RM: ker => [:RD, :WR],
+ * RM: usr => [:RD, :WR],
+ * PE: ker => [:RD, :WR],
+ * PE: usr => [:RD, :WR],
+ * Size: 4 bytes (min access size = 4 bytes)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint32 reg;
+mppa_uint32 word;
+struct mppa_secure_cluster_regs_securedbg_get_cmd_payload_view _;
+} mppa_secure_cluster_regs_securedbg_get_cmd_payload_reg_t;
+
+struct mppa_secure_cluster_regs_securedbg_set_cmd_payload_view {
+mppa_uint32 val :32; /*[31: 0]reset: 0x0,behavior: [:RD],Value*/
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_secure_cluster_regs_securedbg_set_cmd_payload_view[(sizeof(struct mppa_secure_cluster_regs_securedbg_set_cmd_payload_view) == 4)*2-1];// If this fails, then the size of struct mppa_secure_cluster_regs_securedbg_set_cmd_payload_view as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_SECURE_CLUSTER_REGS_SECUREDBG_SET_CMD_PAYLOAD_VIEW_VAL__SHIFT 0
+#define MPPA_SECURE_CLUSTER_REGS_SECUREDBG_SET_CMD_PAYLOAD_VIEW_VAL__MASK 0xffffffffUL
+
+
+/***
+ * secure_cluster_regs securedbg_set_cmd_payload_reg register definition
+ * Payload data as given by JTAG to secure debug service, see Secure Debug
+ * Application Note
+ *
+ * Permissions:
+ * RM: ker => [:RD],
+ * RM: usr => [:RD],
+ * PE: ker => [:RD],
+ * PE: usr => [:RD],
+ * Size: 4 bytes (min access size = 4 bytes)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint32 reg;
+mppa_uint32 word;
+struct mppa_secure_cluster_regs_securedbg_set_cmd_payload_view _;
+} mppa_secure_cluster_regs_securedbg_set_cmd_payload_reg_t;
+
+typedef enum {
+MPPA_SECURE_CLUSTER_REGS_ONGOING = 0x1,
+MPPA_SECURE_CLUSTER_REGS_DONE = 0x2,
+MPPA_SECURE_CLUSTER_REGS_FAILED = 0x3,
+} mppa_secure_cluster_regs_auth_status_value_t;
+
+struct mppa_secure_cluster_regs_securedbg_status_view {
+mppa_uint32 auth_status :3; /*[ 2: 0]reset: 0x0,behavior: [:RD, :WR],values: auth_status,Authentication status*/
+mppa_uint32 reserved_0:1;
+mppa_uint32 service_status :1; /*[ 4: 4]reset: 0x0,behavior: [:RD, :WR],Secure debug service status (1=ready with challenge available)*/
+mppa_uint32 reserved_1:3;
+mppa_uint32 cmd_ready :1; /*[ 8: 8]reset: 0x0,behavior: [:RD, :WR],Ready to process next command*/
+mppa_uint32 reserved_3:23;
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_secure_cluster_regs_securedbg_status_view[(sizeof(struct mppa_secure_cluster_regs_securedbg_status_view) == 4)*2-1];// If this fails, then the size of struct mppa_secure_cluster_regs_securedbg_status_view as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_SECURE_CLUSTER_REGS_SECUREDBG_STATUS_VIEW_AUTH_STATUS__SHIFT 0
+#define MPPA_SECURE_CLUSTER_REGS_SECUREDBG_STATUS_VIEW_AUTH_STATUS__MASK 0x7UL
+#define MPPA_SECURE_CLUSTER_REGS_SECUREDBG_STATUS_VIEW_SERVICE_STATUS__SHIFT 4
+#define MPPA_SECURE_CLUSTER_REGS_SECUREDBG_STATUS_VIEW_SERVICE_STATUS__MASK 0x10UL
+#define MPPA_SECURE_CLUSTER_REGS_SECUREDBG_STATUS_VIEW_CMD_READY__SHIFT 8
+#define MPPA_SECURE_CLUSTER_REGS_SECUREDBG_STATUS_VIEW_CMD_READY__MASK 0x100UL
+
+
+/***
+ * secure_cluster_regs securedbg_status_reg register definition
+ * Status from secure debug service to JTAG, see Secure Debug Application Note
+ *
+ * Permissions:
+ * RM: ker => [:RD, :WR],
+ * RM: usr => [:RD, :WR],
+ * PE: ker => [:RD, :WR],
+ * PE: usr => [:RD, :WR],
+ * Size: 4 bytes (min access size = 4 bytes)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint32 reg;
+mppa_uint32 word;
+struct mppa_secure_cluster_regs_securedbg_status_view _;
+} mppa_secure_cluster_regs_securedbg_status_reg_t;
+
+typedef enum {
+MPPA_SECURE_CLUSTER_REGS_PUSH_RA = 0x0,
+MPPA_SECURE_CLUSTER_REGS_PUSH_SIG = 0x1,
+MPPA_SECURE_CLUSTER_REGS_GET_RB = 0x2,
+MPPA_SECURE_CLUSTER_REGS_START_AUTH = 0x3,
+MPPA_SECURE_CLUSTER_REGS_NOP = 0x4,
+} mppa_secure_cluster_regs_command_codes_value_t;
+
+struct mppa_secure_cluster_regs_securedbg_command_view {
+mppa_uint32 command :3; /*[ 2: 0]reset: 0x0,behavior: [:RD],values: command_codes,Command*/
+mppa_uint32 reserved_0:5;
+mppa_uint32 chunk_id :7; /*[14: 8]reset: 0x0,behavior: [:RD],Chunk ID*/
+mppa_uint32 reserved_2:17;
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_secure_cluster_regs_securedbg_command_view[(sizeof(struct mppa_secure_cluster_regs_securedbg_command_view) == 4)*2-1];// If this fails, then the size of struct mppa_secure_cluster_regs_securedbg_command_view as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_SECURE_CLUSTER_REGS_SECUREDBG_COMMAND_VIEW_COMMAND__SHIFT 0
+#define MPPA_SECURE_CLUSTER_REGS_SECUREDBG_COMMAND_VIEW_COMMAND__MASK 0x7UL
+#define MPPA_SECURE_CLUSTER_REGS_SECUREDBG_COMMAND_VIEW_CHUNK_ID__SHIFT 8
+#define MPPA_SECURE_CLUSTER_REGS_SECUREDBG_COMMAND_VIEW_CHUNK_ID__MASK 0x7f00UL
+
+
+/***
+ * secure_cluster_regs securedbg_command_reg register definition
+ * Command from JTAG to secure debug service, see Secure Debug Application
+ * Note
+ *
+ * Permissions:
+ * RM: ker => [:RD],
+ * RM: usr => [:RD],
+ * PE: ker => [:RD],
+ * PE: usr => [:RD],
+ * Size: 4 bytes (min access size = 4 bytes)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint32 reg;
+mppa_uint32 word;
+struct mppa_secure_cluster_regs_securedbg_command_view _;
+} mppa_secure_cluster_regs_securedbg_command_reg_t;
+
+struct mppa_secure_cluster_regs_l2_remote_access_config_view {
+mppa_uint32 cluster0_pl_perm :4; /*[ 3: 0]reset: 0xF,behavior: [:RD, :WR],When bit i is asserted, Cluster 0 Priviledge Level i is authorized to issue L2 Cache Maintenance Operation through DSU L2 Remote*/
+mppa_uint32 cluster1_pl_perm :4; /*[ 7: 4]reset: 0xF,behavior: [:RD, :WR],When bit i is asserted, Cluster 1 Priviledge Level i is authorized to issue L2 Cache Maintenance Operation through DSU L2 Remote*/
+mppa_uint32 cluster2_pl_perm :4; /*[11: 8]reset: 0xF,behavior: [:RD, :WR],When bit i is asserted, Cluster 2 Priviledge Level i is authorized to issue L2 Cache Maintenance Operation through DSU L2 Remote*/
+mppa_uint32 cluster3_pl_perm :4; /*[15:12]reset: 0xF,behavior: [:RD, :WR],When bit i is asserted, Cluster 3 Priviledge Level i is authorized to issue L2 Cache Maintenance Operation through DSU L2 Remote*/
+mppa_uint32 cluster4_pl_perm :4; /*[19:16]reset: 0xF,behavior: [:RD, :WR],When bit i is asserted, Cluster 4 Priviledge Level i is authorized to issue L2 Cache Maintenance Operation through DSU L2 Remote*/
+mppa_uint32 reserved_1:12;
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_secure_cluster_regs_l2_remote_access_config_view[(sizeof(struct mppa_secure_cluster_regs_l2_remote_access_config_view) == 4)*2-1];// If this fails, then the size of struct mppa_secure_cluster_regs_l2_remote_access_config_view as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_SECURE_CLUSTER_REGS_L2_REMOTE_ACCESS_CONFIG_VIEW_CLUSTER0_PL_PERM__SHIFT 0
+#define MPPA_SECURE_CLUSTER_REGS_L2_REMOTE_ACCESS_CONFIG_VIEW_CLUSTER0_PL_PERM__MASK 0xfUL
+#define MPPA_SECURE_CLUSTER_REGS_L2_REMOTE_ACCESS_CONFIG_VIEW_CLUSTER1_PL_PERM__SHIFT 4
+#define MPPA_SECURE_CLUSTER_REGS_L2_REMOTE_ACCESS_CONFIG_VIEW_CLUSTER1_PL_PERM__MASK 0xf0UL
+#define MPPA_SECURE_CLUSTER_REGS_L2_REMOTE_ACCESS_CONFIG_VIEW_CLUSTER2_PL_PERM__SHIFT 8
+#define MPPA_SECURE_CLUSTER_REGS_L2_REMOTE_ACCESS_CONFIG_VIEW_CLUSTER2_PL_PERM__MASK 0xf00UL
+#define MPPA_SECURE_CLUSTER_REGS_L2_REMOTE_ACCESS_CONFIG_VIEW_CLUSTER3_PL_PERM__SHIFT 12
+#define MPPA_SECURE_CLUSTER_REGS_L2_REMOTE_ACCESS_CONFIG_VIEW_CLUSTER3_PL_PERM__MASK 0xf000UL
+#define MPPA_SECURE_CLUSTER_REGS_L2_REMOTE_ACCESS_CONFIG_VIEW_CLUSTER4_PL_PERM__SHIFT 16
+#define MPPA_SECURE_CLUSTER_REGS_L2_REMOTE_ACCESS_CONFIG_VIEW_CLUSTER4_PL_PERM__MASK 0xf0000UL
+
+
+/***
+ * secure_cluster_regs l2_remote_access_config_reg register definition
+ * L2 Remote access configuration
+ *
+ * Permissions:
+ * RM: ker => [:RD, :WR],
+ * RM: usr => [:RD, :WR],
+ * PE: ker => [:RD, :WR],
+ * PE: usr => [:RD, :WR],
+ * Size: 4 bytes (min access size = 4 bytes)
+ * Reset value: 0xFFFFF
+ */
+typedef union {
+mppa_uint32 reg;
+mppa_uint32 word;
+struct mppa_secure_cluster_regs_l2_remote_access_config_view _;
+} mppa_secure_cluster_regs_l2_remote_access_config_reg_t;
+
+struct mppa_secure_cluster_regs_global_config {
+mppa_uint64 smem_meta_init :1; /*[ 0: 0]reset: 0x0,behavior: [:RD, :WR],SMEM metadata initialization (transition from 0 to 1 sets all metadata to default value)*/
+mppa_uint64 reserved_0:1;
+mppa_uint64 l2_cache_config_ratio :2; /*[ 3: 2]reset: 0x0,behavior: [:RD, :WR],L2 cache config: 00b=off, 01b=L2 ratio 1/8 (1MB), 10b=L2 ratio 1/4 (2MB), 11b=L2 ratio 1/2 (4MB).*/
+mppa_uint64 smem_psht_rd_dis :10; /*[13: 4]reset: 0x0,behavior: [:RD, :WR],Disable Read Peripheral Shoot-Through (0: DSU; 1: DMA-Tx; ...; 9: DMA-PCIe-Rx*/
+mppa_uint64 smem_psht_wr_dis :10; /*[23:14]reset: 0x0,behavior: [:RD, :WR],Disable Write Peripheral Shoot-Through (0: DSU; 1: DMA-Tx; ...; 9: DMA-PCIe-Rx*/
+mppa_uint64 reserved_1:9;
+mppa_uint64 dsu_ecc_bypass :1; /*[33:33]reset: 0x0,behavior: [:RD, :WR],Bypass ECC in dsu memory*/
+mppa_uint64 smem_ecc_bypass :1; /*[34:34]reset: 0x0,behavior: [:RD, :WR],Bypass ECC in smem memory*/
+mppa_uint64 smem_burst_len :3; /*[37:35]reset: 0x1,behavior: [:RD, :WR],Configure maximum burst length for Smart Arbitration Protocol (SAP) in smem*/
+mppa_uint64 axi_burst_dis :1; /*[38:38]reset: 0x0,behavior: [:RD, :WR],AXI2SMEM only generates 1-flit transaction*/
+mppa_uint64 smem_dcld_dis :1; /*[39:39]reset: 0x0,behavior: [:RD, :WR],Disable DCLD in SMEM*/
+mppa_uint64 smem_replay_watchdog :16; /*[55:40]reset: 0x0,behavior: [:RD, :WR],SMEM Replay Watchdog: when different than 0, SMEM Replay are initiated every smem_replay_watchdog clock cycles*/
+mppa_uint64 smem_replay_shift :8; /*[63:56]reset: 0x0,behavior: [:RD, :WR],SMEM Replay Shift: SMEM Replay Watchdog is multiplied by 2**smem_replay_shift*/
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_secure_cluster_regs_global_config[(sizeof(struct mppa_secure_cluster_regs_global_config) == 8)*2-1];// If this fails, then the size of struct mppa_secure_cluster_regs_global_config as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_SECURE_CLUSTER_REGS_GLOBAL_CONFIG_SMEM_META_INIT__SHIFT 0
+#define MPPA_SECURE_CLUSTER_REGS_GLOBAL_CONFIG_SMEM_META_INIT__MASK 0x1ULL
+#define MPPA_SECURE_CLUSTER_REGS_GLOBAL_CONFIG_L2_CACHE_CONFIG_RATIO__SHIFT 2
+#define MPPA_SECURE_CLUSTER_REGS_GLOBAL_CONFIG_L2_CACHE_CONFIG_RATIO__MASK 0xcULL
+#define MPPA_SECURE_CLUSTER_REGS_GLOBAL_CONFIG_SMEM_PSHT_RD_DIS__SHIFT 4
+#define MPPA_SECURE_CLUSTER_REGS_GLOBAL_CONFIG_SMEM_PSHT_RD_DIS__MASK 0x3ff0ULL
+#define MPPA_SECURE_CLUSTER_REGS_GLOBAL_CONFIG_SMEM_PSHT_WR_DIS__SHIFT 14
+#define MPPA_SECURE_CLUSTER_REGS_GLOBAL_CONFIG_SMEM_PSHT_WR_DIS__MASK 0xffc000ULL
+#define MPPA_SECURE_CLUSTER_REGS_GLOBAL_CONFIG_DSU_ECC_BYPASS__SHIFT 33
+#define MPPA_SECURE_CLUSTER_REGS_GLOBAL_CONFIG_DSU_ECC_BYPASS__MASK 0x200000000ULL
+#define MPPA_SECURE_CLUSTER_REGS_GLOBAL_CONFIG_SMEM_ECC_BYPASS__SHIFT 34
+#define MPPA_SECURE_CLUSTER_REGS_GLOBAL_CONFIG_SMEM_ECC_BYPASS__MASK 0x400000000ULL
+#define MPPA_SECURE_CLUSTER_REGS_GLOBAL_CONFIG_SMEM_BURST_LEN__SHIFT 35
+#define MPPA_SECURE_CLUSTER_REGS_GLOBAL_CONFIG_SMEM_BURST_LEN__MASK 0x3800000000ULL
+#define MPPA_SECURE_CLUSTER_REGS_GLOBAL_CONFIG_AXI_BURST_DIS__SHIFT 38
+#define MPPA_SECURE_CLUSTER_REGS_GLOBAL_CONFIG_AXI_BURST_DIS__MASK 0x4000000000ULL
+#define MPPA_SECURE_CLUSTER_REGS_GLOBAL_CONFIG_SMEM_DCLD_DIS__SHIFT 39
+#define MPPA_SECURE_CLUSTER_REGS_GLOBAL_CONFIG_SMEM_DCLD_DIS__MASK 0x8000000000ULL
+#define MPPA_SECURE_CLUSTER_REGS_GLOBAL_CONFIG_SMEM_REPLAY_WATCHDOG__SHIFT 40
+#define MPPA_SECURE_CLUSTER_REGS_GLOBAL_CONFIG_SMEM_REPLAY_WATCHDOG__MASK 0xffff0000000000ULL
+#define MPPA_SECURE_CLUSTER_REGS_GLOBAL_CONFIG_SMEM_REPLAY_SHIFT__SHIFT 56
+#define MPPA_SECURE_CLUSTER_REGS_GLOBAL_CONFIG_SMEM_REPLAY_SHIFT__MASK 0xff00000000000000ULL
+
+
+/***
+ * secure_cluster_regs global_config_write register definition
+ *
+ * Permissions:
+ * RM: ker => [:RD, :WR],
+ * RM: usr => [:RD, :WR],
+ * PE: ker => [:RD, :WR],
+ * PE: usr => [:RD, :WR],
+ * Size: 8 bytes (min access size = 8 bytes)
+ * Reset value: 0x800000000
+ */
+typedef union {
+mppa_uint64 reg;
+mppa_uint64 dword;
+struct mppa_secure_cluster_regs_global_config _;
+} mppa_secure_cluster_regs_global_config_write_t;
+
+/***
+ * secure_cluster_regs global_config_set register definition
+ *
+ * Permissions:
+ * RM: ker => [:RD, :WR],
+ * RM: usr => [:RD, :WR],
+ * PE: ker => [:RD, :WR],
+ * PE: usr => [:RD, :WR],
+ * Size: 8 bytes (min access size = 8 bytes)
+ * Reset value: 0x800000000
+ */
+typedef union {
+mppa_uint64 reg;
+mppa_uint64 dword;
+struct mppa_secure_cluster_regs_global_config _;
+} mppa_secure_cluster_regs_global_config_set_t;
+
+/***
+ * secure_cluster_regs global_config_clear register definition
+ *
+ * Permissions:
+ * RM: ker => [:RD, :WR],
+ * RM: usr => [:RD, :WR],
+ * PE: ker => [:RD, :WR],
+ * PE: usr => [:RD, :WR],
+ * Size: 8 bytes (min access size = 8 bytes)
+ * Reset value: 0x800000000
+ */
+typedef union {
+mppa_uint64 reg;
+mppa_uint64 dword;
+struct mppa_secure_cluster_regs_global_config _;
+} mppa_secure_cluster_regs_global_config_clear_t;
+
+/***
+ * secure_cluster_regs config group definition
+ * Global Power Control
+ *
+ * Size: 64/0x40 bytes
+ */
+typedef struct  {
+mppa_secure_cluster_regs_global_config_write_t write; /* offset: 0x0, size: 0x8 */
+mppa_uint8 unused0[8];
+mppa_secure_cluster_regs_global_config_set_t set; /* offset: 0x10, size: 0x8 */
+mppa_uint8 unused1[8];
+mppa_secure_cluster_regs_global_config_clear_t clear; /* offset: 0x20, size: 0x8 */
+mppa_uint8 unused2[24];
+} mppa_secure_cluster_regs_config_t;
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_mppa_secure_cluster_regs_config_t[(sizeof(mppa_secure_cluster_regs_config_t) == 64)*2-1];// If this fails, then the size of mppa_secure_cluster_regs_config_t as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+struct mppa_secure_cluster_regs_global_status {
+mppa_uint64 reset :1; /*[ 0: 0]reset: 0x0,Top reset*/
+mppa_uint64 clk_en :1; /*[ 1: 1]reset: 0x1,Kernel clock enable*/
+mppa_uint64 rm_wup :1; /*[ 2: 2]reset: 0x0,wake-up bit from bootmode to RM*/
+mppa_uint64 shuf_dis :1; /*[ 3: 3]reset: 0x0,Shuffling disable*/
+mppa_uint64 noc_idle :1; /*[ 4: 4]reset: 0x1,All DMA RX and TX channel are clear*/
+mppa_uint64 dbg_fifo_idle :1; /*[ 5: 5]reset: 0x1,Debug message fifo empty*/
+mppa_uint64 watchdog :1; /*[ 6: 6]reset: 0x0,Watchdog fire*/
+mppa_uint64 reserved_1:57;
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_secure_cluster_regs_global_status[(sizeof(struct mppa_secure_cluster_regs_global_status) == 8)*2-1];// If this fails, then the size of struct mppa_secure_cluster_regs_global_status as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_SECURE_CLUSTER_REGS_GLOBAL_STATUS_RESET__SHIFT 0
+#define MPPA_SECURE_CLUSTER_REGS_GLOBAL_STATUS_RESET__MASK 0x1ULL
+#define MPPA_SECURE_CLUSTER_REGS_GLOBAL_STATUS_CLK_EN__SHIFT 1
+#define MPPA_SECURE_CLUSTER_REGS_GLOBAL_STATUS_CLK_EN__MASK 0x2ULL
+#define MPPA_SECURE_CLUSTER_REGS_GLOBAL_STATUS_RM_WUP__SHIFT 2
+#define MPPA_SECURE_CLUSTER_REGS_GLOBAL_STATUS_RM_WUP__MASK 0x4ULL
+#define MPPA_SECURE_CLUSTER_REGS_GLOBAL_STATUS_SHUF_DIS__SHIFT 3
+#define MPPA_SECURE_CLUSTER_REGS_GLOBAL_STATUS_SHUF_DIS__MASK 0x8ULL
+#define MPPA_SECURE_CLUSTER_REGS_GLOBAL_STATUS_NOC_IDLE__SHIFT 4
+#define MPPA_SECURE_CLUSTER_REGS_GLOBAL_STATUS_NOC_IDLE__MASK 0x10ULL
+#define MPPA_SECURE_CLUSTER_REGS_GLOBAL_STATUS_DBG_FIFO_IDLE__SHIFT 5
+#define MPPA_SECURE_CLUSTER_REGS_GLOBAL_STATUS_DBG_FIFO_IDLE__MASK 0x20ULL
+#define MPPA_SECURE_CLUSTER_REGS_GLOBAL_STATUS_WATCHDOG__SHIFT 6
+#define MPPA_SECURE_CLUSTER_REGS_GLOBAL_STATUS_WATCHDOG__MASK 0x40ULL
+
+
+/***
+ * secure_cluster_regs global_status register definition
+ *
+ * Permissions:
+ * RM: ker => [:RD],
+ * RM: usr => [:RD],
+ * PE: ker => [:RD],
+ * PE: usr => [:RD],
+ * Size: 8 bytes (min access size = 8 bytes)
+ * Reset value: 0x32
+ */
+typedef union {
+mppa_uint64 reg;
+mppa_uint64 dword;
+struct mppa_secure_cluster_regs_global_status _;
+} mppa_secure_cluster_regs_global_status_t;
+
+struct mppa_secure_cluster_regs_proc_config {
+mppa_uint32 wakeup :1; /*[ 0: 0]reset: 0x0,behavior: [:RD, :WR],wake-up processor*/
+mppa_uint32 reset_on_wakeup :1; /*[ 1: 1]reset: 0x0,behavior: [:RD, :WR],Processor FSM goes back to RESETING when going out from deep sleep*/
+mppa_uint32 reserved_0:8;
+mppa_uint32 wd_ack :1; /*[10:10]reset: 0x0,behavior: [:RD, :WR],Watchdog acknowledge*/
+mppa_uint32 reserved_2:21;
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_secure_cluster_regs_proc_config[(sizeof(struct mppa_secure_cluster_regs_proc_config) == 4)*2-1];// If this fails, then the size of struct mppa_secure_cluster_regs_proc_config as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_SECURE_CLUSTER_REGS_PROC_CONFIG_WAKEUP__SHIFT 0
+#define MPPA_SECURE_CLUSTER_REGS_PROC_CONFIG_WAKEUP__MASK 0x1UL
+#define MPPA_SECURE_CLUSTER_REGS_PROC_CONFIG_RESET_ON_WAKEUP__SHIFT 1
+#define MPPA_SECURE_CLUSTER_REGS_PROC_CONFIG_RESET_ON_WAKEUP__MASK 0x2UL
+#define MPPA_SECURE_CLUSTER_REGS_PROC_CONFIG_WD_ACK__SHIFT 10
+#define MPPA_SECURE_CLUSTER_REGS_PROC_CONFIG_WD_ACK__MASK 0x400UL
+
+
+/***
+ * secure_cluster_regs write register definition
+ * This register can only be accessed by the RM
+ *
+ * Permissions:
+ * RM: ker => [:RD, :WR],
+ * RM: usr => [:RD, :WR],
+ * PE: ker => [:RD, :WR],
+ * PE: usr => [:RD, :WR],
+ * Size: 4 bytes (min access size = 1 byte)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint32 reg;
+mppa_uint32 word;
+mppa_uint16 hword[2];
+mppa_uint8 bword[4];
+struct mppa_secure_cluster_regs_proc_config _;
+} mppa_secure_cluster_regs_write_t;
+
+struct mppa_secure_cluster_regs_proc_config_reserved {
+mppa_uint32 reserved_1:32;
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_secure_cluster_regs_proc_config_reserved[(sizeof(struct mppa_secure_cluster_regs_proc_config_reserved) == 4)*2-1];// If this fails, then the size of struct mppa_secure_cluster_regs_proc_config_reserved as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+
+
+/***
+ * secure_cluster_regs reserved register definition
+ * Reserved bytes.
+ *
+ * Permissions:
+ * RM: ker => [:RD, :WR],
+ * RM: usr => [:RD, :WR],
+ * PE: ker => [:RD, :WR],
+ * PE: usr => [:RD, :WR],
+ * Size: 4 bytes (min access size = 1 byte)
+ * Reset value: Not initialized
+ */
+typedef union {
+mppa_uint32 reg;
+mppa_uint32 word;
+mppa_uint16 hword[2];
+mppa_uint8 bword[4];
+struct mppa_secure_cluster_regs_proc_config_reserved _;
+} mppa_secure_cluster_regs_reserved_t;
+
+/***
+ * secure_cluster_regs set register definition
+ * Written data is considered as a mask where bits at 1 set register corresponding
+ * bits.
+ *
+ * Permissions:
+ * RM: ker => [:RD, :WR],
+ * RM: usr => [:RD, :WR],
+ * PE: ker => [:RD, :WR],
+ * PE: usr => [:RD, :WR],
+ * Size: 4 bytes (min access size = 1 byte)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint32 reg;
+mppa_uint32 word;
+mppa_uint16 hword[2];
+mppa_uint8 bword[4];
+struct mppa_secure_cluster_regs_proc_config _;
+} mppa_secure_cluster_regs_set_t;
+
+/***
+ * secure_cluster_regs clear register definition
+ * Written data is considered as a mask where bits at 1 clear register corresponding
+ * bits.
+ *
+ * Permissions:
+ * RM: ker => [:RD, :WR],
+ * RM: usr => [:RD, :WR],
+ * PE: ker => [:RD, :WR],
+ * PE: usr => [:RD, :WR],
+ * Size: 4 bytes (min access size = 1 byte)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint32 reg;
+mppa_uint32 word;
+mppa_uint16 hword[2];
+mppa_uint8 bword[4];
+struct mppa_secure_cluster_regs_proc_config _;
+} mppa_secure_cluster_regs_clear_t;
+
+/***
+ * secure_cluster_regs proc_control group definition
+ * Processor Power Control
+ *
+ * Size: 64/0x40 bytes
+ */
+typedef struct  {
+mppa_secure_cluster_regs_write_t write; /* offset: 0x0, size: 0x4 */
+mppa_secure_cluster_regs_reserved_t reserved_write; /* offset: 0x4, size: 0x4 */
+mppa_uint8 unused0[8];
+mppa_secure_cluster_regs_set_t set; /* offset: 0x10, size: 0x4 */
+mppa_secure_cluster_regs_reserved_t reserved_set; /* offset: 0x14, size: 0x4 */
+mppa_uint8 unused1[8];
+mppa_secure_cluster_regs_clear_t clear; /* offset: 0x20, size: 0x4 */
+mppa_secure_cluster_regs_reserved_t reserved_clear; /* offset: 0x24, size: 0x4 */
+mppa_uint8 unused2[24];
+} mppa_secure_cluster_regs_proc_control_t;
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_mppa_secure_cluster_regs_proc_control_t[(sizeof(mppa_secure_cluster_regs_proc_control_t) == 64)*2-1];// If this fails, then the size of mppa_secure_cluster_regs_proc_control_t as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+struct mppa_secure_cluster_regs_proc_status {
+mppa_uint32 wd :1; /*[ 0: 0]reset: 0x0,behavior: [:RD],*/
+mppa_uint32 idle :2; /*[ 2: 1]reset: 0x2,behavior: [:RD],*/
+mppa_uint32 fsm :2; /*[ 4: 3]reset: 0x0,behavior: [:RD],*/
+mppa_uint32 reserved_1:27;
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_secure_cluster_regs_proc_status[(sizeof(struct mppa_secure_cluster_regs_proc_status) == 4)*2-1];// If this fails, then the size of struct mppa_secure_cluster_regs_proc_status as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_SECURE_CLUSTER_REGS_PROC_STATUS_WD__SHIFT 0
+#define MPPA_SECURE_CLUSTER_REGS_PROC_STATUS_WD__MASK 0x1UL
+#define MPPA_SECURE_CLUSTER_REGS_PROC_STATUS_IDLE__SHIFT 1
+#define MPPA_SECURE_CLUSTER_REGS_PROC_STATUS_IDLE__MASK 0x6UL
+#define MPPA_SECURE_CLUSTER_REGS_PROC_STATUS_FSM__SHIFT 3
+#define MPPA_SECURE_CLUSTER_REGS_PROC_STATUS_FSM__MASK 0x18UL
+
+
+/***
+ * secure_cluster_regs proc_sts register definition
+ * Permissions:
+ * RM: ker => [:RD],
+ * RM: usr => [:RD],
+ * PE: ker => [:RD],
+ * PE: usr => [:RD],
+ * Size: 4 bytes (min access size = 1 byte)
+ * Reset value: 0x4
+ */
+typedef union {
+mppa_uint32 reg;
+mppa_uint32 word;
+mppa_uint16 hword[2];
+mppa_uint8 bword[4];
+struct mppa_secure_cluster_regs_proc_status _;
+} mppa_secure_cluster_regs_proc_sts_t;
+
+/***
+ * secure_cluster_regs proc_status group definition
+ * Processor Power Control
+ *
+ * Size: 16/0x10 bytes
+ */
+typedef struct  {
+mppa_secure_cluster_regs_proc_sts_t proc_sts; /* offset: 0x0, size: 0x4 */
+mppa_secure_cluster_regs_reserved_t reserved_status; /* offset: 0x4, size: 0x4 */
+mppa_uint8 unused0[8];
+} mppa_secure_cluster_regs_proc_status_t;
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_mppa_secure_cluster_regs_proc_status_t[(sizeof(mppa_secure_cluster_regs_proc_status_t) == 16)*2-1];// If this fails, then the size of mppa_secure_cluster_regs_proc_status_t as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+struct mppa_secure_cluster_regs_ecc_status {
+mppa_uint64 secc :16; /*[15: 0]reset: 0x0,behavior: [:RD],single ecc error status per bank*/
+mppa_uint64 decc :16; /*[31:16]reset: 0x0,behavior: [:RD],double ecc error status per bank*/
+mppa_uint64 reserved_1:32;
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_secure_cluster_regs_ecc_status[(sizeof(struct mppa_secure_cluster_regs_ecc_status) == 8)*2-1];// If this fails, then the size of struct mppa_secure_cluster_regs_ecc_status as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_SECURE_CLUSTER_REGS_ECC_STATUS_SECC__SHIFT 0
+#define MPPA_SECURE_CLUSTER_REGS_ECC_STATUS_SECC__MASK 0xffffULL
+#define MPPA_SECURE_CLUSTER_REGS_ECC_STATUS_DECC__SHIFT 16
+#define MPPA_SECURE_CLUSTER_REGS_ECC_STATUS_DECC__MASK 0xffff0000ULL
+
+
+/***
+ * secure_cluster_regs ecc_status register definition
+ * Permissions:
+ * RM: ker => [:RD],
+ * RM: usr => [:RD],
+ * PE: ker => [:RD],
+ * PE: usr => [:RD],
+ * Size: 8 bytes (min access size = 1 byte)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint64 reg;
+mppa_uint64 dword;
+mppa_uint32 word[2];
+mppa_uint16 hword[4];
+mppa_uint8 bword[8];
+struct mppa_secure_cluster_regs_ecc_status _;
+} mppa_secure_cluster_regs_ecc_status_t;
+
+struct mppa_secure_cluster_regs_ecc_status_securebank {
+mppa_uint64 secc :1; /*[ 0: 0]reset: 0x0,behavior: [:RD],single ecc error status*/
+mppa_uint64 reserved_0:15;
+mppa_uint64 decc :1; /*[16:16]reset: 0x0,behavior: [:RD],double ecc error status*/
+mppa_uint64 reserved_2:47;
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_secure_cluster_regs_ecc_status_securebank[(sizeof(struct mppa_secure_cluster_regs_ecc_status_securebank) == 8)*2-1];// If this fails, then the size of struct mppa_secure_cluster_regs_ecc_status_securebank as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_SECURE_CLUSTER_REGS_ECC_STATUS_SECUREBANK_SECC__SHIFT 0
+#define MPPA_SECURE_CLUSTER_REGS_ECC_STATUS_SECUREBANK_SECC__MASK 0x1ULL
+#define MPPA_SECURE_CLUSTER_REGS_ECC_STATUS_SECUREBANK_DECC__SHIFT 16
+#define MPPA_SECURE_CLUSTER_REGS_ECC_STATUS_SECUREBANK_DECC__MASK 0x10000ULL
+
+
+/***
+ * secure_cluster_regs ecc_status_securebank register definition
+ * Permissions:
+ * RM: ker => [:RD],
+ * RM: usr => [:RD],
+ * PE: ker => [:RD],
+ * PE: usr => [:RD],
+ * Size: 8 bytes (min access size = 1 byte)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint64 reg;
+mppa_uint64 dword;
+mppa_uint32 word[2];
+mppa_uint16 hword[4];
+mppa_uint8 bword[8];
+struct mppa_secure_cluster_regs_ecc_status_securebank _;
+} mppa_secure_cluster_regs_ecc_status_securebank_t;
+
+/***
+ * secure_cluster_regs ecc_status_clear register definition
+ * Permissions:
+ * RM: ker => [:RD],
+ * RM: usr => [:RD],
+ * PE: ker => [:RD],
+ * PE: usr => [:RD],
+ * Size: 8 bytes (min access size = 1 byte)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint64 reg;
+mppa_uint64 dword;
+mppa_uint32 word[2];
+mppa_uint16 hword[4];
+mppa_uint8 bword[8];
+struct mppa_secure_cluster_regs_ecc_status _;
+} mppa_secure_cluster_regs_ecc_status_clear_t;
+
+/***
+ * secure_cluster_regs ecc_status_securebank_clear register definition
+ * Permissions:
+ * RM: ker => [:RD],
+ * RM: usr => [:RD],
+ * PE: ker => [:RD],
+ * PE: usr => [:RD],
+ * Size: 8 bytes (min access size = 1 byte)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint64 reg;
+mppa_uint64 dword;
+mppa_uint32 word[2];
+mppa_uint16 hword[4];
+mppa_uint8 bword[8];
+struct mppa_secure_cluster_regs_ecc_status_securebank _;
+} mppa_secure_cluster_regs_ecc_status_securebank_clear_t;
+
+struct mppa_secure_cluster_regs_secure_status_crypto0_nonsecure {
+mppa_uint32 present :1; /*[ 0: 0]reset: 0x1,behavior: [:RD],Crypto Acc 0 present in non-secure world*/
+mppa_uint32 reserved_1:31;
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_secure_cluster_regs_secure_status_crypto0_nonsecure[(sizeof(struct mppa_secure_cluster_regs_secure_status_crypto0_nonsecure) == 4)*2-1];// If this fails, then the size of struct mppa_secure_cluster_regs_secure_status_crypto0_nonsecure as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_SECURE_CLUSTER_REGS_SECURE_STATUS_CRYPTO0_NONSECURE_PRESENT__SHIFT 0
+#define MPPA_SECURE_CLUSTER_REGS_SECURE_STATUS_CRYPTO0_NONSECURE_PRESENT__MASK 0x1UL
+
+
+/***
+ * secure_cluster_regs crypto0_nonsecure register definition
+ * Permissions:
+ * RM: ker => [:RD],
+ * RM: usr => [:RD],
+ * PE: ker => [:RD],
+ * PE: usr => [:RD],
+ * Size: 4 bytes (min access size = 1 byte)
+ * Reset value: 0x1
+ */
+typedef union {
+mppa_uint32 reg;
+mppa_uint32 word;
+mppa_uint16 hword[2];
+mppa_uint8 bword[4];
+struct mppa_secure_cluster_regs_secure_status_crypto0_nonsecure _;
+} mppa_secure_cluster_regs_crypto0_nonsecure_t;
+
+struct mppa_secure_cluster_regs_secure_status_crypto0_secure {
+mppa_uint32 present :1; /*[ 0: 0]reset: 0x0,behavior: [:RD],Crypto Acc 0 present in secure world*/
+mppa_uint32 reserved_1:31;
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_secure_cluster_regs_secure_status_crypto0_secure[(sizeof(struct mppa_secure_cluster_regs_secure_status_crypto0_secure) == 4)*2-1];// If this fails, then the size of struct mppa_secure_cluster_regs_secure_status_crypto0_secure as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_SECURE_CLUSTER_REGS_SECURE_STATUS_CRYPTO0_SECURE_PRESENT__SHIFT 0
+#define MPPA_SECURE_CLUSTER_REGS_SECURE_STATUS_CRYPTO0_SECURE_PRESENT__MASK 0x1UL
+
+
+/***
+ * secure_cluster_regs crypto0_secure register definition
+ * Permissions:
+ * RM: ker => [:RD],
+ * RM: usr => [:RD],
+ * PE: ker => [:RD],
+ * PE: usr => [:RD],
+ * Size: 4 bytes (min access size = 1 byte)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint32 reg;
+mppa_uint32 word;
+mppa_uint16 hword[2];
+mppa_uint8 bword[4];
+struct mppa_secure_cluster_regs_secure_status_crypto0_secure _;
+} mppa_secure_cluster_regs_crypto0_secure_t;
+
+struct mppa_secure_cluster_regs_secure_status_crypto1_nonsecure {
+mppa_uint32 present :1; /*[ 0: 0]reset: 0x1,behavior: [:RD],Crypto Acc 0 present in non-secure world*/
+mppa_uint32 reserved_1:31;
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_secure_cluster_regs_secure_status_crypto1_nonsecure[(sizeof(struct mppa_secure_cluster_regs_secure_status_crypto1_nonsecure) == 4)*2-1];// If this fails, then the size of struct mppa_secure_cluster_regs_secure_status_crypto1_nonsecure as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_SECURE_CLUSTER_REGS_SECURE_STATUS_CRYPTO1_NONSECURE_PRESENT__SHIFT 0
+#define MPPA_SECURE_CLUSTER_REGS_SECURE_STATUS_CRYPTO1_NONSECURE_PRESENT__MASK 0x1UL
+
+
+/***
+ * secure_cluster_regs crypto1_nonsecure register definition
+ * Permissions:
+ * RM: ker => [:RD],
+ * RM: usr => [:RD],
+ * PE: ker => [:RD],
+ * PE: usr => [:RD],
+ * Size: 4 bytes (min access size = 1 byte)
+ * Reset value: 0x1
+ */
+typedef union {
+mppa_uint32 reg;
+mppa_uint32 word;
+mppa_uint16 hword[2];
+mppa_uint8 bword[4];
+struct mppa_secure_cluster_regs_secure_status_crypto1_nonsecure _;
+} mppa_secure_cluster_regs_crypto1_nonsecure_t;
+
+struct mppa_secure_cluster_regs_secure_status_crypto1_secure {
+mppa_uint32 present :1; /*[ 0: 0]reset: 0x0,behavior: [:RD],Crypto Acc 0 present in secure world*/
+mppa_uint32 reserved_1:31;
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_secure_cluster_regs_secure_status_crypto1_secure[(sizeof(struct mppa_secure_cluster_regs_secure_status_crypto1_secure) == 4)*2-1];// If this fails, then the size of struct mppa_secure_cluster_regs_secure_status_crypto1_secure as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_SECURE_CLUSTER_REGS_SECURE_STATUS_CRYPTO1_SECURE_PRESENT__SHIFT 0
+#define MPPA_SECURE_CLUSTER_REGS_SECURE_STATUS_CRYPTO1_SECURE_PRESENT__MASK 0x1UL
+
+
+/***
+ * secure_cluster_regs crypto1_secure register definition
+ * Permissions:
+ * RM: ker => [:RD],
+ * RM: usr => [:RD],
+ * PE: ker => [:RD],
+ * PE: usr => [:RD],
+ * Size: 4 bytes (min access size = 1 byte)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint32 reg;
+mppa_uint32 word;
+mppa_uint16 hword[2];
+mppa_uint8 bword[4];
+struct mppa_secure_cluster_regs_secure_status_crypto1_secure _;
+} mppa_secure_cluster_regs_crypto1_secure_t;
+
+/***
+ * secure_cluster_regs secure_status group definition
+ * Secure status
+ *
+ * Size: 16/0x10 bytes
+ */
+typedef struct  {
+mppa_secure_cluster_regs_crypto0_nonsecure_t crypto0_nonsecure; /* offset: 0x0, size: 0x4 */
+mppa_secure_cluster_regs_crypto0_secure_t crypto0_secure; /* offset: 0x4, size: 0x4 */
+mppa_secure_cluster_regs_crypto1_nonsecure_t crypto1_nonsecure; /* offset: 0x8, size: 0x4 */
+mppa_secure_cluster_regs_crypto1_secure_t crypto1_secure; /* offset: 0xC, size: 0x4 */
+} mppa_secure_cluster_regs_secure_status_t;
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_mppa_secure_cluster_regs_secure_status_t[(sizeof(mppa_secure_cluster_regs_secure_status_t) == 16)*2-1];// If this fails, then the size of mppa_secure_cluster_regs_secure_status_t as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+struct mppa_secure_cluster_regs_locked_route_error_cnt {
+mppa_uint32 cnt :8; /*[ 7: 0]reset: 0x0,behavior: [:RD],*/
+mppa_uint32 reserved_1:24;
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_secure_cluster_regs_locked_route_error_cnt[(sizeof(struct mppa_secure_cluster_regs_locked_route_error_cnt) == 4)*2-1];// If this fails, then the size of struct mppa_secure_cluster_regs_locked_route_error_cnt as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_SECURE_CLUSTER_REGS_LOCKED_ROUTE_ERROR_CNT_CNT__SHIFT 0
+#define MPPA_SECURE_CLUSTER_REGS_LOCKED_ROUTE_ERROR_CNT_CNT__MASK 0xffUL
+
+
+/***
+ * secure_cluster_regs locked_route_error_cnt register definition
+ * Number of NoC packets carrying a bad locked route.
+ *
+ * Permissions:
+ * RM: ker => [:RD],
+ * RM: usr => [:RD],
+ * PE: ker => [:RD],
+ * PE: usr => [:RD],
+ * Size: 4 bytes (min access size = 4 bytes)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint32 reg;
+mppa_uint32 word;
+struct mppa_secure_cluster_regs_locked_route_error_cnt _;
+} mppa_secure_cluster_regs_locked_route_error_cnt_t;
+
+struct mppa_secure_cluster_regs_locked_route {
+mppa_uint64 lock_fifo :6; /*[ 5: 0]reset: 0x0,behavior: [:RD, :WR],*/
+mppa_uint64 reserved_1:58;
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_secure_cluster_regs_locked_route[(sizeof(struct mppa_secure_cluster_regs_locked_route) == 8)*2-1];// If this fails, then the size of struct mppa_secure_cluster_regs_locked_route as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_SECURE_CLUSTER_REGS_LOCKED_ROUTE_LOCK_FIFO__SHIFT 0
+#define MPPA_SECURE_CLUSTER_REGS_LOCKED_ROUTE_LOCK_FIFO__MASK 0x3fULL
+
+
+/***
+ * secure_cluster_regs locked_route register definition
+ * Allow/disable a NoC router input to output direction.
+ *
+ * Permissions:
+ * RM: ker => [:RD, :WR],
+ * RM: usr => [:RD, :WR],
+ * PE: ker => [:RD, :WR],
+ * PE: usr => [:RD, :WR],
+ * Size: 8 bytes (min access size = 8 bytes)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint64 reg;
+mppa_uint64 dword;
+struct mppa_secure_cluster_regs_locked_route _;
+} mppa_secure_cluster_regs_locked_route_t;
+
+/***
+ * secure_cluster_regs locked_route_dst group definition
+ * Allow/disable a NoC router input to output direction.
+ *
+ * Size: 48/0x30 bytes
+ */
+#define MPPA_SECURE_CLUSTER_REGS_LOCKED_ROUTE_DST_DST_NUMBER 6
+typedef struct  {
+mppa_secure_cluster_regs_locked_route_t dst[6]; /* offset: 0x0, size: 0x30 ( /!\ this is a 64bits register*/
+} mppa_secure_cluster_regs_locked_route_dst_t;
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_mppa_secure_cluster_regs_locked_route_dst_t[(sizeof(mppa_secure_cluster_regs_locked_route_dst_t) == 48)*2-1];// If this fails, then the size of mppa_secure_cluster_regs_locked_route_dst_t as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+/***
+ * secure_cluster_regs locked_route_vchan group definition
+ * Allow/disable a NoC router input to output direction.
+ *
+ * Size: 96/0x60 bytes
+ */
+#define MPPA_SECURE_CLUSTER_REGS_LOCKED_ROUTE_VCHAN_VCHAN_NUMBER 2
+typedef struct  {
+mppa_secure_cluster_regs_locked_route_dst_t vchan[2]; /* offset: 0x0, size: 0x60 */
+} mppa_secure_cluster_regs_locked_route_vchan_t;
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_mppa_secure_cluster_regs_locked_route_vchan_t[(sizeof(mppa_secure_cluster_regs_locked_route_vchan_t) == 96)*2-1];// If this fails, then the size of mppa_secure_cluster_regs_locked_route_vchan_t as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+struct mppa_secure_cluster_regs_locked_route_write_enable {
+mppa_uint32 write_en :1; /*[ 0: 0]reset: 0x1,behavior: [:RD, :WR],*/
+mppa_uint32 reserved_1:31;
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_secure_cluster_regs_locked_route_write_enable[(sizeof(struct mppa_secure_cluster_regs_locked_route_write_enable) == 4)*2-1];// If this fails, then the size of struct mppa_secure_cluster_regs_locked_route_write_enable as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_SECURE_CLUSTER_REGS_LOCKED_ROUTE_WRITE_ENABLE_WRITE_EN__SHIFT 0
+#define MPPA_SECURE_CLUSTER_REGS_LOCKED_ROUTE_WRITE_ENABLE_WRITE_EN__MASK 0x1UL
+
+
+/***
+ * secure_cluster_regs locked_route_write_enable register definition
+ * When set, freeze the locked route register.
+ *
+ * Permissions:
+ * RM: ker => [:RD, :WR],
+ * RM: usr => [:RD, :WR],
+ * PE: ker => [:RD, :WR],
+ * PE: usr => [:RD, :WR],
+ * Size: 4 bytes (min access size = 4 bytes)
+ * Reset value: 0x1
+ */
+typedef union {
+mppa_uint32 reg;
+mppa_uint32 word;
+struct mppa_secure_cluster_regs_locked_route_write_enable _;
+} mppa_secure_cluster_regs_locked_route_write_enable_t;
+
+struct mppa_secure_cluster_regs_ext_axi_pl_view {
+mppa_uint32 PL_Value :2; /*[ 1: 0]reset: 0x0,behavior: [:RD, :WR],PL value assigned to incoming AXI transactions if override bit is set*/
+mppa_uint32 reserved_0:29;
+mppa_uint32 override :1; /*[31:31]reset: 0x0,behavior: [:RD, :WR],When set, override default PL for incoming AXI transactions*/
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_secure_cluster_regs_ext_axi_pl_view[(sizeof(struct mppa_secure_cluster_regs_ext_axi_pl_view) == 4)*2-1];// If this fails, then the size of struct mppa_secure_cluster_regs_ext_axi_pl_view as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_SECURE_CLUSTER_REGS_EXT_AXI_PL_VIEW_PL_VALUE__SHIFT 0
+#define MPPA_SECURE_CLUSTER_REGS_EXT_AXI_PL_VIEW_PL_VALUE__MASK 0x3UL
+#define MPPA_SECURE_CLUSTER_REGS_EXT_AXI_PL_VIEW_OVERRIDE__SHIFT 31
+#define MPPA_SECURE_CLUSTER_REGS_EXT_AXI_PL_VIEW_OVERRIDE__MASK 0x80000000UL
+
+
+/***
+ * secure_cluster_regs ext_axi_pl register definition
+ * External API with priority Level handler
+ *
+ * Permissions:
+ * RM: ker => [:RD, :WR],
+ * RM: usr => [:RD, :WR],
+ * PE: ker => [:RD, :WR],
+ * PE: usr => [:RD, :WR],
+ * Size: 4 bytes (min access size = 4 bytes)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint32 reg;
+mppa_uint32 word;
+struct mppa_secure_cluster_regs_ext_axi_pl_view _;
+} mppa_secure_cluster_regs_ext_axi_pl_t;
+
+struct mppa_secure_cluster_regs_ring_level {
+mppa_uint32 ring_level :2; /*[ 1: 0]reset: 0x3,behavior: [:RD, :WR],Protection ring level, value is relative to current initiator ring level*/
+mppa_uint32 data_lock :1; /*[ 2: 2]reset: 0x0,behavior: [:RD, :WR],If set all protected registers are RO*/
+mppa_uint32 lock :1; /*[ 3: 3]reset: 0x0,behavior: [:RD, :WR],Auto-lock. RO if it is set, only cleared on the next reset*/
+mppa_uint32 reserved_1:28;
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_secure_cluster_regs_ring_level[(sizeof(struct mppa_secure_cluster_regs_ring_level) == 4)*2-1];// If this fails, then the size of struct mppa_secure_cluster_regs_ring_level as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_SECURE_CLUSTER_REGS_RING_LEVEL_RING_LEVEL__SHIFT 0
+#define MPPA_SECURE_CLUSTER_REGS_RING_LEVEL_RING_LEVEL__MASK 0x3UL
+#define MPPA_SECURE_CLUSTER_REGS_RING_LEVEL_DATA_LOCK__SHIFT 2
+#define MPPA_SECURE_CLUSTER_REGS_RING_LEVEL_DATA_LOCK__MASK 0x4UL
+#define MPPA_SECURE_CLUSTER_REGS_RING_LEVEL_LOCK__SHIFT 3
+#define MPPA_SECURE_CLUSTER_REGS_RING_LEVEL_LOCK__MASK 0x8UL
+
+
+/***
+ * secure_cluster_regs ring_config register definition
+ * Ring Protection Config
+ *
+ * Permissions:
+ * RM: ker => [:RD, :WR],
+ * RM: usr => [:RD, :WR],
+ * PE: ker => [:RD, :WR],
+ * PE: usr => [:RD, :WR],
+ * Size: 4 bytes (min access size = 4 bytes)
+ * Reset value: 0x3
+ */
+typedef union {
+mppa_uint32 reg;
+mppa_uint32 word;
+struct mppa_secure_cluster_regs_ring_level _;
+} mppa_secure_cluster_regs_ring_config_t;
+
+struct mppa_secure_cluster_regs_ring_level_abs {
+mppa_uint32 ring_level :2; /*[ 1: 0]reset: 0x3,behavior: [:RD],Absolute value of protection ring level*/
+mppa_uint32 reserved_1:30;
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_secure_cluster_regs_ring_level_abs[(sizeof(struct mppa_secure_cluster_regs_ring_level_abs) == 4)*2-1];// If this fails, then the size of struct mppa_secure_cluster_regs_ring_level_abs as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_SECURE_CLUSTER_REGS_RING_LEVEL_ABS_RING_LEVEL__SHIFT 0
+#define MPPA_SECURE_CLUSTER_REGS_RING_LEVEL_ABS_RING_LEVEL__MASK 0x3UL
+
+
+/***
+ * secure_cluster_regs ring_level_abs_value register definition
+ * Absolute value of protection ring level
+ *
+ * Permissions:
+ * RM: ker => [:RD],
+ * RM: usr => [:RD],
+ * PE: ker => [:RD],
+ * PE: usr => [:RD],
+ * Size: 4 bytes (min access size = 4 bytes)
+ * Reset value: 0x3
+ */
+typedef union {
+mppa_uint32 reg;
+mppa_uint32 word;
+struct mppa_secure_cluster_regs_ring_level_abs _;
+} mppa_secure_cluster_regs_ring_level_abs_value_t;
+
+struct mppa_secure_cluster_regs_config {
+mppa_uint32 two_steps_auth :1; /*[ 0: 0]reset: 0x0,behavior: [:RD, :WR],Enable two-steps authentication. RO if 'lock' bit is set*/
+mppa_uint32 wr_dis :1; /*[ 1: 1]reset: 0x0,behavior: [:RD, :WR],Disable writes in whole regbank. RO if 'lock' bit is set*/
+mppa_uint32 lock :1; /*[ 2: 2]reset: 0x0,behavior: [:RD, :WR],Auto-lock. RO if it is set, only cleared on the next reset*/
+mppa_uint32 reserved_1:29;
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_secure_cluster_regs_config[(sizeof(struct mppa_secure_cluster_regs_config) == 4)*2-1];// If this fails, then the size of struct mppa_secure_cluster_regs_config as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_SECURE_CLUSTER_REGS_CONFIG_TWO_STEPS_AUTH__SHIFT 0
+#define MPPA_SECURE_CLUSTER_REGS_CONFIG_TWO_STEPS_AUTH__MASK 0x1UL
+#define MPPA_SECURE_CLUSTER_REGS_CONFIG_WR_DIS__SHIFT 1
+#define MPPA_SECURE_CLUSTER_REGS_CONFIG_WR_DIS__MASK 0x2UL
+#define MPPA_SECURE_CLUSTER_REGS_CONFIG_LOCK__SHIFT 2
+#define MPPA_SECURE_CLUSTER_REGS_CONFIG_LOCK__MASK 0x4UL
+
+
+/***
+ * secure_cluster_regs init_config register definition
+ * Initiator Protection Config
+ *
+ * Permissions:
+ * RM: ker => [:RD, :WR],
+ * RM: usr => [:RD, :WR],
+ * PE: ker => [:RD, :WR],
+ * PE: usr => [:RD, :WR],
+ * Size: 4 bytes (min access size = 4 bytes)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint32 reg;
+mppa_uint32 word;
+struct mppa_secure_cluster_regs_config _;
+} mppa_secure_cluster_regs_init_config_t;
+
+struct mppa_secure_cluster_regs_allow_rd {
+mppa_uint32 read_mask_enable :32; /*[31: 0]reset: 0xFFFFFFFF,behavior: [:RD, :WR],Mask of allowed initiators for read accesses. RO if 'INITIATOR_PROTECT_CONFIG.lock' bit is set*/
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_secure_cluster_regs_allow_rd[(sizeof(struct mppa_secure_cluster_regs_allow_rd) == 4)*2-1];// If this fails, then the size of struct mppa_secure_cluster_regs_allow_rd as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_SECURE_CLUSTER_REGS_ALLOW_RD_READ_MASK_ENABLE__SHIFT 0
+#define MPPA_SECURE_CLUSTER_REGS_ALLOW_RD_READ_MASK_ENABLE__MASK 0xffffffffUL
+
+
+/***
+ * secure_cluster_regs allow_ld register definition
+ * Allowed Initiators for read accesses
+ *
+ * Permissions:
+ * RM: ker => [:RD, :WR],
+ * RM: usr => [:RD, :WR],
+ * PE: ker => [:RD, :WR],
+ * PE: usr => [:RD, :WR],
+ * Size: 4 bytes (min access size = 4 bytes)
+ * Reset value: 0xFFFFFFFF
+ */
+typedef union {
+mppa_uint32 reg;
+mppa_uint32 word;
+struct mppa_secure_cluster_regs_allow_rd _;
+} mppa_secure_cluster_regs_allow_ld_t;
+
+struct mppa_secure_cluster_regs_allow_wr {
+mppa_uint32 write_mask_enable :32; /*[31: 0]reset: 0xFFFFFFFF,behavior: [:RD, :WR],Mask of allowed initiators for write accesses. RO if 'INITIATOR_PROTECT_CONFIG.lock' bit is set*/
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_secure_cluster_regs_allow_wr[(sizeof(struct mppa_secure_cluster_regs_allow_wr) == 4)*2-1];// If this fails, then the size of struct mppa_secure_cluster_regs_allow_wr as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_SECURE_CLUSTER_REGS_ALLOW_WR_WRITE_MASK_ENABLE__SHIFT 0
+#define MPPA_SECURE_CLUSTER_REGS_ALLOW_WR_WRITE_MASK_ENABLE__MASK 0xffffffffUL
+
+
+/***
+ * secure_cluster_regs allow_st register definition
+ * Allowed Initiators for write accesses
+ *
+ * Permissions:
+ * RM: ker => [:RD, :WR],
+ * RM: usr => [:RD, :WR],
+ * PE: ker => [:RD, :WR],
+ * PE: usr => [:RD, :WR],
+ * Size: 4 bytes (min access size = 4 bytes)
+ * Reset value: 0xFFFFFFFF
+ */
+typedef union {
+mppa_uint32 reg;
+mppa_uint32 word;
+struct mppa_secure_cluster_regs_allow_wr _;
+} mppa_secure_cluster_regs_allow_st_t;
+
+struct mppa_secure_cluster_regs_enabled_mask {
+mppa_uint32 write_mask_subscribers :32; /*[31: 0]reset: 0x0,behavior: [:RD],Mask of enabled initiators
+Bits description:
+[0..15]: PEs,
+16: RM,
+17: DSU,
+18: Crypto DMA0,
+19: Crypto DMA1,
+20: AXI Write,
+21: AXI Read,
+22: DMA Tx,
+23: DMA Rx*/
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_secure_cluster_regs_enabled_mask[(sizeof(struct mppa_secure_cluster_regs_enabled_mask) == 4)*2-1];// If this fails, then the size of struct mppa_secure_cluster_regs_enabled_mask as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_SECURE_CLUSTER_REGS_ENABLED_MASK_WRITE_MASK_SUBSCRIBERS__SHIFT 0
+#define MPPA_SECURE_CLUSTER_REGS_ENABLED_MASK_WRITE_MASK_SUBSCRIBERS__MASK 0xffffffffUL
+
+
+/***
+ * secure_cluster_regs subscribe_write register definition
+ * Mask of enabled initiators
+ *
+ * Permissions:
+ * RM: ker => [:RD],
+ * RM: usr => [:RD],
+ * PE: ker => [:RD],
+ * PE: usr => [:RD],
+ * Size: 4 bytes (min access size = 4 bytes)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint32 reg;
+mppa_uint32 word;
+struct mppa_secure_cluster_regs_enabled_mask _;
+} mppa_secure_cluster_regs_subscribe_write_t;
+
+struct mppa_secure_cluster_regs_subscribe {
+mppa_uint32 magic_value :32; /*[31: 0]reset: 0x0,behavior: [:WR],Write 'magic value' <TDB> to subscribe.*/
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_secure_cluster_regs_subscribe[(sizeof(struct mppa_secure_cluster_regs_subscribe) == 4)*2-1];// If this fails, then the size of struct mppa_secure_cluster_regs_subscribe as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_SECURE_CLUSTER_REGS_SUBSCRIBE_MAGIC_VALUE__SHIFT 0
+#define MPPA_SECURE_CLUSTER_REGS_SUBSCRIBE_MAGIC_VALUE__MASK 0xffffffffUL
+
+
+/***
+ * secure_cluster_regs subscribe register definition
+ * Initiator subscribe register
+ *
+ * Permissions:
+ * RM: ker => [:WR],
+ * RM: usr => [:WR],
+ * PE: ker => [:WR],
+ * PE: usr => [:WR],
+ * Size: 4 bytes (min access size = 4 bytes)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint32 reg;
+mppa_uint32 word;
+struct mppa_secure_cluster_regs_subscribe _;
+} mppa_secure_cluster_regs_subscribe_t;
+
+/***
+ * secure_cluster_regs protect group definition
+ *
+ * Size: 28/0x1C bytes
+ */
+typedef struct  {
+mppa_secure_cluster_regs_init_config_t config; /* offset: 0x0, size: 0x4 */
+mppa_secure_cluster_regs_allow_ld_t read_mask_enable; /* offset: 0x4, size: 0x4 */
+mppa_secure_cluster_regs_allow_st_t write_mask_enable; /* offset: 0x8, size: 0x4 */
+mppa_secure_cluster_regs_subscribe_write_t write_mask_subscribers; /* offset: 0xC, size: 0x4 */
+mppa_secure_cluster_regs_subscribe_t subscribe_write; /* offset: 0x10, size: 0x4 */
+mppa_secure_cluster_regs_ring_config_t ring_level_config; /* offset: 0x14, size: 0x4 */
+mppa_secure_cluster_regs_ring_level_abs_value_t ring_level_abs_value; /* offset: 0x18, size: 0x4 */
+} mppa_secure_cluster_regs_protect_t;
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_mppa_secure_cluster_regs_protect_t[(sizeof(mppa_secure_cluster_regs_protect_t) == 28)*2-1];// If this fails, then the size of mppa_secure_cluster_regs_protect_t as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+struct mppa_secure_cluster_regs_debug_addr_low {
+mppa_uint32 addr_31_0 :32; /*[31: 0]reset: 0x0,behavior: [:RD],Address in error (low part)*/
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_secure_cluster_regs_debug_addr_low[(sizeof(struct mppa_secure_cluster_regs_debug_addr_low) == 4)*2-1];// If this fails, then the size of struct mppa_secure_cluster_regs_debug_addr_low as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_SECURE_CLUSTER_REGS_DEBUG_ADDR_LOW_ADDR_31_0__SHIFT 0
+#define MPPA_SECURE_CLUSTER_REGS_DEBUG_ADDR_LOW_ADDR_31_0__MASK 0xffffffffUL
+
+
+/***
+ * secure_cluster_regs addr_31_0 register definition
+ * In case of register access error, contains the low part of address
+ *
+ * Permissions:
+ * RM: ker => [:RD],
+ * RM: usr => [:RD],
+ * PE: ker => [:RD],
+ * PE: usr => [:RD],
+ * Size: 4 bytes (min access size = 4 bytes)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint32 reg;
+mppa_uint32 word;
+struct mppa_secure_cluster_regs_debug_addr_low _;
+} mppa_secure_cluster_regs_addr_31_0_t;
+
+struct mppa_secure_cluster_regs_debug_addr_high {
+mppa_uint32 addr_63_32 :32; /*[31: 0]reset: 0x0,behavior: [:RD],Address in error (high part)*/
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_secure_cluster_regs_debug_addr_high[(sizeof(struct mppa_secure_cluster_regs_debug_addr_high) == 4)*2-1];// If this fails, then the size of struct mppa_secure_cluster_regs_debug_addr_high as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_SECURE_CLUSTER_REGS_DEBUG_ADDR_HIGH_ADDR_63_32__SHIFT 0
+#define MPPA_SECURE_CLUSTER_REGS_DEBUG_ADDR_HIGH_ADDR_63_32__MASK 0xffffffffUL
+
+
+/***
+ * secure_cluster_regs addr_63_32 register definition
+ * In case of register access error, contains the high part of address
+ *
+ * Permissions:
+ * RM: ker => [:RD],
+ * RM: usr => [:RD],
+ * PE: ker => [:RD],
+ * PE: usr => [:RD],
+ * Size: 4 bytes (min access size = 4 bytes)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint32 reg;
+mppa_uint32 word;
+struct mppa_secure_cluster_regs_debug_addr_high _;
+} mppa_secure_cluster_regs_addr_63_32_t;
+
+struct mppa_secure_cluster_regs_debug_err_status {
+mppa_uint32 error :1; /*[ 0: 0]reset: 0x0,behavior: [:RD, :WR],Set if an error is detected.
+This bit is sticky, so the register is frozen up to this bit is clear.*/
+mppa_uint32 error_type :13; /*[13: 1]reset: 0x0,behavior: [:RD, :WR],Error type
+[1] : Initiator : unauthorised read,
+[2] : Initiator : unauthorised write,
+[3] : Initiator : two step authorisation,
+[4] : Initiator : write disable,
+[5] : Decoder   : decode,
+[6] : Decoder   : access,
+[7] : Decoder   : size,
+[8] : Decoder   : ring,
+[9] : Decoder   : lock,
+[10]: Decoder   : atomic,
+[11]: Ring      : overflow,
+[12]: Register  : parity on read,
+[13]: Register  : parity on the fly*/
+mppa_uint32 reserved_0:2;
+mppa_uint32 ring_level :2; /*[17:16]reset: 0x0,behavior: [:RD, :WR],Ring Level*/
+mppa_uint32 write :1; /*[18:18]reset: 0x0,behavior: [:RD, :WR],'1' for read, '0' for write*/
+mppa_uint32 size :3; /*[21:19]reset: 0x0,behavior: [:RD, :WR],Size*/
+mppa_uint32 initiator :5; /*[26:22]reset: 0x0,behavior: [:RD, :WR],Initiator number*/
+mppa_uint32 reserved_2:5;
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_secure_cluster_regs_debug_err_status[(sizeof(struct mppa_secure_cluster_regs_debug_err_status) == 4)*2-1];// If this fails, then the size of struct mppa_secure_cluster_regs_debug_err_status as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_SECURE_CLUSTER_REGS_DEBUG_ERR_STATUS_ERROR__SHIFT 0
+#define MPPA_SECURE_CLUSTER_REGS_DEBUG_ERR_STATUS_ERROR__MASK 0x1UL
+#define MPPA_SECURE_CLUSTER_REGS_DEBUG_ERR_STATUS_ERROR_TYPE__SHIFT 1
+#define MPPA_SECURE_CLUSTER_REGS_DEBUG_ERR_STATUS_ERROR_TYPE__MASK 0x3ffeUL
+#define MPPA_SECURE_CLUSTER_REGS_DEBUG_ERR_STATUS_RING_LEVEL__SHIFT 16
+#define MPPA_SECURE_CLUSTER_REGS_DEBUG_ERR_STATUS_RING_LEVEL__MASK 0x30000UL
+#define MPPA_SECURE_CLUSTER_REGS_DEBUG_ERR_STATUS_WRITE__SHIFT 18
+#define MPPA_SECURE_CLUSTER_REGS_DEBUG_ERR_STATUS_WRITE__MASK 0x40000UL
+#define MPPA_SECURE_CLUSTER_REGS_DEBUG_ERR_STATUS_SIZE__SHIFT 19
+#define MPPA_SECURE_CLUSTER_REGS_DEBUG_ERR_STATUS_SIZE__MASK 0x380000UL
+#define MPPA_SECURE_CLUSTER_REGS_DEBUG_ERR_STATUS_INITIATOR__SHIFT 22
+#define MPPA_SECURE_CLUSTER_REGS_DEBUG_ERR_STATUS_INITIATOR__MASK 0x7c00000UL
+
+
+/***
+ * secure_cluster_regs err_status register definition
+ * In case of register access error, contains the high part of address
+ *
+ * Permissions:
+ * RM: ker => [:RD, :WR],
+ * RM: usr => [:RD, :WR],
+ * PE: ker => [:RD, :WR],
+ * PE: usr => [:RD, :WR],
+ * Size: 4 bytes (min access size = 4 bytes)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint32 reg;
+mppa_uint32 word;
+struct mppa_secure_cluster_regs_debug_err_status _;
+} mppa_secure_cluster_regs_err_status_t;
+
+struct mppa_secure_cluster_regs_error_injection {
+mppa_uint32 enable :1; /*[ 0: 0]reset: 0x0,behavior: [:RD, :WR],Enable the injection of error*/
+mppa_uint32 error_type :4; /*[ 4: 1]reset: 0x0,behavior: [:RD, :WR],Error type to inject:
+[1] : Initiator : unauthorised read,
+[2] : Initiator : unauthorised write,
+[3] : Initiator : two step authorisation,
+[4] : Initiator : write disable,
+[5] : Decoder   : decode,
+[6] : Decoder   : access,
+[7] : Decoder   : size,
+[8] : Decoder   : ring,
+[9] : Decoder   : lock,
+[10]: Decoder   : atomic,
+[11]: Ring      : overflow,
+[12]: Register  : parity on read,
+[13]: Register  : parity on the fly*/
+mppa_uint32 reserved_1:27;
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_secure_cluster_regs_error_injection[(sizeof(struct mppa_secure_cluster_regs_error_injection) == 4)*2-1];// If this fails, then the size of struct mppa_secure_cluster_regs_error_injection as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_SECURE_CLUSTER_REGS_ERROR_INJECTION_ENABLE__SHIFT 0
+#define MPPA_SECURE_CLUSTER_REGS_ERROR_INJECTION_ENABLE__MASK 0x1UL
+#define MPPA_SECURE_CLUSTER_REGS_ERROR_INJECTION_ERROR_TYPE__SHIFT 1
+#define MPPA_SECURE_CLUSTER_REGS_ERROR_INJECTION_ERROR_TYPE__MASK 0x1eUL
+
+
+/***
+ * secure_cluster_regs error_injection register definition
+ * Poisoning register
+ *
+ * Permissions:
+ * RM: ker => [:RD, :WR],
+ * RM: usr => [:RD, :WR],
+ * PE: ker => [:RD, :WR],
+ * PE: usr => [:RD, :WR],
+ * Size: 4 bytes (min access size = 4 bytes)
+ * Reset value: 0x0
+ */
+typedef union {
+mppa_uint32 reg;
+mppa_uint32 word;
+struct mppa_secure_cluster_regs_error_injection _;
+} mppa_secure_cluster_regs_error_injection_t;
+
+/***
+ * secure_cluster_regs debug_reg group definition
+ *
+ * Size: 24/0x18 bytes
+ */
+typedef struct  {
+mppa_secure_cluster_regs_addr_31_0_t addr_31_0; /* offset: 0x0, size: 0x4 */
+mppa_secure_cluster_regs_addr_63_32_t addr_63_32; /* offset: 0x4, size: 0x4 */
+mppa_secure_cluster_regs_err_status_t err_status; /* offset: 0x8, size: 0x4 */
+mppa_secure_cluster_regs_error_injection_t error_injection; /* offset: 0xC, size: 0x4 */
+mppa_secure_cluster_regs_ring_config_t dbg_ring_level_config; /* offset: 0x10, size: 0x4 */
+mppa_secure_cluster_regs_ring_level_abs_value_t dbg_ring_level_abs_val; /* offset: 0x14, size: 0x4 */
+} mppa_secure_cluster_regs_debug_reg_t;
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_mppa_secure_cluster_regs_debug_reg_t[(sizeof(mppa_secure_cluster_regs_debug_reg_t) == 24)*2-1];// If this fails, then the size of mppa_secure_cluster_regs_debug_reg_t as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+/***
+ * secure_cluster_regs device definition
+ * Coolidge secure registers in a cluster
+ *
+ * Size: 4024/0xFB8 bytes
+ */
+typedef struct  {
+mppa_secure_cluster_regs_rm_lockstep_cfg_reg_t rm_lockstep_cfg_reg; /* offset: 0x0, size: 0x4 */
+mppa_secure_cluster_regs_crypto_acc_reg_t crypto_acc_reg_0; /* offset: 0x4, size: 0x4 */
+mppa_secure_cluster_regs_crypto_acc_reg_t crypto_acc_reg_1; /* offset: 0x8, size: 0x4 */
+mppa_uint8 unused0[4];
+mppa_secure_cluster_regs_secure_mst_config_reg_t secure_mst_config_reg; /* offset: 0x10, size: 0x4 */
+mppa_uint8 unused1[12];
+mppa_secure_cluster_regs_securedbg_get_cmd_payload_reg_t securedbg_get_cmd_payload_reg; /* offset: 0x20, size: 0x4 */
+mppa_secure_cluster_regs_securedbg_set_cmd_payload_reg_t securedbg_set_cmd_payload_reg; /* offset: 0x24, size: 0x4 */
+mppa_secure_cluster_regs_securedbg_status_reg_t securedbg_status_reg; /* offset: 0x28, size: 0x4 */
+mppa_secure_cluster_regs_securedbg_command_reg_t securedbg_command_reg; /* offset: 0x2C, size: 0x4 */
+mppa_secure_cluster_regs_l2_remote_access_config_reg_t l2_remote_access_config_reg; /* offset: 0x30, size: 0x4 */
+mppa_uint8 unused2[12];
+mppa_secure_cluster_regs_config_t global_config; /* offset: 0x40, size: 0x40 */
+mppa_secure_cluster_regs_global_status_t global_status; /* offset: 0x80, size: 0x8 */
+mppa_uint8 unused3[56];
+mppa_secure_cluster_regs_proc_control_t rm_control; /* offset: 0xC0, size: 0x40 */
+mppa_secure_cluster_regs_proc_status_t rm_status; /* offset: 0x100, size: 0x10 */
+mppa_uint8 unused4[48];
+mppa_secure_cluster_regs_ecc_status_t ecc_status; /* offset: 0x140, size: 0x8 */
+mppa_secure_cluster_regs_ecc_status_securebank_t ecc_status_securebank; /* offset: 0x148, size: 0x8 */
+mppa_secure_cluster_regs_ecc_status_clear_t ecc_status_clear; /* offset: 0x150, size: 0x8 */
+mppa_secure_cluster_regs_ecc_status_securebank_clear_t ecc_status_securebank_clear; /* offset: 0x158, size: 0x8 */
+mppa_secure_cluster_regs_secure_status_t secure_status; /* offset: 0x160, size: 0x10 */
+mppa_uint8 unused5[208];
+mppa_secure_cluster_regs_locked_route_error_cnt_t locked_route_error_cnt; /* offset: 0x240, size: 0x4 */
+mppa_uint8 unused6[4];
+mppa_secure_cluster_regs_locked_route_error_cnt_t lac_locked_route_error_cnt; /* offset: 0x248, size: 0x4 */
+mppa_uint8 unused7[276];
+mppa_secure_cluster_regs_locked_route_vchan_t locked_route; /* offset: 0x360, size: 0x60 */
+mppa_secure_cluster_regs_locked_route_write_enable_t locked_route_write_enable; /* offset: 0x3C0, size: 0x4 */
+mppa_uint8 unused8[28];
+mppa_secure_cluster_regs_ext_axi_pl_t ext_axi_pl; /* offset: 0x3E0, size: 0x4 */
+mppa_secure_cluster_regs_ring_config_t ring_level_config; /* offset: 0x3E4, size: 0x4 */
+mppa_secure_cluster_regs_ring_level_abs_value_t ring_level_abs_val; /* offset: 0x3E8, size: 0x4 */
+mppa_uint8 unused9[2964];
+mppa_secure_cluster_regs_protect_t initiator_protect; /* offset: 0xF80, size: 0x1C */
+mppa_secure_cluster_regs_debug_reg_t debug_regs; /* offset: 0xF9C, size: 0x18 */
+mppa_uint8 unused10[4];
+} mppa_secure_cluster_regs_t;
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_mppa_secure_cluster_regs_t[(sizeof(mppa_secure_cluster_regs_t) == 4024)*2-1];// If this fails, then the size of mppa_secure_cluster_regs_t as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#endif // _INCLUDED_DEVICES_SECURE_CLUSTER_REGS_COOLIDGE_V2_DEV_
+
+/* -*- Mode: C; c-basic-offset: 2 -*- */
+/* vim:set ft=c sw=2 cindent: */

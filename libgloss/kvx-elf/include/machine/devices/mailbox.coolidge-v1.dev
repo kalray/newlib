@@ -1,0 +1,160 @@
+/*
+ * mailbox.coolidge-v1.dev
+ * Automatically generated from registers definition files. Do not edit
+ * Copyright (c) Kalray 2024.
+ */
+
+#ifndef _INCLUDED_DEVICES_MAILBOX_COOLIDGE_V1_DEV_
+#define _INCLUDED_DEVICES_MAILBOX_COOLIDGE_V1_DEV_
+
+#include "device_inttype.h"
+
+
+/***
+ * mailbox mailbox register definition
+ * Mailbox
+ *
+ * Permissions:
+ * ANY: ker => [:RD, :WR],
+ * ANY: usr => [:RD, :WR],
+ * Size: 8 bytes (min access size = 8 bytes)
+ * Reset value: Not initialized
+ */
+typedef union {
+mppa_uint64 reg;
+mppa_uint64 dword;
+} mppa_mailbox_mailbox_t;
+
+/***
+ * mailbox mailbox_lac register definition
+ * Mailbox load and clear
+ *
+ * Permissions:
+ * ANY: ker => [:RD],
+ * ANY: usr => [:RD],
+ * Size: 8 bytes (min access size = 8 bytes)
+ * Reset value: Not initialized
+ */
+typedef union {
+mppa_uint64 reg;
+mppa_uint64 dword;
+} mppa_mailbox_mailbox_lac_t;
+
+/***
+ * mailbox mask register definition
+ * Mask is used to fire interrupt depending on the trigger mode
+ *
+ * Permissions:
+ * ANY: ker => [:RD, :WR],
+ * ANY: usr => [:RD, :WR],
+ * Size: 8 bytes (min access size = 8 bytes)
+ * Reset value: Not initialized
+ */
+typedef union {
+mppa_uint64 reg;
+mppa_uint64 dword;
+} mppa_mailbox_mask_t;
+
+struct mppa_mailbox_v_funct {
+mppa_uint64 ifunct :2; /*[ 1: 0]behavior: [:RD, :WR],Mailbox input function: 0: write, 1: or, 2:add*/
+mppa_uint64 reserved_0:6;
+mppa_uint64 trigger :3; /*[10: 8]behavior: [:RD, :WR],Mailbox trigger function: 0:no trigger, 1:doorbell, 2: mask, 3:barrier, 4: value*/
+mppa_uint64 reserved_2:53;
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_mailbox_v_funct[(sizeof(struct mppa_mailbox_v_funct) == 8)*2-1];// If this fails, then the size of struct mppa_mailbox_v_funct as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_MAILBOX_V_FUNCT_IFUNCT__SHIFT 0
+#define MPPA_MAILBOX_V_FUNCT_IFUNCT__MASK 0x3ULL
+#define MPPA_MAILBOX_V_FUNCT_TRIGGER__SHIFT 8
+#define MPPA_MAILBOX_V_FUNCT_TRIGGER__MASK 0x700ULL
+
+
+/***
+ * mailbox funct register definition
+ * Mailbox function
+ *
+ * Permissions:
+ * ANY: ker => [:RD, :WR],
+ * ANY: usr => [:RD, :WR],
+ * Size: 8 bytes (min access size = 8 bytes)
+ * Reset value: Not initialized
+ */
+typedef union {
+mppa_uint64 reg;
+mppa_uint64 dword;
+struct mppa_mailbox_v_funct _;
+} mppa_mailbox_funct_t;
+
+struct mppa_mailbox_v_access_policy {
+mppa_uint64 rm :2; /*[ 1: 0]behavior: [:RD, :WR],*/
+mppa_uint64 reserved_0:6;
+mppa_uint64 pe :2; /*[ 9: 8]behavior: [:RD, :WR],*/
+mppa_uint64 reserved_2:54;
+};
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_struct_mppa_mailbox_v_access_policy[(sizeof(struct mppa_mailbox_v_access_policy) == 8)*2-1];// If this fails, then the size of struct mppa_mailbox_v_access_policy as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#define MPPA_MAILBOX_V_ACCESS_POLICY_RM__SHIFT 0
+#define MPPA_MAILBOX_V_ACCESS_POLICY_RM__MASK 0x3ULL
+#define MPPA_MAILBOX_V_ACCESS_POLICY_PE__SHIFT 8
+#define MPPA_MAILBOX_V_ACCESS_POLICY_PE__MASK 0x300ULL
+
+
+/***
+ * mailbox access_pol register definition
+ * Register access policy
+ *
+ * Permissions:
+ * ANY: ker => [:RD, :WR],
+ * ANY: usr => [:RD, :WR],
+ * Size: 8 bytes (min access size = 8 bytes)
+ * Reset value: Not initialized
+ */
+typedef union {
+mppa_uint64 reg;
+mppa_uint64 dword;
+struct mppa_mailbox_v_access_policy _;
+} mppa_mailbox_access_pol_t;
+
+/***
+ * mailbox group_mailbox group definition
+ *
+ * Size: 512/0x200 bytes
+ */
+typedef struct  {
+mppa_mailbox_mailbox_t mailbox; /* offset: 0x0, size: 0x8 */
+mppa_mailbox_mailbox_lac_t mailbox_lac; /* offset: 0x8, size: 0x8 */
+mppa_mailbox_mask_t mask; /* offset: 0x10, size: 0x8 */
+mppa_mailbox_funct_t funct; /* offset: 0x18, size: 0x8 */
+mppa_mailbox_access_pol_t access_policy; /* offset: 0x20, size: 0x8 */
+mppa_uint8 unused0[472];
+} mppa_mailbox_group_mailbox_t;
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_mppa_mailbox_group_mailbox_t[(sizeof(mppa_mailbox_group_mailbox_t) == 512)*2-1];// If this fails, then the size of mppa_mailbox_group_mailbox_t as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+/***
+ * mailbox device definition
+ * MPPA APIC mailboxes
+ *
+ * Size: 65536/0x10000 bytes
+ */
+#define MPPA_MAILBOX_MAILBOX_NUMBER 128
+typedef struct  {
+mppa_mailbox_group_mailbox_t mailbox[16][8]; /* offset: 0x0, size: 0x10000 */
+} mppa_mailbox_t;
+
+#ifndef KVX_DISABLE_TYPECHECK
+typedef char assertion_for_mppa_mailbox_t[(sizeof(mppa_mailbox_t) == 65536)*2-1];// If this fails, then the size of mppa_mailbox_t as created by the compiler does not match the hardware size.
+
+#endif /* KVX_DISABLE_TYPECHECK */
+#endif // _INCLUDED_DEVICES_MAILBOX_COOLIDGE_V1_DEV_
+
+/* -*- Mode: C; c-basic-offset: 2 -*- */
+/* vim:set ft=c sw=2 cindent: */

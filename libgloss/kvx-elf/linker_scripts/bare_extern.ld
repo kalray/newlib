@@ -1,3 +1,3 @@
 EXTERN(
-  trace_pc_dtor
+  mppa_trace_pc_dtor
 )

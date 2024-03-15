@@ -175,7 +175,7 @@ static kvx_boot_args_t __kvx_libc_args;
 
 extern int execute_main_on_rm __attribute((weak));
 extern int mppa_trace_pc_enable (bool enable)  __attribute__((weak));
-extern int trace_pc_config(void) __attribute__((weak));
+extern int mppa_trace_pc_config(void) __attribute__((weak));
 
 static  void __kvx_trace_pc_disable(void)
 {
@@ -185,8 +185,8 @@ static  void __kvx_trace_pc_disable(void)
 
 int __kvx_trace_pc_init(void)
 {
-  if (trace_pc_config)
-    return trace_pc_config();
+  if (mppa_trace_pc_config)
+    return mppa_trace_pc_config();
   return 0;
 }
 

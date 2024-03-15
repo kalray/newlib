@@ -43,7 +43,7 @@ extern "C"	{
 
   extern void  __libc_init_array(void);
   extern void  __libc_fini_array(void);
-  extern int trace_pc_config(void) __attribute__((weak));
+  extern int mppa_trace_pc_config(void) __attribute__((weak));
 
   void __kvx_finish_newlib_init(void)
   {
@@ -53,8 +53,8 @@ extern "C"	{
 
   int __kvx_trace_pc_init(void)
   {
-    if (trace_pc_config)
-      return trace_pc_config();
+    if (mppa_trace_pc_config)
+      return mppa_trace_pc_config();
     return 0;
   }
 
